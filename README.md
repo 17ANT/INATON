@@ -1,6 +1,7 @@
 # INATON
 
-![image](https://user-images.githubusercontent.com/101968934/206652983-b6854969-5dde-4fc2-9c14-07be43b23632.png)
+
+![image](https://user-images.githubusercontent.com/101968934/206655080-7c39e569-bbff-4211-9ab8-0b44ecf2fdd0.png)
 
 
 발자국 남기고 갑니다🐾 -100-
