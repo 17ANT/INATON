@@ -11,6 +11,7 @@ import LoginEmail from '../pages/LoginEmail/LoginEmail';
 
 import MyProfile from '../pages/myProfile/MyProfile';
 import YourProfile from '../pages/yourProfile/YourProfile';
+import ProfileModification from '../pages/profileModification/ProfileModification';
 export default function Router() {
     return (
         <BrowserRouter>
@@ -24,6 +25,7 @@ export default function Router() {
                 <Route path='/postupload' element={<PostUpload />} />
                 <Route path='/myprofile' element={<MyProfile />} />
                 <Route path='/yourprofile' element={<YourProfile />} />
+                <Route path='/myprofile/modification' element={<ProfileModification />} />
             </Routes>
         </BrowserRouter>
     );
