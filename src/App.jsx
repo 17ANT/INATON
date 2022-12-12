@@ -14,8 +14,9 @@ const GlobalStyle = createGlobalStyle`
     --font-color:  #515a48;
     --border-color: #dbdbdb;
     /* 배경컬러 */
-    --bg-color: #f2f2f2
-    
+    --bg-color: #f2f2f2;
+    /* error 컬러 */
+    --error-color: #EB5757
    }
      .sr-only{
     position: absolute;

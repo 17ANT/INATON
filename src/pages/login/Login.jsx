@@ -1,104 +1,131 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
-const LoginForm = styled.div`
-  padding: 0 34px;
-  width: fit-content;
+const Container = styled.div`
   min-height: 100vh;
-  margin: 0 auto;
-  /* border: 1px solid #000; */
-  text-align: center;
-  h2 {
-    margin: 30px 0 40px;
-    font-weight: 700;
-    font-size: 24px;
-    color: #515a48;
-    user-select: none;
-  }
-`;
-
-const Form = styled.form`
+  background-color: var(--main-color);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  overflow: hidden;
 `;
-const InputBox = styled.div`
+
+const LogoImg = styled.img`
+  display: block;
+  margin: 0 auto;
+  width: 144px;
+  transform: translateY(180px);
+`;
+
+const LoginArticle = styled.article`
   position: relative;
-  width: 100%;
-
-  input {
-    width: 322px;
-    height: 35px;
-    border: none;
-    outline: none;
-    border-bottom: 2px solid #dbdbdb;
-    color: #000;
-    letter-spacing: 0.06em;
-    font-size: 1.05em;
-    caret-color: #a8bc93;
+  height: 362px;
+  top: 415px;
+  height: 362px;
+  display: flex;
+  background: #ffffff;
+  border-radius: 20px;
+  flex-direction: column;
+  padding: 50px 34px 20px;
+  gap: 10px;
+  .kakao-btn {
+    border: 1px solid #f2c94c;
+    :active {
+      background-color: #f2c94c;
+      color: #fff;
+      img {
+        background-color: #fff;
+        border-radius: 50%;
+      }
+    }
   }
-  span {
-    position: absolute;
-    left: 0;
-    pointer-events: none;
-    padding: 5px 0;
-    margin: 10px 0;
-    font-size: 1.1em;
-    color: #666;
-    transition: 0.5s;
+  .google-btn {
+    border: 1px solid #767676;
+    :active {
+      background-color: #767676;
+      color: #fff;
+      img {
+        background-color: #fff;
+        border-radius: 50%;
+      }
+    }
   }
-  input:is(:focus, :valid) ~ span {
-    color: #a8bc93;
-    font-size: 0.9em;
-    transform: translateY(-23px);
+  .facebook-btn {
+    border: 1px solid #2d9cdb;
+    :active {
+      background-color: #2d9cdb;
+      color: #fff;
+      img {
+        background-color: #fff;
+        border-radius: 50%;
+      }
+    }
   }
 `;
-
-const SubmitBtn = styled.input`
-  background-color: #a8bc93;
-  color: #fff;
+const LoginButton = styled.button`
+  position: relative;
   width: 322px;
-  margin: 30px 0 20px;
   height: 44px;
-  border-radius: 30px;
+  margin: 0 auto;
+  border-radius: 20px;
   border: none;
   cursor: pointer;
-  :focus {
-    background: rgba(168, 188, 147, 0.7);
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  background-color: transparent;
+  span {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0 auto;
+    color: var(--sub-fon);
   }
 `;
 
-const SignupLink = styled.a`
-  color: #767676;
-  text-decoration: none;
-`;
-const WarningMessage = styled.span`
-  color: #eb5757;
-  font-weight: 500;
-  font-size: 12px;
-  text-align: left;
+const LoginLink = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 20px;
+  a {
+      position: relative;
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--sub-font);
+    text-decoration: none;
+    :nth-child(1)::before {
+      content: '';
+      position: absolute;
+      right: -15px;
+      width: 1px;
+      height: 15px;
+      background-color: #c4c4c4;
+    }
+}
 `;
 
 export default function Login() {
   return (
-    <LoginForm>
-      <h2>로그인</h2>
-      <Form action="">
-        <InputBox>
-          <input type="text" name="" required />
-          <span>이메일</span>
-        </InputBox>
-        <InputBox>
-          <input type="password" name="" required />
-          <span>비밀번호</span>
-        </InputBox>
-        <WarningMessage>
-          *이메일 또는 비밀번호가 일치하지 않습니다.
-        </WarningMessage>
-        <SubmitBtn type="submit" value="로그인" />
-      </Form>
-      <SignupLink href="#">이메일로 회원가입</SignupLink>
-    </LoginForm>
+    <Container>
+      <LogoImg src={`/assets/symbol-logo-W.png`} alt="" />
+      <LoginArticle>
+        <LoginButton className="kakao-btn">
+          <img src={`/assets/message-circle.png`} alt="" />
+          <span>카카오톡 계정으로 로그인</span>
+        </LoginButton>
+        <LoginButton className="google-btn">
+          <img src={`/assets/google.png`} alt="" />
+          <span>구글 계정으로 로그인</span>
+        </LoginButton>
+        <LoginButton className="facebook-btn">
+          <img src={`/assets/facebook.png`} alt="페이스북으로 로그인" />
+          <span>페이스북 계정으로 로그인</span>
+        </LoginButton>
+        <LoginLink>
+          <a href="/login/email">이메일로 로그인</a>
+          <a href="/signup">회원가입</a>
+        </LoginLink>
+      </LoginArticle>
+    </Container>
   );
 }
