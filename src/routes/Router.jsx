@@ -5,6 +5,7 @@ import SignUp from '../pages/signup/Signup';
 import Splash from '../pages/splash/Splash';
 import ChatList from './../pages/chatList/ChatList';
 import ChatRoom from './../pages/chatRoom/ChatRoom';
+import PostUpload from '../pages/postUpload/PostUpload';
 
 export default function Router() {
   return (
@@ -15,6 +16,7 @@ export default function Router() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/chatlist" element={<ChatList />} />
         <Route path="/chatroom" element={<ChatRoom />} />
+        <Route path="/postupload" element={<PostUpload />} />
       </Routes>
     </BrowserRouter>
   );
