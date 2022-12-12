@@ -1,13 +1,16 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Reset } from 'styled-reset';
+import Login from './pages/login/Login';
+
+
+
 
 function App() {
   return (
     <BrowserRouter>
       <Reset />
       <Routes>
-        <Route />
-        <h1>hello world</h1>
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
