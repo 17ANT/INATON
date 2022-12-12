@@ -1,5 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
 
 export default function ChatRoom() {
-  return <div>ChatRoom 왔다감</div>;
+  return (
+    <>
+      <h1>하이루</h1>
+    </>
+  );
 }
