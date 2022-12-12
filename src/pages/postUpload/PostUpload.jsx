@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Header = styled.div`
     width: 100%;
     height: 48px;
-    background-color: #a8bc93;
+    background-color: var(--main-color);
 `;
 
 const ProfileImg = styled.img`
@@ -44,7 +44,7 @@ const TextForm = styled.textarea`
     border: none;
     resize: none;
     ::placeholder {
-        color: #c4c4c4;
+        color: var(--sub-border);
     }
     :focus,
     :active {
@@ -61,7 +61,7 @@ const ImageButton = styled.label`
     display: block;
     border-radius: 50%;
 
-    background: url('/assets/icon/icon-upload.png') no-repeat center/28px 28px #a8bc93;
+    background: url('/assets/icon/icon-upload.png') no-repeat center/28px 28px var(--main-color);
 `;
 
 const ImageList = styled.ul`
@@ -78,7 +78,7 @@ const ImageItem = styled.li`
         height: 228px;
         /* 이미지 2개 이상: 168px*126px */
         position: relative;
-        background: #c4c4c4;
+        background: var(--sub-border);
         border-radius: 10px;
     }
     button {
@@ -119,7 +119,9 @@ export default function PostUpload() {
                             rows={1}
                             onChange={handleResize}
                         ></TextForm>
-                        <ImageButton htmlFor="imgUpload">업로드</ImageButton>
+                        <ImageButton htmlFor="imgUpload">
+                            <span className="ir">이미지 업로드</span>
+                        </ImageButton>
                         <input type="file" id="imgUpload" className="ir" />
                     </PostUploadForm>
                     <ImageList>

@@ -14,7 +14,9 @@ const GlobalStyle = createGlobalStyle`
     --font-color:  #515a48;
     --border-color: #dbdbdb;
     /* 배경컬러 */
-    --bg-color: #f2f2f2
+    --bg-color: #f2f2f2;
+    /* 서브보더 */
+    --sub-border: #c4c4c4;
     
     }
     .sr-only{
