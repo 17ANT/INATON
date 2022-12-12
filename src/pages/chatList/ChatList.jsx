@@ -1,5 +1,4 @@
 import React from 'react';
-import profile from '../../assets/Ellipse 6.png';
 import styled from 'styled-components';
 
 const ChatMain = styled.main`
@@ -25,7 +24,7 @@ const List = styled.ul`
   li .user-profile {
     width: 42px;
     height: 42px;
-    border: 0.5px solid #dbdbdb;
+    border: 0.5px solid var(--border-color);
     border-radius: 50%;
     margin-right: 12px;
   }
@@ -37,6 +36,7 @@ const List = styled.ul`
   }
   .chat-info strong {
     display: block;
+    color: var(--font-color);
     font-weight: 600;
     font-size: 14px;
     line-height: 18px;
@@ -47,7 +47,7 @@ const List = styled.ul`
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
-    color: #767676;
+    color: var(--sub-font);
     display: block;
     white-space: nowrap;
     overflow: hidden;
@@ -71,7 +71,7 @@ export default function ChatList() {
         <List>
           <li>
             <div className="user-profile">
-              <img src={profile} alt="" />
+              <img src={'assets/Ellipse 6.png'} alt="" />
             </div>
             <div className="chat-info">
               <strong>회원이름</strong>
@@ -83,13 +83,13 @@ export default function ChatList() {
           </li>
           <li>
             <div className="user-profile">
-              <img src={profile} alt="" />
+              <img src={'assets/Ellipse 6.png'} alt="" />
             </div>
             <div className="chat-info">
               <strong>회원이름</strong>
               <p>채팅내용</p>
             </div>
-            <strong className="chat-date">채팅날짜</strong>
+            <strong className="chat-date">2022-12-31</strong>
           </li>
         </List>
       </ChatMain>
