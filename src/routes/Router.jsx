@@ -3,12 +3,10 @@ import React from 'react';
 import Login from '../pages/login/Login';
 import SignUp from '../pages/signup/Signup';
 import Splash from '../pages/splash/Splash';
-
 import ChatList from './../pages/chatList/ChatList';
 import ChatRoom from './../pages/chatRoom/ChatRoom';
 import PostUpload from '../pages/postUpload/PostUpload';
 import LoginEmail from '../pages/LoginEmail/LoginEmail';
-
 import MyProfile from '../pages/myProfile/MyProfile';
 import YourProfile from '../pages/yourProfile/YourProfile';
 import ProfileModification from '../pages/profileModification/ProfileModification';
@@ -29,4 +27,5 @@ export default function Router() {
             </Routes>
         </BrowserRouter>
     );
+
 }

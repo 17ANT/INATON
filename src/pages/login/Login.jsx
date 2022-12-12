@@ -2,11 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
+  position: relative;
   min-height: 100vh;
   background-color: var(--main-color);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  width: 100%;
+  overflow-y: hidden;
 `;
 
 const LogoImg = styled.img`
@@ -17,9 +19,10 @@ const LogoImg = styled.img`
 `;
 
 const LoginArticle = styled.article`
-  position: relative;
-  height: 362px;
-  top: 415px;
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+  bottom: -20px;
   height: 362px;
   display: flex;
   background: #ffffff;
@@ -88,7 +91,7 @@ const LoginLink = styled.div`
   gap: 28px;
   margin-top: 20px;
   a {
-      position: relative;
+    position: relative;
     font-weight: 400;
     font-size: 12px;
     color: var(--sub-font);
@@ -101,7 +104,7 @@ const LoginLink = styled.div`
       height: 15px;
       background-color: #c4c4c4;
     }
-}
+  }
 `;
 
 export default function Login() {
