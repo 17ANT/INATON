@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// const One = styled.div`
-//   color: red;
-// `;
 
 const LoginForm = styled.div`
   padding: 0 34px;
