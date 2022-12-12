@@ -1,18 +1,13 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Reset } from 'styled-reset';
 import Login from './pages/login/Login';
-
-
-
+import Router from './routes/Router';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Reset />
-      <Routes>
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    return (
+        <>
+            <Reset />
+            <Router />
+        </>
+    );
 }
 export default App;
