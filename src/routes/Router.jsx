@@ -3,10 +3,11 @@ import React from 'react';
 import Login from '../pages/login/Login';
 import SignUp from '../pages/signup/Signup';
 import Splash from '../pages/splash/Splash';
+
 import ChatList from './../pages/chatList/ChatList';
 import ChatRoom from './../pages/chatRoom/ChatRoom';
 import PostUpload from '../pages/postUpload/PostUpload';
-
+import LoginEmail from '../pages/LoginEmail/LoginEmail';
 export default function Router() {
   return (
     <BrowserRouter>
@@ -15,9 +16,11 @@ export default function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/chatlist" element={<ChatList />} />
+        <Route path="/login/email" element={<LoginEmail />} />
         <Route path="/chatroom" element={<ChatRoom />} />
         <Route path="/postupload" element={<PostUpload />} />
       </Routes>
     </BrowserRouter>
   );
+
 }

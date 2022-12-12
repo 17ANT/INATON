@@ -15,11 +15,18 @@ const GlobalStyle = createGlobalStyle`
     --border-color: #dbdbdb;
     /* 배경컬러 */
     --bg-color: #f2f2f2;
+
+    /* error 컬러 */
+    --error-color: #EB5757
+   }
+     .sr-only{
+
     /* 서브보더 */
     --sub-border: #c4c4c4;
     
     }
     .sr-only{
+
     position: absolute;
     width: 1px;
     height: 1px;
