@@ -3,8 +3,8 @@ import Router from './routes/Router';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-   
-   :root{
+
+    :root{
     --main-color: #a8bc93;
     /* 비활성화 버튼*/
     --sub-color: #dbe3d2;
@@ -15,10 +15,18 @@ const GlobalStyle = createGlobalStyle`
     --border-color: #dbdbdb;
     /* 배경컬러 */
     --bg-color: #f2f2f2;
+
     /* error 컬러 */
     --error-color: #EB5757
    }
      .sr-only{
+
+    /* 서브보더 */
+    --sub-border: #c4c4c4;
+    
+    }
+    .sr-only{
+
     position: absolute;
     width: 1px;
     height: 1px;
@@ -28,17 +36,17 @@ const GlobalStyle = createGlobalStyle`
     clip: rect(0,0,0,0);
     white-space: nowrap;
     border-width: 0;
-  }
+}
 
 `;
 
 function App() {
-  return (
-    <>
-      <GlobalStyle />
-      <Reset />
-      <Router />
-    </>
-  );
+    return (
+        <>
+            <GlobalStyle />
+            <Reset />
+            <Router />
+        </>
+    );
 }
 export default App;
