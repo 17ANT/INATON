@@ -10,6 +10,7 @@ import PostUpload from '../pages/postUpload/PostUpload';
 import LoginEmail from '../pages/LoginEmail/LoginEmail';
 
 import MyProfile from '../pages/myProfile/MyProfile';
+import YourProfile from '../pages/yourProfile/YourProfile';
 export default function Router() {
     return (
         <BrowserRouter>
@@ -22,6 +23,7 @@ export default function Router() {
                 <Route path='/chatroom' element={<ChatRoom />} />
                 <Route path='/postupload' element={<PostUpload />} />
                 <Route path='/myprofile' element={<MyProfile />} />
+                <Route path='/yourprofile' element={<YourProfile />} />
             </Routes>
         </BrowserRouter>
     );
