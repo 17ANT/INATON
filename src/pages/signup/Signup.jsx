@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
+import ErrorMessage from '../../components/sewon/ErrorMessage/ErrorMessage';
+import Input from '../../components/sewon/Input/Input';
 
 const SignupForm = styled.div`
   padding: 0 34px;
@@ -24,18 +26,6 @@ const InputBox = styled.div`
   position: relative;
   width: 100%;
   margin-top: 26px;
-
-  input {
-    width: 322px;
-    height: 35px;
-    border: none;
-    outline: none;
-    border-bottom: 2px solid #dbdbdb;
-    color: var(--font-color);
-    letter-spacing: 0.06em;
-    font-size: 1.05em;
-    caret-color: #a8bc93;
-  }
   span {
     position: absolute;
     left: 0;
@@ -46,14 +36,6 @@ const InputBox = styled.div`
     color: var(--sub-font);
     transition: 0.5s;
   }
-  input:is(:focus, :valid) ~ span {
-    color: var(--main-color);
-    font-size: 0.9em;
-    transform: translateY(-23px);
-  }
-  input:is(:focus, :valid) {
-    border-bottom: 2px solid var(--main-color);
-  }
   .active {
     border-bottom: 2px solid var(--main-color);
   }
@@ -62,13 +44,6 @@ const InputBox = styled.div`
     font-size: 0.9em;
     transform: translateY(-23px);
   }
-`;
-const WarningMessage = styled.span`
-  color: var(--error-color);
-  margin-top: 6px;
-  font-weight: 500;
-  font-size: 12px;
-  text-align: left;
 `;
 
 const SubmitBtn = styled.input`
@@ -85,35 +60,20 @@ const SubmitBtn = styled.input`
   }
 `;
 export default function Signup() {
-  const validValue = useRef(null);
-  const handleValid = (e) => {
-    if (validValue.current.value !== '') {
-      e.target.classList.add('active');
-    } else {
-      e.target.classList.remove('active');
-    }
-  };
   return (
     <SignupForm>
       <h2>이메일로 회원가입</h2>
       <Form action="">
         <InputBox>
-          <input
-            type="email"
-            required
-            onChange={handleValid}
-            ref={validValue}
-          />
+          <Input type="email" required />
           <span>이메일</span>
         </InputBox>
-        <WarningMessage>*이미 가입된 이메일 주소입니다.</WarningMessage>
+        <ErrorMessage text={'*이미 가입된 이메일 주소입니다.'} />
         <InputBox>
-          <input type="password" name="" required />
+          <Input type="password" name="" required />
           <span>비밀번호</span>
         </InputBox>
-        <WarningMessage>
-          *이메일 또는 비밀번호가 일치하지 않습니다.
-        </WarningMessage>
+        <ErrorMessage text={'*이메일 또는 비밀번호가 일치하지 않습니다.'} />
         <SubmitBtn type="submit" value="다음" />
       </Form>
     </SignupForm>

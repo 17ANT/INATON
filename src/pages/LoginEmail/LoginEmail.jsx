@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
+import ErrorMessage from '../../components/sewon/ErrorMessage/ErrorMessage';
+import InputTag from '../../components/sewon/Input/Input';
 
 const LoginForm = styled.div`
   padding: 0 34px;
@@ -24,17 +26,6 @@ const InputBox = styled.div`
   position: relative;
   width: 100%;
   margin-top: 26px;
-  input {
-    width: 322px;
-    height: 35px;
-    border: none;
-    outline: none;
-    border-bottom: 2px solid #dbdbdb;
-    color: var(--font-color);
-    letter-spacing: 0.06em;
-    font-size: 1.05em;
-    caret-color: var(--main-color);
-  }
   span {
     position: absolute;
     left: 0;
@@ -45,14 +36,7 @@ const InputBox = styled.div`
     color: var(--sub-font);
     transition: 0.5s;
   }
-  input:is(:focus, :valid) ~ span {
-    color: var(--main-color);
-    font-size: 0.9em;
-    transform: translateY(-23px);
-  }
-  input:is(:focus, :valid) {
-    border-bottom: 2px solid var(--main-color);
-  }
+
   .active {
     border-bottom: 2px solid var(--main-color);
   }
@@ -81,46 +65,22 @@ const SignupLink = styled.a`
   color: var(--sub-font);
   text-decoration: none;
 `;
-const WarningMessage = styled.span`
-  color: var(--error-color);
-  margin-top: 6px;
-  font-weight: 500;
-  font-size: 12px;
-  text-align: left;
-`;
+
 
 export default function LoginEmail() {
-  const validValue = useRef(null);
-  // if (validValue.current.value !== '') {
-  //   validValue.target.classList.add('active');
-  // }
-  const handleValid = (e) => {
-    if (validValue.current.value !== '') {
-      e.target.classList.add('active');
-    } else {
-      e.target.classList.remove('active');
-    }
-  };
   return (
     <LoginForm>
       <h2>로그인</h2>
       <Form action="">
         <InputBox>
-          <input
-            type="email"
-            required
-            onChange={handleValid}
-            ref={validValue}
-          />
+          <InputTag type="email" required />
           <span>이메일</span>
         </InputBox>
         <InputBox>
-          <input type="password" name="" required />
+          <InputTag type="password" name="" required />
           <span>비밀번호</span>
         </InputBox>
-        <WarningMessage>
-          *이메일 또는 비밀번호가 일치하지 않습니다.
-        </WarningMessage>
+        <ErrorMessage text={"*이메일 또는 비밀번호가 일치하지 않습니다."} />
         <SubmitBtn type="submit" value="로그인" />
       </Form>
       <SignupLink href="/signup">이메일로 회원가입</SignupLink>

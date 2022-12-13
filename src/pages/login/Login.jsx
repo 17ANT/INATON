@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   position: relative;
@@ -102,7 +103,7 @@ const LoginLink = styled.div`
       right: -15px;
       width: 1px;
       height: 15px;
-      background-color: #c4c4c4;
+      background-color: var(--sub-border);
     }
   }
 `;
@@ -125,8 +126,8 @@ export default function Login() {
           <span>페이스북 계정으로 로그인</span>
         </LoginButton>
         <LoginLink>
-          <a href="/login/email">이메일로 로그인</a>
-          <a href="/signup">회원가입</a>
+          <Link to="/login/email">이메일로 로그인</Link>
+          <Link to="/signup">회원가입</Link>
         </LoginLink>
       </LoginArticle>
     </Container>
