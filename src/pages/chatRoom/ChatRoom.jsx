@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import ChatHeader from './../../components/header/ChatHeader';
 
 const Main = styled.main`
   position: fixed;
   width: 100%;
   background-color: var(--bg-color);
-  height: calc(100% - 60px);
+  height: 100%;
   overflow-y: scroll;
 `;
 const ChatRoomWrap = styled.section`
@@ -13,6 +14,7 @@ const ChatRoomWrap = styled.section`
   flex-direction: column;
   justify-content: flex-end;
   padding: 20px 16px;
+  margin-top: 48px;
 `;
 const MyMsg = styled.section`
   display: flex;
@@ -116,6 +118,7 @@ const MsgInput = styled.footer`
 export default function ChatRoom() {
   return (
     <>
+      <ChatHeader />
       <Main>
         <ChatRoomWrap>
           <MyMsg>

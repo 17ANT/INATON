@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import NavBar from '../../components/navBar/NavBar';
+import BasicHeader from './../../components/header/BasicHeader';
 
 const ChatMain = styled.main`
   position: fixed;
@@ -10,6 +11,8 @@ const ChatMain = styled.main`
   width: 100%;
   height: 100%;
   padding: 24px 16px;
+  overflow-y: scroll;
+  margin-top: 48px;
 `;
 
 const List = styled.ul`
@@ -68,6 +71,7 @@ const List = styled.ul`
 export default function ChatList() {
   return (
     <>
+      <BasicHeader />
       <ChatMain>
         <List>
           <li>
