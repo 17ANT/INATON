@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
-
 
 const LoginForm = styled.div`
   padding: 0 34px;
@@ -12,7 +11,7 @@ const LoginForm = styled.div`
     margin: 30px 0 40px;
     font-weight: 700;
     font-size: 24px;
-    color:var( --font-color);
+    color: var(--font-color);
     user-select: none;
   }
 `;
@@ -20,12 +19,11 @@ const LoginForm = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 16px;
 `;
 const InputBox = styled.div`
   position: relative;
   width: 100%;
-
+  margin-top: 26px;
   input {
     width: 322px;
     height: 35px;
@@ -35,7 +33,7 @@ const InputBox = styled.div`
     color: var(--font-color);
     letter-spacing: 0.06em;
     font-size: 1.05em;
-    caret-color: #a8bc93;
+    caret-color: var(--main-color);
   }
   span {
     position: absolute;
@@ -48,7 +46,18 @@ const InputBox = styled.div`
     transition: 0.5s;
   }
   input:is(:focus, :valid) ~ span {
-    color:var(--main-color);
+    color: var(--main-color);
+    font-size: 0.9em;
+    transform: translateY(-23px);
+  }
+  input:is(:focus, :valid) {
+    border-bottom: 2px solid var(--main-color);
+  }
+  .active {
+    border-bottom: 2px solid var(--main-color);
+  }
+  .active ~ span {
+    color: var(--main-color);
     font-size: 0.9em;
     transform: translateY(-23px);
   }
@@ -73,19 +82,36 @@ const SignupLink = styled.a`
   text-decoration: none;
 `;
 const WarningMessage = styled.span`
-  color: #eb5757;
+  color: var(--error-color);
+  margin-top: 6px;
   font-weight: 500;
   font-size: 12px;
   text-align: left;
 `;
 
 export default function LoginEmail() {
+  const validValue = useRef(null);
+  // if (validValue.current.value !== '') {
+  //   validValue.target.classList.add('active');
+  // }
+  const handleValid = (e) => {
+    if (validValue.current.value !== '') {
+      e.target.classList.add('active');
+    } else {
+      e.target.classList.remove('active');
+    }
+  };
   return (
     <LoginForm>
       <h2>로그인</h2>
       <Form action="">
         <InputBox>
-          <input type="text" name="" required />
+          <input
+            type="email"
+            required
+            onChange={handleValid}
+            ref={validValue}
+          />
           <span>이메일</span>
         </InputBox>
         <InputBox>
@@ -97,7 +123,7 @@ export default function LoginEmail() {
         </WarningMessage>
         <SubmitBtn type="submit" value="로그인" />
       </Form>
-      <SignupLink href="#">이메일로 회원가입</SignupLink>
+      <SignupLink href="/signup">이메일로 회원가입</SignupLink>
     </LoginForm>
   );
 }
