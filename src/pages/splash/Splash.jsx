@@ -7,6 +7,7 @@ const Logo = styled.main`
     justify-content: center;
     align-items: center;
 `;
+
 export default function Splash() {
     return (
         <Logo>
