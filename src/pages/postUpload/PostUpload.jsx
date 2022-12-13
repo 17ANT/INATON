@@ -17,15 +17,6 @@ const PostUploadMain = styled.main`
     display: flex;
     gap: 12px;
     padding: 20px 16px;
-
-    .ir {
-        position: absolute;
-        left: -10000px;
-        top: auto;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-    }
 `;
 
 const PostPreview = styled.div`
@@ -108,11 +99,11 @@ export default function PostUpload() {
         <>
             <Header />
             <PostUploadMain>
-                <h2 className="ir">게시글 작성</h2>
+                <h2 className="sr-only">게시글 작성</h2>
                 <ProfileImg src={'/assets/basic-profile-img.png'} alt="프로필 이미지" />
                 <PostPreview>
                     <PostUploadForm>
-                        <h3 className="ir">게시글을 입력해주세요</h3>
+                        <h3 className="sr-only">게시글을 입력해주세요</h3>
 
                         <TextForm
                             ref={txtRef}
@@ -121,9 +112,9 @@ export default function PostUpload() {
                             onChange={handleResize}
                         ></TextForm>
                         <ImageButton htmlFor="imgUpload">
-                            <span className="ir">이미지 업로드</span>
+                            <span className="sr-only">이미지 업로드</span>
                         </ImageButton>
-                        <input type="file" id="imgUpload" className="ir" />
+                        <input type="file" id="imgUpload" className="sr-only" />
                     </PostUploadForm>
                     <ImageList>
                         <ImageItem>
