@@ -10,16 +10,19 @@ const Header = styled.div`
 
 const PostDetailMain = styled.main`
     position: relative;
-    background-color: yellow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px;
+    gap: 20px;
 `;
 
 const CommentList = styled.ul`
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 16px;
-    padding: 26px 16px;
     border-top: 1px solid var(--border-color);
+    padding: 20px 0;
 `;
 
 const CommentItem = styled.li`
