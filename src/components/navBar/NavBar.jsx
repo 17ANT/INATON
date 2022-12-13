@@ -41,12 +41,14 @@ const NavList = styled.ul`
   }
   .home a.active::before {
     background: url('assets/icon/icon-home-fill.png') no-repeat;
+    background-size: contain;
   }
   .chat a::before {
     background: url('assets/icon/icon-message-circle.png') no-repeat;
   }
   .chat a.active::before {
     background: url('assets/icon/icon-message-circle-fill.png') no-repeat;
+    background-size: contain;
   }
   .user a::before {
     background: url('assets/icon/icon-user.png') no-repeat;
@@ -54,6 +56,7 @@ const NavList = styled.ul`
   }
   .user a.active::before {
     background: url('assets/icon/icon-user-fill.png') no-repeat;
+    background-size: contain;
   }
   .post a::before {
     background: url('assets/icon/icon-edit.png') no-repeat;
