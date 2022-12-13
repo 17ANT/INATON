@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
-import ErrorMessage from '../../components/sewon/ErrorMessage/ErrorMessage';
+import ErrorMessage from '../../components/errorMessage/ErrorMessage';
 import Input from '../../components/sewon/Input/Input';
 
 const SignupForm = styled.div`

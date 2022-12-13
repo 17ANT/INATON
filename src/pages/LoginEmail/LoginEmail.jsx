@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import ErrorMessage from '../../components/sewon/ErrorMessage/ErrorMessage';
+import ErrorMessage from '../../components/errorMessage/ErrorMessage';
 import InputTag from '../../components/sewon/Input/Input';
 
 const LoginForm = styled.div`
@@ -66,7 +66,6 @@ const SignupLink = styled.a`
   text-decoration: none;
 `;
 
-
 export default function LoginEmail() {
   return (
     <LoginForm>
@@ -80,7 +79,7 @@ export default function LoginEmail() {
           <InputTag type="password" name="" required />
           <span>비밀번호</span>
         </InputBox>
-        <ErrorMessage text={"*이메일 또는 비밀번호가 일치하지 않습니다."} />
+        <ErrorMessage text={'*이메일 또는 비밀번호가 일치하지 않습니다.'} />
         <SubmitBtn type="submit" value="로그인" />
       </Form>
       <SignupLink href="/signup">이메일로 회원가입</SignupLink>
