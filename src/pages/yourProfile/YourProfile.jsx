@@ -10,6 +10,7 @@ const TopBasicNav = styled.nav`
     display: flex;
     justify-content: space-between;
     min-width: 390px;
+    border-bottom: 0.5px solid var(--border-color);
 `;
 
 const ArrowLeftImg = styled.img`
