@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import NavBar from '../../components/navBar/NavBar';
 
 const ChatMain = styled.main`
   position: fixed;
@@ -93,6 +94,9 @@ export default function ChatList() {
           </li>
         </List>
       </ChatMain>
+      <footer>
+        <NavBar />
+      </footer>
     </>
   );
 }
