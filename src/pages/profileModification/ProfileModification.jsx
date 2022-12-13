@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const ProfileModificationDiv = styled.div`
     margin: 0 auto;
@@ -10,10 +11,11 @@ const TopBasicNav = styled.nav`
     display: flex;
     justify-content: space-between;
     min-width: 390px;
+    border-bottom: 0.5px solid var(--border-color);
 `;
 
 const ArrowLeftImg = styled.img`
-    margin: 13px 0 13px 16px;
+    margin: 13px 0 10px 16px;
     width: 22px;
     height: 22px;
 `;
@@ -37,7 +39,8 @@ const ProfileForm = styled.form`
 const ImgDiv = styled.div`
     position: relative;
     margin: 0 auto;
-    width: fit-content;
+    padding-left: 10px;
+    width: 275px;
     text-align: center;
 `;
 
@@ -50,67 +53,58 @@ const ProfileImg = styled.img`
 const ChangeImg = styled.img`
     position: absolute;
     top: 74px;
-    left: 115px;
+    left: 165px;
     width: 36px;
     height: 36px;
 `;
 
-const UserNameLabel = styled.p`
-    margin: 30px 0 10px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--sub-font);
+const InputDiv = styled.div`
+    margin: 0 auto;
+    padding-top: 14px;
+    width: fit-content;
 `;
 
-const UserNameInput = styled.input`
-    padding: 0 0 8px 0;
-    width: 322px;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--border-color);
-    border: none;
-    border-bottom: 1px solid var(--border-color);
-`;
-
-const UserIdLabel = styled.p`
+const UserInputLabel = styled.p`
     margin: 16px 0 10px;
     font-size: 12px;
     font-weight: 500;
     color: var(--sub-font);
 `;
 
-const UserIdInput = styled.input`
-    padding: 0 0 8px 0;
+const UserInput = styled.input`
+    padding-bottom: 8px;
     width: 322px;
     font-size: 14px;
     font-weight: 400;
-    color: var(--border-color);
     border: none;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 2px solid var(--border-color);
+
+    &:focus,
+    &:active {
+        outline: none;
+        border: none;
+        border-bottom: 2px solid var(--main-color);
+    }
+    &::placeholder {
+        font-size: 14px;
+        color: var(--border-color);
+    }
 `;
 
-const UserDescLabel = styled.p`
-    margin: 16px 0 10px;
+const UserInputError = styled.strong`
+    display: block;
+    margin-top: 6px;
     font-size: 12px;
-    font-weight: 500;
-    color: var(--sub-font);
-`;
-
-const UserDescInput = styled.input`
-    padding: 0 0 8px 0;
-    width: 322px;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--border-color);
-    border: none;
-    border-bottom: 1px solid var(--border-color);
+    color: var(--error-color);
 `;
 
 export default function ProfileModification() {
     return (
         <ProfileModificationDiv>
             <TopBasicNav>
-                <ArrowLeftImg src='/assets/icon/icon-arrow-left.png' alt='arrow-left-img' />
+                <Link to='/myprofile' style={{ textDecoration: 'none' }}>
+                    <ArrowLeftImg src='/assets/icon/icon-arrow-left.png' alt='arrow-left-img' />
+                </Link>
                 <SaveBtn>저장</SaveBtn>
             </TopBasicNav>
 
@@ -120,16 +114,21 @@ export default function ProfileModification() {
                     <ChangeImg src='/assets/upload-file.png'></ChangeImg>
                 </ImgDiv>
 
-                <UserNameLabel htmlFor='name'>사용자 이름</UserNameLabel>
-                <UserNameInput type='text' id='name' placeholder='2~10자 이내여야 합니다.'></UserNameInput>
-                <UserIdLabel htmlFor='id'>계정 ID</UserIdLabel>
-                <UserIdInput
-                    type='text'
-                    id='id'
-                    placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
-                ></UserIdInput>
-                <UserDescLabel htmlFor='desc'>소개</UserDescLabel>
-                <UserDescInput type='text' id='desc' placeholder='자신에 대해 소개해 주세요!'></UserDescInput>
+                <InputDiv>
+                    <UserInputLabel htmlFor='name'>사용자 이름</UserInputLabel>
+                    <UserInput type='text' id='name' placeholder='2~10자 이내여야 합니다.'></UserInput>
+                    <UserInputError>*2~10자 이내여야 합니다.</UserInputError>
+                    <UserInputLabel htmlFor='id'>계정 ID</UserInputLabel>
+                    <UserInput
+                        type='text'
+                        id='id'
+                        placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
+                    ></UserInput>
+                    <UserInputError>*영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.</UserInputError>
+                    <UserInputLabel htmlFor='desc'>소개</UserInputLabel>
+                    <UserInput type='text' id='desc' placeholder='자신에 대해 소개해 주세요!'></UserInput>
+                    <UserInputError>*최대 50자 입력 가능합니다.</UserInputError>
+                </InputDiv>
             </ProfileForm>
         </ProfileModificationDiv>
     );
