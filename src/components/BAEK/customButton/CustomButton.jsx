@@ -23,8 +23,13 @@ const CustomButtonBox = styled.button`
             return 'var(--main-color)';
         }
     }};
-    color: ${(props) => (props.state === 'activ' ? 'var(--sub-font)' : 'none')};
+    color: ${(props) => (props.state === 'activ' ? 'var(--sub-font)' : '#fff')};
     border: ${(props) => (props.state === 'activ' ? '1px solid var(--border-color)' : 'none')};
+
+    :active {
+        /* props.state가 없을 떄만 */
+        /*  active 됐을 때 배경색 변경 */
+    }
 `;
 
 export default function CustomButton({ text, onClick, size, state }) {
