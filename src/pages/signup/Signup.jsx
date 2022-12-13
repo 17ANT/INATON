@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';
-import Input from '../../components/sewon/Input/Input';
+import Input from '../../components/Input/Input';
 
 const SignupForm = styled.div`
   padding: 0 34px;
