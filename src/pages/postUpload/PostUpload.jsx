@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import UploadHeader from '../../components/header/UploadHeader';
+import ProfileImg from '../../components/profileImg/ProfileImg';
 import UploadButton from '../../components/uploadButton/UploadButton';
 
 const Header = styled.div`
@@ -9,11 +10,11 @@ const Header = styled.div`
     background-color: var(--main-color);
 `;
 
-const ProfileImg = styled.img`
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-`;
+// const ProfileImg = styled.img`
+//     width: 42px;
+//     height: 42px;
+//     border-radius: 50%;
+// `;
 
 const PostUploadMain = styled.main`
     display: flex;
@@ -97,7 +98,7 @@ export default function PostUpload() {
             <Header />
             <PostUploadMain>
                 <h2 className="sr-only">게시글 작성</h2>
-                <ProfileImg src={'/assets/basic-profile-img.png'} alt="프로필 이미지" />
+                <ProfileImg size="42px" src={'/assets/basic-profile-img.png'} alt="프로필 이미지" />
                 <PostPreview>
                     <PostUploadForm>
                         <h3 className="sr-only">게시글을 입력해주세요</h3>
