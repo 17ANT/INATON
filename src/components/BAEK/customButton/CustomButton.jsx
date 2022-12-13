@@ -12,7 +12,6 @@ const CustomButtonBox = styled.button`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    cursor: pointer;
 
     background-color: ${(props) => {
         if (props.state === 'disabled') {
@@ -25,10 +24,16 @@ const CustomButtonBox = styled.button`
     }};
     color: ${(props) => (props.state === 'activ' ? 'var(--sub-font)' : '#fff')};
     border: ${(props) => (props.state === 'activ' ? '1px solid var(--border-color)' : 'none')};
+    cursor: ${(props) => (props.state === 'disabled' ? 'default' : 'pointer')};
 
     :active {
         /* props.state가 없을 떄만 */
         /*  active 됐을 때 배경색 변경 */
+        background-color: ${(props) => {
+            if (props.state === null) {
+                return 'var(--sub-color)';
+            }
+        }};
     }
 `;
 
@@ -67,3 +72,7 @@ export default function CustomButton({ text, onClick, size, state }) {
         </CustomButtonBox>
     );
 }
+
+CustomButton.defaultProps = {
+    state: null,
+};
