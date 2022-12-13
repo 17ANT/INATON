@@ -6,18 +6,20 @@ import Splash from '../pages/splash/Splash';
 import ChatList from './../pages/chatList/ChatList';
 import ChatRoom from './../pages/chatRoom/ChatRoom';
 import PostUpload from '../pages/postUpload/PostUpload';
+import PostDetail from '../pages/postDetail/PostDetail';
 
 export default function Router() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Splash />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/chatlist" element={<ChatList />} />
-        <Route path="/chatroom" element={<ChatRoom />} />
-        <Route path="/postupload" element={<PostUpload />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Splash />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/chatlist" element={<ChatList />} />
+                <Route path="/chatroom" element={<ChatRoom />} />
+                <Route path="/postupload" element={<PostUpload />} />
+                <Route path="/postdetail" element={<PostDetail />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }
