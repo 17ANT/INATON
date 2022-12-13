@@ -103,7 +103,7 @@ const LoginLink = styled.div`
       right: -15px;
       width: 1px;
       height: 15px;
-      background-color: var(--sub-border);
+      background-color: #c4c4c4;
     }
   }
 `;
