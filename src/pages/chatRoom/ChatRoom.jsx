@@ -6,6 +6,7 @@ const Main = styled.main`
   width: 100%;
   background-color: var(--bg-color);
   height: calc(100% - 60px);
+  overflow-y: scroll;
 `;
 const ChatRoomWrap = styled.section`
   display: flex;
@@ -39,6 +40,10 @@ const MyMsg = styled.section`
       color: var(--sub-font);
       align-self: flex-end;
     }
+    img {
+      border-radius: 10px;
+      height: 240px;
+    }
   }
 `;
 const YourMsg = styled.section`
@@ -68,6 +73,10 @@ const YourMsg = styled.section`
       color: var(--sub-font);
       align-self: flex-end;
     }
+    img {
+      border-radius: 10px;
+      height: 240px;
+    }
   }
 `;
 
@@ -84,7 +93,9 @@ const MsgInput = styled.footer`
     padding: 0 16px;
     align-items: center;
     height: 60px;
-
+    .img-upload {
+      cursor: pointer;
+    }
     .msg-input {
       width: calc(100% - 98px);
       border: none;
@@ -146,12 +157,19 @@ export default function ChatRoom() {
               <strong>13:49</strong>
             </div>
           </MyMsg>
+          <MyMsg>
+            <h3 className="sr-only">메시지</h3>
+            <div>
+              <img src={`assets/chat-exapmle.png`} alt="" />
+              <strong>13:49</strong>
+            </div>
+          </MyMsg>
         </ChatRoomWrap>
       </Main>
       <MsgInput>
         <h2 className="sr-only">채팅입력창</h2>
         <form>
-          <label htmlFor="imgUpload">
+          <label htmlFor="imgUpload" className="img-upload">
             <img src={'assets/img-button.png'} alt="" />
           </label>
           <input type="file" id="imgUpload" className="sr-only" />
