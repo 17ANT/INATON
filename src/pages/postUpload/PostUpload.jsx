@@ -62,6 +62,7 @@ const ImageButton = styled.label`
     border-radius: 50%;
 
     background: url('/assets/icon/icon-upload.png') no-repeat center/28px 28px var(--main-color);
+    cursor: pointer;
 `;
 
 const ImageList = styled.ul`
