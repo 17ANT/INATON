@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import FollowCount, { FollowDiv } from '../followCount/FollowCount';
 
 const PostContainer = styled.div`
     position: relative;
@@ -75,6 +76,10 @@ const PostReaction = styled.div`
     }
 `;
 
+const ReactionCnt = styled(FollowDiv)`
+    background-color: aqua;
+`;
+
 const PostDate = styled.p`
     padding-left: 54px;
     font-weight: 400;
@@ -94,7 +99,16 @@ const MoreBtn = styled.button`
     cursor: pointer;
 `;
 
+function changeUnit(num) {
+    if (num >= 1000000) return Math.floor(num / 1000000) + 'M';
+    else if (num >= 1000) return Math.floor(num / 1000) + 'K';
+    else return num;
+}
+
 export default function HomePost() {
+    const likeCnt = changeUnit(123456789);
+    const commentCnt = changeUnit(1234);
+
     return (
         <>
             <PostContainer>
@@ -116,10 +130,11 @@ export default function HomePost() {
                 </PostContents>
                 <PostReaction>
                     <button>
-                        <img src={'/assets/icon/icon-heart.png'} alt="" /> 58
+                        <img src={'/assets/icon/icon-heart.png'} alt="" />
+                        {likeCnt}
                     </button>
                     <button>
-                        <img src={'/assets/icon/icon-message-circle.png'} alt="" /> 12
+                        <img src={'/assets/icon/icon-message-circle.png'} alt="" /> {commentCnt}
                     </button>
                 </PostReaction>
                 <PostDate>2020년 10월 21일</PostDate>
