@@ -11,9 +11,16 @@ const ProfileInfo = styled.div`
 
 const ProfileText = styled.div`
     display: flex;
-    flex-direction: ${(props) => (props.check === 'COMMENT' ? 'rows' : 'column')};
-    align-items: ${(props) => (props.check === 'COMMENT' ? 'center' : 'rows')};
+    flex-direction: column;
     gap: ${(props) => props.line};
+
+    ${(props) =>
+        props.check === 'COMMENT' &&
+        css`
+            flex-direction: row;
+            align-items: center;
+        `}
+        }
 
     white-space: nowrap;
     strong {
@@ -29,18 +36,27 @@ const ProfileText = styled.div`
     }
 
     p {
-        width: ${(props) => (props.check === 'COMMENT' ? 'fit-content' : '240px')};
+        width: 240px;
         height: 15px;
 
         font-weight: 400;
         font-size: 12px;
         line-height: 15px;
+        color:var(--sub-font);
 
         overflow: hidden;
         text-overflow: ellipsis;
 
-        &::before {
-            content: ${(props) => (props.check === 'COMMENT' ? '안녕' : '룰라')};
+        ${(props) =>
+            props.check === 'COMMENT' &&
+            css`
+                width: fit-content;
+                font-size: 10px;
+                line-height: 13px;
+                &:before {
+                    content: '· ';
+                }
+            `}
         }
     }
 `;
