@@ -13,29 +13,36 @@ import YourProfile from '../pages/yourProfile/YourProfile';
 import ProfileModification from '../pages/profileModification/ProfileModification';
 import Home from './../pages/home/Home';
 import Search from './../pages/search/Search';
+import NotFound from './../pages/NotFound/NotFound';
+
 import TestPage from '../pages/B_TestPage/TestPage';
 
 export default function Router() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Splash />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/search" element={<Search />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/chatlist" element={<ChatList />} />
-                <Route path="/login/email" element={<LoginEmail />} />
-                <Route path="/chatroom" element={<ChatRoom />} />
-                <Route path="/postupload" element={<PostUpload />} />
-                <Route path="/postdetail" element={<PostDetail />} />
-                <Route path="/myprofile" element={<MyProfile />} />
-                <Route path="/yourprofile" element={<YourProfile />} />
-                <Route path="/myprofile/modification" element={<ProfileModification />} />
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Splash />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/chatlist" element={<ChatList />} />
+        <Route path="/login/email" element={<LoginEmail />} />
+        <Route path="/chatroom" element={<ChatRoom />} />
+        <Route path="/postupload" element={<PostUpload />} />
+        <Route path="/postdetail" element={<PostDetail />} />
+        <Route path="/myprofile" element={<MyProfile />} />
+        <Route path="/yourprofile" element={<YourProfile />} />
+        <Route
+          path="/myprofile/modification"
+          element={<ProfileModification />}
+        />
 
-                {/* 테스트용 임시 페이지 */}
-                <Route path="/btest" element={<TestPage />} />
-            </Routes>
-        </BrowserRouter>
-    );
+        {/* 테스트용 임시 페이지 */}
+        <Route path="/btest" element={<TestPage />} />
+        
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
