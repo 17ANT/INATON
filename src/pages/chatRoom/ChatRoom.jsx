@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ChatHeader from './../../components/header/ChatHeader';
 
@@ -142,9 +143,9 @@ export default function ChatRoom() {
           </YourMsg>
           <YourMsg>
             <h3 className="sr-only">메시지</h3>
-            <a href="#">
+            <Link to="#">
               <img src={`assets/Ellipse 6.png`} alt="" />
-            </a>
+            </Link>
             <div>
               <p>
                 네 안녕하세요 대답하시라구요 아 진짜 아놔 왜 답을 안하세요
