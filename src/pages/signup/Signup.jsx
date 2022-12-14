@@ -37,7 +37,7 @@ export default function Signup() {
         <ErrorMessage text={'*이미 가입된 이메일 주소입니다.'} />
         <InputDiv text="비밀번호" type="password" />
         <ErrorMessage text={'*이메일 또는 비밀번호가 일치하지 않습니다.'} />
-        <CustomButton text="다음" size="L" state="disabled" />
+        <CustomButton size="L" state="disabled" >다음</CustomButton>
       </Form>
     </SignupForm>
   );
