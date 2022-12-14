@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import CustomButton from '../customButton/CustomButton';
 
 const HeaderWrap = styled.header`
     width: 100%;
@@ -28,21 +29,23 @@ const Section = styled.section`
 export default function UploadHeader() {
     const navigate = useNavigate();
 
-    return (
-        <>
-            <HeaderWrap>
-                <Section>
-                    <button
-                        className="back"
-                        onClick={() => {
-                            navigate(-1);
-                        }}
-                    >
-                        <img src={`assets/icon/icon-arrow-left.png`} alt="" />
-                    </button>
-                    <button></button>
-                </Section>
-            </HeaderWrap>
-        </>
-    );
+
+  return (
+    <>
+      <HeaderWrap>
+        <Section>
+          <button
+            className="back"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            <img src={`assets/icon/icon-arrow-left.png`} alt="" />
+          </button>
+          <CustomButton size="ms">저장</CustomButton>
+        </Section>
+      </HeaderWrap>
+    </>
+  );
+
 }
