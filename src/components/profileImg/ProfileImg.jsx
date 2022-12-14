@@ -10,3 +10,7 @@ const ProfileImgBox = styled.img`
 export default function ProfileImg({ size, src, alt }) {
     return <ProfileImgBox size={size} src={src} alt={alt}></ProfileImgBox>;
 }
+
+ProfileImg.defaultProps = {
+    src: './assets/basic-profile-img.png',
+};

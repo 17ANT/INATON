@@ -91,7 +91,7 @@ export default function PostUpload() {
             <Header />
             <PostUploadMain>
                 <h2 className="sr-only">게시글 작성</h2>
-                <ProfileImg size="42px" src={'/assets/basic-profile-img.png'} alt="프로필 이미지" />
+                <ProfileImg size="42px" alt="프로필 이미지" />
                 <PostPreview>
                     <PostUploadForm>
                         <h3 className="sr-only">게시글을 입력해주세요</h3>
