@@ -104,11 +104,6 @@ export default function PostUpload() {
                         ></TextForm>
 
                         <UploadButton radius="28px" size="50px" bg="var(--main-color)"></UploadButton>
-
-                        {/* <ImageButton htmlFor="imgUpload">
-                            <span className="sr-only">이미지 업로드</span>
-                        </ImageButton>
-                        <input type="file" id="imgUpload" className="sr-only" /> */}
                     </PostUploadForm>
                     <ImageList>
                         <ImageItem>
