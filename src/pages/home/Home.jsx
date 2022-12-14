@@ -17,8 +17,8 @@ const NoneFollowSection = styled.div`
     border: 1px solid #000;
     /* overflow: hidden; */
     display: flex;
-    transform: translateY(-50%);
     flex-direction: column;
+    transform: translateY(-50%);
     align-items: center;
     gap: 20px;
     width: 181px;
