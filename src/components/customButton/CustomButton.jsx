@@ -67,7 +67,14 @@ export default function CustomButton({ children, onClick, size, state }) {
     }
 
     return (
-        <CustomButtonBox onClick={onClick} state={state} width={width} height={height} radius={radius}>
+        <CustomButtonBox
+            onClick={onClick}
+            state={state}
+            width={width}
+            height={height}
+            radius={radius}
+            disabled={state !== 'disabled'}
+        >
             {children}
         </CustomButtonBox>
     );
