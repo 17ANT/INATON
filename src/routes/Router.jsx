@@ -40,7 +40,7 @@ export default function Router() {
 
         {/* 테스트용 임시 페이지 */}
         <Route path="/btest" element={<TestPage />} />
-        
+
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
