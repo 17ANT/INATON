@@ -12,5 +12,5 @@ export default function ProfileImg({ size, src, alt }) {
 }
 
 ProfileImg.defaultProps = {
-    src: './assets/basic-profile-img.png',
+    src: '/assets/basic-profile-img.png',
 };
