@@ -15,6 +15,8 @@ import Home from './../pages/home/Home';
 import Search from './../pages/search/Search';
 import NotFound from './../pages/NotFound/NotFound';
 
+import TestPage from '../pages/B_TestPage/TestPage';
+
 export default function Router() {
   return (
     <BrowserRouter>
@@ -35,6 +37,10 @@ export default function Router() {
           path="/myprofile/modification"
           element={<ProfileModification />}
         />
+
+        {/* 테스트용 임시 페이지 */}
+        <Route path="/btest" element={<TestPage />} />
+        
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

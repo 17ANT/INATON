@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import HomePost from '../../components/homePost/HomePost';
 
+styled(HomePost)`
+    outline: 3px solid red;
+`;
+
 const Header = styled.div`
     width: 100%;
     height: 48px;
