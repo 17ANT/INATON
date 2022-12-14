@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import CustomButton from './../../components/customButton/CustomButton';
 
 const NotFoundMain = styled.main`
   display: flex;
@@ -24,15 +25,16 @@ export default function NotFound() {
   return (
     <>
       <NotFoundMain>
-        <img src={`assets/icon/icon-404.png`} alt="" />
-        <p>페이지를 찾을 수 없습니다</p>
-        <button
+        <img src={'/assets/icon/icon-404.png'} alt="" />
+        <p>페이지를 찾을 수 없습니다!</p>
+        <CustomButton
+          size="m"
           onClick={() => {
             navigate(-1);
           }}
         >
           이전페이지
-        </button>
+        </CustomButton>
       </NotFoundMain>
     </>
   );
