@@ -13,6 +13,7 @@ import YourProfile from '../pages/yourProfile/YourProfile';
 import ProfileModification from '../pages/profileModification/ProfileModification';
 import Home from './../pages/home/Home';
 import Search from './../pages/search/Search';
+import NotFound from './../pages/NotFound/NotFound';
 
 export default function Router() {
   return (
@@ -34,6 +35,7 @@ export default function Router() {
           path="/myprofile/modification"
           element={<ProfileModification />}
         />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
