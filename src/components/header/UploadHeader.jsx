@@ -41,7 +41,7 @@ export default function UploadHeader() {
           >
             <img src={`assets/icon/icon-arrow-left.png`} alt="" />
           </button>
-          <CustomButton size="ms">왜....?</CustomButton>
+          <CustomButton size="ms">저장</CustomButton>
         </Section>
       </HeaderWrap>
     </>
