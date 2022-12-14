@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import CustomButton from '../customButton/CustomButton';
 
 const HeaderWrap = styled.header`
   width: 100%;
@@ -40,7 +41,7 @@ export default function UploadHeader() {
           >
             <img src={`assets/icon/icon-arrow-left.png`} alt="" />
           </button>
-          <button></button>
+          <CustomButton size="ms">왜....?</CustomButton>
         </Section>
       </HeaderWrap>
     </>
