@@ -5,6 +5,7 @@ import ErrorMessage from '../../components/errorMessage/ErrorMessage';
 import InputDiv from '../../components/Input/Input';
 
 const LoginForm = styled.div`
+  /* font-family: var(--font-family); */
   padding: 0 34px;
   width: fit-content;
   min-height: 100vh;
