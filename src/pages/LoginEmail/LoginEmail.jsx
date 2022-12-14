@@ -40,7 +40,7 @@ export default function LoginEmail() {
         <InputDiv text="이메일" type="email" />
         <InputDiv text="비밀번호" type="password" />
         <ErrorMessage text={'*이메일 또는 비밀번호가 일치하지 않습니다.'} />
-        <CustomButton text="로그인" size="L" state="disabled" />
+        <CustomButton size="L" state="disabled" >로그인</CustomButton>
       </Form>
       <SignupLink href="/signup">이메일로 회원가입</SignupLink>
     </LoginForm>
