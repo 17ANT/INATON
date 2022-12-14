@@ -37,7 +37,7 @@ const CustomButtonBox = styled.button`
     }
 `;
 
-export default function CustomButton({ text, onClick, size, state }) {
+export default function CustomButton({ children, onClick, size, state }) {
     let width, height, radius;
     switch (size.toUpperCase()) {
         case 'L':
@@ -68,7 +68,7 @@ export default function CustomButton({ text, onClick, size, state }) {
 
     return (
         <CustomButtonBox onClick={onClick} state={state} width={width} height={height} radius={radius}>
-            {text}
+            {children}
         </CustomButtonBox>
     );
 }
