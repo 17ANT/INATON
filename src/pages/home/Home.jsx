@@ -51,12 +51,12 @@ export default function Home() {
         // 팔로우가 있는경우
         <HomePostList>
           <HomePost />
-          {/* <HomePost />
           <HomePost />
           <HomePost />
           <HomePost />
           <HomePost />
-          <HomePost /> */}
+          <HomePost />
+          <HomePost />
         </HomePostList>
       ) : (
         // 팔로우가 없는 경우
