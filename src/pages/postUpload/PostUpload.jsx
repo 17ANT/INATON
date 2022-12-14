@@ -10,12 +10,6 @@ const Header = styled.div`
     background-color: var(--main-color);
 `;
 
-// const ProfileImg = styled.img`
-//     width: 42px;
-//     height: 42px;
-//     border-radius: 50%;
-// `;
-
 const PostUploadMain = styled.main`
     display: flex;
     gap: 12px;
@@ -30,6 +24,12 @@ const PostPreview = styled.div`
 
 const PostUploadForm = styled.form`
     width: 100%;
+
+    label {
+        position: fixed;
+        bottom: 16px;
+        right: 16px;
+    }
 `;
 
 const TextForm = styled.textarea`
@@ -45,13 +45,6 @@ const TextForm = styled.textarea`
         outline: none;
     }
 `;
-
-// styled(UploadButton)`
-//     outline: 3px solid red;
-//     position: fixed;
-//     bottom: 16px;
-//     right: 16px;
-// `;
 
 const ImageList = styled.ul`
     max-width: 520px;
@@ -109,6 +102,7 @@ export default function PostUpload() {
                             rows={1}
                             onChange={handleResize}
                         ></TextForm>
+
                         <UploadButton radius="28px" size="50px" bg="var(--main-color)"></UploadButton>
 
                         {/* <ImageButton htmlFor="imgUpload">
