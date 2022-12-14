@@ -7,7 +7,7 @@ const Main = styled.main`
   position: fixed;
   width: 100%;
   background-color: var(--bg-color);
-  height: 100%;
+  height: calc(100% - 48px);
   overflow-y: scroll;
 `;
 const ChatRoomWrap = styled.section`

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-const HeaderWrap = styled.header`
+const ChatHeaderBox = styled.header`
   width: 100%;
   position: fixed;
   left: 0;
@@ -43,22 +43,20 @@ export default function ChatHeader() {
   const navigate = useNavigate();
 
   return (
-    <>
-      <HeaderWrap>
-        <Section>
-          <button
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            <img src={`assets/icon/icon-arrow-left.png`} alt="" />
-          </button>
-          <h2>유저이름</h2>
-          <button className="more">
-            <img src={`assets/icon/icon-more-vertical.png`} alt="" />
-          </button>
-        </Section>
-      </HeaderWrap>
-    </>
+    <ChatHeaderBox>
+      <Section>
+        <button
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          <img src={`assets/icon/icon-arrow-left.png`} alt="" />
+        </button>
+        <h2>회원이름</h2>
+        <button className="more">
+          <img src={`assets/icon/icon-more-vertical.png`} alt="" />
+        </button>
+      </Section>
+    </ChatHeaderBox>
   );
 }
