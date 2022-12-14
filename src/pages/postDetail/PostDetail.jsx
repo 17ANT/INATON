@@ -17,7 +17,7 @@ const PostDetailMain = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 16px;
+    padding: 20px 16px 82px;
     gap: 20px;
 `;
 
@@ -84,6 +84,7 @@ const MoreBtn = styled.button`
 
 const CommentWrite = styled.div`
     position: fixed;
+    z-index: 10;
     width: auto;
     left: 0;
     right: 0;
@@ -93,6 +94,7 @@ const CommentWrite = styled.div`
     display: flex;
     flex-wrap: no-wrap;
     align-items: center;
+    background-color: #fff;
     border-top: 1px solid var(--border-color);
 
     img {
