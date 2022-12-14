@@ -75,6 +75,22 @@ const PostReaction = styled.div`
     }
 `;
 
+const ImgContainer = styled.ul`
+    display: flex;
+    width: 304px;
+    height: 228px;
+    overflow: hidden;
+`;
+
+const ImgItem = styled.li`
+    transition: 0.2s;
+    p {
+        font-size: 32px;
+        color: red;
+        position: absolute;
+    }
+`;
+
 const PostDate = styled.p`
     padding-left: 54px;
     font-weight: 400;
@@ -94,7 +110,31 @@ const MoreBtn = styled.button`
     cursor: pointer;
 `;
 
-export default function HomePost() {
+function changeUnit(num) {
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    else if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+    else return num;
+}
+
+export default function HomePost({ like, comment, imgList }) {
+    const likeCnt = changeUnit(like);
+    const commentCnt = changeUnit(comment);
+    let swipeIndex = 0;
+
+    const handleSwipe = (e) => {
+        // 이미지 스와이프 이벤트
+        e.preventDefault();
+        swipeIndex += 1;
+        if (swipeIndex > 2) {
+            swipeIndex = 0;
+        }
+        const position = -100 * swipeIndex;
+        const changeList = e.currentTarget.parentElement.childNodes;
+        changeList.forEach((el) => {
+            el.style.transform = `translateX(${position}%)`;
+        });
+    };
+
     return (
         <>
             <PostContainer>
@@ -112,14 +152,21 @@ export default function HomePost() {
                         옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한
                         그들의 그와 약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.
                     </p>
-                    <img src={'/assets/post-img-example.png'} alt="" />
+                    <ImgContainer>
+                        {imgList.map((el, idx) => (
+                            <ImgItem key={idx} onClick={handleSwipe}>
+                                <img src={el} alt="" />
+                            </ImgItem>
+                        ))}
+                    </ImgContainer>
                 </PostContents>
                 <PostReaction>
                     <button>
-                        <img src={'/assets/icon/icon-heart.png'} alt="" /> 58
+                        <img src={'/assets/icon/icon-heart.png'} alt="" />
+                        {likeCnt}
                     </button>
                     <button>
-                        <img src={'/assets/icon/icon-message-circle.png'} alt="" /> 12
+                        <img src={'/assets/icon/icon-message-circle.png'} alt="" /> {commentCnt}
                     </button>
                 </PostReaction>
                 <PostDate>2020년 10월 21일</PostDate>
