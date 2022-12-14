@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import ProfileImg from '../profileImg/ProfileImg';
 
 const ProfileInfo = styled.div`
+    width: fit-content;
     display: flex;
     gap: ${(props) => props.gap};
     align-items: center;
@@ -28,7 +29,7 @@ const ProfileText = styled.div`
     }
 
     p {
-        width: 240px;
+        width: ${(props) => (props.check === 'COMMENT' ? 'fit-content' : '240px')};
         height: 15px;
 
         font-weight: 400;
@@ -37,19 +38,11 @@ const ProfileText = styled.div`
 
         overflow: hidden;
         text-overflow: ellipsis;
+
+        &::before {
+            content: ${(props) => (props.check === 'COMMENT' ? '안녕' : '룰라')};
+        }
     }
-    ${(props) =>
-        (props.check === 'COMMENT") &&
-        css`
-            background: #ff6b6b;
-            &:hover {
-                background: #ff8787;
-            }
-            &:active {
-                background: #fa5252;
-            }
-            transform: translate(-50%, 50%) rotate(45deg);
-        `}
 `;
 
 export default function InlineProfileInfo({ img, name, desc, state }) {
