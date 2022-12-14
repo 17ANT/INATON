@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
     --error-color: #EB5757;
     /* 서브보더 */
     --sub-border: #c4c4c4;
+    --font-family: 'Spoqa Han Sans Neo', 'sans-serif';
    }
     .sr-only{
 
@@ -31,17 +32,21 @@ const GlobalStyle = createGlobalStyle`
     clip: rect(0,0,0,0);
     white-space: nowrap;
     border-width: 0;
-}
-
+    }
+    body,button{
+        font-family: var(--font-family);
+        font-size:14px;
+        line-height:18px;
+    }
 `;
 
 function App() {
-    return (
-        <>
-            <GlobalStyle />
-            <Reset />
-            <Router />
-        </>
-    );
+  return (
+    <>
+      <GlobalStyle />
+      <Reset />
+      <Router />
+    </>
+  );
 }
 export default App;

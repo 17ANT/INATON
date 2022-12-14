@@ -9,7 +9,7 @@ const ChatMain = styled.main`
   justify-content: center;
   min-width: 390px;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 108px);
   padding: 24px 16px;
   overflow-y: scroll;
   margin-top: 48px;

@@ -1,5 +1,28 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
+const InputBox = styled.div`
+  position: relative;
+  width: 100%;
+  margin-top: 26px;
+  span {
+    position: absolute;
+    left: 0;
+    pointer-events: none;
+    padding: 5px 0;
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: var(--sub-font);
+    transition: 0.5s;
+  }
+  .active {
+    border-bottom: 2px solid var(--main-color);
+  }
+  .active ~ span {
+    color: var(--main-color);
+    font-size: 0.9em;
+    transform: translateY(-23px);
+  }
+`;
 const InputTag = styled.input`
   width: 322px;
   height: 35px;
@@ -21,17 +44,19 @@ const InputTag = styled.input`
   }
 `;
 
-export default function Input({ type }) {
+export default function InputDiv({ type,text }) {
   const validValue = useRef(null);
   const handleValid = (e) => {
-    if (validValue.current.value !== '') {
+    if (e.target.value !== '') {
       e.target.classList.add('active');
     } else {
       e.target.classList.remove('active');
     }
   };
   return (
-    <InputTag onChange={handleValid} type={type} required ref={validValue} />
+    <InputBox text={text}>
+      <InputTag ref={validValue} onChange={handleValid} type={type} required />
+      <span>{text}</span>
+    </InputBox>
   );
 }
-

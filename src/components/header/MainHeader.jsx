@@ -21,6 +21,7 @@ const Section = styled.section`
   h1 {
     color: var(--font-color);
     font-weight: bold;
+    font-size: 18px;
   }
   button {
     background-color: transparent;
