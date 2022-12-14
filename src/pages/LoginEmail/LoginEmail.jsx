@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import CustomButton from '../../components/customButton/CustomButton';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';
-import InputTag from '../../components/Input/Input';
+import InputDiv from '../../components/Input/Input';
 
 const LoginForm = styled.div`
   padding: 0 34px;
@@ -9,6 +10,7 @@ const LoginForm = styled.div`
   min-height: 100vh;
   margin: 0 auto;
   text-align: center;
+  overflow: hidden;
   h2 {
     margin: 30px 0 40px;
     font-weight: 700;
@@ -16,51 +18,14 @@ const LoginForm = styled.div`
     color: var(--font-color);
     user-select: none;
   }
+  button {
+    margin: 30px 0 20px;
+  }
 `;
-
 const Form = styled.form`
   display: flex;
   flex-direction: column;
 `;
-const InputBox = styled.div`
-  position: relative;
-  width: 100%;
-  margin-top: 26px;
-  span {
-    position: absolute;
-    left: 0;
-    pointer-events: none;
-    padding: 5px 0;
-    margin: 10px 0;
-    font-size: 1.1em;
-    color: var(--sub-font);
-    transition: 0.5s;
-  }
-
-  .active {
-    border-bottom: 2px solid var(--main-color);
-  }
-  .active ~ span {
-    color: var(--main-color);
-    font-size: 0.9em;
-    transform: translateY(-23px);
-  }
-`;
-
-const SubmitBtn = styled.input`
-  background-color: var(--main-color);
-  color: #fff;
-  width: 322px;
-  margin: 30px 0 20px;
-  height: 44px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  :active {
-    background: rgba(168, 188, 147, 0.7);
-  }
-`;
-
 const SignupLink = styled.a`
   color: var(--sub-font);
   text-decoration: none;
@@ -71,16 +36,10 @@ export default function LoginEmail() {
     <LoginForm>
       <h2>로그인</h2>
       <Form action="">
-        <InputBox>
-          <InputTag type="email" required />
-          <span>이메일</span>
-        </InputBox>
-        <InputBox>
-          <InputTag type="password" name="" required />
-          <span>비밀번호</span>
-        </InputBox>
+        <InputDiv text="이메일" type="email" />
+        <InputDiv text="비밀번호" type="password" />
         <ErrorMessage text={'*이메일 또는 비밀번호가 일치하지 않습니다.'} />
-        <SubmitBtn type="submit" value="로그인" />
+        <CustomButton text="로그인" size="L" state="disabled" />
       </Form>
       <SignupLink href="/signup">이메일로 회원가입</SignupLink>
     </LoginForm>
