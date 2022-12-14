@@ -145,7 +145,15 @@ export default function PostDetail() {
         <>
             <Header />
             <PostDetailMain>
-                <HomePost />
+                <HomePost
+                    like="123456789"
+                    comment="1234"
+                    imgList={[
+                        '/assets/post-img-example.png',
+                        '/assets/post-img-example.png',
+                        '/assets/post-img-example.png',
+                    ]}
+                />
 
                 <CommentList>
                     <CommentItem>
