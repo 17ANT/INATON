@@ -4,17 +4,15 @@ import UploadHeader from '../../components/header/UploadHeader';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UploadButton from '../../components/uploadButton/UploadButton';
 
-const Test = styled.div`
-    width: 390px;
-`;
 const PostUploadMain = styled.main`
+    width: 100%;
     display: flex;
     gap: 12px;
     padding: 68px 16px;
 `;
 
 const PostPreview = styled.div`
-    flex: 1;
+    width: 100%;
     display: flex;
     flex-direction: column;
 `;
@@ -24,6 +22,8 @@ const PostUploadForm = styled.form`
         position: fixed;
         bottom: 16px;
         right: 16px;
+        z-index: 50;
+        box-shadow: 0px 0px 4px #646464;
     }
 `;
 
@@ -45,21 +45,27 @@ const TextForm = styled.textarea`
     }
 `;
 
+const ImageSlider = styled.div`
+    overflow-y: scroll;
+`;
+
 const ImageList = styled.ul`
-    min-width: 520px;
+    width: 520px;
+    /* 3개 겹치는 현상 발생
+    width: min(520px, fit-content); */
+
     display: flex;
-    flex: 0 0 304px;
+    flex: 1 0 304px;
+    justify-content: start;
     gap: 8px;
 `;
 
 const ImageItem = styled.li`
     position: relative;
-    flex-basis: 304px;
+    width: min(304px, 100%);
 
     img {
         width: max(168px, 100%);
-        position: relative;
-        background: var(--sub-border);
         border-radius: 10px;
     }
 
@@ -100,17 +106,26 @@ export default function PostUpload() {
                             rows={1}
                             onChange={handleResize}
                         ></TextForm>
-
                         <UploadButton radius="28px" size="50px" bg="var(--main-color)" />
                     </PostUploadForm>
 
-                    <ImageList>
-                        {/* 개수에 따른 배치는 JS로 컨트롤 */}
-                        <ImageItem>
-                            <img src="/assets/post-img-example.png" alt="" />
-                            <button type="button"></button>
-                        </ImageItem>
-                    </ImageList>
+                    <ImageSlider>
+                        <ImageList>
+                            {/* 개수에 따른 배치는 JS로 컨트롤 */}
+                            <ImageItem>
+                                <img src="/assets/post-img-example.png" alt="" />
+                                <button type="button"></button>
+                            </ImageItem>
+                            <ImageItem>
+                                <img src="/assets/post-img-example.png" alt="" />
+                                <button type="button"></button>
+                            </ImageItem>
+                            <ImageItem>
+                                <img src="/assets/post-img-example.png" alt="" />
+                                <button type="button"></button>
+                            </ImageItem>
+                        </ImageList>
+                    </ImageSlider>
                 </PostPreview>
             </PostUploadMain>
         </>
