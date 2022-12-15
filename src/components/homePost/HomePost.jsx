@@ -18,6 +18,7 @@ const PostContents = styled.div`
     gap: 16px;
 
     p {
+        padding-right: 16px;
         font-weight: 400;
         font-size: 14px;
         line-height: 18px;
@@ -51,19 +52,19 @@ const PostReaction = styled.div`
 
 const ImgContainer = styled.ul`
     display: flex;
-    width: 100%;
+    width: 304px;
     height: 228px;
     overflow-x: scroll;
     overflow-y: hidden;
 `;
 
 const ImgItem = styled.li`
-    border: 1px solid red;
-    transition: 0.2s;
-    width: 304px;
-    height: 228px;
-    border-radius: 10px;
-    overflow: hiddn;
+    img {
+        width: 304px;
+        height: 228px;
+        border-radius: 10px;
+        object-fit: cover;
+    }
 `;
 
 const SwipeContainer = styled.ul`
@@ -143,20 +144,23 @@ export default function HomePost({ like, comment, imgList }) {
                         옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한
                         그들의 그와 약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.
                     </p>
-                    <ImgContainer>
-                        {imgList.map((el, idx) => (
-                            <ImgItem key={idx} onClick={handleSwipe}>
-                                <img src={el} alt="" />
-                            </ImgItem>
-                        ))}
-                    </ImgContainer>
-
-                    {imgList.length > 1 && (
-                        <SwipeContainer>
-                            {imgList.map((el, idx) => (
-                                <SwipeItem key={idx} on={idx ? null : 'on'}></SwipeItem>
-                            ))}
-                        </SwipeContainer>
+                    {imgList && (
+                        <>
+                            <ImgContainer>
+                                {imgList.map((el, idx) => (
+                                    <ImgItem key={idx} onClick={handleSwipe}>
+                                        <img src={el} alt="" />
+                                    </ImgItem>
+                                ))}
+                            </ImgContainer>
+                            {imgList.length > 1 && (
+                                <SwipeContainer>
+                                    {imgList.map((el, idx) => (
+                                        <SwipeItem key={idx} on={idx ? null : 'on'}></SwipeItem>
+                                    ))}
+                                </SwipeContainer>
+                            )}
+                        </>
                     )}
                 </PostContents>
 

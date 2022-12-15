@@ -86,11 +86,11 @@ export default function PostDetail() {
                 <HomePost
                     like="123456789"
                     comment="1234"
-                    imgList={[
-                        '/assets/chat-exapmle.png',
-                        '/assets/post-img-example.png',
-                        '/assets/post-img-example.png',
-                    ]}
+                    // imgList={[
+                    //     '/assets/chat-exapmle.png',
+                    //     '/assets/post-img-example.png',
+                    //     '/assets/post-img-example.png',
+                    // ]}
                 />
 
                 <CommentList>
