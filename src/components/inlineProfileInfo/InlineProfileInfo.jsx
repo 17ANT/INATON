@@ -20,7 +20,6 @@ const ProfileText = styled.div`
             flex-direction: row;
             align-items: center;
         `}
-        }
 
     white-space: nowrap;
     strong {
@@ -62,7 +61,6 @@ const ProfileText = styled.div`
 `;
 
 export default function InlineProfileInfo({ img, name, desc, state }) {
-
     const check = state.toUpperCase();
     let size, gap, line;
     switch (check) {
@@ -104,5 +102,4 @@ export default function InlineProfileInfo({ img, name, desc, state }) {
 InlineProfileInfo.defaultProps = {
     img: './assets/basic-profile-img.png',
     desc: '  ',
-
 };
