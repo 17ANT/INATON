@@ -22,7 +22,6 @@ const LogoImg = styled.img`
 const LoginArticle = styled.article`
   position: absolute;
   width: 100%;
-  box-sizing: border-box;
   bottom: -20px;
   height: 362px;
   display: flex;
