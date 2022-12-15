@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
 
 const PostContainer = styled.div`
     position: relative;
@@ -9,35 +10,8 @@ const PostContainer = styled.div`
     gap: 16px;
 `;
 
-const ProfileContainer = styled.div`
-    display: flex;
-    gap: 12px;
-
-    img {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-    }
-`;
-
-const UserInfo = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
-
-const UserName = styled.strong`
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
-`;
-
-const UserAccount = styled.p`
-    font-size: 12px;
-    line-height: 14px;
-    color: var(--sub-font);
-`;
-
 const PostContents = styled.div`
+    position: relative;
     padding-left: 54px;
     display: flex;
     flex-direction: column;
@@ -77,18 +51,38 @@ const PostReaction = styled.div`
 
 const ImgContainer = styled.ul`
     display: flex;
-    width: 304px;
+    width: 300%;
     height: 228px;
-    overflow: hidden;
+    overflow: scroll;
 `;
 
 const ImgItem = styled.li`
     transition: 0.2s;
-    p {
-        font-size: 32px;
-        color: red;
-        position: absolute;
+    width: 304px;
+    height: 228px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        border: 1px solid red;
+        object-fit: cover;
     }
+`;
+
+const SwipeContainer = styled.ul`
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-left: 54px;
+    display: flex;
+    gap: 10px;
+`;
+
+const SwipeItem = styled.li`
+    background-color: var(--error-color);
+    width: 10px;
+    height: 10px;
 `;
 
 const PostDate = styled.p`
@@ -140,13 +134,7 @@ export default function HomePost({ like, comment, imgList }) {
             <PostContainer>
                 <h3 className="sr-only">게시글 상세 정보</h3>
 
-                <ProfileContainer>
-                    <img src={'/assets/basic-profile-img.png'} alt="프로필 이미지" />
-                    <UserInfo>
-                        <UserName>애월읍 위니브 감귤농장</UserName>
-                        <UserAccount>@ weniv_Mandarin</UserAccount>
-                    </UserInfo>
-                </ProfileContainer>
+                <InlineProfileInfo name="애월읍 위니브 감귤농장" desc="@ weniv_Mandarin" state="post" />
                 <PostContents>
                     <p>
                         옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한
@@ -159,16 +147,26 @@ export default function HomePost({ like, comment, imgList }) {
                             </ImgItem>
                         ))}
                     </ImgContainer>
+
+                    {imgList.length > 1 && (
+                        <SwipeContainer>
+                            {imgList.map((el, idx) => (
+                                <SwipeItem key={idx}></SwipeItem>
+                            ))}
+                        </SwipeContainer>
+                    )}
                 </PostContents>
+
                 <PostReaction>
                     <button>
-                        <img src={'/assets/icon/icon-heart.png'} alt="" />
+                        <img src={'/assets/icon/icon-heart.png'} alt="좋아요" />
                         {likeCnt}
                     </button>
                     <button>
-                        <img src={'/assets/icon/icon-message-circle.png'} alt="" /> {commentCnt}
+                        <img src={'/assets/icon/icon-message-circle.png'} alt="댓글 입력창으로 이동" /> {commentCnt}
                     </button>
                 </PostReaction>
+
                 <PostDate>2020년 10월 21일</PostDate>
                 <MoreBtn type="button">
                     <span className="sr-only">더보기</span>

@@ -42,6 +42,14 @@ const GlobalStyle = createGlobalStyle`
         font-size:14px;
         line-height:18px;
     }
+
+    a {
+        display: block;
+        text-decoration: none;
+        color: #000;
+    }
+
+
 `;
 
 function App() {
