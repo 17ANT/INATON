@@ -21,8 +21,9 @@ const Section = styled.section`
 
   h2 {
     font-size: 14px;
-    line-height: 18px;
-    margin-left: 10px;
+    line-height: 45px;
+    height: 48px;
+    margin-left: 8px;
     font-weight: bold;
     color: var(--font-color);
   }
@@ -39,11 +40,11 @@ const Section = styled.section`
   }
 `;
 
-export default function ChatHeader() {
+export default function ChatHeader({ text, isMore }) {
   const navigate = useNavigate();
 
   return (
-    <ChatHeaderBox>
+    <ChatHeaderBox text={text} isMore={isMore}>
       <Section>
         <button
           onClick={() => {
@@ -52,10 +53,14 @@ export default function ChatHeader() {
         >
           <img src={`assets/icon/icon-arrow-left.png`} alt="" />
         </button>
-        <h2>회원이름</h2>
-        <button className="more">
-          <img src={`assets/icon/icon-more-vertical.png`} alt="" />
-        </button>
+        <h2>{text}</h2>
+        {isMore ? (
+          <button className="more">
+            <img src={`assets/icon/icon-more-vertical.png`} alt="" />
+          </button>
+        ) : (
+          <></>
+        )}
       </Section>
     </ChatHeaderBox>
   );
