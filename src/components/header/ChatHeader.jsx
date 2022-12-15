@@ -40,7 +40,7 @@ const Section = styled.section`
   }
 `;
 
-export default function ChatHeader({ text, isMore }) {
+export default function ChatHeader({ text, isMore, onClick }) {
   const navigate = useNavigate();
 
   return (
@@ -55,7 +55,7 @@ export default function ChatHeader({ text, isMore }) {
         </button>
         <h2>{text}</h2>
         {isMore ? (
-          <button className="more">
+          <button className="more" onClick={onClick}>
             <img src={`assets/icon/icon-more-vertical.png`} alt="" />
           </button>
         ) : (
