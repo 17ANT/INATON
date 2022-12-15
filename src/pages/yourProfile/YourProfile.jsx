@@ -55,7 +55,7 @@ export default function YourProfile() {
             <YourProfileWrap>
                 <ProfileHeader>
                     <FollowCount count={2950} kind='followers'></FollowCount>
-                    <ProfileImg size='110px' src='assets/Ellipse-1.png' alt='profile image'></ProfileImg>
+                    <ProfileImg size='110px' src='/assets/Ellipse-1.png' alt='profile image'></ProfileImg>
                     <FollowCount count={128} kind='followings'></FollowCount>
                 </ProfileHeader>
 
@@ -69,13 +69,13 @@ export default function YourProfile() {
 
                 <ProfileButton>
                     <Link to='/'>
-                        <ImageButton size='15px' src='assets/icon/icon-message-circle.png' alt='message'></ImageButton>
+                        <ImageButton size='34px' src='assets/icon/icon-message-circle.png' alt='message'></ImageButton>
                     </Link>
                     <CustomButton size='M' state='activ'>
                         언팔로우
                     </CustomButton>
                     <Link to='/'>
-                        <ImageButton size='15px' src='assets/icon/icon-share.png' alt='message'></ImageButton>
+                        <ImageButton size='34px' src='assets/icon/icon-share.png' alt='message' onClick></ImageButton>
                     </Link>
                 </ProfileButton>
             </YourProfileWrap>
