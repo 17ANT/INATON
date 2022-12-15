@@ -6,7 +6,7 @@ import FollowCount from '../../components/followCount/FollowCount';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UserInfoText from '../../components/userInfoText/UserInfoText';
 import CustomButton from '../../components/customButton/CustomButton';
-import ImageButton from '../../components/imageButton/ImageButton';
+import { ImgButton } from '../../components/imageButton/ImageButton';
 
 const YourProfileWrap = styled.div`
     margin: 0 auto;
@@ -40,6 +40,11 @@ const ProfileButton = styled.div`
     text-align: center;
     justify-content: space-between;
     gap: 10px;
+`;
+
+const ImageButton = styled(ImgButton)`
+    padding: 9px;
+    border: 1px solid var(--border-color);
 `;
 
 export default function YourProfile() {
