@@ -4,6 +4,7 @@ import HomePost from '../../components/homePost/HomePost';
 import NavBar from '../../components/navBar/NavBar';
 import MainHeader from './../../components/header/MainHeader';
 import CustomButton from '../../components/customButton/CustomButton';
+import CustomMainHeader from '../../components/header/CustomMainHeader';
 
 const Container = styled.div`
   display: flex;
@@ -41,22 +42,39 @@ const NoneFollowSection = styled.div`
 `;
 
 export default function Home() {
-  const [isFollow, setIsFollow] = useState(false);
+  const [isFollow, setIsFollow] = useState(true);
 
   return (
     <Container>
-      <MainHeader />
+      <CustomMainHeader />
 
       {isFollow ? (
         // 팔로우가 있는경우
         <HomePostList>
-          <HomePost />
-          <HomePost />
-          <HomePost />
-          <HomePost />
-          <HomePost />
-          <HomePost />
-          <HomePost />
+          <HomePost
+            like="88349"
+            comment="1210104"
+            imgList={[
+              '/assets/post-img-example.png',
+              '/assets/post-img-example.png',
+              '/assets/post-img-example.png',
+            ]}
+          />
+          <HomePost
+            like="123456789"
+            comment="1234"
+            imgList={[
+            ]}
+          />
+          <HomePost
+            like="123456789"
+            comment="65"
+            imgList={[
+              '/assets/post-img-example.png',
+              '/assets/post-img-example.png',
+              '/assets/post-img-example.png',
+            ]}
+          />
         </HomePostList>
       ) : (
         // 팔로우가 없는 경우
