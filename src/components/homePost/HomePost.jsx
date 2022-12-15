@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
 
 const PostContainer = styled.div`
@@ -51,38 +51,41 @@ const PostReaction = styled.div`
 
 const ImgContainer = styled.ul`
     display: flex;
-    width: 300%;
+    width: 100%;
     height: 228px;
-    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: hidden;
 `;
 
 const ImgItem = styled.li`
+    border: 1px solid red;
     transition: 0.2s;
     width: 304px;
     height: 228px;
-
-    img {
-        width: 100%;
-        height: 100%;
-        border: 1px solid red;
-        object-fit: cover;
-    }
+    border-radius: 10px;
+    overflow: hiddn;
 `;
 
 const SwipeContainer = styled.ul`
     position: absolute;
-    bottom: 0;
+    bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
     padding-left: 54px;
     display: flex;
-    gap: 10px;
+    gap: 6px;
 `;
 
 const SwipeItem = styled.li`
-    background-color: var(--error-color);
-    width: 10px;
-    height: 10px;
+    background-color: #fff;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    ${(props) =>
+        props.on &&
+        css`
+            background-color: var(--error-color);
+        `}
 `;
 
 const PostDate = styled.p`
@@ -151,7 +154,7 @@ export default function HomePost({ like, comment, imgList }) {
                     {imgList.length > 1 && (
                         <SwipeContainer>
                             {imgList.map((el, idx) => (
-                                <SwipeItem key={idx}></SwipeItem>
+                                <SwipeItem key={idx} on={idx ? null : 'on'}></SwipeItem>
                             ))}
                         </SwipeContainer>
                     )}
