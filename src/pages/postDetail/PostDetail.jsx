@@ -77,7 +77,7 @@ const MoreBtn = styled.button`
     right: 0px;
     width: 20px;
     height: 20px;
-    background: url('/assets/icon/icon-more-vertical.png') no-repeat center/20px 20px;
+    background: url('assets/icon/icon-more-vertical.png') no-repeat center/20px 20px;
     border: none;
     cursor: pointer;
 `;

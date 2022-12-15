@@ -4,16 +4,13 @@ import UploadHeader from '../../components/header/UploadHeader';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UploadButton from '../../components/uploadButton/UploadButton';
 
-const Header = styled.div`
-    width: 100%;
-    height: 48px;
-    background-color: var(--main-color);
+const Test = styled.div`
+    width: 390px;
 `;
-
 const PostUploadMain = styled.main`
     display: flex;
     gap: 12px;
-    padding: 20px 16px;
+    padding: 68px 16px;
 `;
 
 const PostPreview = styled.div`
@@ -23,8 +20,6 @@ const PostPreview = styled.div`
 `;
 
 const PostUploadForm = styled.form`
-    width: 100%;
-
     label {
         position: fixed;
         bottom: 16px;
@@ -37,6 +32,10 @@ const TextForm = styled.textarea`
     margin-bottom: 16px;
     border: none;
     resize: none;
+    font-family: var(--font-family);
+    font-size: 14px;
+    line-height: 18px;
+
     ::placeholder {
         color: var(--sub-border);
     }
@@ -47,22 +46,23 @@ const TextForm = styled.textarea`
 `;
 
 const ImageList = styled.ul`
-    max-width: 520px;
+    min-width: 520px;
     display: flex;
+    flex: 0 0 304px;
     gap: 8px;
 `;
 
 const ImageItem = styled.li`
     position: relative;
+    flex-basis: 304px;
 
     img {
-        width: 304px;
-        height: 228px;
-        /* 이미지 2개 이상: 168px*126px */
+        width: max(168px, 100%);
         position: relative;
         background: var(--sub-border);
         border-radius: 10px;
     }
+
     button {
         position: absolute;
         top: 6px;
@@ -83,12 +83,10 @@ export default function PostUpload() {
         txtRef.current.style.height = 'auto'; //height 초기화
         txtRef.current.style.height = txtRef.current.scrollHeight + 'px';
     };
-    // //textarea 자동높이
 
     return (
         <>
             <UploadHeader />
-            <Header />
             <PostUploadMain>
                 <h2 className="sr-only">게시글 작성</h2>
                 <ProfileImg size="42px" alt="프로필 이미지" />
@@ -103,17 +101,11 @@ export default function PostUpload() {
                             onChange={handleResize}
                         ></TextForm>
 
-                        <UploadButton radius="28px" size="50px" bg="var(--main-color)"></UploadButton>
+                        <UploadButton radius="28px" size="50px" bg="var(--main-color)" />
                     </PostUploadForm>
+
                     <ImageList>
-                        <ImageItem>
-                            <img src="/assets/post-img-example.png" alt="" />
-                            <button type="button"></button>
-                        </ImageItem>
-                        <ImageItem>
-                            <img src="/assets/post-img-example.png" alt="" />
-                            <button type="button"></button>
-                        </ImageItem>
+                        {/* 개수에 따른 배치는 JS로 컨트롤 */}
                         <ImageItem>
                             <img src="/assets/post-img-example.png" alt="" />
                             <button type="button"></button>
