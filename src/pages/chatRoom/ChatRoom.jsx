@@ -119,7 +119,7 @@ const MsgInput = styled.footer`
 export default function ChatRoom() {
   return (
     <>
-      <ChatHeader />
+      <ChatHeader text={'회원이름'} isMore={true} />
       <Main>
         <ChatRoomWrap>
           <MyMsg>

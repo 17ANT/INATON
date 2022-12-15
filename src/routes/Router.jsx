@@ -16,6 +16,8 @@ import Search from './../pages/search/Search';
 import NotFound from './../pages/NotFound/NotFound';
 
 import TestPage from '../pages/B_TestPage/TestPage';
+import Follower from '../pages/follow/Follower';
+import Following from './../pages/follow/Following';
 
 export default function Router() {
   return (
@@ -37,6 +39,8 @@ export default function Router() {
           path="/myprofile/modification"
           element={<ProfileModification />}
         />
+        <Route path="/follower" element={<Follower />} />
+        <Route path="/following" element={<Following />} />
 
         {/* 테스트용 임시 페이지 */}
         <Route path="/btest" element={<TestPage />} />

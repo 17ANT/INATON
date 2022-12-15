@@ -25,7 +25,7 @@ const Section = styled.section`
     }
 `;
 
-export default function BasicHeader() {
+export default function BasicHeader({ onClick }) {
     const navigate = useNavigate();
 
     return (
@@ -39,7 +39,7 @@ export default function BasicHeader() {
                     >
                         <img src={`assets/icon/icon-arrow-left.png`} alt="" />
                     </button>
-                    <button>
+                    <button onClick={onClick}>
                         <img src={`assets/icon/icon-more-vertical.png`} alt="" />
                     </button>
                 </Section>
