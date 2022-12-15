@@ -54,7 +54,7 @@ export default function SearchHeader() {
               navigate(-1);
             }}
           >
-            <img src={`assets/icon/icon-arrow-left.png`} alt="" />
+            <img src={`/assets/icon/icon-arrow-left.png`} alt="" />
           </button>
           <label htmlFor="searchInp">
             <input type="search" id="searchInp" placeholder="계정검색" />
