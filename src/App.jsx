@@ -22,7 +22,6 @@ const GlobalStyle = createGlobalStyle`
     --font-family: 'Spoqa Han Sans Neo', 'sans-serif';
    }
     .sr-only{
-
     position: absolute;
     width: 1px;
     height: 1px;
@@ -33,6 +32,11 @@ const GlobalStyle = createGlobalStyle`
     white-space: nowrap;
     border-width: 0;
     }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+    
     body,button{
         font-family: var(--font-family);
         font-size:14px;
@@ -41,12 +45,12 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  return (
-    <>
-      <GlobalStyle />
-      <Reset />
-      <Router />
-    </>
-  );
+    return (
+        <>
+            <GlobalStyle />
+            <Reset />
+            <Router />
+        </>
+    );
 }
 export default App;

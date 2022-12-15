@@ -15,8 +15,9 @@ const HeaderWrap = styled.header`
 
 const Section = styled.section`
     display: flex;
-    justify-content: space-between;
+    width: 100%;
     height: 48px;
+    justify-content: space-between;
     align-items: center;
     padding: 0 16px;
     .back {
@@ -29,23 +30,21 @@ const Section = styled.section`
 export default function UploadHeader() {
     const navigate = useNavigate();
 
-
-  return (
-    <>
-      <HeaderWrap>
-        <Section>
-          <button
-            className="back"
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            <img src={`assets/icon/icon-arrow-left.png`} alt="" />
-          </button>
-          <CustomButton size="ms">저장</CustomButton>
-        </Section>
-      </HeaderWrap>
-    </>
-  );
-
+    return (
+        <>
+            <HeaderWrap>
+                <Section>
+                    <button
+                        className="back"
+                        onClick={() => {
+                            navigate(-1);
+                        }}
+                    >
+                        <img src={`assets/icon/icon-arrow-left.png`} alt="" />
+                    </button>
+                    <CustomButton size="ms">저장</CustomButton>
+                </Section>
+            </HeaderWrap>
+        </>
+    );
 }
