@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { confirmAlert } from 'react-confirm-alert';
 import styled from 'styled-components';
 import UploadHeader from '../../components/header/UploadHeader';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UserInfoInput from '../../components/userInfoInput/UserInfoInput';
-import { ImgButton } from '../../components/imageButton/ImageButton';
+import ImageButton from '../../components/imageButton/ImageButton';
+import UploadButton2 from '../../components/uploadButton/UploadButton2';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const ProfileModificationWrap = styled.div`
     margin: 0 auto;
@@ -29,27 +32,60 @@ const ProfileMain = styled.div`
     gap: 16px;
 `;
 
-const UploadImageButton = styled(ImgButton)`
+const UploadButtonWrap = styled.div`
+    display: flex;
+    flex-direction: column;
     position: absolute;
-    top: 105px;
-    left: 155px;
-    padding: 0;
-    border: none;
+    top: 30px;
+    left: 160px;
+    gap: 53px;
 `;
 
 export default function ProfileModification() {
+    const [imageFile, setImageFile] = useState('../assets/Ellipse-1.png');
+
+    /* 이미지를 업로드 하는 이벤트 함수 */
+    const viewImageFile = (e) => {
+        setImageFile(URL.createObjectURL(e.target.files[0]));
+    };
+
+    /* 업로드 한 이미지를 기본 이미지로 변경하는 이벤트 함수 */
+    const deleteImageFile = () => {
+        if (imageFile !== '../assets/Ellipse-1.png') {
+            confirmAlert({
+                message: '기본 이미지로 변경하시겠습니까?',
+                buttons: [
+                    {
+                        label: 'Yes',
+                        onClick: () => {
+                            URL.revokeObjectURL(imageFile);
+                            setImageFile('../assets/Ellipse-1.png');
+                        },
+                    },
+                    {
+                        label: 'No',
+                    },
+                ],
+            });
+        }
+    };
+
     return (
         <>
             <UploadHeader></UploadHeader>
 
             <ProfileModificationWrap>
                 <ProfileHeader>
-                    <ProfileImg size='110px' src='../assets/Ellipse-1.png' alt='message'></ProfileImg>
-                    <UploadImageButton
-                        size='36px'
-                        src='../assets/upload-file.png'
-                        alt='upload button'
-                    ></UploadImageButton>
+                    <ProfileImg size='110px' src={imageFile} alt='message'></ProfileImg>
+                    <UploadButtonWrap>
+                        <ImageButton
+                            size='20px'
+                            src='../assets/x-button.png'
+                            alt='delete image'
+                            onClick={deleteImageFile}
+                        ></ImageButton>
+                        <UploadButton2 id='imgUpload' radius='50%' size='36px' onChange={viewImageFile}></UploadButton2>
+                    </UploadButtonWrap>
                 </ProfileHeader>
 
                 <ProfileMain>
