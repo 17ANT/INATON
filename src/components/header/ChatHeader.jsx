@@ -51,12 +51,12 @@ export default function ChatHeader({ text, isMore, onClick }) {
             navigate(-1);
           }}
         >
-          <img src={`assets/icon/icon-arrow-left.png`} alt="" />
+          <img src={`/assets/icon/icon-arrow-left.png`} alt="" />
         </button>
         <h2>{text}</h2>
         {isMore ? (
           <button className="more" onClick={onClick}>
-            <img src={`assets/icon/icon-more-vertical.png`} alt="" />
+            <img src={`/assets/icon/icon-more-vertical.png`} alt="" />
           </button>
         ) : (
           <></>

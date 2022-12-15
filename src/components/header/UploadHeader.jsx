@@ -4,47 +4,47 @@ import { useNavigate } from 'react-router-dom';
 import CustomButton from '../customButton/CustomButton';
 
 const HeaderWrap = styled.header`
-    width: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
-    border-bottom: 1px solid var(--border-color);
-    z-index: 4;
-    background-color: #fff;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-bottom: 1px solid var(--border-color);
+  z-index: 4;
+  background-color: #fff;
 `;
 
 const Section = styled.section`
-    display: flex;
-    width: 100%;
-    height: 48px;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 16px;
-    .back {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-    }
+  display: flex;
+  width: 100%;
+  height: 48px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  .back {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
 `;
 
 export default function UploadHeader() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
-        <>
-            <HeaderWrap>
-                <Section>
-                    <button
-                        className="back"
-                        onClick={() => {
-                            navigate(-1);
-                        }}
-                    >
-                        <img src={`assets/icon/icon-arrow-left.png`} alt="" />
-                    </button>
-                    <CustomButton size="ms">저장</CustomButton>
-                </Section>
-            </HeaderWrap>
-        </>
-    );
+  return (
+    <>
+      <HeaderWrap>
+        <Section>
+          <button
+            className="back"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            <img src={`/assets/icon/icon-arrow-left.png`} alt="" />
+          </button>
+          <CustomButton size="ms">저장</CustomButton>
+        </Section>
+      </HeaderWrap>
+    </>
+  );
 }

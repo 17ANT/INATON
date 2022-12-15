@@ -36,30 +36,30 @@ const NavList = styled.ul`
     margin-bottom: 4px;
   }
   .home a::before {
-    background: url('assets/icon/icon-home.png') no-repeat;
+    background: url('/assets/icon/icon-home.png') no-repeat;
     background-size: contain;
   }
   .home a.active::before {
-    background: url('assets/icon/icon-home-fill.png') no-repeat;
+    background: url('/assets/icon/icon-home-fill.png') no-repeat;
     background-size: contain;
   }
   .chat a::before {
-    background: url('assets/icon/icon-message-circle.png') no-repeat;
+    background: url('/assets/icon/icon-message-circle.png') no-repeat;
   }
   .chat a.active::before {
-    background: url('assets/icon/icon-message-circle-fill.png') no-repeat;
+    background: url('/assets/icon/icon-message-circle-fill.png') no-repeat;
     background-size: contain;
   }
   .user a::before {
-    background: url('assets/icon/icon-user.png') no-repeat;
+    background: url('/assets/icon/icon-user.png') no-repeat;
     background-size: contain;
   }
   .user a.active::before {
-    background: url('assets/icon/icon-user-fill.png') no-repeat;
+    background: url('/assets/icon/icon-user-fill.png') no-repeat;
     background-size: contain;
   }
   .post a::before {
-    background: url('assets/icon/icon-edit.png') no-repeat;
+    background: url('/assets/icon/icon-edit.png') no-repeat;
     background-size: contain;
   }
   .active {

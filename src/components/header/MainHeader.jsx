@@ -28,7 +28,7 @@ const Section = styled.section`
     border: none;
     cursor: pointer;
     a {
-      background: url('assets/icon/icon-search.png') no-repeat center / 24px
+      background: url('/assets/icon/icon-search.png') no-repeat center / 24px
         24px;
       display: block;
       width: 24px;
