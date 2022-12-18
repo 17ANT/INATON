@@ -35,6 +35,7 @@ const TextForm = styled.textarea`
     font-family: var(--font-family);
     font-size: 14px;
     line-height: 18px;
+    white-space: break-all;
 
     ::placeholder {
         color: var(--sub-border);
@@ -46,13 +47,12 @@ const TextForm = styled.textarea`
 `;
 
 const ImageSlider = styled.div`
-    overflow-y: scroll;
+    overflow-x: scroll;
+    overflow-y: hidden;
 `;
 
 const ImageList = styled.ul`
     width: 520px;
-    /* 3개 겹치는 현상 발생
-    width: min(520px, fit-content); */
 
     display: flex;
     flex: 1 0 304px;
@@ -62,11 +62,15 @@ const ImageList = styled.ul`
 
 const ImageItem = styled.li`
     position: relative;
-    width: min(304px, 100%);
+    width: 304px;
+    height: 228px;
 
     img {
-        width: max(168px, 100%);
+        /* 이미지 개수에 따른 크기는 JS로 컨트롤 */
+        width: 304px;
+        height: 228px;
         border-radius: 10px;
+        object-fit: cover;
     }
 
     button {
