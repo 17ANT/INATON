@@ -104,6 +104,8 @@ const MsgInput = styled.footer`
       border: none;
       outline: none;
       margin-left: 18px;
+      font-size: 1.05em;
+      letter-spacing: 0.05em;
     }
     button {
       border: none;
