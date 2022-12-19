@@ -2,11 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import NavBar from '../../components/navBar/NavBar';
 import BasicHeader from './../../components/header/BasicHeader';
+import InlineProfileInfo from './../../components/inlineProfileInfo/InlineProfileInfo';
 
-const ChatMain = styled.main`
+const ChatMain = styled.ul`
   position: fixed;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   min-width: 390px;
   width: 100%;
   height: calc(100% - 108px);
@@ -15,61 +17,22 @@ const ChatMain = styled.main`
   margin-top: 48px;
 `;
 
-const List = styled.ul`
-  width: 100%;
-  max-width: 390px;
-`;
-
 const ChatItem = styled.li`
   display: flex;
   position: relative;
   align-items: center;
   margin-bottom: 20px;
   cursor: pointer;
-`;
-
-const UserProfile = styled.div`
-  width: 42px;
-  height: 42px;
-  border: 0.5px solid var(--border-color);
-  border-radius: 50%;
-  margin-right: 12px;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-`;
-const ChatInfo = styled.div`
-  strong {
-    display: block;
-    color: var(--font-color);
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 18px;
-    margin: 2px 0 4px 0;
-  }
-  p {
-    max-width: 238px;
+  width: 390px;
+  span {
+    position: absolute;
+    right: 0;
+    bottom: 3px;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 15px;
-    color: var(--sub-font);
-    display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 10px;
+    line-height: 13px;
+    color: #dbdbdb;
   }
-`;
-const ChatDate = styled.strong`
-  position: absolute;
-  right: 0;
-  bottom: 3px;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 13px;
-  color: #dbdbdb;
 `;
 
 export default function ChatList() {
@@ -77,34 +40,43 @@ export default function ChatList() {
     <>
       <BasicHeader />
       <ChatMain>
-        <List>
-          <ChatItem>
-            <UserProfile>
-              <span></span>
-              <img src={'assets/Ellipse 6.png'} alt="" />
-            </UserProfile>
-            <ChatInfo>
-              <strong>회원이름</strong>
-              <p>
-                채팅내용채팅내용채팅내용채팅내용채팅내용채팅내용채팅내용채팅내용채팅내용
-              </p>
-            </ChatInfo>
-            <ChatDate>2022-12-12</ChatDate>
-          </ChatItem>
-          <ChatItem>
-            <UserProfile>
-              <span></span>
-              <img src={'assets/Ellipse 6.png'} alt="" />
-            </UserProfile>
-            <ChatInfo>
-              <strong>회원이름</strong>
-              <p>
-                채팅내용채팅내용채팅내용채팅내용채팅내용채팅내용채팅내용채팅내용채팅내용
-              </p>
-            </ChatInfo>
-            <ChatDate>2022-12-12</ChatDate>
-          </ChatItem>
-        </List>
+        <ChatItem>
+          <InlineProfileInfo
+            img="./assets/basic-profile-img.png"
+            name="채팅"
+            desc="난 지금 행복해 그래서 불안해 폭풍 전 바다는 늘 고요하니까"
+            state="chat"
+          />
+          <span>2022-12-18</span>
+        </ChatItem>
+        <ChatItem>
+          <InlineProfileInfo
+            img="./assets/post-img-example.png"
+            name="채팅"
+            desc="불이 붙어 빨리 타면 안 되잖아
+            나는 사랑을 응원해"
+            state="chat"
+          />
+          <span>2022-12-18</span>
+        </ChatItem>
+        <ChatItem>
+          <InlineProfileInfo
+            img="./assets/basic-profile-img.png"
+            name="채팅"
+            desc="젊은 우리, 나이테는 잘 보이지 않고"
+            state="chat"
+          />
+          <span>2022-12-18</span>
+        </ChatItem>
+        <ChatItem>
+          <InlineProfileInfo
+            img="./assets/post-img-example.png"
+            name="채팅"
+            desc="찬란한 빛에 눈이 멀어 꺼져가는데"
+            state="chat"
+          />
+          <span>2022-12-15</span>
+        </ChatItem>
       </ChatMain>
       <footer>
         <NavBar />
