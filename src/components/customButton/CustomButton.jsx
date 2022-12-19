@@ -67,6 +67,7 @@ export default function CustomButton({ children, onClick, size, state }) {
         <>
             {/* {state === 'disabled' ? console.log(true) : console.log(false)} */}
             <CustomButtonBox
+                type="button"
                 onClick={onClick}
                 state={state}
                 width={width}
