@@ -80,7 +80,7 @@ export default function Signup() {
                 <InputDiv ref={emailRef} onChange={handleTest} text="이메일" type="email" />
                 <ErrorMessage text={msg} />
                 <InputDiv ref={pwRef} onChange={handleTest} text="비밀번호" type="password" />
-                <ErrorMessage text={'*이메일 또는 비밀번호가 일치하지 않습니다.'} />
+                <ErrorMessage text={'*비밀번호는 6자 이상이어야 합니다.'} />
                 <CustomButton onClick={handleSubmit} size="L">
                     다음
                 </CustomButton>
