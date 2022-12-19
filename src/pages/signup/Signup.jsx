@@ -1,4 +1,4 @@
-import { useRef, useContext } from 'react';
+import { useRef, useContext, useState } from 'react';
 import styled from 'styled-components';
 import CustomButton from '../../components/customButton/CustomButton';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';
@@ -33,6 +33,7 @@ const Form = styled.form`
 export default function Signup() {
     const emailRef = useRef(null);
     const pwRef = useRef(null);
+    const [msg, setMsg] = useState('');
     let newUser = useContext(SignupContext);
     let signupData = {};
     //     "user": {
@@ -63,6 +64,8 @@ export default function Signup() {
             },
         });
         console.log('메세지 : ' + message.message);
+        setMsg('* ' + message.message);
+        console.log(msg);
         // 비밀번호 validation
 
         // error가 없을 때 context값 변경하고 링크 이동
@@ -75,7 +78,7 @@ export default function Signup() {
             <h2>이메일로 회원가입</h2>
             <Form action="">
                 <InputDiv ref={emailRef} onChange={handleTest} text="이메일" type="email" />
-                <ErrorMessage text={'*이미 가입된 이메일 주소입니다.'} />
+                <ErrorMessage text={msg} />
                 <InputDiv ref={pwRef} onChange={handleTest} text="비밀번호" type="password" />
                 <ErrorMessage text={'*이메일 또는 비밀번호가 일치하지 않습니다.'} />
                 <CustomButton onClick={handleSubmit} size="L">
