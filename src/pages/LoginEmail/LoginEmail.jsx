@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { BASE_URL } from '../../common/BASE_URL';
 import CustomButton from '../../components/customButton/CustomButton';
@@ -42,6 +42,11 @@ export default function LoginEmail() {
     //                 },
     const emailRef = useRef(null);
     const pwRef = useRef(null);
+
+    // console.dir(emailRef);
+    // if (emailRef.current.value) {
+    //     emailRef.target.classList.add('active');
+    // }
     const handleChange = (e) => {
         // console.log(emailRef.current.value);
         // console.log(pwRef.current.value);
@@ -55,6 +60,16 @@ export default function LoginEmail() {
         setUser({ user: { email: emailRef.current.value, password: pwRef.current.value } });
     };
 
+    // useEffect(() => {
+    //     console.log(emailRef.current.value);
+    // }, []);
+
+    //꼼수로 로드됐을 때 0.1초안에 화면 클릭이벤트 주기
+
+    // setTimeout(() => {
+    //     btn.console.log('클릭완');
+    // }, 1000);
+    // emailRef.click();
     return (
         <LoginForm>
             <h2>로그인</h2>
