@@ -44,10 +44,10 @@ const InputTag = styled.input`
     }
 `;
 
-function InputDiv({ type, text, onChange }, ref) {
+function InputDiv({ type, text, onChange, onBlur }, ref) {
     return (
         <InputBox text={text}>
-            <InputTag ref={ref} onChange={onChange} type={type} required />
+            <InputTag ref={ref} onChange={onChange} onBlur={onBlur} type={type} required />
             <span>{text}</span>
         </InputBox>
     );
