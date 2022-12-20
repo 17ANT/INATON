@@ -33,11 +33,11 @@ const Input = styled.input`
     }
 `;
 
-export default function UserInfoInput({ labelText, placeholder }) {
+export default function UserInfoInput({ labelText, placeholder, maxLength }) {
     return (
         <UserInputDiv>
             <Label>{labelText}</Label>
-            <Input placeholder={placeholder}></Input>
+            <Input placeholder={placeholder} maxLength={maxLength}></Input>
         </UserInputDiv>
     );
 }
