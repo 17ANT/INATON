@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useRef, useState } from 'react';
+import styled from 'styled-components';
+import searchUser from '../../pages/home/SearchAPI';
 
 const Header = styled.header`
   width: 100%;
@@ -27,7 +28,7 @@ const Section = styled.div`
     border: none;
     cursor: pointer;
     a {
-      background: url("assets/icon/icon-search.png") no-repeat center / 24px
+      background: url('assets/icon/icon-search.png') no-repeat center / 24px
         24px;
       display: block;
       width: 24px;
@@ -71,7 +72,7 @@ const Section = styled.div`
     position: relative;
     left: 22px;
     transition: 0.5s ease-in-out;
-    img{
+    img {
       width: 20px;
     }
   }
@@ -83,7 +84,7 @@ const Section = styled.div`
     opacity: 0;
     visibility: hidden;
     transform: scale(0);
-    img{
+    img {
       width: 20px;
     }
   }
@@ -96,20 +97,29 @@ const Section = styled.div`
 `;
 
 export default function CustomMainHeader() {
-  const [searchBox, setSearchBox] = useState("searchBox");
-  const [closeBtn, setCloseBtn] = useState("closeBtn");
-  const [searchBtn, setSearchBtn] = useState("searchBtn");
+  const [searchBox, setSearchBox] = useState('searchBox');
+  const [closeBtn, setCloseBtn] = useState('closeBtn');
+  const [searchBtn, setSearchBtn] = useState('searchBtn');
+  const searchRef = useRef(null);
+  const [searchValue, setSearchValue] = useState('');
+
+  const HandleSearchValue = () => {
+    setSearchValue(searchRef.current.value);
+  };
+  searchUser(searchValue);
+  console.log(searchValue);
 
   const HandleSearchBtn = () => {
-    setSearchBox("searchBox active");
-    setCloseBtn("closeBtn active");
-    setSearchBtn("searchBtn active");
+    setSearchBox('searchBox active');
+    setCloseBtn('closeBtn active');
+    setSearchBtn('searchBtn active');
   };
 
   const HandleCloseBtn = () => {
-    setSearchBox("searchBox");
-    setCloseBtn("closeBtn");
-    setSearchBtn("searchBtn");
+    setSearchBox('searchBox');
+    setCloseBtn('closeBtn');
+    setSearchBtn('searchBtn');
+    setSearchValue('');
   };
 
   return (
@@ -121,22 +131,25 @@ export default function CustomMainHeader() {
             <i
               name="search-outline"
               onClick={HandleSearchBtn}
-              className={searchBtn}
-            >
+              className={searchBtn}>
               <img src="assets/icon/search.png" alt="" />
             </i>
             <i
               name="close-outline"
               onClick={HandleCloseBtn}
-              className={closeBtn}
-            >
+              className={closeBtn}>
               <img src="assets/icon/icon-delete-black.png" alt="" />
-              {/* 닫기 */}
             </i>
           </span>
         </div>
         <div className={searchBox}>
-          <input type="text" placeholder="Search here..." />
+          <input
+            onChange={HandleSearchValue}
+            ref={searchRef}
+            value={searchValue}
+            type="text"
+            placeholder="Search here..."
+          />
         </div>
       </Section>
     </Header>
