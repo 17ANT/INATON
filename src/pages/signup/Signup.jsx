@@ -85,18 +85,14 @@ export default function Signup() {
 
     async function handleSubmit() {
         // error가 없을 때 context값 변경하고 링크 이동
-        if (emailMsg === '* 사용 가능한 이메일 입니다.' && pwMsg === '') {
-            newUser = { ...newUser, ...signupData };
-            console.log(newUser);
-            // 데이터를 넘겨주면서 페이지 이동
-            navigate('/myprofile/modification');
-        } else {
-            // disabled
-            console.log('다시 써!');
-        }
+        newUser = { ...newUser, ...signupData };
+        console.log(newUser);
+        // 데이터를 넘겨주면서 페이지 이동
+        navigate('/signup/profile');
     }
 
     return (
+        // 여기에 조건식 ? <SignupForm/>:<SignupProfile/>
         <SignupForm>
             <h2>이메일로 회원가입</h2>
             <Form action="">
