@@ -4,6 +4,8 @@ import NavBar from '../../components/navBar/NavBar';
 import InlineProfileInfo from '../../components/inlineProfileInfo/InlineProfileInfo';
 import styled from 'styled-components';
 import CustomButton from '../../components/customButton/CustomButton';
+import getFollowing from './FollowingAPI';
+import { useState, useEffect } from 'react';
 
 const StyledInlineProfileInfo = styled.div`
   margin: 48px auto;
@@ -27,11 +29,43 @@ const StyledInlineProfileInfo = styled.div`
 `;
 
 export default function Following() {
+  const token = localStorage.getItem('token');
+  const accountname = localStorage.getItem('accountname');
+
+  const [followings, setFollowings] = useState(null);
+
+  useEffect(() => {
+    async function setFollowingList() {
+      const followingList = await getFollowing(token, accountname);
+      setFollowings(followingList);
+    }
+
+    setFollowingList();
+  }, [accountname]);
+
   return (
     <>
       <ChatHeader text={'Following'} isMore={false} />
-
+      {/* <Btn>팔로우목록</Btn> */}
       <StyledInlineProfileInfo>
+        {followings &&
+          followings.map((item) => (
+            <>
+              <div>
+                <InlineProfileInfo
+                  name={item.username}
+                  desc={item.accountname}
+                  state="follow"
+                />
+                <CustomButton size="s" state="activ">
+                  취소
+                </CustomButton>
+              </div>
+            </>
+          ))}
+      </StyledInlineProfileInfo>
+
+      {/* <StyledInlineProfileInfo>
         <div>
           <InlineProfileInfo
             name="야롱"
@@ -58,7 +92,7 @@ export default function Following() {
           />
           <CustomButton size="s">팔로우</CustomButton>
         </div>
-      </StyledInlineProfileInfo>
+      </StyledInlineProfileInfo> */}
       <NavBar />
     </>
   );
