@@ -27,9 +27,7 @@ const CommentList = styled.ul`
 const CommentWrite = styled.div`
     position: fixed;
     z-index: 10;
-    width: auto;
-    left: 0;
-    right: 0;
+    width: 100%;
     bottom: 0;
     padding: 0px 16px;
     height: 61px;
@@ -48,16 +46,14 @@ const CommentForm = styled.form`
     gap: 18px;
 
     input {
-        height: 100%;
-        background: none;
         border: none;
         flex-grow: 1;
 
         font-size: 1.05em;
         letter-spacing: 0.05em;
+        line-height: 18px;
 
         ::placeholder {
-            line-height: 18px;
             color: var(--sub-border);
         }
         :focus,
@@ -86,11 +82,11 @@ export default function PostDetail() {
                 <HomePost
                     like="123456789"
                     comment="1234"
-                    // imgList={[
-                    //     '/assets/chat-exapmle.png',
-                    //     '/assets/post-img-example.png',
-                    //     '/assets/post-img-example.png',
-                    // ]}
+                    imgList={[
+                        '/assets/chat-exapmle.png',
+                        '/assets/post-img-example.png',
+                        '/assets/post-img-example.png',
+                    ]}
                 />
 
                 <CommentList>

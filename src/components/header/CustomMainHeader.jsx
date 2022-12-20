@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
 const Header = styled.header`
   width: 100%;
@@ -27,7 +27,7 @@ const Section = styled.div`
     border: none;
     cursor: pointer;
     a {
-      background: url('assets/icon/icon-search.png') no-repeat center / 24px
+      background: url("assets/icon/icon-search.png") no-repeat center / 24px
         24px;
       display: block;
       width: 24px;
@@ -51,7 +51,6 @@ const Section = styled.div`
     display: flex;
     background-color: #fff;
     align-items: center;
-    /* padding: 0 30px; */
     transition: 0.5s ease-in-out;
   }
   .searchBox.active {
@@ -70,9 +69,11 @@ const Section = styled.div`
   }
   .searchBtn {
     position: relative;
-    left: 30px;
-    top: 2.5px;
+    left: 22px;
     transition: 0.5s ease-in-out;
+    img{
+      width: 20px;
+    }
   }
   .searchBtn.active {
     display: none;
@@ -82,6 +83,9 @@ const Section = styled.div`
     opacity: 0;
     visibility: hidden;
     transform: scale(0);
+    img{
+      width: 20px;
+    }
   }
   .closeBtn.active {
     opacity: 1;
@@ -92,30 +96,43 @@ const Section = styled.div`
 `;
 
 export default function CustomMainHeader() {
-    const [searchBox, setSearchBox] = useState("searchBox")
-    const [closeBtn, setCloseBtn] = useState("closeBtn")
-    const [searchBtn, setSearchBtn] = useState("searchBtn")
+  const [searchBox, setSearchBox] = useState("searchBox");
+  const [closeBtn, setCloseBtn] = useState("closeBtn");
+  const [searchBtn, setSearchBtn] = useState("searchBtn");
 
-    const HandleSearchBtn = ()=>{
-        setSearchBox("searchBox active")
-        setCloseBtn("closeBtn active")
-        setSearchBtn("searchBtn active")
-    }
+  const HandleSearchBtn = () => {
+    setSearchBox("searchBox active");
+    setCloseBtn("closeBtn active");
+    setSearchBtn("searchBtn active");
+  };
 
-    const HandleCloseBtn = ()=>{
-        setSearchBox("searchBox")
-        setCloseBtn("closeBtn")
-        setSearchBtn("searchBtn")
-    }
-    
+  const HandleCloseBtn = () => {
+    setSearchBox("searchBox");
+    setCloseBtn("closeBtn");
+    setSearchBtn("searchBtn");
+  };
+
   return (
     <Header>
       <Section>
         <h2>INATON 피드</h2>
         <div className="search">
           <span className="icon">
-            <i name="search-outline" onClick={HandleSearchBtn} className={searchBtn}><img src="assets/icon/icon-search.png" alt="" /></i>
-            <i name="close-outline" onClick={HandleCloseBtn} className={closeBtn}>닫기</i>
+            <i
+              name="search-outline"
+              onClick={HandleSearchBtn}
+              className={searchBtn}
+            >
+              <img src="assets/icon/search.png" alt="" />
+            </i>
+            <i
+              name="close-outline"
+              onClick={HandleCloseBtn}
+              className={closeBtn}
+            >
+              <img src="assets/icon/icon-delete-black.png" alt="" />
+              {/* 닫기 */}
+            </i>
           </span>
         </div>
         <div className={searchBox}>
