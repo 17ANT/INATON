@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import HomePost from '../../components/homePost/HomePost';
 import NavBar from '../../components/navBar/NavBar';
-import MainHeader from './../../components/header/MainHeader';
 import CustomButton from '../../components/customButton/CustomButton';
 import CustomMainHeader from '../../components/header/CustomMainHeader';
+
 
 const Container = styled.div`
   display: flex;
@@ -60,12 +60,7 @@ export default function Home() {
               '/assets/post-img-example.png',
             ]}
           />
-          <HomePost
-            like="123456789"
-            comment="1234"
-            imgList={[
-            ]}
-          />
+          <HomePost like="123456789" comment="1234" />
           <HomePost
             like="123456789"
             comment="65"
