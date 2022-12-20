@@ -1,4 +1,5 @@
-import { useRef, useContext, useState } from 'react';
+import { useRef, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CustomButton from '../../components/customButton/CustomButton';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';
@@ -33,55 +34,85 @@ const Form = styled.form`
 export default function Signup() {
     const emailRef = useRef(null);
     const pwRef = useRef(null);
-    const [msg, setMsg] = useState('');
+    const [emailMsg, setEmailMsg] = useState('');
+    const [pwMsg, setPwMsg] = useState('* 영어, 숫자포함해서 8자 이상 입력해주세요');
+    const navigate = useNavigate();
+    const [btnState, setBtnState] = useState('disabled');
+
+    useEffect(() => {
+        if (emailMsg === '* 사용 가능한 이메일 입니다.' && pwMsg === '') {
+            setBtnState('');
+        } else {
+            setBtnState('disabled');
+        }
+    }, [emailMsg, pwMsg]);
+
     let newUser = useContext(SignupContext);
     let signupData = {};
-    //     "user": {
-    //         "username": String*,
-    //         "email": String*,
-    //         "password": String*,
-    //         "accountname": String*,
-    //         "intro": String,
-    //         "image": String // 예시) https://mandarin.api.weniv.co.kr/1641906557953.png
-    // }
 
-    const handleTest = () => {
-        // console.log(newUser);
-        // newUser(signupData);
-        // const
+    const handleChange = (e) => {
+        if (emailRef.current.value !== '') {
+            emailRef.current.classList.add('active');
+        } else {
+            emailRef.current.classList.remove('active');
+        }
         signupData = {
             email: emailRef.current.value,
             password: pwRef.current.value,
         };
     };
 
-    async function handleSubmit() {
-        // 이메일  체크
-        // console.log(emailRef.current.value);
+    async function handleEmailValid() {
+        // 이메일 validation check
         const message = await emailValid({
             user: {
                 email: emailRef.current.value,
             },
         });
-        console.log('메세지 : ' + message.message);
-        setMsg('* ' + message.message);
-        console.log(msg);
-        // 비밀번호 validation
+        setEmailMsg('* ' + message.message);
+    }
 
+    function handlePwValid() {
+        //비밀번호 validation check
+        const reg = new RegExp('^.*(?=.{8,})(?=.*[0-9])(?=.*[a-zA-Z]).*$');
+
+        if (reg.test(pwRef.current.value)) {
+            setPwMsg('');
+        } else {
+            setPwMsg('* 영어, 숫자포함해서 8자 이상 입력해주세요');
+        }
+    }
+
+    async function handleSubmit() {
         // error가 없을 때 context값 변경하고 링크 이동
-        newUser = { ...newUser, ...signupData };
-        console.log(newUser);
+        if (emailMsg === '* 사용 가능한 이메일 입니다.' && pwMsg === '') {
+            newUser = { ...newUser, ...signupData };
+            console.log(newUser);
+            // 데이터를 넘겨주면서 페이지 이동
+            navigate('/myprofile/modification');
+        } else {
+            // disabled
+            console.log('다시 써!');
+        }
     }
 
     return (
         <SignupForm>
             <h2>이메일로 회원가입</h2>
             <Form action="">
-                <InputDiv ref={emailRef} onChange={handleTest} text="이메일" type="email" />
-                <ErrorMessage text={msg} />
-                <InputDiv ref={pwRef} onChange={handleTest} text="비밀번호" type="password" />
-                <ErrorMessage text={'*비밀번호는 6자 이상이어야 합니다.'} />
-                <CustomButton onClick={handleSubmit} size="L">
+                <InputDiv ref={emailRef} onChange={handleChange} onBlur={handleEmailValid} text="이메일" type="email" />
+                <ErrorMessage text={emailMsg} />
+                <InputDiv
+                    ref={pwRef}
+                    onChange={() => {
+                        handlePwValid();
+                        handleChange();
+                    }}
+                    text="비밀번호"
+                    type="password"
+                />
+                <ErrorMessage text={pwMsg} />
+                <CustomButton onClick={handleSubmit} size="L" state={btnState}>
                     다음
                 </CustomButton>
             </Form>
