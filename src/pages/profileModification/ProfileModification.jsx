@@ -99,7 +99,11 @@ export default function ProfileModification() {
                 </ProfileHeader>
 
                 <ProfileMain>
-                    <UserInfoInput labelText='사용자 이름' placeholder='2~10자 이내여야 합니다.'></UserInfoInput>
+                    <UserInfoInput
+                        labelText='사용자 이름'
+                        placeholder='2~10자 이내여야 합니다.'
+                        maxLength='10'
+                    ></UserInfoInput>
                     <UserInfoInput
                         labelText='계정 ID'
                         placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
@@ -107,6 +111,7 @@ export default function ProfileModification() {
                     <UserInfoInput
                         labelText='소개'
                         placeholder='자신과 판매할 상품에 대해 소개해 주세요!'
+                        maxLength='50'
                     ></UserInfoInput>
                 </ProfileMain>
             </ProfileModificationWrap>
