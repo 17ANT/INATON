@@ -41,7 +41,7 @@ const ProfileText = styled.div`
         font-weight: 400;
         font-size: 12px;
         line-height: 15px;
-        color:var(--sub-font);
+        color: var(--sub-font);
 
         overflow: hidden;
         text-overflow: ellipsis;
@@ -56,7 +56,6 @@ const ProfileText = styled.div`
                     content: '· ';
                 }
             `}
-        }
     }
 `;
 

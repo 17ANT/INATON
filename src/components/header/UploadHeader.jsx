@@ -27,9 +27,8 @@ const Section = styled.section`
     }
 `;
 
-export default function UploadHeader({ onClick }) {
+export default function UploadHeader({ onClick, state, text }) {
     const navigate = useNavigate();
-
     return (
         <>
             <HeaderWrap>
@@ -42,11 +41,15 @@ export default function UploadHeader({ onClick }) {
                     >
                         <img src={`/assets/icon/icon-arrow-left.png`} alt="" />
                     </button>
-                    <CustomButton size="ms" onClick={onClick}>
-                        저장
+                    <CustomButton state={state} size="ms" onClick={onClick}>
+                        {text}
                     </CustomButton>
                 </Section>
             </HeaderWrap>
         </>
     );
 }
+
+UploadHeader.defaultProps = {
+    state: 'disabled',
+};

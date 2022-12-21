@@ -19,33 +19,38 @@ import TestPage from '../pages/B_TestPage/TestPage';
 import Follower from '../pages/follow/Follower';
 import Following from './../pages/follow/Following';
 import SignupProfile from '../pages/signup/SignupProfile';
+import { SignupContextProvider } from '../Contexts/SignupContext';
 
 export default function Router() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Splash />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/search" element={<Search />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/signup/profile" element={<SignupProfile />} />
-                <Route path="/chatlist" element={<ChatList />} />
-                <Route path="/login/email" element={<LoginEmail />} />
-                <Route path="/chatroom" element={<ChatRoom />} />
-                <Route path="/postupload" element={<PostUpload />} />
-                <Route path="/postdetail" element={<PostDetail />} />
-                <Route path="/myprofile" element={<MyProfile />} />
-                <Route path="/yourprofile" element={<YourProfile />} />
-                <Route path="/myprofile/modification" element={<ProfileModification />} />
-                <Route path="/follower" element={<Follower />} />
-                <Route path="/following" element={<Following />} />
+        <SignupContextProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Splash />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/search" element={<Search />} />
+                    <Route path="/login" element={<Login />} />
 
-                {/* 테스트용 임시 페이지 */}
-                <Route path="/btest" element={<TestPage />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/signup/profile" element={<SignupProfile />} />
 
-                <Route path="/*" element={<NotFound />} />
-            </Routes>
-        </BrowserRouter>
+                    <Route path="/chatlist" element={<ChatList />} />
+                    <Route path="/login/email" element={<LoginEmail />} />
+                    <Route path="/chatroom" element={<ChatRoom />} />
+                    <Route path="/postupload" element={<PostUpload />} />
+                    <Route path="/postdetail" element={<PostDetail />} />
+                    <Route path="/myprofile" element={<MyProfile />} />
+                    <Route path="/yourprofile" element={<YourProfile />} />
+                    <Route path="/myprofile/modification" element={<ProfileModification />} />
+                    <Route path="/follower" element={<Follower />} />
+                    <Route path="/following" element={<Following />} />
+
+                    {/* 테스트용 임시 페이지 */}
+                    <Route path="/btest" element={<TestPage />} />
+
+                    <Route path="/*" element={<NotFound />} />
+                </Routes>
+            </BrowserRouter>
+        </SignupContextProvider>
     );
 }
