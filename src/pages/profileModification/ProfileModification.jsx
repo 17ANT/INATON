@@ -5,8 +5,8 @@ import UploadHeader from '../../components/header/UploadHeader';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UserInfoInput from '../../components/userInfoInput/UserInfoInput';
 import ImageButton from '../../components/imageButton/ImageButton';
-import UploadButton2 from '../../components/uploadButton/UploadButton2';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import UploadButton from '../../components/uploadButton/UploadButton';
 
 const ProfileModificationWrap = styled.div`
     margin: 0 auto;
@@ -78,7 +78,7 @@ export default function ProfileModification() {
 
     return (
         <>
-            <UploadHeader></UploadHeader>
+            <UploadHeader text="저장" />
 
             <ProfileModificationWrap>
                 <ProfileHeader>
@@ -94,7 +94,13 @@ export default function ProfileModification() {
                         )}
                     </DeleteButtonWrap>
                     <UploadButtonWrap>
-                        <UploadButton2 id="imgUpload" radius="50%" size="36px" onChange={viewImageFile}></UploadButton2>
+                        <UploadButton
+                            bg="#f26e22"
+                            id="imgUpload"
+                            radius="22px"
+                            size="36px"
+                            onChange={viewImageFile}
+                        ></UploadButton>
                     </UploadButtonWrap>
                 </ProfileHeader>
 
