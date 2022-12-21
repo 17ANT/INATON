@@ -48,7 +48,9 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none;
         color: #000;
     }
-
+    ::-webkit-scrollbar {
+    width: 0px;
+  }
 
 `;
 

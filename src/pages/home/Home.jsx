@@ -5,7 +5,6 @@ import NavBar from '../../components/navBar/NavBar';
 import CustomButton from '../../components/customButton/CustomButton';
 import CustomMainHeader from '../../components/header/CustomMainHeader';
 
-
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -13,6 +12,7 @@ const Container = styled.div`
   padding: 68px 0 90px;
   min-height: 100vh;
   box-sizing: border-box;
+ 
 `;
 
 const HomePostList = styled.ul`
@@ -47,7 +47,7 @@ export default function Home() {
   return (
     <Container>
       <CustomMainHeader />
-    
+
       {isFollow ? (
         // 팔로우가 있는경우
         <HomePostList>
