@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 
 const UserInputDiv = styled.div`
     width: 322px;
+    margin-top: 16px;
+
+    &:first-child {
+        margin-top: 0px;
+    }
 `;
 
 const Label = styled.label`
@@ -33,11 +38,19 @@ const Input = styled.input`
     }
 `;
 
-export default function UserInfoInput({ labelText, placeholder, maxLength }) {
+function UserInfoInput({ labelText, placeholder, maxLength, onBlur, onChange }, ref) {
     return (
         <UserInputDiv>
             <Label>{labelText}</Label>
-            <Input placeholder={placeholder} maxLength={maxLength}></Input>
+            <Input
+                ref={ref}
+                placeholder={placeholder}
+                maxLength={maxLength}
+                onBlur={onBlur}
+                onChange={onChange}
+            ></Input>
         </UserInputDiv>
     );
 }
+
+export default forwardRef(UserInfoInput);
