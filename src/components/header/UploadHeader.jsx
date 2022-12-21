@@ -27,26 +27,29 @@ const Section = styled.section`
   }
 `;
 
-export default function UploadHeader({ onClick, children }) {
-  const navigate = useNavigate();
-
-  return (
-    <>
-      <HeaderWrap>
-        <Section>
-          <button
-            className="back"
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            <img src={`/assets/icon/icon-arrow-left.png`} alt="" />
-          </button>
-          <CustomButton size="ms" onClick={onClick}>
-            {children}
-          </CustomButton>
-        </Section>
-      </HeaderWrap>
-    </>
-  );
+export default function UploadHeader({ onClick, state, text }) {
+    const navigate = useNavigate();
+    return (
+        <>
+            <HeaderWrap>
+                <Section>
+                    <button
+                        className="back"
+                        onClick={() => {
+                            navigate(-1);
+                        }}
+                    >
+                        <img src={`/assets/icon/icon-arrow-left.png`} alt="" />
+                    </button>
+                    <CustomButton state={state} size="ms" onClick={onClick}>
+                        {text}
+                    </CustomButton>
+                </Section>
+            </HeaderWrap>
+        </>
+    );
 }
+
+UploadHeader.defaultProps = {
+    state: 'disabled',
+};

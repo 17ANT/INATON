@@ -38,6 +38,8 @@ export default function Signup() {
     const [pwMsg, setPwMsg] = useState('* 영어, 숫자포함해서 8자 이상 입력해주세요');
     const navigate = useNavigate();
     const [btnState, setBtnState] = useState('disabled');
+    let { signupInfo } = useContext(SignupContext);
+    let signupData = {};
 
     useEffect(() => {
         if (emailMsg === '* 사용 가능한 이메일 입니다.' && pwMsg === '') {
@@ -47,8 +49,7 @@ export default function Signup() {
         }
     }, [emailMsg, pwMsg]);
 
-    let newUser = useContext(SignupContext);
-    let signupData = {};
+    // let newUser = useContext(SignupContext);
 
     const handleChange = (e) => {
         if (emailRef.current.value !== '') {
@@ -85,8 +86,13 @@ export default function Signup() {
 
     async function handleSubmit() {
         // error가 없을 때 context값 변경하고 링크 이동
-        newUser = { ...newUser, ...signupData };
-        console.log(newUser);
+        signupInfo.user = {
+            ...signupInfo.user,
+            ...signupData,
+        };
+        console.log(signupInfo);
+        // newUser = { ...newUser, ...signupData };
+        // console.log(newUser);
         // 데이터를 넘겨주면서 페이지 이동
         navigate('/signup/profile');
     }
