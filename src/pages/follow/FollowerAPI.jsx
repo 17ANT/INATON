@@ -1,11 +1,11 @@
 import { BASE_URL } from '../../common/BASE_URL';
 
-async function getFollower(reqData) {
-  const token = localStorage.getItem('token');
+async function getFollower(token, accountname) {
   console.log(token);
 
   try {
-    const data = await fetch(BASE_URL + '/profile/:accountname/follower', {
+    // const data = await fetch(BASE_URL + `/profile/${accountname}/follower`, {
+    const data = await fetch(BASE_URL + `/profile/heejin/follower`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -13,14 +13,10 @@ async function getFollower(reqData) {
       },
     });
     console.log(data);
-    const json = await data.json();
-    console.log(json);
-    renderFollowList(json);
-
-    const renderFollowList = (followList) => {
-      document.querySelector('#followList').innerHTML =
-        JSON.stringify(followList);
-    };
+    const result = await data.json();
+    // JSON.parse(data.json())
+    console.log(result);
+    return result;
   } catch (error) {
     console.log(error.message);
   }

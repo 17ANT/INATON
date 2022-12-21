@@ -50,18 +50,16 @@ export default function Following() {
       <StyledInlineProfileInfo>
         {followings &&
           followings.map((item) => (
-            <>
-              <div>
-                <InlineProfileInfo
-                  name={item.username}
-                  desc={item.accountname}
-                  state="follow"
-                />
-                <CustomButton size="s" state="activ">
-                  취소
-                </CustomButton>
-              </div>
-            </>
+            <div key={item._id}>
+              <InlineProfileInfo
+                name={item.username}
+                desc={item.accountname}
+                state="follow"
+              />
+              <CustomButton size="s" state="activ">
+                취소
+              </CustomButton>
+            </div>
           ))}
       </StyledInlineProfileInfo>
 
