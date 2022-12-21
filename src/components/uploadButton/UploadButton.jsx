@@ -9,13 +9,12 @@ const UploadButtonBox = styled.label`
 
     background: url('/assets/icon/icon-upload.png') no-repeat center/ ${(props) => props.radius};
     background-color: ${(props) => props.bg};
-
     cursor: pointer;
 `;
 
-export default function UploadButton({ radius, size, bg, id }) {
+export default function UploadButton({ radius, size, bg, id, onChange }) {
     return (
-        <UploadButtonBox htmlFor={id} radius={radius} size={size} bg={bg}>
+        <UploadButtonBox htmlFor={id} radius={radius} size={size} bg={bg} onChange={onChange}>
             <span className="sr-only">이미지 업로드</span>
             <input type="file" id="imgUpload" className={`id sr-only`} />
         </UploadButtonBox>
