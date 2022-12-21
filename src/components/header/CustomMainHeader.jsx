@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import searchUser from '../../pages/home/SearchAPI';
+import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
 
 const Header = styled.header`
   width: 100%;
@@ -48,7 +49,7 @@ const Section = styled.div`
     position: absolute;
     right: -100%;
     width: 100%;
-    height: 100%;
+    max-height: 100%;
     display: flex;
     background-color: #fff;
     align-items: center;
@@ -102,11 +103,20 @@ export default function CustomMainHeader() {
   const [searchBtn, setSearchBtn] = useState('searchBtn');
   const searchRef = useRef(null);
   const [searchValue, setSearchValue] = useState('');
+  const [searchResult, setSearchResult] = useState(null);
+
+  useEffect(() => {
+    async function userList() {
+      const searchList = await searchUser(searchValue);
+      setSearchResult(searchList);
+    }
+
+    userList();
+  }, [searchValue]);
 
   const HandleSearchValue = () => {
     setSearchValue(searchRef.current.value);
   };
-  searchUser(searchValue);
   console.log(searchValue);
 
   const HandleSearchBtn = () => {
@@ -152,6 +162,19 @@ export default function CustomMainHeader() {
           />
         </div>
       </Section>
+      {searchValue === '' ? (
+        // 검색어가 없을 때
+        <></>
+      ) : (
+        // 검색어가 있을 때
+        <ul>
+          {searchResult &&
+            searchResult.map((item) => (
+                <li key={item._id}>{item.username}</li>
+                // <InlineProfileInfo img="이미지경로" ame="팔로우" desc={'사용자가 설정한 프로필 설명이 보이는 공간입니다.'} state="follow" />
+            ))}
+        </ul>
+      )}
     </Header>
   );
 }

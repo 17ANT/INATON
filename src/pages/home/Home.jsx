@@ -47,7 +47,7 @@ export default function Home() {
   return (
     <Container>
       <CustomMainHeader />
-
+    
       {isFollow ? (
         // 팔로우가 있는경우
         <HomePostList>
