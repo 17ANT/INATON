@@ -78,7 +78,7 @@ export default function ProfileModification() {
 
     return (
         <>
-            <UploadHeader></UploadHeader>
+            <UploadHeader text="저장" />
 
             <ProfileModificationWrap>
                 <ProfileHeader>
