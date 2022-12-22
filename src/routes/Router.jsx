@@ -15,11 +15,11 @@ import Home from './../pages/home/Home';
 import Search from './../pages/search/Search';
 import NotFound from './../pages/NotFound/NotFound';
 
-import TestPage from '../pages/B_TestPage/TestPage';
 import Follower from '../pages/follow/Follower';
 import Following from './../pages/follow/Following';
 import SignupProfile from '../pages/signup/SignupProfile';
 import { SignupContextProvider } from '../Contexts/SignupContext';
+import TestPage from '../pages/testPage/TestPage';
 
 export default function Router() {
     return (
@@ -45,8 +45,7 @@ export default function Router() {
                     <Route path="/follower" element={<Follower />} />
                     <Route path="/following" element={<Following />} />
 
-                    {/* 테스트용 임시 페이지 */}
-                    <Route path="/btest" element={<TestPage />} />
+                    <Route path="/test" element={<TestPage />} />
 
                     <Route path="/*" element={<NotFound />} />
                 </Routes>

@@ -9,8 +9,8 @@ async function searchUser(reqData) {
         const data = await fetch(BASE_URL + `/user/searchuser/?keyword=${reqData}`, {
             method: 'GET',
             headers: {
-                "Authorization" : `Bearer ${token}`,
-                "Content-type" : "application/json"
+                Authorization: `Bearer ${token}`,
+                'Content-type': 'application/json',
             },
             // body: JSON.stringify(reqData),
             // user: {
