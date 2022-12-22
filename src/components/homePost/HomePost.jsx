@@ -114,9 +114,10 @@ function changeUnit(num) {
     else return num;
 }
 
-export default function HomePost({ like, comment, imgList }) {
-    const likeCnt = changeUnit(like);
-    const commentCnt = changeUnit(comment);
+export default function HomePost({ data }) {
+    const likeCnt = changeUnit(data.heartCount);
+    const commentCnt = changeUnit(data.commentCount);
+    const imgList = data.image ? data.image.split(',') : [];
     let swipeIndex = 0;
 
     const handleSwipe = (e) => {
@@ -138,12 +139,9 @@ export default function HomePost({ like, comment, imgList }) {
             <PostContainer>
                 <h3 className="sr-only">게시글 상세 정보</h3>
 
-                <InlineProfileInfo name="애월읍 위니브 감귤농장" desc="@ weniv_Mandarin" state="post" />
+                <InlineProfileInfo name={data.author.username} desc={`@ +${data.author.accountname}`} state="post" />
                 <PostContents>
-                    <p>
-                        옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한
-                        그들의 그와 약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.
-                    </p>
+                    <p>{data.content}</p>
                     {imgList && (
                         <>
                             <ImgContainer>
@@ -174,7 +172,7 @@ export default function HomePost({ like, comment, imgList }) {
                     </button>
                 </PostReaction>
 
-                <PostDate>2020년 10월 21일</PostDate>
+                <PostDate>{data.createdAt}</PostDate>
                 <MoreBtn type="button">
                     <span className="sr-only">더보기</span>
                 </MoreBtn>

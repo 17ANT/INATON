@@ -5,7 +5,7 @@ async function userPost(reqData) {
     // console.log(BASE_URL);
     try {
         const token = localStorage.getItem('token');
-        const data = await fetch(BASE_URL + `/user/:acountname/userpost`, {
+        const data = await fetch(BASE_URL + `/user/${'rudgus123'}/userpost`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`,
