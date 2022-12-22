@@ -19,6 +19,7 @@ import Follower from '../pages/follow/Follower';
 import Following from './../pages/follow/Following';
 import SignupProfile from '../pages/signup/SignupProfile';
 import { SignupContextProvider } from '../Contexts/SignupContext';
+import TestPage from '../pages/testPage/TestPage';
 
 export default function Router() {
     return (
@@ -43,6 +44,8 @@ export default function Router() {
                     <Route path="/myprofile/modification" element={<ProfileModification />} />
                     <Route path="/follower" element={<Follower />} />
                     <Route path="/following" element={<Following />} />
+
+                    <Route path="/test" element={<TestPage />} />
 
                     <Route path="/*" element={<NotFound />} />
                 </Routes>
