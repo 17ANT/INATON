@@ -1,6 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import postImage from '../../common/ImageUploadAPI';
 import UploadHeader from '../../components/header/UploadHeader';
+import ImagePreview from '../../components/imagePreview/ImagePreview';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UploadButton from '../../components/uploadButton/UploadButton';
 
@@ -60,33 +62,10 @@ const ImageList = styled.ul`
     gap: 8px;
 `;
 
-const ImageItem = styled.li`
-    position: relative;
-    width: 304px;
-    height: 228px;
-
-    img {
-        /* 이미지 개수에 따른 크기는 JS로 컨트롤 */
-        width: 304px;
-        height: 228px;
-        border-radius: 10px;
-        object-fit: cover;
-    }
-
-    button {
-        position: absolute;
-        top: 6px;
-        right: 6px;
-        width: 22px;
-        height: 22px;
-        border: none;
-        background: url('/assets/icon/icon-delete.png') no-repeat center/22px 22px transparent;
-        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-        cursor: pointer;
-    }
-`;
-
 export default function PostUpload() {
+    const [image, setImage] = useState([]);
+    const [content, setContent] = useState([]);
+
     // textarea 자동높이
     const txtRef = useRef();
     const handleResize = () => {
@@ -94,9 +73,27 @@ export default function PostUpload() {
         txtRef.current.style.height = txtRef.current.scrollHeight + 'px';
     };
 
+    async function handleImg(e) {
+        setImage([...image, URL.createObjectURL(e.target.files[0])]);
+        // setImage(image.push(URL.createObjectURL(e.target.files[0])));
+
+        // const res = await postImage(URL.createObjectURL(e.target.files[0]));
+        // console.log(res);
+    }
+    const handleDelete = (e) => {
+        // console.log(e.target.previousSibling.src);
+        setImage(image.filter((el) => el !== e.target.previousSibling.src));
+    };
+
     return (
         <>
-            <UploadHeader />
+            <UploadHeader
+                // state={btnState}
+                // onClick={() => {
+                //     handleSubmit();
+                // }}
+                text="업로드"
+            />
             <PostUploadMain>
                 <h2 className="sr-only">게시글 작성</h2>
                 <ProfileImg size="42px" alt="프로필 이미지" />
@@ -110,24 +107,15 @@ export default function PostUpload() {
                             rows={1}
                             onChange={handleResize}
                         ></TextForm>
-                        <UploadButton radius="28px" size="50px" bg="var(--main-color)" />
+                        <UploadButton radius="28px" size="50px" bg="var(--main-color)" onChange={handleImg} />
                     </PostUploadForm>
 
                     <ImageSlider>
                         <ImageList>
-                            {/* 개수에 따른 배치는 JS로 컨트롤 */}
-                            <ImageItem>
-                                <img src="/assets/post-img-example.png" alt="" />
-                                <button type="button"></button>
-                            </ImageItem>
-                            <ImageItem>
-                                <img src="/assets/post-img-example.png" alt="" />
-                                <button type="button"></button>
-                            </ImageItem>
-                            <ImageItem>
-                                <img src="/assets/post-img-example.png" alt="" />
-                                <button type="button"></button>
-                            </ImageItem>
+                            {image &&
+                                image.map((el, index) => (
+                                    <ImagePreview size={image.length} src={el} key={index} onClick={handleDelete} />
+                                ))}
                         </ImageList>
                     </ImageSlider>
                 </PostPreview>
