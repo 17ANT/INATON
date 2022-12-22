@@ -7,8 +7,8 @@ import ProfileImg from '../../components/profileImg/ProfileImg';
 import UserInfoText from '../../components/userInfoText/UserInfoText';
 import CustomButton from '../../components/customButton/CustomButton';
 import { ImgButton } from '../../components/imageButton/ImageButton';
-import YourFeed from './YourFeedAPI';
 import HomePost from '../../components/homePost/HomePost';
+
 const YourProfileWrap = styled.div`
   margin: 0 auto;
   padding-top: 50px;
@@ -47,22 +47,10 @@ const ImageButton = styled(ImgButton)`
   padding: 9px;
   border: 1px solid var(--border-color);
 `;
-const PostList = styled.ul`
-  min-height: calc(100vh - 158px);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
+
 
 export default function YourProfile() {
-  const [postLists, setPostList] = useState(null);
-  async function showPostList() {
-    const feedList = await YourFeed();
-    setPostList(feedList.posts);
-  }
-  useEffect(() => {
-    showPostList();
-  }, []);
+  
   return (
     <>
       <BasicHeader></BasicHeader>
@@ -102,9 +90,7 @@ export default function YourProfile() {
           </Link>
         </ProfileButton>
       </YourProfileWrap>
-      <PostList>
-        {postLists && postLists.map((item) => <HomePost key={item.id} data={item} />)}
-      </PostList>
+    
     </>
   );
 }
