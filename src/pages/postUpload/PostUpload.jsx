@@ -5,6 +5,7 @@ import UploadHeader from '../../components/header/UploadHeader';
 import ImagePreview from '../../components/imagePreview/ImagePreview';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UploadButton from '../../components/uploadButton/UploadButton';
+import uploadPost from './PostUploadAPI';
 
 const PostUploadMain = styled.main`
     width: 100%;
@@ -95,7 +96,16 @@ export default function PostUpload() {
         // console.log(res);
     }
 
-    const handleSubmit = () => {};
+    async function handleSubmit() {
+        const post = {
+            post: {
+                content: content,
+                image: image.join(', '),
+            },
+        };
+        const result = await uploadPost(post);
+        console.log(result);
+    }
 
     const handleDelete = (e) => {
         // console.log(e.target.previousSibling.src);

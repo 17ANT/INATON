@@ -1,6 +1,6 @@
 import { BASE_URL } from '../../common/BASE_URL';
 
-async function emailValid(reqData) {
+async function uploadPost(reqData) {
     const token = localStorage.getItem('token');
     // console.log('emailValid');
     try {
@@ -21,4 +21,4 @@ async function emailValid(reqData) {
     }
 }
 
-export default emailValid;
+export default uploadPost;
