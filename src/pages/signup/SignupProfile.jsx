@@ -12,6 +12,8 @@ import ErrorMessage from '../../components/errorMessage/ErrorMessage';
 import accountValid from './AccountValidAPI';
 import { useNavigate } from 'react-router-dom';
 import UploadButton from '../../components/uploadButton/UploadButton';
+import imageUpload from './ImageAPI';
+import { BASE_URL } from '../../common/BASE_URL';
 
 const ProfileModificationWrap = styled.div`
     margin: 0 auto;
@@ -49,7 +51,7 @@ const UploadButtonWrap = styled.div`
 `;
 
 export default function SignupProfile() {
-    const [imageFile, setImageFile] = useState('../assets/Ellipse-1.png');
+    const [imageFile, setImageFile] = useState('https://mandarin.api.weniv.co.kr/Ellipse.png');
     const [show, setShow] = useState(false);
     const [msg, setMsg] = useState('');
     let { signupInfo } = useContext(SignupContext);
@@ -62,22 +64,29 @@ export default function SignupProfile() {
     const [btnState, setBtnState] = useState('disabled');
 
     /* 이미지를 업로드 하는 이벤트 함수 */
-    const viewImageFile = (e) => {
-        setImageFile(URL.createObjectURL(e.target.files[0]));
-        setShow(true);
+    const viewImageFile = async (e) => {
+        const imgSrc = await imageUpload(e.target.files[0]);
+        console.log(imgSrc);
+        if (imgSrc.message) {
+            alert(imgSrc.message);
+        } else {
+            setImageFile(BASE_URL + '/' + imgSrc.filename);
+            setShow(true);
+        }
+        // setImageFile(URL.createObjectURL(e.target.files[0]));
     };
 
     /* 업로드 한 이미지를 기본 이미지로 변경하는 이벤트 함수 */
     const deleteImageFile = () => {
-        if (imageFile !== '../assets/Ellipse-1.png') {
+        if (imageFile !== BASE_URL + '/' + 'Ellipse.png') {
             confirmAlert({
                 message: '기본 이미지로 변경하시겠습니까?',
                 buttons: [
                     {
                         label: 'Yes',
                         onClick: () => {
-                            URL.revokeObjectURL(imageFile);
-                            setImageFile('../assets/Ellipse-1.png');
+                            // URL.revokeObjectURL(imageFile);
+                            setImageFile(BASE_URL + '/' + 'Ellipse.png');
                             setShow(false);
                         },
                     },
@@ -133,6 +142,7 @@ export default function SignupProfile() {
         };
 
         // // 데이터를 넘겨주면서 페이지 이동
+        console.log(signupInfo);
         postSignup(signupInfo);
         navigate('/login');
     };
@@ -152,28 +162,28 @@ export default function SignupProfile() {
                 onClick={() => {
                     handleSubmit();
                 }}
-                text="저장"
+                text='저장'
             />
 
             <ProfileModificationWrap>
                 <ProfileHeader>
-                    <ProfileImg size="110px" src={imageFile} alt="message"></ProfileImg>
+                    <ProfileImg size='110px' src={imageFile} alt='message'></ProfileImg>
                     <DeleteButtonWrap>
                         {show && (
                             <ImageButton
-                                size="20px"
-                                src="../assets/x-button.png"
-                                alt="delete image"
+                                size='20px'
+                                src='../assets/x-button.png'
+                                alt='delete image'
                                 onClick={deleteImageFile}
                             ></ImageButton>
                         )}
                     </DeleteButtonWrap>
                     <UploadButtonWrap>
                         <UploadButton
-                            bg="#f26e22"
-                            id="imgUpload"
-                            radius="22px"
-                            size="36px"
+                            bg='#f26e22'
+                            id='imgUpload'
+                            radius='22px'
+                            size='36px'
                             onChange={viewImageFile}
                         ></UploadButton>
                     </UploadButtonWrap>
@@ -181,25 +191,25 @@ export default function SignupProfile() {
 
                 <ProfileMain>
                     <UserInfoInput
-                        labelText="사용자 이름"
-                        placeholder="2~10자 이내여야 합니다."
-                        maxLength="10"
+                        labelText='사용자 이름'
+                        placeholder='2~10자 이내여야 합니다.'
+                        maxLength='10'
                         ref={nameRef}
                         onChange={handleName}
                     ></UserInfoInput>
 
                     <UserInfoInput
-                        labelText="계정 ID"
-                        placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
+                        labelText='계정 ID'
+                        placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
                         onBlur={handleValid}
                         ref={accountRef}
                     ></UserInfoInput>
                     <ErrorMessage text={msg} />
 
                     <UserInfoInput
-                        labelText="소개"
-                        placeholder="50자 이내로 자신을 소개해 주세요."
-                        maxLength="50"
+                        labelText='소개'
+                        placeholder='50자 이내로 자신을 소개해 주세요.'
+                        maxLength='50'
                         ref={introRef}
                     ></UserInfoInput>
                 </ProfileMain>
