@@ -1,10 +1,7 @@
 import { BASE_URL } from '../../common/BASE_URL';
 
 async function searchUser(reqData) {
-    // console.log('searchUser');
-    // console.log(BASE_URL);
     try {
-        // console.log(reqData);
         const token = localStorage.getItem('token');
         const data = await fetch(BASE_URL + `/user/searchuser/?keyword=${reqData}`, {
             method: 'GET',
@@ -18,7 +15,6 @@ async function searchUser(reqData) {
             //     password: '12345678',
             // },
         });
-        // console.log(data);
         const result = await data.json();
         console.log(result);
         return result;
