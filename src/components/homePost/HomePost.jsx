@@ -117,7 +117,7 @@ function changeUnit(num) {
 export default function HomePost({ data }) {
     const likeCnt = changeUnit(data.heartCount);
     const commentCnt = changeUnit(data.commentCount);
-    const imgList = data.image ? data.image.split(',') : [];
+    const imgList = data.image ? data.image.split(',') : '';
     let swipeIndex = 0;
 
     const handleSwipe = (e) => {
@@ -139,7 +139,7 @@ export default function HomePost({ data }) {
             <PostContainer>
                 <h3 className="sr-only">게시글 상세 정보</h3>
 
-                <InlineProfileInfo name={data.author.username} desc={`@ +${data.author.accountname}`} state="post" />
+                <InlineProfileInfo name={data.author.username} desc={`@ ${data.author.accountname}`} state="post" />
                 <PostContents>
                     <p>{data.content}</p>
                     {imgList && (
