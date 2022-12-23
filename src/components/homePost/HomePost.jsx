@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
 
@@ -137,8 +138,6 @@ export default function HomePost({ data }) {
     return (
         <>
             <PostContainer>
-                <h3 className="sr-only">게시글 상세 정보</h3>
-
                 <InlineProfileInfo name={data.author.username} desc={`@ ${data.author.accountname}`} state="post" />
                 <PostContents>
                     <p>{data.content}</p>
@@ -167,9 +166,11 @@ export default function HomePost({ data }) {
                         <img src={'/assets/icon/icon-heart.png'} alt="좋아요" />
                         {likeCnt}
                     </button>
-                    <button>
-                        <img src={'/assets/icon/icon-message-circle.png'} alt="댓글 입력창으로 이동" /> {commentCnt}
-                    </button>
+                    <Link to={`/post/${data.id}`}>
+                        <button>
+                            <img src={'/assets/icon/icon-message-circle.png'} alt="댓글 입력창으로 이동" /> {commentCnt}
+                        </button>
+                    </Link>
                 </PostReaction>
 
                 <PostDate>{data.createdAt}</PostDate>
