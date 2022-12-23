@@ -1,6 +1,6 @@
 import { BASE_URL } from '../../common/BASE_URL';
 
-async function YourFeed(reqData) {
+async function Feed(reqData) {
     try {
         const token = localStorage.getItem('token')
         const data = await fetch(BASE_URL + '/post/feed', {
@@ -18,4 +18,4 @@ async function YourFeed(reqData) {
     }
 }
 
-export default YourFeed;
+export default Feed;
