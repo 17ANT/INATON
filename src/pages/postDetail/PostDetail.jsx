@@ -87,7 +87,9 @@ export default function PostDetail() {
     const postData = await getPost(params.post_id);
     setPostInfo(postData.post);
   }
-  getData();
+  useEffect(() => {
+    getData();
+  }, []);
 
   const [commentsValue, setCommentsValue] = useState('');
   const inputRef = useRef(null);
@@ -115,7 +117,7 @@ export default function PostDetail() {
     console.log(comments);
     // setCommentsList(comments);
   }
-  test();
+  // test();
 
   return (
     <>
