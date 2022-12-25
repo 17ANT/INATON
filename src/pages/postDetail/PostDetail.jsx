@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import getPost from '../../common/GetPostDetail';
 import Comment from '../../components/comment/Comment';
 import BasicHeader from '../../components/header/BasicHeader';
@@ -32,7 +32,7 @@ const CommentWrite = styled.div`
   position: fixed;
   z-index: 10;
   width: 100%;
-  bottom: 0;
+  bottom: 0px;
   padding: 0px 16px;
   height: 61px;
   display: flex;
@@ -75,6 +75,11 @@ const CommentForm = styled.form`
     line-height: 18px;
     color: var(--sub-border);
     cursor: pointer;
+    ${(props) =>
+      props.active === false &&
+      css`
+        background-color: var(--error-color);
+      `}
   }
 `;
 
@@ -83,23 +88,27 @@ export default function PostDetail() {
   const [postInfo, setPostInfo] = useState(null);
   const [commentInfo, setCommentInfo] = useState(null);
 
+  const [commentsValue, setCommentsValue] = useState('');
+  const commentRef = useRef(null);
+  const [commentsList, setCommentsList] = useState([]);
+
   async function getData(post_id) {
     const postData = await getPost(params.post_id);
     setPostInfo(postData.post);
   }
+
   useEffect(() => {
     getData();
   }, []);
 
-  const [commentsValue, setCommentsValue] = useState('');
-  const inputRef = useRef(null);
-  const [commentsList, setCommentsList] = useState([]);
-  // 게시글 가져오기
-  // const postInfo = ;
+  useEffect(() => {
+    console.log(commentRef);
+  }, []);
 
   const handleCommentsValue = () => {
     // 댓글창 값 다루기
-    setCommentsValue(inputRef.current.value);
+    console.log(commentRef.current.value);
+    setCommentsValue(commentRef.current.value);
   };
 
   const writeComments = (e) => {
@@ -107,7 +116,7 @@ export default function PostDetail() {
     e.preventDefault();
     CommentsWrite(commentsValue);
     setCommentsValue('');
-    inputRef.current.value = '';
+    commentRef.current.value = '';
     console.log(commentsValue);
   };
 
@@ -122,43 +131,46 @@ export default function PostDetail() {
   return (
     <>
       <BasicHeader />
-      <PostDetailMain>
-        {postInfo && <HomePost data={postInfo} />}
-        <CommentList>
-          <Comment name="서귀포시 무슨 농장" time="5" src="./assets/post-img-example.png">
-            게시글 답글 ~~ !! 최고최고
-          </Comment>
-          <Comment name="감귤러버" time="15" src="./assets/chat-exapmle.png">
-            안녕하세요. 사진이 너무 멋있어요. 한라봉 언제 먹을 수 있나요? 기다리기 지쳤어요 땡뻘땡뻘안녕하세요. 사진이
-            너무 멋있어요. 한라봉 언제 먹을 수 있나요? 기다리기 지쳤어요 땡뻘땡뻘
-          </Comment>
-          {/* {commentsList &&
-            commentsList.map((item) => (
-              <Comment key={item._id} time={item.createdA} src={item.author.image}>
-                {item.content}
-              </Comment>
-            ))} */}
-        </CommentList>
+      {postInfo && (
+        <PostDetailMain>
+          <HomePost data={postInfo} />
+          <CommentList>
+            <Comment name="서귀포시 무슨 농장" time="5" src="./assets/post-img-example.png">
+              게시글 답글 ~~ !! 최고최고
+            </Comment>
+            <Comment name="감귤러버" time="15" src="./assets/chat-exapmle.png">
+              안녕하세요. 사진이 너무 멋있어요. 한라봉 언제 먹을 수 있나요? 기다리기 지쳤어요 땡뻘땡뻘안녕하세요. 사진이
+              너무 멋있어요. 한라봉 언제 먹을 수 있나요? 기다리기 지쳤어요 땡뻘땡뻘
+            </Comment>
+            {/* {commentsList &&
+          commentsList.map((item) => (
+            <Comment key={item._id} time={item.createdA} src={item.author.image}>
+              {item.content}
+            </Comment>
+          ))} */}
+          </CommentList>
+          <CommentWrite>
+            <ProfileImg size="36px" alt="프로필 이미지" src={postInfo.author.image} />
 
-        <CommentWrite>
-          <ProfileImg size="36px" alt="프로필 이미지" />
-
-          <CommentForm>
-            <label htmlFor="inputComment" className="ir"></label>
-            <input
-              ref={inputRef}
-              onChange={handleCommentsValue}
-              type="text"
-              placeholder="댓글 입력하기..."
-              id="inputComment"
-              required
-            />
-            <button type="submit" onClick={writeComments}>
-              게시
-            </button>
-          </CommentForm>
-        </CommentWrite>
-      </PostDetailMain>
+            <CommentForm>
+              <label htmlFor="inputComment" className="ir"></label>
+              <input
+                ref={commentRef}
+                onChange={handleCommentsValue}
+                type="text"
+                placeholder="댓글 입력하기..."
+                id="inputComment"
+                required
+              />
+              {commentRef.current && (
+                <button type="submit" onClick={writeComments} active={commentRef.current.value ? true : false}>
+                  게시
+                </button>
+              )}
+            </CommentForm>
+          </CommentWrite>
+        </PostDetailMain>
+      )}
     </>
   );
 }
