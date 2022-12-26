@@ -48,9 +48,7 @@ const ImageButton = styled(ImgButton)`
   border: 1px solid var(--border-color);
 `;
 
-
 export default function YourProfile() {
-  
   return (
     <>
       <BasicHeader></BasicHeader>
@@ -61,7 +59,8 @@ export default function YourProfile() {
           <ProfileImg
             size="110px"
             src="/assets/Ellipse-1.png"
-            alt="profile image"></ProfileImg>
+            alt="profile image"
+          ></ProfileImg>
           <FollowCount count={128} kind="followings"></FollowCount>
         </ProfileHeader>
 
@@ -69,7 +68,8 @@ export default function YourProfile() {
           <UserInfoText
             userName="애월읍 위니브 감귤농장"
             userId="@ weniv_Mandarin"
-            userDesc="애월읍 감귤 전국 배송, 귤따기 체험, 감귤 농장"></UserInfoText>
+            userDesc="애월읍 감귤 전국 배송, 귤따기 체험, 감귤 농장"
+          ></UserInfoText>
         </ProfileMain>
 
         <ProfileButton>
@@ -77,7 +77,8 @@ export default function YourProfile() {
             <ImageButton
               size="34px"
               src="assets/icon/icon-message-circle.png"
-              alt="message"></ImageButton>
+              alt="message"
+            ></ImageButton>
           </Link>
           <CustomButton size="M" state="activ">
             언팔로우
@@ -86,11 +87,11 @@ export default function YourProfile() {
             <ImageButton
               size="34px"
               src="assets/icon/icon-share.png"
-              alt="message"></ImageButton>
+              alt="message"
+            ></ImageButton>
           </Link>
         </ProfileButton>
       </YourProfileWrap>
-    
     </>
   );
 }

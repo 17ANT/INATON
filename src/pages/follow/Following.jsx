@@ -33,6 +33,7 @@ export default function Following() {
   const accountname = localStorage.getItem('accountname');
 
   const [followings, setFollowings] = useState(null);
+  // const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
     async function setFollowingList() {
@@ -56,9 +57,15 @@ export default function Following() {
                 desc={item.accountname}
                 state="follow"
               />
-              <CustomButton size="s" state="activ">
-                취소
-              </CustomButton>
+              {item.isfollow ? (
+                <CustomButton size="s" state="activ">
+                  취소
+                </CustomButton>
+              ) : (
+                <CustomButton size="s" state="">
+                  팔로우
+                </CustomButton>
+              )}
             </div>
           ))}
       </StyledInlineProfileInfo>

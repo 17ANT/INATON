@@ -20,36 +20,43 @@ import Following from './../pages/follow/Following';
 import SignupProfile from '../pages/signup/SignupProfile';
 import { SignupContextProvider } from '../Contexts/SignupContext';
 import TestPage from '../pages/testPage/TestPage';
+import YourProfilecopy from './../pages/yourProfile/YourProfilecopy';
 
 export default function Router() {
-    return (
-        <SignupContextProvider>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Splash />} />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/search" element={<Search />} />
-                    <Route path="/login" element={<Login />} />
+  return (
+    <SignupContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Splash />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/login" element={<Login />} />
 
-                    <Route path="/signup" element={<SignUp />} />
-                    <Route path="/signup/profile" element={<SignupProfile />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup/profile" element={<SignupProfile />} />
 
-                    <Route path="/chatlist" element={<ChatList />} />
-                    <Route path="/login/email" element={<LoginEmail />} />
-                    <Route path="/chatroom" element={<ChatRoom />} />
-                    <Route path="/postupload" element={<PostUpload />} />
-                    <Route path="/post/:post_id" element={<PostDetail />} />
-                    <Route path="/myprofile" element={<MyProfile />} />
-                    <Route path="/yourprofile" element={<YourProfile />} />
-                    <Route path="/myprofile/modification" element={<ProfileModification />} />
-                    <Route path="/follower" element={<Follower />} />
-                    <Route path="/following" element={<Following />} />
 
-                    <Route path="/test" element={<TestPage />} />
+          <Route path="/chatlist" element={<ChatList />} />
+          <Route path="/login/email" element={<LoginEmail />} />
+          <Route path="/chatroom" element={<ChatRoom />} />
+          <Route path="/postupload" element={<PostUpload />} />
+          <Route path="/post/:post_id" element={<PostDetail />} />
+          <Route path="/myprofile" element={<MyProfile />} />
+          <Route path="/yourprofile" element={<YourProfile />} />
+          <Route path="/yourprofilecopy/:id" element={<YourProfilecopy />} />
+          <Route
+            path="/myprofile/modification"
+            element={<ProfileModification />}
+          />
+          <Route path="/follower" element={<Follower />} />
+          <Route path="/following" element={<Following />} />
 
-                    <Route path="/*" element={<NotFound />} />
-                </Routes>
-            </BrowserRouter>
-        </SignupContextProvider>
-    );
+
+          <Route path="/test" element={<TestPage />} />
+
+          <Route path="/*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </SignupContextProvider>
+  );
 }
