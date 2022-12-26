@@ -1,12 +1,10 @@
 import { BASE_URL } from '../../common/BASE_URL';
 
-async function getFollowing(token, accountname) {
-  console.log(token);
-  //   const BASE_URL = 'https://mandarin.api.weniv.co.kr';
+async function getFollowing(accountname) {
+  const token = localStorage.getItem('token');
 
   try {
     const data = await fetch(BASE_URL + `/profile/${accountname}/following`, {
-      // const data = await fetch(BASE_URL + `/profile/heejin/following`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

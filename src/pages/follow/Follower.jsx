@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import CustomButton from '../../components/customButton/CustomButton';
 import { useState, useEffect } from 'react';
 import getFollower from './FollowerAPI';
+import { useParams, useNavigate } from 'react-router-dom';
+import Follow from './FollowAPI';
 
 const StyledInlineProfileInfo = styled.div`
   margin: 48px auto;
@@ -29,19 +31,19 @@ const StyledInlineProfileInfo = styled.div`
 `;
 
 export default function Follower() {
-  const token = localStorage.getItem('token');
-  const accountname = localStorage.getItem('accountname');
+  const params = useParams();
+  const navigate = useNavigate();
 
   const [followers, setFollowers] = useState(null);
 
   useEffect(() => {
     async function setFollowingList() {
-      const followingList = await getFollower(token, accountname);
+      const followingList = await getFollower(params.id);
       setFollowers(followingList);
     }
 
     setFollowingList();
-  }, [accountname]);
+  }, []);
 
   return (
     <>
@@ -52,13 +54,23 @@ export default function Follower() {
           followers.map((item) => (
             <div key={item._id}>
               <InlineProfileInfo
+                img={item.image}
                 name={item.username}
                 desc={item.accountname}
                 state="follow"
+                onClick={() => {
+                  navigate(`/yourprofilecopy/${item.accountname}`);
+                }}
               />
-              <CustomButton size="s" state="activ">
-                취소
-              </CustomButton>
+              {item.isfollow ? (
+                <CustomButton size="M" state="activ">
+                  언팔로우
+                </CustomButton>
+              ) : (
+                <CustomButton size="M" state="">
+                  팔로우
+                </CustomButton>
+              )}
             </div>
           ))}
       </StyledInlineProfileInfo>

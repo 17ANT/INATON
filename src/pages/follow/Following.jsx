@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import CustomButton from '../../components/customButton/CustomButton';
 import getFollowing from './FollowingAPI';
 import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const StyledInlineProfileInfo = styled.div`
   margin: 48px auto;
@@ -29,20 +30,20 @@ const StyledInlineProfileInfo = styled.div`
 `;
 
 export default function Following() {
-  const token = localStorage.getItem('token');
-  const accountname = localStorage.getItem('accountname');
+  const params = useParams();
+  const navigate = useNavigate();
 
   const [followings, setFollowings] = useState(null);
   // const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
     async function setFollowingList() {
-      const followingList = await getFollowing(token, accountname);
+      const followingList = await getFollowing(params.id);
       setFollowings(followingList);
     }
 
     setFollowingList();
-  }, [accountname]);
+  }, [params.id]);
 
   return (
     <>
@@ -53,9 +54,13 @@ export default function Following() {
           followings.map((item) => (
             <div key={item._id}>
               <InlineProfileInfo
+                img={item.image}
                 name={item.username}
                 desc={item.accountname}
                 state="follow"
+                onClick={() => {
+                  navigate(`/yourprofilecopy/${item.accountname}`);
+                }}
               />
               {item.isfollow ? (
                 <CustomButton size="s" state="activ">
