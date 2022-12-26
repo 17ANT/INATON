@@ -1,14 +1,11 @@
 import { BASE_URL } from '../../common/BASE_URL';
-import { useContext, useState } from 'react';
-import Following from './Following';
 
-async function Follow(accountname) {
+async function UnFollow(accountname) {
   const token = localStorage.getItem('token');
-  // const accountname = localStorage.getItem('accountname');
 
   try {
-    const data = await fetch(BASE_URL + `/profile/${accountname}/follow`, {
-      method: 'POST',
+    const data = await fetch(BASE_URL + `/profile/${accountname}/unfollow`, {
+      method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-type': 'application/json',
@@ -21,4 +18,4 @@ async function Follow(accountname) {
   }
 }
 
-export default Follow;
+export default UnFollow;

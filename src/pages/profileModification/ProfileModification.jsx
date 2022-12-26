@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import styled from 'styled-components';
 import UploadHeader from '../../components/header/UploadHeader';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UserInfoInput from '../../components/userInfoInput/UserInfoInput';
 import ImageButton from '../../components/imageButton/ImageButton';
-import 'react-confirm-alert/src/react-confirm-alert.css';
 // import postSignup from './SignupAPI';
 import { SignupContext } from '../../Contexts/SignupContext';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';

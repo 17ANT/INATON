@@ -11,7 +11,7 @@ const Header = styled.header`
   left: 0;
   top: 0;
   border-bottom: 1px solid var(--border-color);
-  z-index: 4;
+  z-index: 20;
   background-color: #fff;
 `;
 
@@ -100,6 +100,7 @@ const Section = styled.div`
 `;
 
 const SearchResultList = styled.ul`
+padding: 16px 0;
   height: calc(100vh - 110px);
   overflow-y: scroll;
   display: flex;
@@ -151,15 +152,13 @@ export default function CustomMainHeader() {
             <i
               name="search-outline"
               onClick={HandleSearchBtn}
-              className={searchBtn}
-            >
+              className={searchBtn}>
               <img src="assets/icon/search.png" alt="" />
             </i>
             <i
               name="close-outline"
               onClick={HandleCloseBtn}
-              className={closeBtn}
-            >
+              className={closeBtn}>
               <img src="assets/icon/icon-delete-black.png" alt="" />
             </i>
           </span>
@@ -190,7 +189,7 @@ export default function CustomMainHeader() {
                   desc={'@ ' + item.accountname}
                   state="follow"
                   onClick={() => {
-                    navigate(`/yourprofilecopy/${item.accountname}`);
+                    navigate(`/yourprofile/${item.accountname}`);
                   }}
                 />
               </li>
