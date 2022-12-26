@@ -51,16 +51,18 @@ const GlobalStyle = createGlobalStyle`
     ::-webkit-scrollbar {
     width: 0px;
   }
-
+img{
+    object-fit: cover;
+}
 `;
 
 function App() {
-    return (
-        <>
-            <GlobalStyle />
-            <Reset />
-            <Router />
-        </>
-    );
+  return (
+    <>
+      <GlobalStyle />
+      <Reset />
+      <Router />
+    </>
+  );
 }
 export default App;

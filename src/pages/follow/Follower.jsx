@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import getFollower from './FollowerAPI';
 import { useParams, useNavigate } from 'react-router-dom';
 import Follow from './FollowAPI';
+import UnFollow from './UnFollowAPI';
 
 const StyledInlineProfileInfo = styled.div`
   margin: 48px auto;
@@ -33,7 +34,7 @@ const StyledInlineProfileInfo = styled.div`
 export default function Follower() {
   const params = useParams();
   const navigate = useNavigate();
-
+  const [userProfile, setUserProfile] = useState();
   const [followers, setFollowers] = useState(null);
 
   useEffect(() => {
@@ -44,6 +45,20 @@ export default function Follower() {
 
     setFollowingList();
   }, []);
+  async function changeFollow() {
+    // 팔로우 버튼 기능 (팔로우 토글)
+    // setIsFollow((prev) => !prev);
+    console.log(params);
+    if (userProfile.isfollow) {
+      // 언팔로우 API
+      const res = await UnFollow(params.id);
+      setUserProfile(res.profile);
+    } else {
+      // 팔로우 API
+      const res = await Follow(params.id);
+      setUserProfile(res.profile);
+    }
+  }
 
   return (
     <>
@@ -63,11 +78,16 @@ export default function Follower() {
                 }}
               />
               {item.isfollow ? (
-                <CustomButton size="M" state="activ">
+                <CustomButton
+                  size="M"
+                  state="activ"
+                  onClick={(item) => {
+                    changeFollow(item);
+                  }}>
                   언팔로우
                 </CustomButton>
               ) : (
-                <CustomButton size="M" state="">
+                <CustomButton size="M" state="" onClick={changeFollow}>
                   팔로우
                 </CustomButton>
               )}
