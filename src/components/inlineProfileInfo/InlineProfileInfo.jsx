@@ -68,7 +68,6 @@ export default function InlineProfileInfo({
   name,
   desc,
   state,
-  onClick,
 }) {
   const check = state.toUpperCase();
   let size, gap, line;
@@ -98,7 +97,7 @@ export default function InlineProfileInfo({
   }
 
   return (
-    <ProfileInfo gap={gap} onClick={onClick}>
+    <ProfileInfo gap={gap}>
       <Link to={`/yourprofile/${accountname}`}>
         <ProfileImg src={img} alt="" size={size}></ProfileImg>
         <ProfileText line={line} check={check}>

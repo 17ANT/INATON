@@ -28,13 +28,11 @@ export default function InlineProfileFollow({ item }) {
   return (
     <>
       <InlineProfileInfo
+        accountname={item.accountname}
         img={item.image}
         name={item.username}
-        desc={item.accountname}
+        desc={`@ ${item.accountname}`}
         state="follow"
-        onClick={() => {
-          navigate(`/yourprofile/${item.accountname}`);
-        }}
       />
       {accountname !== item.accountname ? (
         item.isfollow ? (
