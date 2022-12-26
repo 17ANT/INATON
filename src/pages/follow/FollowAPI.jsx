@@ -3,22 +3,22 @@ import { useContext, useState } from 'react';
 import { SignupContext } from './../../Contexts/SignupContext';
 import Following from './Following';
 
-async function Follow() {
-  console.log(token);
+async function Follow(accountname) {
   const [follow, setFollow] = useState(Following.isfollow);
-  let { token, accountname } = useContext(SignupContext);
+  const token = localStorage.getItem('token');
+  // const accountname = localStorage.getItem('accountname');
 
   try {
-    // const data = await fetch(BASE_URL + `/profile/${accountname}/follow`, {
-    const res = await fetch(BASE_URL + `/profile/heejin/follow`, {
+    const data = await fetch(BASE_URL + `/profile/${accountname}/follow`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-type': 'application/json',
       },
     });
-    console.log('팔로우', res);
-    setFollow(res.data.profile.isfollow);
+    console.log(data);
+
+    setFollow(data.profile.isfollow);
   } catch (err) {
     console.log(err);
   }

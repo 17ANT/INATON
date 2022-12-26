@@ -35,7 +35,6 @@ export default function Router() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signup/profile" element={<SignupProfile />} />
 
-
           <Route path="/chatlist" element={<ChatList />} />
           <Route path="/login/email" element={<LoginEmail />} />
           <Route path="/chatroom" element={<ChatRoom />} />
@@ -48,9 +47,8 @@ export default function Router() {
             path="/myprofile/modification"
             element={<ProfileModification />}
           />
-          <Route path="/follower" element={<Follower />} />
-          <Route path="/following" element={<Following />} />
-
+          <Route path="/profile/:id/follower" element={<Follower />} />
+          <Route path="/profile/:id/following" element={<Following />} />
 
           <Route path="/test" element={<TestPage />} />
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import BasicHeader from '../../components/header/BasicHeader';
 import FollowCount from '../../components/followCount/FollowCount';
 import ProfileImg from '../../components/profileImg/ProfileImg';
@@ -9,6 +9,8 @@ import CustomButton from '../../components/customButton/CustomButton';
 import { ImgButton } from '../../components/imageButton/ImageButton';
 import NavBar from './../../components/navBar/NavBar';
 import getProfile from './ProfileAPI';
+import Follower from '../follow/Follower';
+import Follow from '../follow/FollowAPI';
 
 const YourProfileWrap = styled.div`
   margin: 0 auto;
@@ -51,6 +53,7 @@ const ImageButton = styled(ImgButton)`
 
 export default function YourProfilecopy() {
   const params = useParams();
+  const navigate = useNavigate();
   const [userProfile, setUserProfile] = useState();
 
   useEffect(() => {
@@ -61,6 +64,15 @@ export default function YourProfilecopy() {
     handleProfile();
   }, []);
 
+  function goFollower() {
+    navigate(`/profile/${params.id}/follower`);
+  }
+  function goFollowing() {
+    navigate(`/profile/${params.id}/following`);
+  }
+  const fixFollow = () => {
+    Follow(params.id);
+  };
   return (
     <>
       <BasicHeader></BasicHeader>
@@ -70,6 +82,7 @@ export default function YourProfilecopy() {
             <FollowCount
               count={userProfile.followerCount}
               kind="followers"
+              onClick={goFollower}
             ></FollowCount>
             <ProfileImg
               size="110px"
@@ -79,6 +92,7 @@ export default function YourProfilecopy() {
             <FollowCount
               count={userProfile.followingCount}
               kind="followings"
+              onClick={goFollowing}
             ></FollowCount>
           </ProfileHeader>
 
@@ -103,7 +117,7 @@ export default function YourProfilecopy() {
                 언팔로우
               </CustomButton>
             ) : (
-              <CustomButton size="M" state="">
+              <CustomButton size="M" state="" onClick={fixFollow}>
                 팔로우
               </CustomButton>
             )}

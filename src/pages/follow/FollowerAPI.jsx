@@ -1,11 +1,10 @@
 import { BASE_URL } from '../../common/BASE_URL';
 
-async function getFollower(token, accountname) {
-  console.log(token);
+async function getFollower(accountname) {
+  const token = localStorage.getItem('token');
 
   try {
-    // const data = await fetch(BASE_URL + `/profile/${accountname}/follower`, {
-    const data = await fetch(BASE_URL + `/profile/heejin/follower`, {
+    const data = await fetch(BASE_URL + `/profile/${accountname}/follower`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
