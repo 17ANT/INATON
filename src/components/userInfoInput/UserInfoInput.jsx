@@ -38,7 +38,7 @@ const Input = styled.input`
     }
 `;
 
-function UserInfoInput({ labelText, placeholder, maxLength, onBlur, onChange }, ref) {
+function UserInfoInput({ labelText, placeholder, maxLength, onBlur, onChange, defaultValue }, ref) {
     return (
         <UserInputDiv>
             <Label>{labelText}</Label>
@@ -48,6 +48,7 @@ function UserInfoInput({ labelText, placeholder, maxLength, onBlur, onChange }, 
                 maxLength={maxLength}
                 onBlur={onBlur}
                 onChange={onChange}
+                defaultValue={defaultValue}
             ></Input>
         </UserInputDiv>
     );
