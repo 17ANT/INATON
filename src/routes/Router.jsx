@@ -38,7 +38,7 @@ export default function Router() {
                     <Route path="/login/email" element={<LoginEmail />} />
                     <Route path="/chatroom" element={<ChatRoom />} />
                     <Route path="/postupload" element={<PostUpload />} />
-                    <Route path="/postdetail" element={<PostDetail />} />
+                    <Route path="/post/:post_id" element={<PostDetail />} />
                     <Route path="/myprofile" element={<MyProfile />} />
                     <Route path="/yourprofile" element={<YourProfile />} />
                     <Route path="/myprofile/modification" element={<ProfileModification />} />
