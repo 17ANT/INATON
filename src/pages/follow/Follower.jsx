@@ -9,6 +9,7 @@ import getFollower from './FollowerAPI';
 import { useParams, useNavigate } from 'react-router-dom';
 import Follow from './FollowAPI';
 import UnFollow from './UnFollowAPI';
+import InlineProfileFollow from '../../components/inLineProfileFollow/InlineProfileFollow';
 
 const StyledInlineProfileInfo = styled.div`
   margin: 48px auto;
@@ -66,63 +67,13 @@ export default function Follower() {
 
       <StyledInlineProfileInfo>
         {followers &&
-          followers.map((item) => (
-            <div key={item._id}>
-              <InlineProfileInfo
-                img={item.image}
-                name={item.username}
-                desc={item.accountname}
-                state="follow"
-                onClick={() => {
-                  navigate(`/yourprofile/${item.accountname}`);
-                }}
-              />
-              {item.isfollow ? (
-                <CustomButton
-                  size="M"
-                  state="activ"
-                  onClick={(item) => {
-                    changeFollow(item);
-                  }}>
-                  언팔로우
-                </CustomButton>
-              ) : (
-                <CustomButton size="M" state="" onClick={changeFollow}>
-                  팔로우
-                </CustomButton>
-              )}
+          followers.map((item, index) => (
+            <div key={index}>
+              <InlineProfileFollow item={item} />
+              {/* item의 id 값이 내 아이디랑 같을 떄는 출력하지 않는다 */}
             </div>
           ))}
       </StyledInlineProfileInfo>
-
-      {/*       <StyledInlineProfileInfo>
-        <div>
-          <InlineProfileInfo
-            name="야롱"
-            desc={'나는김지현이라네'}
-            state="follow"
-          />
-          <CustomButton size="s" state="activ">
-            취소
-          </CustomButton>
-        </div>
-        <div>
-          <InlineProfileInfo
-            name="팔로우"
-            desc={'사용자가 설정한 프로필 설명이 보이는 공간입니다.'}
-            state="follow"
-          />
-          <CustomButton size="s">팔로우</CustomButton>
-        </div>
-        <div>
-          <InlineProfileInfo
-            name="팔로우"
-            desc={'사용자가 설정한 프로필 설명이 보이는 공간입니다.'}
-            state="follow"
-          />
-          <CustomButton size="s">팔로우</CustomButton>
-        </div>
-      </StyledInlineProfileInfo> */}
       <NavBar />
     </>
   );

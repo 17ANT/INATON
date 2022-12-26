@@ -61,13 +61,13 @@ export default function ImgSlider({ images }) {
   const [showIndex, setShowIndex] = useState(0);
   const dotsRef = useRef(null);
 
-  useEffect(() => {
-    const dotsRefList = dotsRef.current.childNodes;
-    dotsRefList.forEach((el) => {
-      el.active = false;
-    });
-    dotsRefList[showIndex]['active'] = true;
-  }, [showIndex]);
+  // useEffect(() => {
+  //   const dotsRefList = dotsRef.current.childNodes;
+  //   dotsRefList.forEach((el) => {
+  //     el.active = false;
+  //   });
+  //   dotsRefList[showIndex]['active'] = true;
+  // }, [showIndex]);
 
   const handleDots = (e) => {
     const dotsList = Array.from(dotsRef.current.childNodes);
@@ -85,7 +85,7 @@ export default function ImgSlider({ images }) {
               </ImgItem>
             ))}
           </ImgContainer>
-          {images.length > 1 && (
+          {/* {images.length > 1 && (
             <DotsContainer ref={dotsRef}>
               {images.map((el, idx) => (
                 <Dots
@@ -94,7 +94,7 @@ export default function ImgSlider({ images }) {
                   onClick={handleDots}></Dots>
               ))}
             </DotsContainer>
-          )}
+          )} */}
         </Slider>
       )}
     </>
