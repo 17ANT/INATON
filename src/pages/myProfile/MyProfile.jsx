@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import BasicHeader from '../../components/header/BasicHeader';
@@ -6,6 +6,7 @@ import FollowCount from '../../components/followCount/FollowCount';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UserInfoText from '../../components/userInfoText/UserInfoText';
 import CustomButton from '../../components/customButton/CustomButton';
+import getMyProfile from '../../common/GetMyInfo';
 
 const MyProfileWrap = styled.div`
     margin: 0 auto;
@@ -39,33 +40,48 @@ const ProfileButton = styled.div`
 `;
 
 export default function MyProfile() {
+    const [myProfile, setMyProfile] = useState();
+    // const token = localStorage.getItem('token');
+    // const accountname = localStorage.getItem('accountname');
+
+    useEffect(() => {
+        async function handleProfile() {
+            const myProfileData = await getMyProfile();
+            setMyProfile(myProfileData.user);
+        }
+        handleProfile();
+    }, []);
+
     return (
         <>
             <BasicHeader></BasicHeader>
+            {myProfile ? (
+                <MyProfileWrap>
+                    <ProfileHeader>
+                        <FollowCount count={myProfile.followerCount} kind='followers'></FollowCount>
+                        <ProfileImg size='110px' src={myProfile.image} alt='profile image'></ProfileImg>
+                        <FollowCount count={myProfile.followingCount} kind='followings'></FollowCount>
+                    </ProfileHeader>
 
-            <MyProfileWrap>
-                <ProfileHeader>
-                    <FollowCount count={2950} kind='followers'></FollowCount>
-                    <ProfileImg size='110px' src='assets/Ellipse-1.png' alt='profile image'></ProfileImg>
-                    <FollowCount count={128} kind='followings'></FollowCount>
-                </ProfileHeader>
+                    <ProfileMain>
+                        <UserInfoText
+                            userName={myProfile.username}
+                            userId={`@ ${myProfile.accountname}`}
+                            userDesc={myProfile.intro}
+                        ></UserInfoText>
+                    </ProfileMain>
 
-                <ProfileMain>
-                    <UserInfoText
-                        userName='애월읍 위니브 감귤농장'
-                        userId='@ weniv_Mandarin'
-                        userDesc='애월읍 감귤 전국 배송, 귤따기 체험, 감귤 농장'
-                    ></UserInfoText>
-                </ProfileMain>
-
-                <ProfileButton>
-                    <Link to='/myprofile/modification'>
-                        <CustomButton size='M' state='activ'>
-                            프로필 수정
-                        </CustomButton>
-                    </Link>
-                </ProfileButton>
-            </MyProfileWrap>
+                    <ProfileButton>
+                        <Link to='/myprofile/modification'>
+                            <CustomButton size='M' state='activ'>
+                                프로필 수정
+                            </CustomButton>
+                        </Link>
+                    </ProfileButton>
+                </MyProfileWrap>
+            ) : (
+                <></>
+            )}
         </>
     );
 }
