@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import UploadButton from '../../components/uploadButton/UploadButton';
 import imageUpload from './ImageAPI';
 import { BASE_URL } from '../../common/BASE_URL';
+import getMyProfile from '../../common/GetMyInfo';
 
 const ProfileModificationWrap = styled.div`
     margin: 0 auto;
@@ -62,6 +63,15 @@ export default function ProfileModification() {
     let signupData = {};
     const [require, setRequire] = useState(false);
     const [btnState, setBtnState] = useState('disabled');
+    const [myProfile, setMyProfile] = useState({});
+
+    useEffect(() => {
+        async function handleProfile() {
+          const myProfileData = await getMyProfile();
+          setMyProfile(myProfileData.user);
+        }
+        handleProfile();
+    }, []);
 
     /* 이미지를 업로드 하는 이벤트 함수 */
     const viewImageFile = async (e) => {

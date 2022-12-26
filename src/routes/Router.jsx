@@ -20,7 +20,6 @@ import Following from './../pages/follow/Following';
 import SignupProfile from '../pages/signup/SignupProfile';
 import { SignupContextProvider } from '../Contexts/SignupContext';
 import TestPage from '../pages/testPage/TestPage';
-import YourProfilecopy from './../pages/yourProfile/YourProfilecopy';
 
 export default function Router() {
   return (
@@ -41,7 +40,6 @@ export default function Router() {
           <Route path="/postupload" element={<PostUpload />} />
           <Route path="/post/:post_id" element={<PostDetail />} />
           <Route path="/myprofile" element={<MyProfile />} />
-          {/* <Route path="/yourprofile" element={<YourProfile />} /> */}
           <Route path="/yourprofile/:id" element={<YourProfile />} />
           <Route
             path="/myprofile/modification"

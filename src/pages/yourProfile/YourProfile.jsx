@@ -103,7 +103,8 @@ export default function YourProfile() {
             <FollowCount
               count={userProfile.followingCount}
               kind="followings"
-              onClick={goFollowing}></FollowCount>
+              onClick={goFollowing}
+              ></FollowCount>
           </ProfileHeader>
 
           <ProfileMain>

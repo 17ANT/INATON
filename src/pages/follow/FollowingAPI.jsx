@@ -4,13 +4,16 @@ async function getFollowing(accountname) {
   const token = localStorage.getItem('token');
 
   try {
-    const data = await fetch(BASE_URL + `/profile/${accountname}/following`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-type': 'application/json',
-      },
-    });
+    const data = await fetch(
+      BASE_URL + `/profile/${accountname}/following?limit=100&skip=0`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      }
+    );
     console.log(data);
     const result = await data.json();
     // JSON.parse(data.json())

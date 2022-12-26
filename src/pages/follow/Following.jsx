@@ -7,6 +7,7 @@ import CustomButton from '../../components/customButton/CustomButton';
 import getFollowing from './FollowingAPI';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import InlineProfileFollow from '../../components/inLineProfileFollow/InlineProfileFollow';
 
 const StyledInlineProfileInfo = styled.div`
   margin: 48px auto;
@@ -51,26 +52,11 @@ export default function Following() {
       {/* <Btn>팔로우목록</Btn> */}
       <StyledInlineProfileInfo>
         {followings &&
-          followings.map((item) => (
-            <div key={item._id}>
-              <InlineProfileInfo
-                img={item.image}
-                name={item.username}
-                desc={item.accountname}
-                state="follow"
-                onClick={() => {
-                  navigate(`/yourprofile/${item.accountname}`);
-                }}
-              />
-              {item.isfollow ? (
-                <CustomButton size="s" state="activ">
-                  취소
-                </CustomButton>
-              ) : (
-                <CustomButton size="s" state="">
-                  팔로우
-                </CustomButton>
-              )}
+          followings.map((item, index) => (
+            <div key={index}>
+              <InlineProfileFollow item={item} />
+              {/* item의 id 값이 내 아이디랑 같을 떄는 출력하지 않는다 */}
+              
             </div>
           ))}
       </StyledInlineProfileInfo>

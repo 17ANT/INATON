@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const FollowDiv = styled.div`
   width: fit-content;
   text-align: center;
+  cursor: pointer;
 `;
 
 const CountNum = styled.strong`
