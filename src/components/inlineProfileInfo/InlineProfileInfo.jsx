@@ -59,7 +59,7 @@ const ProfileText = styled.div`
   }
 `;
 
-export default function InlineProfileInfo({ img, name, desc, state }) {
+export default function InlineProfileInfo({ img, name, desc, state, onClick }) {
   const check = state.toUpperCase();
   let size, gap, line;
   switch (check) {
@@ -88,7 +88,7 @@ export default function InlineProfileInfo({ img, name, desc, state }) {
   }
 
   return (
-    <ProfileInfo gap={gap}>
+    <ProfileInfo gap={gap} onClick={onClick}>
       <ProfileImg src={img} alt="" size={size}></ProfileImg>
       <ProfileText line={line} check={check}>
         <strong>{name}</strong>

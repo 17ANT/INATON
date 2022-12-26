@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import searchUser from '../../pages/home/SearchAPI';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
+import { useNavigate } from 'react-router-dom';
+import getProfile from './../../pages/yourProfile/ProfileAPI';
 
 const Header = styled.header`
   width: 100%;
@@ -117,6 +119,7 @@ export default function CustomMainHeader() {
   const searchRef = useRef(null);
   const [searchValue, setSearchValue] = useState('');
   const [searchResult, setSearchResult] = useState(null);
+  const navigate = useNavigate();
 
   async function HandleSearchValue() {
     setSearchValue(searchRef.current.value);
@@ -148,13 +151,15 @@ export default function CustomMainHeader() {
             <i
               name="search-outline"
               onClick={HandleSearchBtn}
-              className={searchBtn}>
+              className={searchBtn}
+            >
               <img src="assets/icon/search.png" alt="" />
             </i>
             <i
               name="close-outline"
               onClick={HandleCloseBtn}
-              className={closeBtn}>
+              className={closeBtn}
+            >
               <img src="assets/icon/icon-delete-black.png" alt="" />
             </i>
           </span>
@@ -184,6 +189,9 @@ export default function CustomMainHeader() {
                   name={item.username}
                   desc={'@ ' + item.accountname}
                   state="follow"
+                  onClick={() => {
+                    navigate(`/yourprofilecopy/${item.accountname}`);
+                  }}
                 />
               </li>
             ))}
