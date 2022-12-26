@@ -151,20 +151,20 @@ export default function HomePost({ data }) {
   };
 
   const handlePostModal = (e) => {
-    // 
+    //
     confirmAlert({
       // message: '기본 이미지로 변경하시겠습니까?',
       buttons: [
         {
           label: '수정',
           onClick: () => {
-            console.log("수정");
+            console.log('수정');
           },
         },
         {
           label: '삭제',
           onClick: () => {
-            console.log("삭제");
+            console.log('삭제');
           },
         },
       ],
@@ -174,6 +174,7 @@ export default function HomePost({ data }) {
     <>
       <PostContainer>
         <InlineProfileInfo
+          accountname={data.author.accountname}
           name={data.author.username}
           desc={`@ ${data.author.accountname}`}
           state="post"
@@ -186,7 +187,6 @@ export default function HomePost({ data }) {
             </>
           )}
         </PostContents>
-
         <PostReaction>
           <button>
             <img src={'/assets/icon/icon-heart.png'} alt="좋아요" />
@@ -202,7 +202,6 @@ export default function HomePost({ data }) {
             </button>
           </Link>
         </PostReaction>
-
         <PostDate>{createDate}</PostDate>
         <MoreBtn onClick={handlePostModal} type="button">
           <span className="sr-only">더보기</span>
