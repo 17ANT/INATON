@@ -41,6 +41,7 @@ export default function ChatList() {
       <BasicHeader />
       <ChatMain>
         <ChatItem>
+          {/* 넹 여기는 그냥 두겠습니다! */}
           <InlineProfileInfo
             img="./assets/basic-profile-img.png"
             name="채팅"

@@ -100,7 +100,7 @@ const Section = styled.div`
 `;
 
 const SearchResultList = styled.ul`
-padding: 16px 0;
+  padding: 16px 0;
   height: calc(100vh - 110px);
   overflow-y: scroll;
   display: flex;
@@ -184,13 +184,11 @@ export default function CustomMainHeader() {
               // <li key={item._id}>{item.username}</li>
               <li key={item._id}>
                 <InlineProfileInfo
+                  accountname={item.accountname}
                   img={item.image}
                   name={item.username}
                   desc={'@ ' + item.accountname}
                   state="follow"
-                  onClick={() => {
-                    navigate(`/yourprofile/${item.accountname}`);
-                  }}
                 />
               </li>
             ))}
