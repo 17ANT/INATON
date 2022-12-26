@@ -67,7 +67,7 @@ export default function InlineProfileInfo({ img, name, desc, state, onClick }) {
     case 'POST':
       size = '42px';
       gap = '12px';
-      line = '4px';
+      line = '2px';
       break;
     case 'COMMENT':
       size = '36px';

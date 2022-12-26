@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import ImgSlider from '../imgSlider/ImgSlider';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
 
 const PostContainer = styled.div`
@@ -55,11 +56,13 @@ const ImgContainer = styled.ul`
   display: flex;
   width: 304px;
   height: 228px;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  /* overflow-x: scroll; */
+  /* overflow-y: hidden; */
+  outline: 3px solid yellow;
 `;
 
 const ImgItem = styled.li`
+  width: 100%;
   img {
     width: 304px;
     height: 228px;
@@ -152,20 +155,7 @@ export default function HomePost({ data }) {
           <p>{data.content}</p>
           {imgList && (
             <>
-              <ImgContainer>
-                {imgList.map((el, idx) => (
-                  <ImgItem key={idx} onClick={handleSwipe}>
-                    <img src={el} alt="" />
-                  </ImgItem>
-                ))}
-              </ImgContainer>
-              {imgList.length > 1 && (
-                <SwipeContainer>
-                  {imgList.map((el, idx) => (
-                    <SwipeItem key={idx} on={idx ? null : 'on'}></SwipeItem>
-                  ))}
-                </SwipeContainer>
-              )}
+              <ImgSlider images={imgList} />
             </>
           )}
         </PostContents>
