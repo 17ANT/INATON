@@ -31,9 +31,10 @@ const CommentList = styled.ul`
 const CommentWrite = styled.div`
   position: fixed;
   z-index: 10;
-  width: 100%;
   bottom: 0px;
   padding: 0px 16px;
+  margin: 0px auto;
+  width: 100%;
   height: 61px;
   display: flex;
   flex-wrap: no-wrap;
@@ -43,7 +44,6 @@ const CommentWrite = styled.div`
 `;
 
 const CommentForm = styled.form`
-  margin: 0px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -76,7 +76,7 @@ const CommentForm = styled.form`
     color: var(--sub-border);
     cursor: pointer;
     ${(props) =>
-      props.active === false &&
+      props.active &&
       css`
         background-color: var(--error-color);
       `}
@@ -99,10 +99,6 @@ export default function PostDetail() {
 
   useEffect(() => {
     getData();
-  }, []);
-
-  useEffect(() => {
-    console.log(commentRef);
   }, []);
 
   const handleCommentsValue = () => {
@@ -163,7 +159,7 @@ export default function PostDetail() {
                 required
               />
               {commentRef.current && (
-                <button type="submit" onClick={writeComments} active={commentRef.current.value ? true : false}>
+                <button type="submit" onClick={writeComments} active={commentRef.current.value ? 'active' : ''}>
                   게시
                 </button>
               )}
