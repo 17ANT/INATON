@@ -38,7 +38,7 @@ const DotsContainer = styled.div`
   display: flex;
   flex: 0 0 6px;
   gap: 6px;
-  z-index: 10;
+  z-index: 5;
 `;
 
 const Dots = styled.button`
@@ -88,7 +88,10 @@ export default function ImgSlider({ images }) {
           {images.length > 1 && (
             <DotsContainer ref={dotsRef}>
               {images.map((el, idx) => (
-                <Dots key={idx} active={showIndex === idx} onClick={handleDots}></Dots>
+                <Dots
+                  key={idx}
+                  active={showIndex === idx}
+                  onClick={handleDots}></Dots>
               ))}
             </DotsContainer>
           )}

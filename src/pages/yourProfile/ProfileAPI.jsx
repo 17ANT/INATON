@@ -10,9 +10,7 @@ async function GetProfile(accountname) {
         'Content-type': 'application/json',
       },
     });
-    console.log(data);
     const result = await data.json();
-    console.log(result);
     return result;
   } catch (error) {
     console.log(error.message);

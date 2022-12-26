@@ -41,8 +41,8 @@ export default function Router() {
           <Route path="/postupload" element={<PostUpload />} />
           <Route path="/post/:post_id" element={<PostDetail />} />
           <Route path="/myprofile" element={<MyProfile />} />
-          <Route path="/yourprofile" element={<YourProfile />} />
-          <Route path="/yourprofilecopy/:id" element={<YourProfilecopy />} />
+          {/* <Route path="/yourprofile" element={<YourProfile />} /> */}
+          <Route path="/yourprofile/:id" element={<YourProfile />} />
           <Route
             path="/myprofile/modification"
             element={<ProfileModification />}

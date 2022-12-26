@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import ImgSlider from '../imgSlider/ImgSlider';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const PostContainer = styled.div`
   position: relative;
@@ -107,7 +109,8 @@ const MoreBtn = styled.button`
   right: 0px;
   width: 18px;
   height: 18px;
-  background: url('/assets/icon/icon-more-vertical.png') no-repeat center/18px 18px;
+  background: url('/assets/icon/icon-more-vertical.png') no-repeat center/18px
+    18px;
   border: none;
   cursor: pointer;
 `;
@@ -147,10 +150,34 @@ export default function HomePost({ data }) {
     });
   };
 
+  const handlePostModal = (e) => {
+    // 
+    confirmAlert({
+      // message: '기본 이미지로 변경하시겠습니까?',
+      buttons: [
+        {
+          label: '수정',
+          onClick: () => {
+            console.log("수정");
+          },
+        },
+        {
+          label: '삭제',
+          onClick: () => {
+            console.log("삭제");
+          },
+        },
+      ],
+    });
+  };
   return (
     <>
       <PostContainer>
-        <InlineProfileInfo name={data.author.username} desc={`@ ${data.author.accountname}`} state="post" />
+        <InlineProfileInfo
+          name={data.author.username}
+          desc={`@ ${data.author.accountname}`}
+          state="post"
+        />
         <PostContents>
           <p>{data.content}</p>
           {imgList && (
@@ -167,13 +194,17 @@ export default function HomePost({ data }) {
           </button>
           <Link to={`/post/${data.id}`}>
             <button>
-              <img src={'/assets/icon/icon-message-circle.png'} alt="댓글 입력창으로 이동" /> {commentCnt}
+              <img
+                src={'/assets/icon/icon-message-circle.png'}
+                alt="댓글 입력창으로 이동"
+              />{' '}
+              {commentCnt}
             </button>
           </Link>
         </PostReaction>
 
         <PostDate>{createDate}</PostDate>
-        <MoreBtn type="button">
+        <MoreBtn onClick={handlePostModal} type="button">
           <span className="sr-only">더보기</span>
         </MoreBtn>
       </PostContainer>

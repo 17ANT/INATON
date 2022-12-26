@@ -79,9 +79,9 @@ export default function Home() {
       {isFollow ? (
         // 팔로우가 있는경우
         <HomePostList>
-          {/* <li>
+          <li>
             <HomePost data={postTest} />
-          </li> */}
+          </li>
           {postLists &&
             postLists.map((item) => (
               <li key={item.id}>

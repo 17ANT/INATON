@@ -59,7 +59,7 @@ export default function Follower() {
                 desc={item.accountname}
                 state="follow"
                 onClick={() => {
-                  navigate(`/yourprofilecopy/${item.accountname}`);
+                  navigate(`/yourprofile/${item.accountname}`);
                 }}
               />
               {item.isfollow ? (

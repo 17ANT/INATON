@@ -11,6 +11,7 @@ import NavBar from './../../components/navBar/NavBar';
 import getProfile from './ProfileAPI';
 import Follower from '../follow/Follower';
 import Follow from '../follow/FollowAPI';
+import UnFollow from '../follow/UnFollowAPI';
 
 const YourProfileWrap = styled.div`
   margin: 0 auto;
@@ -55,6 +56,7 @@ export default function YourProfilecopy() {
   const params = useParams();
   const navigate = useNavigate();
   const [userProfile, setUserProfile] = useState();
+  const [isFollow, setIsFollow] = useState(false);
 
   useEffect(() => {
     async function handleProfile() {
@@ -70,9 +72,20 @@ export default function YourProfilecopy() {
   function goFollowing() {
     navigate(`/profile/${params.id}/following`);
   }
-  const fixFollow = () => {
-    Follow(params.id);
-  };
+  async function changeFollow() {
+    // 팔로우 버튼 기능 (팔로우 토글)
+    setIsFollow((prev) => !prev);
+    if (userProfile.isfollow) {
+      // 언팔로우 API
+      const res = await UnFollow(params.id);
+      setUserProfile(res.profile);
+    } else {
+      // 팔로우 API
+      const res = await Follow(params.id);
+      setUserProfile(res.profile);
+    }
+  }
+
   return (
     <>
       <BasicHeader></BasicHeader>
@@ -82,26 +95,22 @@ export default function YourProfilecopy() {
             <FollowCount
               count={userProfile.followerCount}
               kind="followers"
-              onClick={goFollower}
-            ></FollowCount>
+              onClick={goFollower}></FollowCount>
             <ProfileImg
               size="110px"
               src={userProfile.image}
-              alt="profile image"
-            ></ProfileImg>
+              alt="profile image"></ProfileImg>
             <FollowCount
               count={userProfile.followingCount}
               kind="followings"
-              onClick={goFollowing}
-            ></FollowCount>
+              onClick={goFollowing}></FollowCount>
           </ProfileHeader>
 
           <ProfileMain>
             <UserInfoText
               userName={userProfile.username}
               userId={`@ ${params.id}`}
-              userDesc={userProfile.intro}
-            ></UserInfoText>
+              userDesc={userProfile.intro}></UserInfoText>
           </ProfileMain>
 
           <ProfileButton>
@@ -109,15 +118,15 @@ export default function YourProfilecopy() {
               <ImageButton
                 size="34px"
                 src="/assets/icon/icon-message-circle.png"
-                alt="message"
-              ></ImageButton>
+                alt="message"></ImageButton>
             </Link>
+            {/* 버튼이 클릭되었을 때 ~.isFollow가 true면 언팔로우 API, false면 팔로우API 실행 */}
             {userProfile.isfollow ? (
-              <CustomButton size="M" state="activ">
+              <CustomButton size="M" state="activ" onClick={changeFollow}>
                 언팔로우
               </CustomButton>
             ) : (
-              <CustomButton size="M" state="" onClick={fixFollow}>
+              <CustomButton size="M" state="" onClick={changeFollow}>
                 팔로우
               </CustomButton>
             )}
@@ -126,8 +135,7 @@ export default function YourProfilecopy() {
               <ImageButton
                 size="34px"
                 src="/assets/icon/icon-share.png"
-                alt="message"
-              ></ImageButton>
+                alt="message"></ImageButton>
             </Link>
           </ProfileButton>
         </YourProfileWrap>
