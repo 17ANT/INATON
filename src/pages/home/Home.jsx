@@ -82,7 +82,7 @@ export default function Home() {
           {postLists &&
             postLists.map((item) => (
               <li key={item.id}>
-                <HomePost data={postTest} />{' '}
+                <HomePost data={item} />
               </li>
             ))}
         </HomePostList>

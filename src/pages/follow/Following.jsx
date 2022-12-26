@@ -56,39 +56,9 @@ export default function Following() {
             <div key={index}>
               <InlineProfileFollow item={item} />
               {/* item의 id 값이 내 아이디랑 같을 떄는 출력하지 않는다 */}
-              
             </div>
           ))}
       </StyledInlineProfileInfo>
-
-      {/* <StyledInlineProfileInfo>
-        <div>
-          <InlineProfileInfo
-            name="야롱"
-            desc={'나는김지현이라네'}
-            state="follow"
-          />
-          <CustomButton size="s" state="activ">
-            취소
-          </CustomButton>
-        </div>
-        <div>
-          <InlineProfileInfo
-            name="팔로우"
-            desc={'사용자가 설정한 프로필 설명이 보이는 공간입니다.'}
-            state="follow"
-          />
-          <CustomButton size="s">팔로우</CustomButton>
-        </div>
-        <div>
-          <InlineProfileInfo
-            name="팔로우"
-            desc={'사용자가 설정한 프로필 설명이 보이는 공간입니다.'}
-            state="follow"
-          />
-          <CustomButton size="s">팔로우</CustomButton>
-        </div>
-      </StyledInlineProfileInfo> */}
       <NavBar />
     </>
   );
