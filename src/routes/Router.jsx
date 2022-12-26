@@ -35,11 +35,12 @@ export default function Router() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signup/profile" element={<SignupProfile />} />
 
+
           <Route path="/chatlist" element={<ChatList />} />
           <Route path="/login/email" element={<LoginEmail />} />
           <Route path="/chatroom" element={<ChatRoom />} />
           <Route path="/postupload" element={<PostUpload />} />
-          <Route path="/postdetail" element={<PostDetail />} />
+          <Route path="/post/:post_id" element={<PostDetail />} />
           <Route path="/myprofile" element={<MyProfile />} />
           <Route path="/yourprofile" element={<YourProfile />} />
           <Route path="/yourprofilecopy/:id" element={<YourProfilecopy />} />
@@ -49,6 +50,7 @@ export default function Router() {
           />
           <Route path="/follower" element={<Follower />} />
           <Route path="/following" element={<Following />} />
+
 
           <Route path="/test" element={<TestPage />} />
 
