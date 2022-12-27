@@ -1,10 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import ImgSlider from '../imgSlider/ImgSlider';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import doLike from './LikeAPI';
+import deleteLike from './DeleteLikeAPI';
+import PostDelete from '../../pages/postDetail/PostDeleteAPI';
 
 const PostContainer = styled.div`
   position: relative;
@@ -136,12 +139,13 @@ function dateChange(createdAt) {
 }
 
 export default function HomePost({ data, page }) {
+  const [likeState, setLikeState] = useState(data.hearted);
   const likeCnt = changeUnit(data.heartCount);
   const commentCnt = changeUnit(data.commentCount);
   const imgList = data.image ? data.image.split(',') : '';
   let swipeIndex = 0;
   const createDate = dateChange(data.createdAt);
-
+  const navigate = useNavigate();
   const handleSwipe = (e) => {
     // 이미지 스와이프 이벤트
     e.preventDefault();
@@ -157,25 +161,32 @@ export default function HomePost({ data, page }) {
   };
 
   const handlePostModal = (e) => {
-    //
     confirmAlert({
-      // message: '기본 이미지로 변경하시겠습니까?',
+      // message: '게시글을 편집하시겠습니까?',
       buttons: [
         {
           label: '수정',
           onClick: () => {
             console.log('수정');
+            navigate(`/post/${data.id}/modify`, {
+              state: data,
+            });
           },
         },
         {
           label: '삭제',
-          onClick: () => {
+          onClick: async () => {
             console.log('삭제');
+            const res = await PostDelete(data.id);
+            if (res.status === '200') {
+              window.location.replace(`/myprofile`);
+            }
           },
         },
       ],
     });
   };
+
   return (
     <>
       <PostContainer page={page}>
@@ -196,7 +207,12 @@ export default function HomePost({ data, page }) {
         </PostContents>
         <PostReaction>
           <button>
-            <img src={'/assets/icon/icon-heart.png'} alt="좋아요" />
+            {likeState && (
+              <img src={'/assets/icon/icon-heart.png'} alt="좋아요" />
+            )}
+            {!likeState && (
+              <img src={'/assets/icon/icon-heart-active.png'} alt="좋아요" />
+            )}
             {likeCnt}
           </button>
           <Link to={`/post/${data.id}`}>

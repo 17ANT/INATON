@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { BASE_URL } from '../../common/BASE_URL';
 import postImage from '../../common/ImageUploadAPI';
@@ -7,7 +7,9 @@ import UploadHeader from '../../components/header/UploadHeader';
 import ImagePreview from '../../components/imagePreview/ImagePreview';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UploadButton from '../../components/uploadButton/UploadButton';
-import uploadPost from './PostUploadAPI';
+import putPost from './PostModifyAPI';
+import getUser from '../myProfile/GetProfileAPI';
+import getPost from '../../common/GetPostDetail';
 
 const PostUploadMain = styled.main`
   width: 100%;
@@ -65,14 +67,28 @@ const ImageList = styled.ul`
   justify-content: start;
   gap: 8px;
 `;
+function strToList(img) {
+  const result = img.split(',');
+  return result;
+}
+export default function PostModify() {
+  const { state } = useLocation();
 
-export default function PostUpload() {
+  const params = useParams();
   const txtRef = useRef();
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+  const accountname = localStorage.getItem('accountname');
 
   const [image, setImage] = useState([]);
-  const [content, setContent] = useState('');
+  const [postData, setPostData] = useState({});
+  const [content, setContent] = useState([]);
   const [btnState, setBtnState] = useState('disabled');
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   useEffect(() => {
     // console.log(txtRef.current.value);
@@ -82,6 +98,7 @@ export default function PostUpload() {
       setBtnState('disabled');
     }
   }, [content]);
+
   // textarea 자동높이
   const handleResize = () => {
     txtRef.current.style.height = 'auto'; //height 초기화
@@ -89,13 +106,24 @@ export default function PostUpload() {
     setContent(txtRef.current.value);
   };
 
+  async function getData() {
+    const userInfo = await getUser(token, accountname);
+    setUser(userInfo.profile);
+    const postInfo = await getPost(params.post_id);
+    setPostData(postInfo.post);
+    setImage(strToList(postInfo.post.image));
+
+    if (accountname !== postInfo.post.author.accountname) {
+      navigate('/home');
+    }
+  }
+
   async function handleImg(e) {
     if (image.length === 3 && e.target.files) {
       alert('이미지는 3개까지 업로드 가능합니다.');
     } else if (e.target.files[0]) {
       // 이미지 데이터를 API를 이용하여 서버에 업로드
-      // console.log('url>', url);
-      // const res = await postImage(url);
+
       const res = await postImage(e.target.files[0]);
       if (res.message) {
         alert(res.message);
@@ -112,59 +140,62 @@ export default function PostUpload() {
         image: image.join(','),
       },
     };
-    uploadPost(post);
-    navigate('/myprofile');
+    putPost(post, params.post_id);
+    navigate(`/myprofile`);
   }
 
   const handleDelete = (e) => {
-    // console.log(e.target.previousSibling.src);
     setImage(image.filter((el) => el !== e.target.previousSibling.src));
   };
 
   return (
     <>
+      {/* 토큰검증 */}
       <UploadHeader
         state={btnState}
         onClick={() => {
           handleSubmit();
         }}
-        text="업로드"
+        text="수정"
       />
-      <PostUploadMain>
-        <h2 className="sr-only">게시글 작성</h2>
-        <ProfileImg size="42px" alt="프로필 이미지" />
-        <PostPreview>
-          <PostUploadForm>
-            <h3 className="sr-only">게시글을 입력해주세요</h3>
+      {user && (
+        <PostUploadMain>
+          <h2 className="sr-only">게시글 작성</h2>
+          <ProfileImg size="42px" alt="프로필 이미지" src={user.image} />
+          <PostPreview>
+            <PostUploadForm>
+              <h3 className="sr-only">게시글을 입력해주세요</h3>
 
-            <TextForm
-              ref={txtRef}
-              placeholder="게시글 입력하기..."
-              rows={1}
-              onChange={handleResize}></TextForm>
-            <UploadButton
-              radius="28px"
-              size="50px"
-              bg="var(--main-color)"
-              onChange={handleImg}
-            />
-          </PostUploadForm>
+              <TextForm
+                ref={txtRef}
+                placeholder="게시글 입력하기..."
+                rows={1}
+                onChange={handleResize}
+                defaultValue={postData.content}></TextForm>
+              <UploadButton
+                radius="28px"
+                size="50px"
+                bg="var(--main-color)"
+                onChange={handleImg}
+              />
+            </PostUploadForm>
 
-          <ImageSlider>
-            <ImageList>
-              {image &&
-                image.map((el, index) => (
-                  <ImagePreview
-                    size={image.length}
-                    src={el}
-                    key={index}
-                    onClick={handleDelete}
-                  />
-                ))}
-            </ImageList>
-          </ImageSlider>
-        </PostPreview>
-      </PostUploadMain>
+            <ImageSlider>
+              <ImageList>
+                {image &&
+                  image.map((el, index) => (
+                    <ImagePreview
+                      size={image.length}
+                      src={el}
+                      key={index}
+                      onClick={handleDelete}
+                    />
+                  ))}
+              </ImageList>
+            </ImageSlider>
+          </PostPreview>
+        </PostUploadMain>
+      )}
     </>
   );
 }

@@ -88,15 +88,17 @@ export default function PostDetail() {
   const params = useParams();
   const token = localStorage.getItem('token');
   const accountname = localStorage.getItem('accountname');
+
   const [userInfo, setUserInfo] = useState(null);
   const [postInfo, setPostInfo] = useState(null);
-  const [commentsValue, setCommentsValue] = useState('');
   const commentRef = useRef(null);
   const [commentsList, setCommentsList] = useState([]);
+  const [flag, setFlag] = useState();
 
   async function getData() {
     const userData = await getUser(token, accountname);
     setUserInfo(userData.user);
+   
   }
   async function getComments() {
     const postData = await getPost(params.post_id);
@@ -109,26 +111,22 @@ export default function PostDetail() {
     getData();
   }, []);
 
+  // 댓글 무한루프 수정해야함!
   useEffect(() => {
     getComments();
-  }, [commentsList]);
-
-  const handleCommentsValue = () => {
-    // 댓글창 값 다루기
-    setCommentsValue(commentRef.current.value);
-  };
+  }, [flag]);
 
   async function writeComments(e) {
     // 버튼 클릭 or 댓글 입력 후 엔터 이벤트시 댓글 작성
     e.preventDefault();
     const reqData = {
       comment: {
-        content: commentsValue,
+        content: commentRef.current.value,
       },
     };
     await CommentsWrite(params.post_id, reqData);
-    setCommentsValue('');
     commentRef.current.value = '';
+    setFlag((prev) => !prev);
   }
 
   return (
@@ -139,7 +137,9 @@ export default function PostDetail() {
           <HomePost data={postInfo} page="detail" />
           <CommentList>
             {commentsList &&
-              commentsList.map((el) => <Comment key={el.id} data={el} />)}
+              commentsList.map((el) => (
+                <Comment key={el.id} data={el} setFlag={setFlag} />
+              ))}
           </CommentList>
           <CommentWrite>
             {userInfo && (
@@ -153,7 +153,6 @@ export default function PostDetail() {
               <label htmlFor="inputComment" className="ir"></label>
               <input
                 ref={commentRef}
-                onChange={handleCommentsValue}
                 type="text"
                 placeholder="댓글 입력하기..."
                 id="inputComment"
