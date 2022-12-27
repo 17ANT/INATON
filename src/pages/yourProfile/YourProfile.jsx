@@ -9,7 +9,6 @@ import CustomButton from '../../components/customButton/CustomButton';
 import { ImgButton } from '../../components/imageButton/ImageButton';
 import NavBar from './../../components/navBar/NavBar';
 import getProfile from './ProfileAPI';
-import Follower from '../follow/Follower';
 import Follow from '../follow/FollowAPI';
 import UnFollow from '../follow/UnFollowAPI';
 import ProfileFeed from '../myProfile/MyProfileFeedAPI';

@@ -1,7 +1,6 @@
 import { BASE_URL } from './BASE_URL';
 
 async function getPost(post_id) {
-  console.log('searchUser');
   // console.log(BASE_URL);
   try {
     const token = localStorage.getItem('token');

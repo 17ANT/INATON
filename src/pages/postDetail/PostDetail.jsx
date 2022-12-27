@@ -7,8 +7,8 @@ import BasicHeader from '../../components/header/BasicHeader';
 import HomePost from '../../components/homePost/HomePost';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import getUser from '../myProfile/GetProfileAPI';
-import CommentsList from './CommentsListAPI';
-import CommentsWrite from './CommentsWriteAPI';
+import CommentsList from '../../components/comment/CommentsListAPI';
+import CommentsWrite from '../../components/comment/CommentsWriteAPI';
 
 const PostDetailMain = styled.main`
   position: relative;
@@ -95,12 +95,12 @@ export default function PostDetail() {
   const [commentsList, setCommentsList] = useState([]);
 
   async function getData() {
-    const postData = await getPost(params.post_id);
-    setPostInfo(postData.post);
     const userData = await getUser(token, accountname);
     setUserInfo(userData.user);
   }
   async function getComments() {
+    const postData = await getPost(params.post_id);
+    setPostInfo(postData.post);
     const commentData = await CommentsList(params.post_id);
     setCommentsList(commentData.comments);
   }
