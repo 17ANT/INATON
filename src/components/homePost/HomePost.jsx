@@ -141,11 +141,13 @@ function dateChange(createdAt) {
 export default function HomePost({ data, page }) {
   const [likeState, setLikeState] = useState(data.hearted);
   const likeCnt = changeUnit(data.heartCount);
+  const [likeCont, setLikeCont] = useState(likeCnt);
   const commentCnt = changeUnit(data.commentCount);
   const imgList = data.image ? data.image.split(',') : '';
   let swipeIndex = 0;
   const createDate = dateChange(data.createdAt);
   const navigate = useNavigate();
+
   const handleSwipe = (e) => {
     // 이미지 스와이프 이벤트
     e.preventDefault();
@@ -190,11 +192,13 @@ export default function HomePost({ data, page }) {
   const handleLike = async () => {
     if (!likeState) {
       await doLike(data.id);
-      setLikeState(data.hearted);
+      setLikeState((prev) => !prev);
+      setLikeCont((prev) => prev + 1);
     }
     if (likeState) {
       await deleteLike(data.id);
-      setLikeState(data.hearted);
+      setLikeState((prev) => !prev);
+      setLikeCont((prev) => prev - 1);
     }
   };
 
@@ -218,20 +222,27 @@ export default function HomePost({ data, page }) {
         </PostContents>
         <PostReaction>
           <button>
-            {!likeState && (
-              <img src={'/assets/icon/icon-heart.png'} alt="좋아요" onClick={handleLike}/>
+            {likeState ? (
+              <img
+                src={'/assets/icon/icon-heart-active.png'}
+                alt="좋아요"
+                onClick={handleLike}
+              />
+            ) : (
+              <img
+                src={'/assets/icon/icon-heart.png'}
+                alt="좋아요"
+                onClick={handleLike}
+              />
             )}
-            {likeState && (
-              <img src={'/assets/icon/icon-heart-active.png'} alt="좋아요" onClick={handleLike}/>
-            )}
-            {likeCnt}
+            {likeCont}
           </button>
           <Link to={`/post/${data.id}`}>
             <button>
               <img
                 src={'/assets/icon/icon-message-circle.png'}
                 alt="댓글 입력창으로 이동"
-              />{' '}
+              />
               {commentCnt}
             </button>
           </Link>
