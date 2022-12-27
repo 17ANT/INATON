@@ -8,9 +8,11 @@ import UserInfoText from '../../components/userInfoText/UserInfoText';
 import CustomButton from '../../components/customButton/CustomButton';
 import getMyProfile from '../../common/GetMyInfo';
 import NavBar from '../../components/navBar/NavBar';
+import ProfileFeed from './MyProfileFeedAPI';
+import FeedList from '../../components/feedList/FeedList';
 
 const MyProfileWrap = styled.div`
-  margin: 0 auto;
+  margin: 0 auto 16px;
   padding-top: 50px;
   width: 100%;
   min-width: 358px;
@@ -40,11 +42,16 @@ const ProfileButton = styled.div`
   text-align: center;
 `;
 
+const PostContainer = styled.div`
+  min-height: fit-content;
+  margin-bottom: 40px;
+`;
+
 export default function MyProfile() {
   const [myProfile, setMyProfile] = useState();
+  const [myFeed, setMyFeed] = useState([]);
   const navigate = useNavigate();
 
-  // const token = localStorage.getItem('token');
   const accountname = localStorage.getItem('accountname');
 
   useEffect(() => {
@@ -53,7 +60,14 @@ export default function MyProfile() {
       setMyProfile(myProfileData.user);
     }
     handleProfile();
+    getFeed();
   }, []);
+
+  async function getFeed() {
+    const res = await ProfileFeed(accountname);
+    setMyFeed(res.post);
+  }
+
   function goFollower() {
     navigate(`/profile/${accountname}/follower`);
   }
@@ -63,7 +77,7 @@ export default function MyProfile() {
   return (
     <>
       <BasicHeader></BasicHeader>
-      {myProfile ? (
+      {myProfile && (
         <MyProfileWrap>
           <ProfileHeader>
             <FollowCount
@@ -77,8 +91,7 @@ export default function MyProfile() {
             <FollowCount
               count={myProfile.followingCount}
               kind="followings"
-              onClick={goFollowing}
-              ></FollowCount>
+              onClick={goFollowing}></FollowCount>
           </ProfileHeader>
 
           <ProfileMain>
@@ -96,10 +109,13 @@ export default function MyProfile() {
             </Link>
           </ProfileButton>
         </MyProfileWrap>
-      ) : (
-        <></>
       )}
-      <NavBar/>
+      {/* 여긴가요?? */}
+      <PostContainer>
+        <FeedList posts={myFeed} />
+      </PostContainer>
+
+      <NavBar />
     </>
   );
 }

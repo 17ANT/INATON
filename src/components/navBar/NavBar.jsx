@@ -75,16 +75,14 @@ export default function NavBar() {
           <li className="home">
             <NavLink
               to="/home"
-              className={({ isActive }) => (isActive ? 'active' : '')}
-            >
+              className={({ isActive }) => (isActive ? 'active' : '')}>
               홈
             </NavLink>
           </li>
           <li className="chat">
             <NavLink
               to="/chatlist"
-              className={({ isActive }) => (isActive ? 'active' : '')}
-            >
+              className={({ isActive }) => (isActive ? 'active' : '')}>
               채팅
             </NavLink>
           </li>
@@ -94,8 +92,7 @@ export default function NavBar() {
           <li className="user">
             <NavLink
               to="/myprofile"
-              className={({ isActive }) => (isActive ? 'active' : '')}
-            >
+              className={({ isActive }) => (isActive ? 'active' : '')}>
               프로필
             </NavLink>
           </li>
