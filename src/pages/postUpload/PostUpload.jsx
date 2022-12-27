@@ -7,6 +7,7 @@ import UploadHeader from '../../components/header/UploadHeader';
 import ImagePreview from '../../components/imagePreview/ImagePreview';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UploadButton from '../../components/uploadButton/UploadButton';
+import getUser from '../myProfile/GetProfileAPI';
 import uploadPost from './PostUploadAPI';
 
 const PostUploadMain = styled.main`
@@ -69,10 +70,13 @@ const ImageList = styled.ul`
 export default function PostUpload() {
   const txtRef = useRef();
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+  const accountname = localStorage.getItem('accountname');
 
   const [image, setImage] = useState([]);
   const [content, setContent] = useState('');
   const [btnState, setBtnState] = useState('disabled');
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     // console.log(txtRef.current.value);
@@ -82,6 +86,16 @@ export default function PostUpload() {
       setBtnState('disabled');
     }
   }, [content]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function getData() {
+    const userInfo = await getUser(token, accountname);
+    setUser(userInfo.profile);
+  }
+
   // textarea 자동높이
   const handleResize = () => {
     txtRef.current.style.height = 'auto'; //height 초기화
@@ -132,7 +146,7 @@ export default function PostUpload() {
       />
       <PostUploadMain>
         <h2 className="sr-only">게시글 작성</h2>
-        <ProfileImg size="42px" alt="프로필 이미지" />
+        <ProfileImg size="42px" alt="프로필 이미지" src={user.image} />
         <PostPreview>
           <PostUploadForm>
             <h3 className="sr-only">게시글을 입력해주세요</h3>

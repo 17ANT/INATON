@@ -187,6 +187,17 @@ export default function HomePost({ data, page }) {
     });
   };
 
+  const handleLike = async () => {
+    if (!likeState) {
+      await doLike(data.id);
+      setLikeState(data.hearted);
+    }
+    if (likeState) {
+      await deleteLike(data.id);
+      setLikeState(data.hearted);
+    }
+  };
+
   return (
     <>
       <PostContainer page={page}>
@@ -207,11 +218,11 @@ export default function HomePost({ data, page }) {
         </PostContents>
         <PostReaction>
           <button>
-            {likeState && (
-              <img src={'/assets/icon/icon-heart.png'} alt="좋아요" />
-            )}
             {!likeState && (
-              <img src={'/assets/icon/icon-heart-active.png'} alt="좋아요" />
+              <img src={'/assets/icon/icon-heart.png'} alt="좋아요" onClick={handleLike}/>
+            )}
+            {likeState && (
+              <img src={'/assets/icon/icon-heart-active.png'} alt="좋아요" onClick={handleLike}/>
             )}
             {likeCnt}
           </button>
