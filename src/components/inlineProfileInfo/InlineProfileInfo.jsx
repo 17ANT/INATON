@@ -4,12 +4,10 @@ import ProfileImg from '../profileImg/ProfileImg';
 import { Link } from 'react-router-dom';
 
 const ProfileInfo = styled.div`
-  a {
-    width: fit-content;
-    display: flex;
-    gap: ${(props) => props.gap};
-    align-items: center;
-  }
+  width: fit-content;
+  display: flex;
+  gap: ${(props) => props.gap};
+  align-items: center;
 `;
 
 const ProfileText = styled.div`
@@ -98,13 +96,23 @@ export default function InlineProfileInfo({
 
   return (
     <ProfileInfo gap={gap}>
-      <Link to={`/yourprofile/${accountname}`}>
-        <ProfileImg src={img} alt="" size={size}></ProfileImg>
-        <ProfileText line={line} check={check}>
-          <strong>{name}</strong>
-          <p>{desc}</p>
-        </ProfileText>
-      </Link>
+      {check === 'CHAT' ? (
+        <>
+          <ProfileImg src={img} alt="" size={size}></ProfileImg>
+          <ProfileText line={line} check={check}>
+            <strong>{name}</strong>
+            <p>{desc}</p>
+          </ProfileText>
+        </>
+      ) : (
+        <Link to={`/yourprofile/${accountname}`}>
+          <ProfileImg src={img} alt="" size={size}></ProfileImg>
+          <ProfileText line={line} check={check}>
+            <strong>{name}</strong>
+            <p>{desc}</p>
+          </ProfileText>
+        </Link>
+      )}
     </ProfileInfo>
   );
 }

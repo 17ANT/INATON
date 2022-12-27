@@ -127,7 +127,7 @@ export default function YourProfile() {
           </ProfileMain>
 
           <ProfileButton>
-            <Link to="/">
+            <Link to="/chatroom">
               <ImageButton
                 size="34px"
                 src="/assets/icon/icon-message-circle.png"
