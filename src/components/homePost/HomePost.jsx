@@ -143,33 +143,50 @@ export default function HomePost({ data, page }) {
   const commentCnt = changeUnit(data.commentCount);
   const imgList = data.image ? data.image.split(',') : '';
   const createDate = dateChange(data.createdAt);
+  const accountname = localStorage.getItem('accountname');
+
   const navigate = useNavigate();
 
   const handlePostModal = (e) => {
-    confirmAlert({
-      // message: '게시글을 편집하시겠습니까?',
-      buttons: [
-        {
-          label: '수정',
-          onClick: () => {
-            console.log('수정');
-            navigate(`/post/${data.id}/modify`, {
-              state: data,
-            });
-          },
-        },
-        {
-          label: '삭제',
-          onClick: async () => {
-            console.log('삭제');
-            const res = await PostDelete(data.id);
-            if (res.status === '200') {
-              window.location.replace(`/myprofile`);
-            }
-          },
-        },
-      ],
-    });
+    data.author.accountname === accountname
+      ? confirmAlert({
+          // message: '게시글을 편집하시겠습니까?',
+          buttons: [
+            {
+              label: '수정',
+              onClick: () => {
+                console.log('수정');
+                navigate(`/post/${data.id}/modify`, {
+                  state: data,
+                });
+              },
+            },
+            {
+              label: '삭제',
+              onClick: async () => {
+                console.log('삭제');
+                const res = await PostDelete(data.id);
+                if (res.status === '200') {
+                  window.location.replace(`/myprofile`);
+                }
+              },
+            },
+          ],
+        })
+      : confirmAlert({
+          message: '게시글을 신고하시겠습니까?',
+          buttons: [
+            {
+              label: '신고',
+              onClick: () => {
+                console.log('신고하기');
+              },
+            },
+            {
+              label: '취소',
+            },
+          ],
+        });
   };
 
   const handleLike = async () => {
