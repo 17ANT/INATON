@@ -44,7 +44,6 @@ const TextForm = styled.textarea`
   font-size: 14px;
   line-height: 18px;
   white-space: break-all;
-
   ::placeholder {
     color: var(--sub-border);
   }
@@ -61,7 +60,6 @@ const ImageSlider = styled.div`
 
 const ImageList = styled.ul`
   width: 520px;
-
   display: flex;
   flex: 1 0 304px;
   justify-content: start;
