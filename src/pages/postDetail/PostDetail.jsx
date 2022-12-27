@@ -22,7 +22,7 @@ const PostDetailMain = styled.main`
 const CommentList = styled.ul`
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
   gap: 16px;
   border-top: 1px solid var(--border-color);
@@ -87,7 +87,7 @@ const CommentForm = styled.form`
 export default function PostDetail() {
   const params = useParams();
   const token = localStorage.getItem('token');
-  const accountname = localStorage.getItem('accountname')
+  const accountname = localStorage.getItem('accountname');
   const [userInfo, setUserInfo] = useState(null);
   const [postInfo, setPostInfo] = useState(null);
   const [commentInfo, setCommentInfo] = useState(null);
@@ -101,6 +101,8 @@ export default function PostDetail() {
     setPostInfo(postData.post);
     const userData = await getUser(token, accountname);
     setUserInfo(userData.user);
+    const commentData = await CommentsList(params.post_id);
+    setCommentsList(commentData.comments);
   }
 
   useEffect(() => {
@@ -109,17 +111,20 @@ export default function PostDetail() {
 
   const handleCommentsValue = () => {
     // 댓글창 값 다루기
-    console.log(commentRef.current.value);
     setCommentsValue(commentRef.current.value);
   };
 
   const writeComments = (e) => {
     // 버튼 클릭 or 댓글 입력 후 엔터 이벤트시 댓글 작성
     e.preventDefault();
-    CommentsWrite(commentsValue);
+    const reqData = {
+      comment: {
+        content: commentsValue,
+      },
+    };
+    CommentsWrite(params.post_id, reqData);
     setCommentsValue('');
     commentRef.current.value = '';
-    console.log(commentsValue);
   };
 
   return (
@@ -129,23 +134,8 @@ export default function PostDetail() {
         <PostDetailMain>
           <HomePost data={postInfo} page="detail" />
           <CommentList>
-            <Comment
-              name="서귀포시 무슨 농장"
-              time="5"
-              src="./assets/post-img-example.png">
-              게시글 답글 ~~ !! 최고최고
-            </Comment>
-            <Comment name="감귤러버" time="15" src="./assets/chat-exapmle.png">
-              안녕하세요. 사진이 너무 멋있어요. 한라봉 언제 먹을 수 있나요?
-              기다리기 지쳤어요 땡뻘땡뻘안녕하세요. 사진이 너무 멋있어요. 한라봉
-              언제 먹을 수 있나요? 기다리기 지쳤어요 땡뻘땡뻘
-            </Comment>
-            {/* {commentsList &&
-          commentsList.map((item) => (
-            <Comment key={item._id} time={item.createdA} src={item.author.image}>
-              {item.content}
-            </Comment>
-          ))} */}
+            {commentsList &&
+              commentsList.map((el) => <Comment key={el.id} data={el} />)}
           </CommentList>
           <CommentWrite>
             {userInfo && (
@@ -155,7 +145,7 @@ export default function PostDetail() {
                 src={userInfo.image}
               />
             )}
-            <CommentForm>
+            <CommentForm onSubmit={writeComments}>
               <label htmlFor="inputComment" className="ir"></label>
               <input
                 ref={commentRef}
@@ -165,14 +155,7 @@ export default function PostDetail() {
                 id="inputComment"
                 required
               />
-              {commentRef.current && (
-                <button
-                  type="submit"
-                  onClick={writeComments}
-                  active={commentRef.current.value ? 'active' : ''}>
-                  게시
-                </button>
-              )}
+              {commentRef.current && <button type="submit">게시</button>}
             </CommentForm>
           </CommentWrite>
         </PostDetailMain>
