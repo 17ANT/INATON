@@ -118,8 +118,7 @@ const MoreBtn = styled.button`
   right: 0px;
   width: 18px;
   height: 18px;
-  background: url('/assets/icon/icon-more-vertical.png') no-repeat center/18px
-    18px;
+  background: url('/assets/icon/icon-more-vertical.png') no-repeat center/18px 18px;
   border: none;
   cursor: pointer;
 `;
@@ -143,22 +142,8 @@ export default function HomePost({ data, page }) {
   const likeCnt = changeUnit(data.heartCount);
   const commentCnt = changeUnit(data.commentCount);
   const imgList = data.image ? data.image.split(',') : '';
-  let swipeIndex = 0;
   const createDate = dateChange(data.createdAt);
   const navigate = useNavigate();
-  const handleSwipe = (e) => {
-    // 이미지 스와이프 이벤트
-    e.preventDefault();
-    swipeIndex += 1;
-    if (swipeIndex > 2) {
-      swipeIndex = 0;
-    }
-    const position = -100 * swipeIndex;
-    const changeList = e.currentTarget.parentElement.childNodes;
-    changeList.forEach((el) => {
-      el.style.transform = `translateX(${position}%)`;
-    });
-  };
 
   const handlePostModal = (e) => {
     confirmAlert({
@@ -218,21 +203,13 @@ export default function HomePost({ data, page }) {
         </PostContents>
         <PostReaction>
           <button>
-            {!likeState && (
-              <img src={'/assets/icon/icon-heart.png'} alt="좋아요" onClick={handleLike}/>
-            )}
-            {likeState && (
-              <img src={'/assets/icon/icon-heart-active.png'} alt="좋아요" onClick={handleLike}/>
-            )}
+            {!likeState && <img src={'/assets/icon/icon-heart.png'} alt="좋아요" onClick={handleLike} />}
+            {likeState && <img src={'/assets/icon/icon-heart-active.png'} alt="좋아요" onClick={handleLike} />}
             {likeCnt}
           </button>
           <Link to={`/post/${data.id}`}>
             <button>
-              <img
-                src={'/assets/icon/icon-message-circle.png'}
-                alt="댓글 입력창으로 이동"
-              />{' '}
-              {commentCnt}
+              <img src={'/assets/icon/icon-message-circle.png'} alt="댓글 입력창으로 이동" /> {commentCnt}
             </button>
           </Link>
         </PostReaction>
