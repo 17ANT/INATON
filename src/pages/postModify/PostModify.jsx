@@ -65,10 +65,16 @@ const ImageList = styled.ul`
   justify-content: start;
   gap: 8px;
 `;
-function strToList(img) {
-  const result = img.split(',');
-  return result;
+
+function prepImage(img) {
+  if (img) {
+    const result = img.split(',');
+    return result;
+  } else {
+    return !!img;
+  }
 }
+
 export default function PostModify() {
   const params = useParams();
   const txtRef = useRef();
@@ -98,7 +104,6 @@ export default function PostModify() {
 
   // textarea 자동높이
   const handleResize = () => {
-    console.log('txtRef', txtRef.current.value);
     txtRef.current.style.height = 'auto'; //height 초기화
     txtRef.current.style.height = txtRef.current.scrollHeight + 'px';
     setContent(txtRef.current.value);
@@ -109,7 +114,11 @@ export default function PostModify() {
     setUser(userInfo.profile);
     const postInfo = await getPost(params.post_id);
     setPostData(postInfo.post);
-    setImage(strToList(postInfo.post.image));
+    if (prepImage(postInfo.post.image)) {
+      setImage(prepImage(postInfo.post.image));
+    } else {
+      console.log('이미지읎다', image);
+    }
 
     if (accountname !== postInfo.post.author.accountname) {
       navigate('/home');
