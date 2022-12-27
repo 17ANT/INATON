@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import ImgSlider from '../imgSlider/ImgSlider';
@@ -11,7 +11,13 @@ const PostContainer = styled.div`
   width: 358px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+  // 수정되어야 할 gap
+  ${(props) =>
+    props.page === 'detail' &&
+    css`
+      gap: 16px;
+    `}
 `;
 
 const PostContents = styled.div`
@@ -129,7 +135,7 @@ function dateChange(createdAt) {
   return `${year}년 ${month}월 ${date}일`;
 }
 
-export default function HomePost({ data }) {
+export default function HomePost({ data, page }) {
   const likeCnt = changeUnit(data.heartCount);
   const commentCnt = changeUnit(data.commentCount);
   const imgList = data.image ? data.image.split(',') : '';
@@ -172,11 +178,12 @@ export default function HomePost({ data }) {
   };
   return (
     <>
-      <PostContainer>
+      <PostContainer page={page}>
         <InlineProfileInfo
           accountname={data.author.accountname}
           name={data.author.username}
           desc={`@ ${data.author.accountname}`}
+          img={data.author.image}
           state="post"
         />
         <PostContents>

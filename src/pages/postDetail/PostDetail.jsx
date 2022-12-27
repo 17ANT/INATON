@@ -6,6 +6,7 @@ import Comment from '../../components/comment/Comment';
 import BasicHeader from '../../components/header/BasicHeader';
 import HomePost from '../../components/homePost/HomePost';
 import ProfileImg from '../../components/profileImg/ProfileImg';
+import getUser from '../myProfile/GetProfileAPI';
 import CommentsList from './CommentsListAPI';
 import CommentsWrite from './CommentsWriteAPI';
 
@@ -85,6 +86,9 @@ const CommentForm = styled.form`
 
 export default function PostDetail() {
   const params = useParams();
+  const token = localStorage.getItem('token');
+  const accountname = localStorage.getItem('accountname')
+  const [userInfo, setUserInfo] = useState(null);
   const [postInfo, setPostInfo] = useState(null);
   const [commentInfo, setCommentInfo] = useState(null);
 
@@ -95,6 +99,8 @@ export default function PostDetail() {
   async function getData(post_id) {
     const postData = await getPost(params.post_id);
     setPostInfo(postData.post);
+    const userData = await getUser(token, accountname);
+    setUserInfo(userData.user);
   }
 
   useEffect(() => {
@@ -116,27 +122,23 @@ export default function PostDetail() {
     console.log(commentsValue);
   };
 
-  async function test() {
-    // 댓글 리스트 불러오기
-    const comments = await CommentsList();
-    console.log(comments);
-    // setCommentsList(comments);
-  }
-  // test();
-
   return (
     <>
       <BasicHeader />
       {postInfo && (
         <PostDetailMain>
-          <HomePost data={postInfo} />
+          <HomePost data={postInfo} page="detail" />
           <CommentList>
-            <Comment name="서귀포시 무슨 농장" time="5" src="./assets/post-img-example.png">
+            <Comment
+              name="서귀포시 무슨 농장"
+              time="5"
+              src="./assets/post-img-example.png">
               게시글 답글 ~~ !! 최고최고
             </Comment>
             <Comment name="감귤러버" time="15" src="./assets/chat-exapmle.png">
-              안녕하세요. 사진이 너무 멋있어요. 한라봉 언제 먹을 수 있나요? 기다리기 지쳤어요 땡뻘땡뻘안녕하세요. 사진이
-              너무 멋있어요. 한라봉 언제 먹을 수 있나요? 기다리기 지쳤어요 땡뻘땡뻘
+              안녕하세요. 사진이 너무 멋있어요. 한라봉 언제 먹을 수 있나요?
+              기다리기 지쳤어요 땡뻘땡뻘안녕하세요. 사진이 너무 멋있어요. 한라봉
+              언제 먹을 수 있나요? 기다리기 지쳤어요 땡뻘땡뻘
             </Comment>
             {/* {commentsList &&
           commentsList.map((item) => (
@@ -146,8 +148,13 @@ export default function PostDetail() {
           ))} */}
           </CommentList>
           <CommentWrite>
-            <ProfileImg size="36px" alt="프로필 이미지" src={postInfo.author.image} />
-
+            {userInfo && (
+              <ProfileImg
+                size="36px"
+                alt="프로필 이미지"
+                src={userInfo.image}
+              />
+            )}
             <CommentForm>
               <label htmlFor="inputComment" className="ir"></label>
               <input
@@ -159,7 +166,10 @@ export default function PostDetail() {
                 required
               />
               {commentRef.current && (
-                <button type="submit" onClick={writeComments} active={commentRef.current.value ? 'active' : ''}>
+                <button
+                  type="submit"
+                  onClick={writeComments}
+                  active={commentRef.current.value ? 'active' : ''}>
                   게시
                 </button>
               )}

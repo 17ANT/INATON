@@ -6,6 +6,7 @@ import CustomButton from '../../components/customButton/CustomButton';
 import CustomMainHeader from '../../components/header/CustomMainHeader';
 import Feed from './FeedAPI';
 import getMyProfile from '../../common/GetMyInfo';
+import FeedList from '../../components/feedList/FeedList';
 
 const Container = styled.div`
   display: flex;
@@ -13,14 +14,6 @@ const Container = styled.div`
   align-items: center;
   padding: 68px 0 90px;
   min-height: 100vh;
-  box-sizing: border-box;
-`;
-
-const HomePostList = styled.ul`
-  min-height: calc(100vh - 158px);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
 `;
 
 const NoneFollowSection = styled.div`
@@ -67,14 +60,7 @@ export default function Home() {
       {userData &&
         (userData.followingCount > 0 ? (
           // 팔로우가 있는경우
-          <HomePostList>
-            {postLists &&
-              postLists.map((item) => (
-                <li key={item.id}>
-                  <HomePost data={item} />
-                </li>
-              ))}
-          </HomePostList>
+          <FeedList posts={postLists}/>
         ) : (
           // 팔로우가 없는 경우
           <>
