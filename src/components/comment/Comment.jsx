@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
@@ -6,12 +6,15 @@ import CommentsDelete from './CommentsDeleteAPI';
 import CommentReport from './CommentReportAPI';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+
 const CommentContainer = styled.li`
   position: relative;
   width: 358px;
 `;
 
 const CommentContent = styled.p`
+  width: 358px;
+  word-break: break-word;
   margin-left: 48px;
   margin-right: 18px;
   font-weight: 400;
@@ -67,7 +70,7 @@ const timeCheck = (val) => {
   return result;
 };
 
-export default function Comment({ data }) {
+export default function Comment({ data, setFlag }) {
   const params = useParams();
 
   const myAcc = localStorage.getItem('accountname');
@@ -81,6 +84,7 @@ export default function Comment({ data }) {
             label: '삭제',
             onClick: () => {
               CommentsDelete(params.post_id, data.id);
+              setFlag((prev) => !prev);
             },
           },
           {
@@ -105,7 +109,9 @@ export default function Comment({ data }) {
       });
     }
   };
+
   const timeResult = timeCheck(data.createdAt);
+
   return (
     <CommentContainer>
       <InlineProfileInfo

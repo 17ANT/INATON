@@ -20,6 +20,7 @@ import Following from './../pages/follow/Following';
 import SignupProfile from '../pages/signup/SignupProfile';
 import { SignupContextProvider } from '../Contexts/SignupContext';
 import TestPage from '../pages/testPage/TestPage';
+import PostModify from '../pages/postModify/PostModify';
 
 export default function Router() {
   return (
@@ -38,6 +39,7 @@ export default function Router() {
           <Route path="/login/email" element={<LoginEmail />} />
           <Route path="/chatroom" element={<ChatRoom />} />
           <Route path="/postupload" element={<PostUpload />} />
+          <Route path="/post/:post_id/modify" element={<PostModify />} />
           <Route path="/post/:post_id" element={<PostDetail />} />
           <Route path="/myprofile" element={<MyProfile />} />
           <Route path="/yourprofile/:id" element={<YourProfile />} />
