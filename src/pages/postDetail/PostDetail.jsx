@@ -90,17 +90,17 @@ export default function PostDetail() {
   const accountname = localStorage.getItem('accountname');
   const [userInfo, setUserInfo] = useState(null);
   const [postInfo, setPostInfo] = useState(null);
-  const [commentInfo, setCommentInfo] = useState(null);
-
   const [commentsValue, setCommentsValue] = useState('');
   const commentRef = useRef(null);
   const [commentsList, setCommentsList] = useState([]);
 
-  async function getData(post_id) {
+  async function getData() {
     const postData = await getPost(params.post_id);
     setPostInfo(postData.post);
     const userData = await getUser(token, accountname);
     setUserInfo(userData.user);
+  }
+  async function getComments() {
     const commentData = await CommentsList(params.post_id);
     setCommentsList(commentData.comments);
   }
@@ -109,12 +109,16 @@ export default function PostDetail() {
     getData();
   }, []);
 
+  useEffect(() => {
+    getComments();
+  }, [commentsList]);
+
   const handleCommentsValue = () => {
     // 댓글창 값 다루기
     setCommentsValue(commentRef.current.value);
   };
 
-  const writeComments = (e) => {
+  async function writeComments(e) {
     // 버튼 클릭 or 댓글 입력 후 엔터 이벤트시 댓글 작성
     e.preventDefault();
     const reqData = {
@@ -122,10 +126,10 @@ export default function PostDetail() {
         content: commentsValue,
       },
     };
-    CommentsWrite(params.post_id, reqData);
+    await CommentsWrite(params.post_id, reqData);
     setCommentsValue('');
     commentRef.current.value = '';
-  };
+  }
 
   return (
     <>
