@@ -31,11 +31,11 @@ const ImgItem = styled.li`
 
 const DotsContainer = styled.div`
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 100%;
   bottom: 12px;
 
   display: flex;
+  justify-content: center;
   flex: 0 0 6px;
   gap: 6px;
   z-index: 5;
@@ -61,13 +61,15 @@ export default function ImgSlider({ images }) {
   const [showIndex, setShowIndex] = useState(0);
   const dotsRef = useRef(null);
 
-  // useEffect(() => {
-  //   const dotsRefList = dotsRef.current.childNodes;
-  //   dotsRefList.forEach((el) => {
-  //     el.active = false;
-  //   });
-  //   dotsRefList[showIndex]['active'] = true;
-  // }, [showIndex]);
+  useEffect(() => {
+    if (dotsRef.current && dotsRef.current.hasChildNodes()) {
+      const dotsRefList = dotsRef.current.childNodes;
+      dotsRefList.forEach((el) => {
+        el.active = false;
+      });
+      dotsRefList[showIndex]['active'] = true;
+    }
+  }, [showIndex]);
 
   const handleDots = (e) => {
     const dotsList = Array.from(dotsRef.current.childNodes);
@@ -85,16 +87,13 @@ export default function ImgSlider({ images }) {
               </ImgItem>
             ))}
           </ImgContainer>
-          {/* {images.length > 1 && (
+          {images.length > 1 && (
             <DotsContainer ref={dotsRef}>
               {images.map((el, idx) => (
-                <Dots
-                  key={idx}
-                  active={showIndex === idx}
-                  onClick={handleDots}></Dots>
+                <Dots key={idx} active={showIndex === idx} onClick={handleDots}></Dots>
               ))}
             </DotsContainer>
-          )} */}
+          )}
         </Slider>
       )}
     </>
