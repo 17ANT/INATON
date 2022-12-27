@@ -70,8 +70,6 @@ function strToList(img) {
   return result;
 }
 export default function PostModify() {
-  const { state } = useLocation();
-
   const params = useParams();
   const txtRef = useRef();
   const navigate = useNavigate();
@@ -90,6 +88,7 @@ export default function PostModify() {
 
   useEffect(() => {
     // console.log(txtRef.current.value);
+    handleResize();
     if (content) {
       setBtnState('');
     } else {
@@ -99,6 +98,7 @@ export default function PostModify() {
 
   // textarea 자동높이
   const handleResize = () => {
+    console.log('txtRef', txtRef.current.value);
     txtRef.current.style.height = 'auto'; //height 초기화
     txtRef.current.style.height = txtRef.current.scrollHeight + 'px';
     setContent(txtRef.current.value);
@@ -114,6 +114,7 @@ export default function PostModify() {
     if (accountname !== postInfo.post.author.accountname) {
       navigate('/home');
     }
+    setContent(postInfo.post.content);
   }
 
   async function handleImg(e) {
@@ -169,25 +170,16 @@ export default function PostModify() {
                 placeholder="게시글 입력하기..."
                 rows={1}
                 onChange={handleResize}
-                defaultValue={postData.content}></TextForm>
-              <UploadButton
-                radius="28px"
-                size="50px"
-                bg="var(--main-color)"
-                onChange={handleImg}
-              />
+                value={content}
+              ></TextForm>
+              <UploadButton radius="28px" size="50px" bg="var(--main-color)" onChange={handleImg} />
             </PostUploadForm>
 
             <ImageSlider>
               <ImageList>
                 {image &&
                   image.map((el, index) => (
-                    <ImagePreview
-                      size={image.length}
-                      src={el}
-                      key={index}
-                      onClick={handleDelete}
-                    />
+                    <ImagePreview size={image.length} src={el} key={index} onClick={handleDelete} />
                   ))}
               </ImageList>
             </ImageSlider>
