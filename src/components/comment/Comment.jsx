@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
-import { BASE_URL } from '../../common/BASE_URL';
+import CommentsDelete from './CommentsDeleteAPI';
 
 const CommentContainer = styled.li`
   position: relative;
@@ -27,10 +27,6 @@ const MoreBtn = styled.button`
   background: url('/assets/icon/icon-more-vertical.png') no-repeat center/20px;
   border: none;
   cursor: pointer;
-`;
-
-const ProfileLink = styled(Link)`
-  width: fit-content;
 `;
 
 const timeCheck = (val) => {
@@ -70,11 +66,22 @@ const timeCheck = (val) => {
 };
 
 export default function Comment({ data }) {
-  //   if (data.length === 0) {
-  //     return <></>;
-  //   }else{
+  const params = useParams();
 
-  //   }
+  const myAcc = localStorage.getItem('accountname');
+
+  const handleMore = () => {
+    if (data.author.accountname === myAcc) {
+      const quer = window.confirm('삭제하시겠습니까?');
+      if (quer) {
+        const post_id = params.post_id;
+        const comment_id = data.id;
+        CommentsDelete(post_id, comment_id);
+      }
+    } else {
+      const report = window.confirm('신고하시겠습니까?');
+    }
+  };
 
   const timeResult = timeCheck(data.createdAt);
   return (
@@ -88,7 +95,7 @@ export default function Comment({ data }) {
       />
 
       <CommentContent>{data.content}</CommentContent>
-      <MoreBtn type="button">
+      <MoreBtn type="button" onClick={handleMore}>
         <span className="sr-only">더보기</span>
       </MoreBtn>
     </CommentContainer>
