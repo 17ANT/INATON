@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
 import CommentsDelete from './CommentsDeleteAPI';
-
+import CommentReport from './CommentReportAPI';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 const CommentContainer = styled.li`
   position: relative;
   width: 358px;
@@ -72,17 +74,37 @@ export default function Comment({ data }) {
 
   const handleMore = () => {
     if (data.author.accountname === myAcc) {
-      const quer = window.confirm('삭제하시겠습니까?');
-      if (quer) {
-        const post_id = params.post_id;
-        const comment_id = data.id;
-        CommentsDelete(post_id, comment_id);
-      }
+      confirmAlert({
+        message: '댓글을 삭제하시겠습니까?',
+        buttons: [
+          {
+            label: '삭제',
+            onClick: () => {
+              CommentsDelete(params.post_id, data.id);
+            },
+          },
+          {
+            label: '취소',
+          },
+        ],
+      });
     } else {
-      const report = window.confirm('신고하시겠습니까?');
+      confirmAlert({
+        message: '댓글을 신고하시겠습니까',
+        buttons: [
+          {
+            label: '신고',
+            onClick: () => {
+              CommentReport(params.post_id, data.id);
+            },
+          },
+          {
+            label: '취소',
+          },
+        ],
+      });
     }
   };
-
   const timeResult = timeCheck(data.createdAt);
   return (
     <CommentContainer>
