@@ -8,6 +8,11 @@ const ProfileInfo = styled.div`
   display: flex;
   gap: ${(props) => props.gap};
   align-items: center;
+  a {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
 `;
 
 const ProfileText = styled.div`
