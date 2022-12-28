@@ -39,12 +39,12 @@ export default function Following() {
 
   useEffect(() => {
     async function setFollowingList() {
-      const followingList = await getFollowing(params.id);
+      const followingList = await getFollowing(params.accountname);
       setFollowings(followingList);
     }
 
     setFollowingList();
-  }, [params.id]);
+  }, [params.accountname]);
 
   return (
     <>

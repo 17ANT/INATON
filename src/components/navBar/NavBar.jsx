@@ -91,7 +91,7 @@ export default function NavBar() {
           </li>
           <li className="user">
             <NavLink
-              to="/myprofile"
+              to="/profile"
               className={({ isActive }) => (isActive ? 'active' : '')}>
               프로필
             </NavLink>
