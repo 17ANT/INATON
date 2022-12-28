@@ -66,22 +66,19 @@ const CommentForm = styled.form`
       outline: none;
     }
   }
+`;
 
-  button {
-    margin-left: auto;
-    background: transparent;
-    border: none;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
-    color: var(--sub-border);
-    cursor: pointer;
-    ${(props) =>
-      props.active &&
-      css`
-        background-color: var(--error-color);
-      `}
-  }
+const CommentButton = styled.button`
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  /* color: ${(props) => (props.btnactiv ? 'var(--font-color)' : 'var( --sub-border)')}; //진한초록 */
+  /* color: ${(props) => (props.btnactiv ? 'var(--main-color)' : 'var( --sub-border)')}; //메인컬러 */
+  color: ${(props) => (props.btnactiv ? 'var(--error-color)' : 'var( --sub-border)')}; //경고
+  cursor: ${(props) => props.btnactiv && 'pointer'};
 `;
 
 export default function PostDetail() {
@@ -94,11 +91,11 @@ export default function PostDetail() {
   const commentRef = useRef(null);
   const [commentsList, setCommentsList] = useState([]);
   const [flag, setFlag] = useState();
+  const [btnState, setBtnState] = useState(false);
 
   async function getData() {
     const userData = await getUser(token, accountname);
     setUserInfo(userData.user);
-   
   }
   async function getComments() {
     const postData = await getPost(params.post_id);
@@ -111,7 +108,6 @@ export default function PostDetail() {
     getData();
   }, []);
 
-  // 댓글 무한루프 수정해야함!
   useEffect(() => {
     getComments();
   }, [flag]);
@@ -129,6 +125,15 @@ export default function PostDetail() {
     setFlag((prev) => !prev);
   }
 
+  const handleInput = () => {
+    if (commentRef.current.value) {
+      setBtnState(true);
+    } else {
+      setBtnState(false);
+    }
+    console.log('activ >');
+  };
+
   return (
     <>
       <BasicHeader />
@@ -136,29 +141,25 @@ export default function PostDetail() {
         <PostDetailMain>
           <HomePost data={postInfo} page="detail" />
           <CommentList>
-            {commentsList &&
-              commentsList.map((el) => (
-                <Comment key={el.id} data={el} setFlag={setFlag} />
-              ))}
+            {commentsList && commentsList.map((el) => <Comment key={el.id} data={el} setFlag={setFlag} />)}
           </CommentList>
           <CommentWrite>
-            {userInfo && (
-              <ProfileImg
-                size="36px"
-                alt="프로필 이미지"
-                src={userInfo.image}
-              />
-            )}
+            {userInfo && <ProfileImg size="36px" alt="프로필 이미지" src={userInfo.image} />}
             <CommentForm onSubmit={writeComments}>
               <label htmlFor="inputComment" className="ir"></label>
               <input
                 ref={commentRef}
+                onChange={handleInput}
                 type="text"
                 placeholder="댓글 입력하기..."
                 id="inputComment"
                 required
               />
-              {commentRef.current && <button type="submit">게시</button>}
+              {commentRef.current && (
+                <CommentButton type="submit" btnactiv={btnState}>
+                  게시
+                </CommentButton>
+              )}
             </CommentForm>
           </CommentWrite>
         </PostDetailMain>

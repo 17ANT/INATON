@@ -118,8 +118,7 @@ const MoreBtn = styled.button`
   right: 0px;
   width: 18px;
   height: 18px;
-  background: url('/assets/icon/icon-more-vertical.png') no-repeat center/18px
-    18px;
+  background: url('/assets/icon/icon-more-vertical.png') no-repeat center/18px 18px;
   border: none;
   cursor: pointer;
 `;
@@ -144,49 +143,51 @@ export default function HomePost({ data, page }) {
   const [likeCont, setLikeCont] = useState(likeCnt);
   const commentCnt = changeUnit(data.commentCount);
   const imgList = data.image ? data.image.split(',') : '';
-  let swipeIndex = 0;
   const createDate = dateChange(data.createdAt);
+  const accountname = localStorage.getItem('accountname');
+
   const navigate = useNavigate();
 
-  const handleSwipe = (e) => {
-    // 이미지 스와이프 이벤트
-    e.preventDefault();
-    swipeIndex += 1;
-    if (swipeIndex > 2) {
-      swipeIndex = 0;
-    }
-    const position = -100 * swipeIndex;
-    const changeList = e.currentTarget.parentElement.childNodes;
-    changeList.forEach((el) => {
-      el.style.transform = `translateX(${position}%)`;
-    });
-  };
-
   const handlePostModal = (e) => {
-    confirmAlert({
-      // message: '게시글을 편집하시겠습니까?',
-      buttons: [
-        {
-          label: '수정',
-          onClick: () => {
-            console.log('수정');
-            navigate(`/post/${data.id}/modify`, {
-              state: data,
-            });
-          },
-        },
-        {
-          label: '삭제',
-          onClick: async () => {
-            console.log('삭제');
-            const res = await PostDelete(data.id);
-            if (res.status === '200') {
-              window.location.replace(`/myprofile`);
-            }
-          },
-        },
-      ],
-    });
+    data.author.accountname === accountname
+      ? confirmAlert({
+          // message: '게시글을 편집하시겠습니까?',
+          buttons: [
+            {
+              label: '수정',
+              onClick: () => {
+                console.log('수정');
+                navigate(`/post/${data.id}/modify`, {
+                  state: data,
+                });
+              },
+            },
+            {
+              label: '삭제',
+              onClick: async () => {
+                console.log('삭제');
+                const res = await PostDelete(data.id);
+                if (res.status === '200') {
+                  window.location.replace(`/myprofile`);
+                }
+              },
+            },
+          ],
+        })
+      : confirmAlert({
+          message: '게시글을 신고하시겠습니까?',
+          buttons: [
+            {
+              label: '신고',
+              onClick: () => {
+                console.log('신고하기');
+              },
+            },
+            {
+              label: '취소',
+            },
+          ],
+        });
   };
 
   const handleLike = async () => {

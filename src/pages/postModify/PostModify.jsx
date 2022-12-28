@@ -65,13 +65,17 @@ const ImageList = styled.ul`
   justify-content: start;
   gap: 8px;
 `;
-function strToList(img) {
-  const result = img.split(',');
-  return result;
-}
-export default function PostModify() {
-  const { state } = useLocation();
 
+function prepImage(img) {
+  if (img) {
+    const result = img.split(',');
+    return result;
+  } else {
+    return !!img;
+  }
+}
+
+export default function PostModify() {
   const params = useParams();
   const txtRef = useRef();
   const navigate = useNavigate();
@@ -90,6 +94,7 @@ export default function PostModify() {
 
   useEffect(() => {
     // console.log(txtRef.current.value);
+    handleResize();
     if (content) {
       setBtnState('');
     } else {
@@ -109,11 +114,16 @@ export default function PostModify() {
     setUser(userInfo.profile);
     const postInfo = await getPost(params.post_id);
     setPostData(postInfo.post);
-    setImage(strToList(postInfo.post.image));
+    if (prepImage(postInfo.post.image)) {
+      setImage(prepImage(postInfo.post.image));
+    } else {
+      console.log('이미지읎다', image);
+    }
 
     if (accountname !== postInfo.post.author.accountname) {
       navigate('/home');
     }
+    setContent(postInfo.post.content);
   }
 
   async function handleImg(e) {
@@ -169,25 +179,16 @@ export default function PostModify() {
                 placeholder="게시글 입력하기..."
                 rows={1}
                 onChange={handleResize}
-                defaultValue={postData.content}></TextForm>
-              <UploadButton
-                radius="28px"
-                size="50px"
-                bg="var(--main-color)"
-                onChange={handleImg}
-              />
+                value={content}
+              ></TextForm>
+              <UploadButton radius="28px" size="50px" bg="var(--main-color)" onChange={handleImg} />
             </PostUploadForm>
 
             <ImageSlider>
               <ImageList>
                 {image &&
                   image.map((el, index) => (
-                    <ImagePreview
-                      size={image.length}
-                      src={el}
-                      key={index}
-                      onClick={handleDelete}
-                    />
+                    <ImagePreview size={image.length} src={el} key={index} onClick={handleDelete} />
                   ))}
               </ImageList>
             </ImageSlider>
