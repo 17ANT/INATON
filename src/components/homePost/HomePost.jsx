@@ -8,6 +8,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import doLike from './LikeAPI';
 import deleteLike from './DeleteLikeAPI';
 import PostDelete from '../../pages/postDetail/PostDeleteAPI';
+import postReport from './PostReportAPI';
 
 const PostContainer = styled.div`
   position: relative;
@@ -118,7 +119,8 @@ const MoreBtn = styled.button`
   right: 0px;
   width: 18px;
   height: 18px;
-  background: url('/assets/icon/icon-more-vertical.png') no-repeat center/18px 18px;
+  background: url('/assets/icon/icon-more-vertical.png') no-repeat center/18px
+    18px;
   border: none;
   cursor: pointer;
 `;
@@ -179,8 +181,8 @@ export default function HomePost({ data, page }) {
           buttons: [
             {
               label: '신고',
-              onClick: () => {
-                console.log('신고하기');
+              onClick: async () => {
+                await postReport(data.id);
               },
             },
             {
@@ -226,7 +228,7 @@ export default function HomePost({ data, page }) {
             {likeState ? (
               <img
                 src={'/assets/icon/icon-heart-active.png'}
-                alt="좋아요"
+                alt="좋아요 취소"
                 onClick={handleLike}
               />
             ) : (

@@ -13,8 +13,8 @@ const CommentContainer = styled.li`
 `;
 
 const CommentContent = styled.p`
-  width: 358px;
-  word-break: break-word;
+  width: 300px; 
+  word-break: break-all; 
   margin-left: 48px;
   margin-right: 18px;
   font-weight: 400;
