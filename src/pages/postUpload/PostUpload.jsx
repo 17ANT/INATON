@@ -127,7 +127,7 @@ export default function PostUpload() {
       },
     };
     uploadPost(post);
-    navigate('/myprofile');
+    navigate('/profile');
   }
 
   const handleDelete = (e) => {

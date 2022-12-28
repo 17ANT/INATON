@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { confirmAlert } from 'react-confirm-alert';
 import BasicHeader from '../../components/header/BasicHeader';
 import FollowCount from '../../components/followCount/FollowCount';
 import ProfileImg from '../../components/profileImg/ProfileImg';
@@ -16,7 +18,7 @@ const MyProfileWrap = styled.div`
   padding-top: 50px;
   width: 100%;
   min-width: 358px;
-  border-bottom: 6px solid var(--border-color);
+  border-bottom: 3px solid var(--border-color);
 `;
 
 const ProfileHeader = styled.div`
@@ -74,9 +76,28 @@ export default function MyProfile() {
   function goFollowing() {
     navigate(`/profile/${accountname}/following`);
   }
+  function logout() {
+    // confirm창 띄우기
+    confirmAlert({
+      message: '로그아웃 하시겠습니까?',
+      buttons: [
+        {
+          label: '로그아웃',
+          onClick: () => {
+            localStorage.removeItem('accountname');
+            localStorage.removeItem('token');
+            navigate('/login');
+          },
+        },
+        {
+          label: '취소',
+        },
+      ],
+    });
+  }
   return (
     <>
-      <BasicHeader></BasicHeader>
+      <BasicHeader onClick={logout}></BasicHeader>
       {myProfile && (
         <MyProfileWrap>
           <ProfileHeader>

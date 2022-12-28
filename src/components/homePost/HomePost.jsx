@@ -151,10 +151,17 @@ export default function HomePost({ data, page }) {
   const navigate = useNavigate();
 
   const handlePostModal = (e) => {
+    let isDelete = false;
     data.author.accountname === accountname
       ? confirmAlert({
-          // message: '게시글을 편집하시겠습니까?',
+          message: '게시글을 편집하시겠습니까?',
           buttons: [
+            {
+              label: '삭제',
+              onClick: () => {
+                isDelete = true;
+              }
+            },
             {
               label: '수정',
               onClick: () => {
@@ -164,17 +171,30 @@ export default function HomePost({ data, page }) {
                 });
               },
             },
-            {
-              label: '삭제',
-              onClick: async () => {
-                console.log('삭제');
-                const res = await PostDelete(data.id);
-                if (res.status === '200') {
-                  window.location.replace(`/myprofile`);
-                }
-              },
-            },
           ],
+          afterClose: () => {
+            if (isDelete) {
+              confirmAlert({
+                message: '삭제하시겠습니까?',
+                buttons: [
+                  {
+                    label: '삭제',
+                    onClick: async () => {
+                      console.log('삭제');
+                      const res = await PostDelete(data.id);
+                      console.log(res.status);
+                      if (res.status === '200') {
+                        window.location.replace(`/profile`);
+                      }
+                    }
+                  },
+                  {
+                    label: '취소'
+                  },
+                ]
+              });
+            }
+          }
         })
       : confirmAlert({
           message: '게시글을 신고하시겠습니까?',

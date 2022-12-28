@@ -13,6 +13,7 @@ import CommentsWrite from '../../components/comment/CommentsWriteAPI';
 const PostDetailMain = styled.main`
   position: relative;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   align-items: center;
   padding: 68px 0 82px;

@@ -70,8 +70,6 @@ export default function YourProfile() {
     async function handleProfile() {
       const userProfileData = await getProfile(params.accountname);
       setUserProfile(userProfileData.profile);
-      // userProfileData.profile.accountname === accountname &&
-      //   navigate('/myprofile');
     }
     handleProfile();
     getFeed();

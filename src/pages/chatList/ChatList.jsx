@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import NavBar from '../../components/navBar/NavBar';
 import BasicHeader from './../../components/header/BasicHeader';
@@ -36,44 +37,47 @@ const ChatItem = styled.li`
 `;
 
 export default function ChatList() {
+  const navigate = useNavigate();
+  function movetoChatroom() {
+    navigate(`/chatroom`);
+  }
   return (
     <>
       <BasicHeader />
       <ChatMain>
-        <ChatItem>
+        <ChatItem onClick={movetoChatroom}>
           {/* 넹 여기는 그냥 두겠습니다! */}
           <InlineProfileInfo
             img="./assets/basic-profile-img.png"
-            name="채팅"
-            desc="난 지금 행복해 그래서 불안해 폭풍 전 바다는 늘 고요하니까"
+            name="피카피카"
+            desc="새해 복 많이 받으세요"
             state="chat"
           />
-          <span>2022-12-18</span>
+          <span>2023-01-01</span>
         </ChatItem>
-        <ChatItem>
+        <ChatItem onClick={movetoChatroom}>
           <InlineProfileInfo
             img="./assets/post-img-example.png"
-            name="채팅"
-            desc="불이 붙어 빨리 타면 안 되잖아
-            나는 사랑을 응원해"
+            name="멋진사자"
+            desc="아 집에 가고싶다"
             state="chat"
           />
           <span>2022-12-18</span>
         </ChatItem>
-        <ChatItem>
+        <ChatItem onClick={movetoChatroom}>
           <InlineProfileInfo
             img="./assets/basic-profile-img.png"
-            name="채팅"
-            desc="젊은 우리, 나이테는 잘 보이지 않고"
+            name="자스민"
+            desc="와 좋아보이네요? 어디인가요?"
             state="chat"
           />
           <span>2022-12-18</span>
         </ChatItem>
-        <ChatItem>
+        <ChatItem onClick={movetoChatroom}>
           <InlineProfileInfo
             img="./assets/post-img-example.png"
-            name="채팅"
-            desc="찬란한 빛에 눈이 멀어 꺼져가는데"
+            name="먹고자"
+            desc="위치 자세히 알려주세요 ㅠ"
             state="chat"
           />
           <span>2022-12-15</span>
