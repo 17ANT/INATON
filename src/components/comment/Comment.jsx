@@ -82,8 +82,8 @@ export default function Comment({ data, setFlag }) {
         buttons: [
           {
             label: '삭제',
-            onClick: () => {
-              CommentsDelete(params.post_id, data.id);
+            onClick: async () => {
+              await CommentsDelete(params.post_id, data.id);
               setFlag((prev) => !prev);
             },
           },

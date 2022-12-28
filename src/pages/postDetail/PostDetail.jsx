@@ -74,10 +74,11 @@ const CommentButton = styled.button`
   border: none;
   font-weight: 500;
   font-size: 14px;
+  /* color: ${(props) =>
+    props.btnactiv ? 'var(--error-color)' : 'var( --sub-border)'}; //경고 */
+  color: ${(props) =>
+    props.btnactiv ? 'var(--font-color)' : 'var( --sub-border)'}; //진한 녹색
   line-height: 18px;
-  /* color: ${(props) => (props.btnactiv ? 'var(--font-color)' : 'var( --sub-border)')}; //진한초록 */
-  /* color: ${(props) => (props.btnactiv ? 'var(--main-color)' : 'var( --sub-border)')}; //메인컬러 */
-  color: ${(props) => (props.btnactiv ? 'var(--error-color)' : 'var( --sub-border)')}; //경고
   cursor: ${(props) => props.btnactiv && 'pointer'};
 `;
 
@@ -131,7 +132,6 @@ export default function PostDetail() {
     } else {
       setBtnState(false);
     }
-    console.log('activ >');
   };
 
   return (
@@ -141,10 +141,19 @@ export default function PostDetail() {
         <PostDetailMain>
           <HomePost data={postInfo} page="detail" />
           <CommentList>
-            {commentsList && commentsList.map((el) => <Comment key={el.id} data={el} setFlag={setFlag} />)}
+            {commentsList &&
+              commentsList.map((el) => (
+                <Comment key={el.id} data={el} setFlag={setFlag} />
+              ))}
           </CommentList>
           <CommentWrite>
-            {userInfo && <ProfileImg size="36px" alt="프로필 이미지" src={userInfo.image} />}
+            {userInfo && (
+              <ProfileImg
+                size="36px"
+                alt="프로필 이미지"
+                src={userInfo.image}
+              />
+            )}
             <CommentForm onSubmit={writeComments}>
               <label htmlFor="inputComment" className="ir"></label>
               <input

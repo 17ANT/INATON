@@ -1,6 +1,7 @@
 import { BASE_URL } from '../../common/BASE_URL';
 
 async function CommentsDelete(post_id, comment_id) {
+  console.log('delete comment')
   const token = localStorage.getItem('token');
   try {
     const data = await fetch(
