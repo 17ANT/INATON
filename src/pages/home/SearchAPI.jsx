@@ -9,14 +9,8 @@ async function searchUser(reqData) {
                 Authorization: `Bearer ${token}`,
                 'Content-type': 'application/json',
             },
-            // body: JSON.stringify(reqData),
-            // user: {
-            //     email: 'sewon123@naver.com',
-            //     password: '12345678',
-            // },
         });
         const result = await data.json();
-        console.log(result);
         return result;
     } catch (error) {
         console.log(error.message);

@@ -49,11 +49,11 @@ export default function ChatList() {
           {/* 넹 여기는 그냥 두겠습니다! */}
           <InlineProfileInfo
             img="./assets/basic-profile-img.png"
-            name="아무개"
-            desc="오늘 저녁 메뉴 추천 받아요"
+            name="피카피카"
+            desc="새해 복 많이 받으세요"
             state="chat"
           />
-          <span>2022-12-18</span>
+          <span>2023-01-01</span>
         </ChatItem>
         <ChatItem onClick={movetoChatroom}>
           <InlineProfileInfo
@@ -67,7 +67,7 @@ export default function ChatList() {
         <ChatItem onClick={movetoChatroom}>
           <InlineProfileInfo
             img="./assets/basic-profile-img.png"
-            name=""
+            name="자스민"
             desc="와 좋아보이네요? 어디인가요?"
             state="chat"
           />
@@ -76,8 +76,8 @@ export default function ChatList() {
         <ChatItem onClick={movetoChatroom}>
           <InlineProfileInfo
             img="./assets/post-img-example.png"
-            name="채팅"
-            desc="찬란한 빛에 눈이 멀어 꺼져가는데"
+            name="먹고자"
+            desc="위치 자세히 알려주세요 ㅠ"
             state="chat"
           />
           <span>2022-12-15</span>

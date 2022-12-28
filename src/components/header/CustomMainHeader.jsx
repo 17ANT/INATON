@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import searchUser from '../../pages/home/SearchAPI';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
-import { useNavigate } from 'react-router-dom';
 import getProfile from './../../pages/yourProfile/ProfileAPI';
 
 const Header = styled.header`
@@ -113,14 +112,13 @@ const SearchResultList = styled.ul`
   }
 `;
 
-export default function CustomMainHeader() {
+export default function CustomMainHeader({ searchActive, setSearchActive }) {
   const [searchBox, setSearchBox] = useState('searchBox');
   const [closeBtn, setCloseBtn] = useState('closeBtn');
   const [searchBtn, setSearchBtn] = useState('searchBtn');
   const searchRef = useRef(null);
   const [searchValue, setSearchValue] = useState('');
   const [searchResult, setSearchResult] = useState(null);
-  const navigate = useNavigate();
 
   async function HandleSearchValue() {
     setSearchValue(searchRef.current.value);
@@ -129,6 +127,12 @@ export default function CustomMainHeader() {
       setSearchResult(searchList);
     }
   }
+
+  useEffect(() => {
+    if (searchActive) {
+      HandleSearchBtn();
+    }
+  }, [searchActive]);
 
   const HandleSearchBtn = () => {
     setSearchBox('searchBox active');
@@ -141,6 +145,7 @@ export default function CustomMainHeader() {
     setCloseBtn('closeBtn');
     setSearchBtn('searchBtn');
     setSearchValue('');
+    setSearchActive(false);
   };
 
   return (

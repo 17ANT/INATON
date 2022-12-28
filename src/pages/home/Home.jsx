@@ -38,6 +38,7 @@ const NoneFollowSection = styled.div`
 export default function Home() {
   const [postLists, setPostList] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [searchActive, setSearchActive] = useState(false);
 
   async function getUser() {
     const userInfo = await getMyProfile();
@@ -53,14 +54,20 @@ export default function Home() {
     getUser();
   }, []);
 
+  function handleSearch() {
+    setSearchActive(true);
+  }
 
   return (
     <Container>
-      <CustomMainHeader />
+      <CustomMainHeader
+        searchActive={searchActive}
+        setSearchActive={setSearchActive}
+      />
       {userData &&
         (userData.followingCount > 0 ? (
           // 팔로우가 있는경우
-          <FeedList posts={postLists}/>
+          <FeedList posts={postLists} />
         ) : (
           // 팔로우가 없는 경우
           <>
@@ -72,7 +79,9 @@ export default function Home() {
                 alt=""
               />
               <p>유저를 검색해 팔로우 해보세요!</p>
-              <CustomButton size="m">검색하기</CustomButton>
+              <CustomButton onClick={handleSearch} size="m">
+                검색하기
+              </CustomButton>
             </NoneFollowSection>
           </>
         ))}

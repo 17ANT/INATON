@@ -19,24 +19,29 @@ import Follower from '../pages/follow/Follower';
 import Following from './../pages/follow/Following';
 import SignupProfile from '../pages/signup/SignupProfile';
 import { SignupContextProvider } from '../Contexts/SignupContext';
-import TestPage from '../pages/testPage/TestPage';
 import PostModify from '../pages/postModify/PostModify';
+import authCheck from '../common/AuthenticationCheck';
 
 export default function Router() {
+  // token 검증 및 token 여부를 확인
+  authCheck();
   return (
     <SignupContextProvider>
       <BrowserRouter>
         <Routes>
+          {/* 토큰이 없어도 볼 수 있는 페이지 isValid : false*/}
           <Route path="/" element={<Splash />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/search" element={<Search />} />
           <Route path="/login" element={<Login />} />
-
+          <Route path="/login/email" element={<LoginEmail />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signup/profile" element={<SignupProfile />} />
 
+          {/* /////////////////////////////////// */}
+          {/* 토큰을 가지고 판단 isValid=true*/}
+          {/* 토큰이 있으면 아래는 갈 수 있고, 없으면 전부다 404로 가거나 login으로?  */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/chatlist" element={<ChatList />} />
-          <Route path="/login/email" element={<LoginEmail />} />
           <Route path="/chatroom" element={<ChatRoom />} />
           <Route path="/postupload" element={<PostUpload />} />
           <Route path="/post/:post_id/modify" element={<PostModify />} />
@@ -48,11 +53,17 @@ export default function Router() {
             element={<ProfileModification />}
           />
           <Route path="/profile/:accountname/follower" element={<Follower />} />
-          <Route path="/profile/:accountname/following" element={<Following />} />
-
-          <Route path="/test" element={<TestPage />} />
-
+          <Route
+            path="/profile/:accountname/following"
+            element={<Following />}
+          />
           <Route path="/*" element={<NotFound />} />
+          {/* /////////////////////////////////// */}
+          {/* isValid= false인 경우 404를 띄워주는데 이전이 아니라 로그인 페이지로 갈 수 있게  */}
+
+          {/* /////////////////////////////////// */}
+
+
         </Routes>
       </BrowserRouter>
     </SignupContextProvider>

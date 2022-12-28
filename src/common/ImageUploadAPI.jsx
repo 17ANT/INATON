@@ -7,9 +7,6 @@ async function postImage(file) {
 
         const data = await fetch(BASE_URL + '/image/uploadfile', {
             method: 'POST',
-            // headers: {
-            //     'Content-type': 'multipart/form-data',
-            // },
             body: formData,
         });
         const res = await data.json();

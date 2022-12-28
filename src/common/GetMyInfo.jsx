@@ -10,7 +10,6 @@ async function getMyProfile() {
       },
     });
     const result = await data.json();
-    console.log('myinfo', result);
     return result;
   } catch (error) {
     console.log(error.message);
