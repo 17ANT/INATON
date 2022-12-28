@@ -40,7 +40,7 @@ export default function Follower() {
 
   useEffect(() => {
     async function setFollowingList() {
-      const followingList = await getFollower(params.id);
+      const followingList = await getFollower(params.accountname);
       setFollowers(followingList);
     }
 
@@ -52,11 +52,11 @@ export default function Follower() {
     console.log(params);
     if (userProfile.isfollow) {
       // 언팔로우 API
-      const res = await UnFollow(params.id);
+      const res = await UnFollow(params.accountname);
       setUserProfile(res.profile);
     } else {
       // 팔로우 API
-      const res = await Follow(params.id);
+      const res = await Follow(params.accountname);
       setUserProfile(res.profile);
     }
   }

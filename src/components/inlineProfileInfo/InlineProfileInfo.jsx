@@ -98,6 +98,11 @@ export default function InlineProfileInfo({
       gap = '12px';
       line = '6px';
   }
+  const myaccount = localStorage.getItem('accountname');
+  let route = `/profile/${accountname}`;
+  if (accountname === myaccount) {
+    route = `/profile`;
+  }
 
   return (
     <ProfileInfo gap={gap}>
@@ -110,7 +115,7 @@ export default function InlineProfileInfo({
           </ProfileText>
         </>
       ) : (
-        <Link to={`/yourprofile/${accountname}`}>
+        <Link to={route}>
           <ProfileImg src={img} alt="" size={size}></ProfileImg>
           <ProfileText line={line} check={check}>
             <strong>{name}</strong>

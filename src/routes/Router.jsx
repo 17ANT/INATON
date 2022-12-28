@@ -41,14 +41,14 @@ export default function Router() {
           <Route path="/postupload" element={<PostUpload />} />
           <Route path="/post/:post_id/modify" element={<PostModify />} />
           <Route path="/post/:post_id" element={<PostDetail />} />
-          <Route path="/myprofile" element={<MyProfile />} />
-          <Route path="/yourprofile/:id" element={<YourProfile />} />
+          <Route path="/profile" element={<MyProfile />} />
+          <Route path="/profile/:accountname" element={<YourProfile />} />
           <Route
             path="/myprofile/modification"
             element={<ProfileModification />}
           />
-          <Route path="/profile/:id/follower" element={<Follower />} />
-          <Route path="/profile/:id/following" element={<Following />} />
+          <Route path="/profile/:accountname/follower" element={<Follower />} />
+          <Route path="/profile/:accountname/following" element={<Following />} />
 
           <Route path="/test" element={<TestPage />} />
 

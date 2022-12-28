@@ -64,37 +64,40 @@ export default function YourProfile() {
   const [userProfile, setUserProfile] = useState();
   const [isFollow, setIsFollow] = useState(false);
   const [myFeed, setMyFeed] = useState([]);
+  const accountname = localStorage.getItem('accountname');
 
   useEffect(() => {
     async function handleProfile() {
-      const userProfileData = await getProfile(params.id);
+      const userProfileData = await getProfile(params.accountname);
       setUserProfile(userProfileData.profile);
+      // userProfileData.profile.accountname === accountname &&
+      //   navigate('/myprofile');
     }
     handleProfile();
     getFeed();
   }, []);
 
   async function getFeed() {
-    const res = await ProfileFeed(params.id);
+    const res = await ProfileFeed(params.accountname);
     setMyFeed(res.post);
   }
 
   function goFollower() {
-    navigate(`/profile/${params.id}/follower`);
+    navigate(`/profile/${params.accountname}/follower`);
   }
   function goFollowing() {
-    navigate(`/profile/${params.id}/following`);
+    navigate(`/profile/${params.accountname}/following`);
   }
   async function changeFollow() {
     // 팔로우 버튼 기능 (팔로우 토글)
     setIsFollow((prev) => !prev);
     if (userProfile.isfollow) {
       // 언팔로우 API
-      const res = await UnFollow(params.id);
+      const res = await UnFollow(params.accountname);
       setUserProfile(res.profile);
     } else {
       // 팔로우 API
-      const res = await Follow(params.id);
+      const res = await Follow(params.accountname);
       setUserProfile(res.profile);
     }
   }
@@ -122,9 +125,11 @@ export default function YourProfile() {
           <ProfileMain>
             <UserInfoText
               userName={userProfile.username}
-              userId={`@ ${params.id}`}
+              userId={`@ ${params.accountname}`}
               userDesc={userProfile.intro}></UserInfoText>
           </ProfileMain>
+
+          {/* 여기서부터 수정시작  */}
 
           <ProfileButton>
             <Link to="/chatroom">
@@ -151,6 +156,8 @@ export default function YourProfile() {
                 alt="message"></ImageButton>
             </Link>
           </ProfileButton>
+
+          {/*  여기까지 */}
         </YourProfileWrap>
       )}
       <PostContainer>
