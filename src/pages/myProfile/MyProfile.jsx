@@ -16,7 +16,7 @@ const MyProfileWrap = styled.div`
   padding-top: 50px;
   width: 100%;
   min-width: 358px;
-  border-bottom: 6px solid var(--border-color);
+  border-bottom: 3px solid var(--border-color);
 `;
 
 const ProfileHeader = styled.div`

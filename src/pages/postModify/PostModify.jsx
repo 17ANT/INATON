@@ -149,7 +149,7 @@ export default function PostModify() {
       },
     };
     putPost(post, params.post_id);
-    navigate(`/myprofile`);
+    navigate(`/profile`);
   }
 
   const handleDelete = (e) => {
@@ -179,16 +179,25 @@ export default function PostModify() {
                 placeholder="게시글 입력하기..."
                 rows={1}
                 onChange={handleResize}
-                value={content}
-              ></TextForm>
-              <UploadButton radius="28px" size="50px" bg="var(--main-color)" onChange={handleImg} />
+                value={content}></TextForm>
+              <UploadButton
+                radius="28px"
+                size="50px"
+                bg="var(--main-color)"
+                onChange={handleImg}
+              />
             </PostUploadForm>
 
             <ImageSlider>
               <ImageList>
                 {image &&
                   image.map((el, index) => (
-                    <ImagePreview size={image.length} src={el} key={index} onClick={handleDelete} />
+                    <ImagePreview
+                      size={image.length}
+                      src={el}
+                      key={index}
+                      onClick={handleDelete}
+                    />
                   ))}
               </ImageList>
             </ImageSlider>

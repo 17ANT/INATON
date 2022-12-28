@@ -10,6 +10,7 @@ const Nav = styled.nav`
   background-color: #fff;
   min-width: 390px;
   border-top: 1px solid var(--border-color);
+  z-index: 20;
 `;
 
 const NavList = styled.ul`
@@ -91,7 +92,7 @@ export default function NavBar() {
           </li>
           <li className="user">
             <NavLink
-              to="/profile"
+              end to="/profile"
               className={({ isActive }) => (isActive ? 'active' : '')}>
               프로필
             </NavLink>

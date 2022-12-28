@@ -54,6 +54,20 @@ const GlobalStyle = createGlobalStyle`
 img{
     object-fit: cover;
 }
+.react-confirm-alert-button-group{
+  justify-content: flex-end;
+  button{
+    border: 1px solid var(--main-color);
+    background-color: var(--main-color);
+    color: #fff;
+  }
+  button[label='취소']{
+    background-color: #fff;
+    border: 1px solid var(--main-color);
+    box-sizing: border-box;
+    color: var(--font-color);
+  }
+}
 `;
 
 function App() {

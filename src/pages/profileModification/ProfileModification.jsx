@@ -43,7 +43,7 @@ const ProfileMain = styled.div`
 const DeleteButtonWrap = styled.div`
   position: absolute;
   top: 30px;
-  left: 160px;
+  left: 163px;
 `;
 
 const UploadButtonWrap = styled.div`
@@ -100,7 +100,7 @@ export default function ProfileModification() {
         message: '기본 이미지로 변경하시겠습니까?',
         buttons: [
           {
-            label: 'Yes',
+            label: '변경',
             onClick: () => {
               // URL.revokeObjectURL(imageFile);
               setImageFile(BASE_URL + '/' + 'Ellipse.png');
@@ -108,7 +108,7 @@ export default function ProfileModification() {
             },
           },
           {
-            label: 'No',
+            label: '취소',
           },
         ],
       });
@@ -169,7 +169,7 @@ export default function ProfileModification() {
       ...signupData,
     };
 
-    navigate('/myprofile');
+    navigate('/profile');
   }
 
   const handleName = () => {
@@ -196,7 +196,7 @@ export default function ProfileModification() {
           <DeleteButtonWrap>
             {show && (
               <ImageButton
-                size="20px"
+                size="31px"
                 src="../assets/x-button.png"
                 alt="delete image"
                 onClick={deleteImageFile}></ImageButton>
