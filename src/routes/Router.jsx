@@ -46,7 +46,11 @@ export default function Router() {
       <BrowserRouter>
         <Routes>
           {/* 토큰이 없거나 유효하지 않을 때 */}
-
+          <Route path="/" element={<Splash />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/login/email" element={<LoginEmail />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup/profile" element={<SignupProfile />} />
           {/* /////////////////////////////////// */}
           {/* 토큰이 있고 토큰이 유효할 때 */}
           {auth ? (
@@ -65,13 +69,7 @@ export default function Router() {
               <Route path="/profile/:accountname/following" element={<Following />} />
             </>
           ) : (
-            <>
-              <Route path="/" element={<Splash />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/login/email" element={<LoginEmail />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/signup/profile" element={<SignupProfile />} />
-            </>
+            <></>
           )}
           {/* 404 */}
           <Route path="/*" element={<NotFound />} />
