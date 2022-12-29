@@ -1,0 +1,32 @@
+.cont_search {
+  width: 380px;
+}
+
+.search_form {
+  border: 1px solid grey;
+  padding: 6px 12px;
+  width: fit-content;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search_form input {
+  width: 250px;
+  padding: 6px 12px;
+  border: none;
+}
+
+.search_form input:active,
+.search_form input:focus {
+  outline: transparent;
+}
+
+.search_form button {
+  padding: 6px 20px;
+  background-color: var(--main-color);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}

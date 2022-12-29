@@ -21,6 +21,7 @@ import SignupProfile from '../pages/signup/SignupProfile';
 import { SignupContextProvider } from '../Contexts/SignupContext';
 import PostModify from '../pages/postModify/PostModify';
 import authCheck from '../common/AuthenticationCheck';
+import MapModal from '../components/map/MapModal';
 
 export default function Router() {
   const token = localStorage.getItem('token');
@@ -67,6 +68,7 @@ export default function Router() {
               <Route path="/myprofile/modification" element={<ProfileModification />} />
               <Route path="/profile/:accountname/follower" element={<Follower />} />
               <Route path="/profile/:accountname/following" element={<Following />} />
+              <Route path="/map" element={<MapModal />} />
             </>
           ) : (
             <></>
