@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Login from '../pages/login/Login';
 import SignUp from '../pages/signup/Signup';
 import Splash from '../pages/splash/Splash';
@@ -23,47 +23,59 @@ import PostModify from '../pages/postModify/PostModify';
 import authCheck from '../common/AuthenticationCheck';
 
 export default function Router() {
+  const token = localStorage.getItem('token');
+  const [auth, setAuth] = useState(!!token);
   // token 검증 및 token 여부를 확인
-  authCheck();
+
+  const authTest = async () => {
+    if (token) {
+      const res = await authCheck();
+      console.log('res', res.isValid);
+      setAuth(res.isValid);
+    } else {
+      setAuth(false);
+    }
+  };
+
+  useEffect(() => {
+    authTest();
+  }, [token]);
+
   return (
     <SignupContextProvider>
       <BrowserRouter>
         <Routes>
-          {/* 토큰이 없어도 볼 수 있는 페이지 isValid : false*/}
-          <Route path="/" element={<Splash />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/login/email" element={<LoginEmail />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signup/profile" element={<SignupProfile />} />
+          {/* 토큰이 없거나 유효하지 않을 때 */}
 
           {/* /////////////////////////////////// */}
-          {/* 토큰을 가지고 판단 isValid=true*/}
-          {/* 토큰이 있으면 아래는 갈 수 있고, 없으면 전부다 404로 가거나 login으로?  */}
-          <Route path="/home" element={<Home />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/chatlist" element={<ChatList />} />
-          <Route path="/chatroom" element={<ChatRoom />} />
-          <Route path="/postupload" element={<PostUpload />} />
-          <Route path="/post/:post_id/modify" element={<PostModify />} />
-          <Route path="/post/:post_id" element={<PostDetail />} />
-          <Route path="/profile" element={<MyProfile />} />
-          <Route path="/profile/:accountname" element={<YourProfile />} />
-          <Route
-            path="/myprofile/modification"
-            element={<ProfileModification />}
-          />
-          <Route path="/profile/:accountname/follower" element={<Follower />} />
-          <Route
-            path="/profile/:accountname/following"
-            element={<Following />}
-          />
+          {/* 토큰이 있고 토큰이 유효할 때 */}
+          {auth ? (
+            <>
+              <Route path="/home" element={<Home />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/chatlist" element={<ChatList />} />
+              <Route path="/chatroom" element={<ChatRoom />} />
+              <Route path="/postupload" element={<PostUpload />} />
+              <Route path="/post/:post_id/modify" element={<PostModify />} />
+              <Route path="/post/:post_id" element={<PostDetail />} />
+              <Route path="/profile" element={<MyProfile />} />
+              <Route path="/profile/:accountname" element={<YourProfile />} />
+              <Route path="/myprofile/modification" element={<ProfileModification />} />
+              <Route path="/profile/:accountname/follower" element={<Follower />} />
+              <Route path="/profile/:accountname/following" element={<Following />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Splash />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/login/email" element={<LoginEmail />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signup/profile" element={<SignupProfile />} />
+            </>
+          )}
+          {/* 404 */}
           <Route path="/*" element={<NotFound />} />
           {/* /////////////////////////////////// */}
-          {/* isValid= false인 경우 404를 띄워주는데 이전이 아니라 로그인 페이지로 갈 수 있게  */}
-
-          {/* /////////////////////////////////// */}
-
-
         </Routes>
       </BrowserRouter>
     </SignupContextProvider>

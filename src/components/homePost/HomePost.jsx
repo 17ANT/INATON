@@ -119,8 +119,7 @@ const MoreBtn = styled.button`
   right: 0px;
   width: 18px;
   height: 18px;
-  background: url('/assets/icon/icon-more-vertical.png') no-repeat center/18px
-    18px;
+  background: url('/assets/icon/icon-more-vertical.png') no-repeat center/18px 18px;
   border: none;
   cursor: pointer;
 `;
@@ -160,7 +159,7 @@ export default function HomePost({ data, page }) {
               label: '삭제',
               onClick: () => {
                 isDelete = true;
-              }
+              },
             },
             {
               label: '수정',
@@ -186,15 +185,15 @@ export default function HomePost({ data, page }) {
                       if (res.status === '200') {
                         window.location.replace(`/profile`);
                       }
-                    }
+                    },
                   },
                   {
-                    label: '취소'
+                    label: '취소',
                   },
-                ]
+                ],
               });
             }
-          }
+          },
         })
       : confirmAlert({
           message: '게시글을 신고하시겠습니까?',
@@ -246,26 +245,15 @@ export default function HomePost({ data, page }) {
         <PostReaction>
           <button>
             {likeState ? (
-              <img
-                src={'/assets/icon/icon-heart-active.png'}
-                alt="좋아요 취소"
-                onClick={handleLike}
-              />
+              <img src={'/assets/icon/icon-heart-active.png'} alt="좋아요 취소" onClick={handleLike} />
             ) : (
-              <img
-                src={'/assets/icon/icon-heart.png'}
-                alt="좋아요"
-                onClick={handleLike}
-              />
+              <img src={'/assets/icon/icon-heart.png'} alt="좋아요" onClick={handleLike} />
             )}
             {likeCont}
           </button>
           <Link to={`/post/${data.id}`}>
             <button>
-              <img
-                src={'/assets/icon/icon-message-circle.png'}
-                alt="댓글 입력창으로 이동"
-              />
+              <img src={'/assets/icon/icon-message-circle.png'} alt="댓글 입력창으로 이동" />
               {commentCnt}
             </button>
           </Link>

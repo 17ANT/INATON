@@ -10,10 +10,6 @@ async function postLogin(reqData) {
         'Content-type': 'application/json',
       },
       body: JSON.stringify(reqData),
-      // user: {
-      //     email: 'sewon123@naver.com',
-      //     password: '12345678',
-      // },
     });
     console.log(data);
     const result = await data.json();
