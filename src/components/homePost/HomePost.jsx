@@ -9,6 +9,7 @@ import doLike from './LikeAPI';
 import deleteLike from './DeleteLikeAPI';
 import PostDelete from '../../pages/postDetail/PostDeleteAPI';
 import postReport from './PostReportAPI';
+import MapResult from '../map/MapResult';
 
 const PostContainer = styled.div`
   position: relative;
@@ -139,6 +140,13 @@ function dateChange(createdAt) {
 }
 
 export default function HomePost({ data, page }) {
+  const testPlace = {
+    place_name: '테일러커피 서교점',
+    x: '126.927602272249',
+    y: '37.5538674238312',
+    address: '서울 마포구 서교동 338-1',
+  };
+
   const [likeState, setLikeState] = useState(data.hearted);
   const likeCnt = changeUnit(data.heartCount);
   const [likeCont, setLikeCont] = useState(likeCnt);
@@ -241,6 +249,7 @@ export default function HomePost({ data, page }) {
               <ImgSlider images={imgList} />
             </>
           )}
+          {page === 'detail' ? <MapResult place={testPlace} /> : <></>}
         </PostContents>
         <PostReaction>
           <button>

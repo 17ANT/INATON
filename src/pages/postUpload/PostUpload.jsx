@@ -23,16 +23,6 @@ const PostPreview = styled.div`
   flex-direction: column;
 `;
 
-const PostUploadForm = styled.form`
-  label {
-    position: fixed;
-    bottom: 16px;
-    right: 16px;
-    z-index: 50;
-    box-shadow: 0px 0px 4px #646464;
-  }
-`;
-
 const TextForm = styled.textarea`
   width: 100%;
   padding: 0 16px;
@@ -65,6 +55,31 @@ const ImageList = styled.ul`
   flex: 1 0 304px;
   justify-content: start;
   gap: 8px;
+`;
+
+const MapButton = styled.button`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: url('/assets/icon/icon-map.png') no-repeat center/ 28px 28px;
+  background-color: var(--main-color);
+  background-size: cover;
+  border: none;
+
+  box-shadow: 0px 0px 4px #646464;
+  cursor: pointer;
+  position: relative;
+  width: 50px;
+  height: 50px;
+`;
+
+const ButtonDiv = styled.div`
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  z-index: 50;
+  gap: 24px;
 `;
 
 export default function PostUpload() {
@@ -134,7 +149,9 @@ export default function PostUpload() {
     // console.log(e.target.previousSibling.src);
     setImage(image.filter((el) => el !== e.target.previousSibling.src));
   };
-
+  const handleMap = (e) => {
+    alert('지도검색모달');
+  };
   return (
     <>
       <UploadHeader
@@ -148,32 +165,20 @@ export default function PostUpload() {
         <h2 className="sr-only">게시글 작성</h2>
         <ProfileImg size="42px" alt="프로필 이미지" src={user.image} />
         <PostPreview>
-          <PostUploadForm>
+          <form>
             <h3 className="sr-only">게시글을 입력해주세요</h3>
-
-            <TextForm
-              ref={txtRef}
-              placeholder="게시글 입력하기..."
-              rows={1}
-              onChange={handleResize}></TextForm>
-            <UploadButton
-              radius="28px"
-              size="50px"
-              bg="var(--main-color)"
-              onChange={handleImg}
-            />
-          </PostUploadForm>
+            <TextForm ref={txtRef} placeholder="게시글 입력하기..." rows={1} onChange={handleResize}></TextForm>
+            <ButtonDiv>
+              <UploadButton radius="28px" size="50px" bg="var(--main-color)" onChange={handleImg} />
+              <MapButton type="button" onClick={handleMap} />
+            </ButtonDiv>
+          </form>
 
           <ImageSlider>
             <ImageList>
               {image &&
                 image.map((el, index) => (
-                  <ImagePreview
-                    size={image.length}
-                    src={el}
-                    key={index}
-                    onClick={handleDelete}
-                  />
+                  <ImagePreview size={image.length} src={el} key={index} onClick={handleDelete} />
                 ))}
             </ImageList>
           </ImageSlider>
