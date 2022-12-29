@@ -10,7 +10,7 @@ const ResultContainer = styled.div`
   border-radius: 10px;
 `;
 
-export default function MapResult({ place }) {
+export default function MapPost({ place }) {
   // const testPlace = {
   //   place_name: '테일러커피 서교점',
   //   x: '126.927602272249',
@@ -24,7 +24,6 @@ export default function MapResult({ place }) {
   //   address: '서울 마포구 서교동 337-10',
   // };
   const [lat, lng] = [place.y, place.x];
-  console.log(lat, lng);
 
   useEffect(() => {
     const mapContainer = document.getElementById('map');

@@ -24,7 +24,7 @@
 
 .search_form button {
   padding: 6px 20px;
-  background-color: dodgerblue;
+  background-color: var(--main-color);
   color: white;
   border: none;
   border-radius: 50px;

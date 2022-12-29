@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import ImgSlider from '../imgSlider/ImgSlider';
@@ -9,7 +9,8 @@ import doLike from './LikeAPI';
 import deleteLike from './DeleteLikeAPI';
 import PostDelete from '../../pages/postDetail/PostDeleteAPI';
 import postReport from './PostReportAPI';
-import MapResult from '../map/MapResult';
+import MapInline from '../map/MapInline';
+import MapPost from '../map/MapPost';
 
 const PostContainer = styled.div`
   position: relative;
@@ -139,13 +140,48 @@ function dateChange(createdAt) {
   return `${year}년 ${month}월 ${date}일`;
 }
 
+function hasMap(content) {
+  try {
+    const res = JSON.parse(content);
+    return res === 'object';
+  } catch (e) {
+    return false;
+  }
+}
 export default function HomePost({ data, page }) {
+  const [mapInfo, setMapInfo] = useState({});
+  const [textContent, setTextContent] = useState('');
+
   const testPlace = {
     place_name: '테일러커피 서교점',
     x: '126.927602272249',
     y: '37.5538674238312',
     address: '서울 마포구 서교동 338-1',
   };
+
+  useEffect(() => {
+    console.log('컨텐츠', data.content);
+    if (hasMap(data.content)) {
+      console.log('있지롱', data.content);
+      // 지도 정보가 있음
+      const strData = JSON.parse(data.content);
+      console.log(strData.map);
+      // setMapInfo(strData.map);
+      setTextContent(strData.content);
+    } else {
+      console.log(data.content);
+
+      // 지도 정보가 없음
+      setMapInfo(testPlace);
+
+      setTextContent(data.content);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('map>', mapInfo);
+    console.log('text>', textContent);
+  }, [mapInfo]);
 
   const [likeState, setLikeState] = useState(data.hearted);
   const likeCnt = changeUnit(data.heartCount);
@@ -249,7 +285,9 @@ export default function HomePost({ data, page }) {
               <ImgSlider images={imgList} />
             </>
           )}
-          {page === 'detail' ? <MapResult place={testPlace} /> : <></>}
+          {/* <MapPost place={testPlace} /> */}
+          {/* {!!Object.keys(mapInfo).length && */}
+          {page === 'detail' ? <MapPost place={mapInfo} /> : <MapInline place={mapInfo}></MapInline>}
         </PostContents>
         <PostReaction>
           <button>

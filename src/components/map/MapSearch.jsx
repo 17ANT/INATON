@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import './map.css';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 const { kakao } = window;
 
 const SearchContainer = styled.div`
@@ -10,14 +12,56 @@ const SearchContainer = styled.div`
 `;
 
 const MapResultList = styled.ul`
+  width: 358px;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
+  position: fixed;
   gap: 12px;
+  height: 400px;
+  bottom: 0px;
+  overflow-y: scroll;
   li {
+    position: relative;
+    padding: 16px 7px 0;
     border-top: 1px solid #777;
+    min-height: fit-content;
+    .info {
+      display: flex;
+      align-items: center;
+      div {
+        width: 250px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+    strong {
+      font-weight: 700;
+      font-size: 1.1em;
+      color: var(--font-color);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    p {
+      font-size: 12px;
+    }
+    button {
+      cursor: pointer;
+      position: relative;
+      left: 30px;
+      width: 65px;
+      height: 30px;
+      font-size: 1em;
+      background-color: var(--main-color);
+      border-radius: 50px;
+      color: #fff;
+      border: none;
+    }
   }
 `;
+
 export default function MapSearch({ searchKeyword, value, setValue }) {
   // 결과 저장
   const [places, setPlaces] = useState([]);
@@ -84,13 +128,12 @@ export default function MapSearch({ searchKeyword, value, setValue }) {
 
         bounds.extend(placePosition);
 
-        const btn = document.createElement('button');
-        btn.innerText = '선택';
-        itemEl.appendChild(btn);
-
         // event
         (function (marker, title) {
           kakao.maps.event.addListener(marker, 'mouseover', function () {
+            var moveLatLon = new kakao.maps.LatLng(places[i].y, places[i].x);
+            map.setLevel(3);
+            map.setCenter(moveLatLon);
             displayInfowindow(marker, title);
           });
 
@@ -100,12 +143,10 @@ export default function MapSearch({ searchKeyword, value, setValue }) {
 
           itemEl.onmouseover = function () {
             displayInfowindow(marker, title);
-            itemEl.style.outline = '3px solid purple';
           };
 
           itemEl.onmouseout = function () {
             infowindow.close();
-            itemEl.style.outline = 'none';
             map.setBounds(bounds);
           };
 
@@ -117,22 +158,34 @@ export default function MapSearch({ searchKeyword, value, setValue }) {
               map.setCenter(moveLatLon);
             }
             if (e.target.tagName === 'BUTTON') {
-              const select = window.confirm(places[i].place_name);
-              if (select) {
-                console.log('선택했다.');
-                console.log({
-                  place_name: places[i].place_name,
-                  x: places[i].x,
-                  y: places[i].y,
-                  address: places[i].address_name,
-                });
-                setValue({
-                  place_name: places[i].place_name,
-                  x: places[i].x,
-                  y: places[i].y,
-                  address: places[i].address_name,
-                });
-              }
+              confirmAlert({
+                message: '해당 장소를 선택하시겠습니까?',
+                buttons: [
+                  {
+                    label: '확인',
+                    onClick: () => {
+                      if (places.road_address_name) {
+                        setValue({
+                          place_name: places[i].place_name,
+                          x: places[i].x,
+                          y: places[i].y,
+                          address: places[i].road_address_name,
+                        });
+                      } else {
+                        setValue({
+                          place_name: places[i].place_name,
+                          x: places[i].x,
+                          y: places[i].y,
+                          address: places[i].address_name,
+                        });
+                      }
+                    },
+                  },
+                  {
+                    label: '취소',
+                  },
+                ],
+              });
             }
           };
         })(marker, places[i].place_name);
@@ -168,20 +221,15 @@ export default function MapSearch({ searchKeyword, value, setValue }) {
       const el = document.createElement('li');
       let itemStr = `
         <div class='info'>
-            <h5 class="info-item place-name">${places.place_name}</h5>
-              
+          <div>
+            <strong class="info-item place-name">${places.place_name}</strong>
               ${
                 places.road_address_name
-                  ? `<span class="info-item road-address-name">
-                    ${places.road_address_name}
-                   </span>
-                   <span class="info-item address-name">
-                 	 ${places.address_name}
-               	   </span>`
-                  : `<span class="info-item address-name">
-             	     ${places.address_name}
-                  </span>`
+                  ? `<p class="info-item road-address-name">${places.road_address_name}</p>`
+                  : ` <p class="info-item address-name">${places.address_name}</p>`
               }
+            </div>
+            <button >선택</button>
         </div>
       `;
 
@@ -219,6 +267,7 @@ export default function MapSearch({ searchKeyword, value, setValue }) {
     }
     // //displayInfowindow()
   }, [searchKeyword]);
+  // //useEfffect
 
   return (
     <SearchContainer>
@@ -228,10 +277,7 @@ export default function MapSearch({ searchKeyword, value, setValue }) {
         <p className="result-text sr-only">
           <strong>{searchKeyword}</strong> 검색 결과
         </p>
-
-        <div className="scroll-wrapper">
-          <MapResultList id="places-list"></MapResultList>
-        </div>
+        <MapResultList id="places-list"></MapResultList>
       </div>
     </SearchContainer>
   );

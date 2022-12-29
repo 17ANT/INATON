@@ -61,9 +61,8 @@ const MapButton = styled.button`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: url('/assets/icon/icon-map.png') no-repeat center/ 28px 28px;
+  background: url('/assets/icon/icon-map.png') no-repeat center/ 24px 24px;
   background-color: var(--main-color);
-  background-size: cover;
   border: none;
 
   box-shadow: 0px 0px 4px #646464;
@@ -150,7 +149,7 @@ export default function PostUpload() {
     setImage(image.filter((el) => el !== e.target.previousSibling.src));
   };
   const handleMap = (e) => {
-    alert('지도검색모달');
+    navigate('/map');
   };
   return (
     <>

@@ -7,9 +7,9 @@ import MapSearch from './MapSearch';
 const MapContainer = styled.div`
   width: 358px;
   border: 1px solid #000;
-  margin: 0 auto;
+  margin: 10px auto;
   form {
-    width: 100%;
+    width: 358px;
   }
 `;
 
