@@ -43,7 +43,7 @@ export default function Signup() {
   let { signupInfo } = useContext(SignupContext);
 
   useEffect(() => {
-    if (emailMsg === '사용 가능한 이메일 입니다.' && pwMsg === '') {
+    if (emailMsg === '* 사용 가능한 이메일 입니다.' && pwMsg === '') {
       setBtnState('');
     } else {
       setBtnState('disabled');
