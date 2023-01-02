@@ -30,8 +30,7 @@ const Section = styled.div`
     border: none;
     cursor: pointer;
     a {
-      background: url('assets/icon/icon-search.png') no-repeat center / 24px
-        24px;
+      background: url('assets/icon/icon-search.png') no-repeat center / 24px 24px;
       display: block;
       width: 24px;
       height: 24px;
@@ -154,17 +153,11 @@ export default function CustomMainHeader({ searchActive, setSearchActive }) {
         <h2>INATON 피드</h2>
         <div className="search">
           <span className="icon">
-            <i
-              name="search-outline"
-              onClick={HandleSearchBtn}
-              className={searchBtn}>
-              <img src="assets/icon/search.png" alt="" />
+            <i name="search-outline" onClick={HandleSearchBtn} className={searchBtn}>
+              <img src={process.env.PUBLIC_URL + '/assets/icon/search.png'} alt="" />
             </i>
-            <i
-              name="close-outline"
-              onClick={HandleCloseBtn}
-              className={closeBtn}>
-              <img src="assets/icon/icon-delete-black.png" alt="" />
+            <i name="close-outline" onClick={HandleCloseBtn} className={closeBtn}>
+              <img src={process.env.PUBLIC_URL + '/assets/icon/icon-delete-black.png'} alt="" />
             </i>
           </span>
         </div>

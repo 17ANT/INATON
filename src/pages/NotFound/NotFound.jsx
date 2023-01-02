@@ -25,7 +25,7 @@ export default function NotFound({ auth }) {
   return (
     <>
       <NotFoundMain>
-        <img src={'/assets/icon/icon-404.png'} alt="" />
+        <img src={process.env.PUBLIC_URL + '/assets/icon/icon-404.png'} alt="" />
         <p>페이지를 찾을 수 없습니다!</p>
         {auth ? (
           <>

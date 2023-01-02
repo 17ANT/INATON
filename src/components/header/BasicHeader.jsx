@@ -37,10 +37,10 @@ export default function BasicHeader({ onClick }) {
               navigate(-1);
             }}
           >
-            <img src={`/assets/icon/icon-arrow-left.png`} alt="" />
+            <img src={`${process.env.PUBLIC_URL}/assets/icon/icon-arrow-left.png`} alt="" />
           </button>
           <button onClick={onClick}>
-            <img src={`/assets/icon/icon-more-vertical.png`} alt="" />
+            <img src={`${process.env.PUBLIC_URL}/assets/icon/icon-more-vertical.png`} alt="" />
           </button>
         </Section>
       </HeaderWrap>

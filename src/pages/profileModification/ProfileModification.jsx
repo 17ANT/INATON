@@ -53,9 +53,7 @@ const UploadButtonWrap = styled.div`
 `;
 
 export default function ProfileModification() {
-  const [imageFile, setImageFile] = useState(
-    'https://mandarin.api.weniv.co.kr/Ellipse.png'
-  );
+  const [imageFile, setImageFile] = useState('https://mandarin.api.weniv.co.kr/Ellipse.png');
   const [show, setShow] = useState(false);
   const [msg, setMsg] = useState('*사용 가능한 계정ID 입니다.');
   let { signupInfo } = useContext(SignupContext);
@@ -90,7 +88,6 @@ export default function ProfileModification() {
       setImageFile(BASE_URL + '/' + imgSrc.filename);
       setShow(true);
     }
-    // setImageFile(URL.createObjectURL(e.target.files[0]));
   };
 
   /* 업로드 한 이미지를 기본 이미지로 변경하는 이벤트 함수 */
@@ -102,7 +99,6 @@ export default function ProfileModification() {
           {
             label: '변경',
             onClick: () => {
-              // URL.revokeObjectURL(imageFile);
               setImageFile(BASE_URL + '/' + 'Ellipse.png');
               setShow(false);
             },
@@ -199,16 +195,12 @@ export default function ProfileModification() {
                 size="31px"
                 src="../assets/x-button.png"
                 alt="delete image"
-                onClick={deleteImageFile}></ImageButton>
+                onClick={deleteImageFile}
+              ></ImageButton>
             )}
           </DeleteButtonWrap>
           <UploadButtonWrap>
-            <UploadButton
-              bg="#f26e22"
-              id="imgUpload"
-              radius="22px"
-              size="36px"
-              onChange={viewImageFile}></UploadButton>
+            <UploadButton bg="#f26e22" id="imgUpload" radius="22px" size="36px" onChange={viewImageFile}></UploadButton>
           </UploadButtonWrap>
         </ProfileHeader>
 
@@ -219,14 +211,16 @@ export default function ProfileModification() {
             maxLength="10"
             ref={nameRef}
             onChange={handleName}
-            defaultValue={myProfile.username}></UserInfoInput>
+            defaultValue={myProfile.username}
+          ></UserInfoInput>
 
           <UserInfoInput
             labelText="계정 ID"
             placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
             onChange={handleValid}
             ref={accountRef}
-            defaultValue={myProfile.accountname}></UserInfoInput>
+            defaultValue={myProfile.accountname}
+          ></UserInfoInput>
           <ErrorMessage text={msg} />
 
           <UserInfoInput
@@ -234,7 +228,8 @@ export default function ProfileModification() {
             placeholder="50자 이내로 자신을 소개해 주세요."
             maxLength="50"
             ref={introRef}
-            defaultValue={myProfile.intro}></UserInfoInput>
+            defaultValue={myProfile.intro}
+          ></UserInfoInput>
         </ProfileMain>
       </ProfileModificationWrap>
     </>

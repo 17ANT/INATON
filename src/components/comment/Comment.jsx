@@ -13,8 +13,8 @@ const CommentContainer = styled.li`
 `;
 
 const CommentContent = styled.p`
-  width: 300px; 
-  word-break: break-all; 
+  width: 300px;
+  word-break: break-all;
   margin-left: 48px;
   margin-right: 18px;
   font-weight: 400;
@@ -31,7 +31,7 @@ const MoreBtn = styled.button`
   height: 20px;
   background: url('/assets/icon/icon-more-vertical.png') no-repeat center/20px;
   border: none;
-  cursor: pointer;
+  cursor: pointer; ;
 `;
 
 const timeCheck = (val) => {
@@ -62,9 +62,7 @@ const timeCheck = (val) => {
   } else if (diff < month * 3) {
     result = Math.floor(diff / month) + '달 전';
   } else {
-    result = `${time.getFullYear()}년 ${
-      time.getMonth() + 1
-    }월 ${time.getDate()}일`;
+    result = `${time.getFullYear()}년 ${time.getMonth() + 1}월 ${time.getDate()}일`;
   }
 
   return result;

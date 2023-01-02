@@ -112,18 +112,18 @@ const LoginLink = styled.div`
 export default function Login() {
   return (
     <Container>
-      <LogoImg src={`/assets/symbol-logo-W.png`} alt="" />
+      <LogoImg src={process.env.PUBLIC_URL + `/assets/symbol-logo-W.png`} alt="" />
       <LoginArticle>
         <LoginButton className="kakao-btn">
-          <img src={`/assets/message-circle.png`} alt="" />
+          <img src={process.env.PUBLIC_URL + `/assets/message-circle.png`} alt="" />
           <span>카카오톡 계정으로 로그인</span>
         </LoginButton>
         <LoginButton className="google-btn">
-          <img src={`/assets/google.png`} alt="" />
+          <img src={process.env.PUBLIC_URL + `/assets/google.png`} alt="" />
           <span>구글 계정으로 로그인</span>
         </LoginButton>
         <LoginButton className="facebook-btn">
-          <img src={`/assets/facebook.png`} alt="페이스북으로 로그인" />
+          <img src={process.env.PUBLIC_URL + `/assets/facebook.png`} alt="페이스북으로 로그인" />
           <span>페이스북 계정으로 로그인</span>
         </LoginButton>
         <LoginLink>

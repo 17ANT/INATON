@@ -284,15 +284,19 @@ export default function HomePost({ data, page }) {
         <PostReaction>
           <button>
             {likeState ? (
-              <img src={'/assets/icon/icon-heart-active.png'} alt="좋아요 취소" onClick={handleLike} />
+              <img
+                src={process.env.PUBLIC_URL + '/assets/icon/icon-heart-active.png'}
+                alt="좋아요 취소"
+                onClick={handleLike}
+              />
             ) : (
-              <img src={'/assets/icon/icon-heart.png'} alt="좋아요" onClick={handleLike} />
+              <img src={process.env.PUBLIC_URL + '/assets/icon/icon-heart.png'} alt="좋아요" onClick={handleLike} />
             )}
             {likeCont}
           </button>
           <Link to={`/post/${data.id}`}>
             <button>
-              <img src={'/assets/icon/icon-message-circle.png'} alt="댓글 입력창으로 이동" />
+              <img src={process.env.PUBLIC_URL + '/assets/icon/icon-message-circle.png'} alt="댓글 입력창으로 이동" />
               {commentCnt}
             </button>
           </Link>

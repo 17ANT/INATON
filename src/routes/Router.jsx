@@ -44,7 +44,7 @@ export default function Router() {
 
   return (
     <SignupContextProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           {/* 토큰이 없거나 유효하지 않을 때 */}
           {/* <Route path="/" element={<Splash auth={auth} />} />

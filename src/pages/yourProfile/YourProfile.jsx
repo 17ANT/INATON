@@ -106,25 +106,17 @@ export default function YourProfile() {
       {userProfile && (
         <YourProfileWrap>
           <ProfileHeader>
-            <FollowCount
-              count={userProfile.followerCount}
-              kind="followers"
-              onClick={goFollower}></FollowCount>
-            <ProfileImg
-              size="110px"
-              src={userProfile.image}
-              alt="profile image"></ProfileImg>
-            <FollowCount
-              count={userProfile.followingCount}
-              kind="followings"
-              onClick={goFollowing}></FollowCount>
+            <FollowCount count={userProfile.followerCount} kind="followers" onClick={goFollower}></FollowCount>
+            <ProfileImg size="110px" src={userProfile.image} alt="profile image"></ProfileImg>
+            <FollowCount count={userProfile.followingCount} kind="followings" onClick={goFollowing}></FollowCount>
           </ProfileHeader>
 
           <ProfileMain>
             <UserInfoText
               userName={userProfile.username}
               userId={`@ ${params.accountname}`}
-              userDesc={userProfile.intro}></UserInfoText>
+              userDesc={userProfile.intro}
+            ></UserInfoText>
           </ProfileMain>
 
           {/* 여기서부터 수정시작  */}
@@ -133,8 +125,9 @@ export default function YourProfile() {
             <Link to="/chatroom">
               <ImageButton
                 size="34px"
-                src="/assets/icon/icon-message-circle.png"
-                alt="message"></ImageButton>
+                src={`${process.env.PUBLIC_URL}/assets/icon/icon-message-circle.png`}
+                alt="message"
+              ></ImageButton>
             </Link>
             {/* 버튼이 클릭되었을 때 ~.isFollow가 true면 언팔로우 API, false면 팔로우API 실행 */}
             {userProfile.isfollow ? (
@@ -150,8 +143,9 @@ export default function YourProfile() {
             <Link to="/">
               <ImageButton
                 size="34px"
-                src="/assets/icon/icon-share.png"
-                alt="message"></ImageButton>
+                src={`${process.env.PUBLIC_URL}/assets/icon/icon-share.png`}
+                alt="message"
+              ></ImageButton>
             </Link>
           </ProfileButton>
 
