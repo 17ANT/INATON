@@ -140,7 +140,7 @@ function dateChange(createdAt) {
   return `${year}년 ${month}월 ${date}일`;
 }
 
-function hasMap(content) {
+export function hasMap(content) {
   try {
     const res = JSON.parse(content);
     return !!res.map;
@@ -161,7 +161,6 @@ export default function HomePost({ data, page }) {
 
   useEffect(() => {
     const contents = data.content;
-    console.log('---');
 
     if (hasMap(contents)) {
       // 지도 정보가 있을 때
