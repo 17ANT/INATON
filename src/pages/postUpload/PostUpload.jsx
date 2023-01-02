@@ -5,6 +5,8 @@ import { BASE_URL } from '../../common/BASE_URL';
 import postImage from '../../common/ImageUploadAPI';
 import UploadHeader from '../../components/header/UploadHeader';
 import ImagePreview from '../../components/imagePreview/ImagePreview';
+import MapInline from '../../components/map/MapInline';
+import MapModal from '../../components/map/MapModal';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UploadButton from '../../components/uploadButton/UploadButton';
 import getUser from '../myProfile/GetProfileAPI';
@@ -92,6 +94,12 @@ export default function PostUpload() {
   const [btnState, setBtnState] = useState('disabled');
   const [user, setUser] = useState({});
 
+  const [open, setOpen] = useState(false);
+  const [select, setSelect] = useState({});
+
+  useEffect(() => {
+    console.log(select);
+  }, [select]);
   useEffect(() => {
     // console.log(txtRef.current.value);
     if (content) {
@@ -149,7 +157,9 @@ export default function PostUpload() {
     setImage(image.filter((el) => el !== e.target.previousSibling.src));
   };
   const handleMap = (e) => {
-    navigate('/map');
+    // navigate('/map');
+    // 모달창 열어주기
+    setOpen(true);
   };
   return (
     <>
@@ -172,7 +182,6 @@ export default function PostUpload() {
               <MapButton type="button" onClick={handleMap} />
             </ButtonDiv>
           </form>
-
           <ImageSlider>
             <ImageList>
               {image &&
@@ -181,8 +190,11 @@ export default function PostUpload() {
                 ))}
             </ImageList>
           </ImageSlider>
+          {!!Object.keys(select).length && <MapInline place={select}></MapInline>}
         </PostPreview>
       </PostUploadMain>
+      {/* 여기에 모달 컴포넌트 불러오기 */}
+      <MapModal open={open} setOpen={setOpen} select={select} setSelect={setSelect} />
     </>
   );
 }

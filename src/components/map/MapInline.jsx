@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const MapItemContainer = styled.div`
   position: relative;
 
-  width: 100%;
+  width: max(304px, 80%);
   border: 1px solid var(--main-color);
   border-radius: 10px;
   padding: 12px 12px 10px;

@@ -56,6 +56,7 @@ img{
 }
 .react-confirm-alert-button-group{
   justify-content: flex-end;
+  z-index: 300;
   button{
     border: 1px solid var(--main-color);
     background-color: var(--main-color);
