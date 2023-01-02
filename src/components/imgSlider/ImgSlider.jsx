@@ -57,6 +57,45 @@ const Dots = styled.button`
     `}
 `;
 
+const Prev = styled.button`
+  width: 24px;
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  img {
+    width: 24px;
+  }
+  &:disabled {
+    visibility: hidden;
+  }
+`;
+
+const Next = styled.button`
+  width: 24px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+
+  img {
+    width: 24px;
+  }
+  &:disabled {
+    visibility: hidden;
+  }
+`;
+
 export default function ImgSlider({ images }) {
   const [showIndex, setShowIndex] = useState(0);
   const dotsRef = useRef(null);
@@ -76,6 +115,13 @@ export default function ImgSlider({ images }) {
     setShowIndex(dotsList.indexOf(e.target));
   };
 
+  const movePrev = () => {
+    setShowIndex((prev) => prev - 1);
+  };
+  const moveNext = () => {
+    setShowIndex((prev) => prev + 1);
+  };
+
   return (
     <>
       {images && (
@@ -88,11 +134,20 @@ export default function ImgSlider({ images }) {
             ))}
           </ImgContainer>
           {images.length > 1 && (
-            <DotsContainer ref={dotsRef}>
-              {images.map((el, idx) => (
-                <Dots key={idx} active={showIndex === idx} onClick={handleDots}></Dots>
-              ))}
-            </DotsContainer>
+            <>
+              <DotsContainer ref={dotsRef}>
+                {images.map((el, idx) => (
+                  <Dots key={idx} active={showIndex === idx} onClick={handleDots}></Dots>
+                  // 화살표 버튼
+                ))}
+              </DotsContainer>
+              <Prev onClick={movePrev} disabled={showIndex === 0}>
+                <img src="/assets/icon/icon-prev.png" alt="이전" />
+              </Prev>
+              <Next onClick={moveNext} disabled={showIndex === images.length - 1}>
+                <img src="/assets/icon/icon-next.png" alt="이후 버튼" />
+              </Next>
+            </>
           )}
         </Slider>
       )}
