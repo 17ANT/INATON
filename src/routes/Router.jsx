@@ -31,7 +31,7 @@ export default function Router() {
   const authTest = async () => {
     if (token) {
       const res = await authCheck();
-      console.log('res', res.isValid);
+      console.log('rs', res.isValid);
       setAuth(res.isValid);
     } else {
       setAuth(false);
@@ -40,20 +40,21 @@ export default function Router() {
 
   useEffect(() => {
     authTest();
-  }, [token]);
+  }, []);
 
   return (
     <SignupContextProvider>
       <BrowserRouter>
         <Routes>
           {/* 토큰이 없거나 유효하지 않을 때 */}
-          <Route path="/" element={<Splash />} />
+          {/* <Route path="/" element={<Splash auth={auth} />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/login/email" element={<LoginEmail />} />
+          <Route path="/login/email" element={<LoginEmail setAuth={setAuth} />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/signup/profile" element={<SignupProfile />} />
+          <Route path="/signup/profile" element={<SignupProfile />} /> */}
           {/* /////////////////////////////////// */}
           {/* 토큰이 있고 토큰이 유효할 때 */}
+          <Route path="/" element={<Splash auth={auth} />} />
           {auth ? (
             <>
               <Route path="/home" element={<Home />} />
@@ -71,10 +72,15 @@ export default function Router() {
               <Route path="/map" element={<MapModal />} />
             </>
           ) : (
-            <></>
+            <>
+              <Route path="/login" element={<Login />} />
+              <Route path="/login/email" element={<LoginEmail setAuth={setAuth} />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signup/profile" element={<SignupProfile />} />
+            </>
           )}
           {/* 404 */}
-          <Route path="/*" element={<NotFound />} />
+          <Route path="/*" element={<NotFound auth={auth} />} />
           {/* /////////////////////////////////// */}
         </Routes>
       </BrowserRouter>
