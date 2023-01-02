@@ -98,11 +98,6 @@ export default function PostUpload() {
   const [select, setSelect] = useState({});
 
   useEffect(() => {
-    console.log(select);
-  }, [select]);
-
-  useEffect(() => {
-    // console.log(txtRef.current.value);
     if (content) {
       setBtnState('');
     } else {
@@ -131,7 +126,6 @@ export default function PostUpload() {
       alert('이미지는 3개까지 업로드 가능합니다.');
     } else if (e.target.files[0]) {
       // 이미지 데이터를 API를 이용하여 서버에 업로드
-      // console.log('url>', url);
       // const res = await postImage(url);
       const res = await postImage(e.target.files[0]);
       if (res.message) {
@@ -165,18 +159,12 @@ export default function PostUpload() {
   }
 
   const handleDelete = (e) => {
-    // console.log(e.target.previousSibling.src);
     setImage(image.filter((el) => el !== e.target.previousSibling.src));
   };
 
   const handleMap = (e) => {
     setOpen(true);
   };
-
-  useEffect(() => {
-    const newContent = JSON.stringify({ content: content, map: select });
-    console.log(newContent);
-  }, [content, select]);
 
   return (
     <>

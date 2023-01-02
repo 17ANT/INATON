@@ -14,15 +14,18 @@ const SearchContainer = styled.div`
 
 const MapResultList = styled.ul`
   width: 358px;
-  height: 100%;
+  /* height: fit-content; */
+  max-height: 80%;
+  height: min(fit-content, 80%);
   display: flex;
   flex-direction: column;
   position: fixed;
   gap: 12px;
-  margin: 20px auto;
+  margin: 0px auto;
   overflow-y: scroll;
   padding-bottom: 16px;
   overflow-x: hidden;
+  border-radius: 0 0 8px 8px;
   /* z-index: 100; */
   background-color: #fff;
   ::-webkit-scrollbar {
