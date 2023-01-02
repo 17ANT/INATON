@@ -8,19 +8,22 @@ const { kakao } = window;
 
 const SearchContainer = styled.div`
   width: 100%;
-  height: 400px;
+  height: 40%;
 `;
 
 const MapResultList = styled.ul`
   width: 358px;
-  margin-top: 20px;
+  height: 50%;
   display: flex;
   flex-direction: column;
   position: fixed;
   gap: 12px;
-  height: 400px;
-  bottom: 0px;
+  margin: 20px auto;
   overflow-y: scroll;
+  padding-bottom: 16px;
+  /* ::-webkit-scrollbar {
+    width: 4px;
+  } */
   li {
     position: relative;
     padding: 16px 7px 0;
