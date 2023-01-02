@@ -49,7 +49,6 @@ export default function Follower() {
   async function changeFollow() {
     // 팔로우 버튼 기능 (팔로우 토글)
     // setIsFollow((prev) => !prev);
-    console.log(params);
     if (userProfile.isfollow) {
       // 언팔로우 API
       const res = await UnFollow(params.accountname);

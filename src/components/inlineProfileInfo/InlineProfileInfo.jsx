@@ -30,7 +30,7 @@ const ProfileText = styled.div`
   white-space: nowrap;
   strong {
     max-width: 240px;
-    font-weight: 500;
+    font-weight: 700;
     white-space: nowrap;
 
     font-size: 14px;
@@ -65,13 +65,7 @@ const ProfileText = styled.div`
   }
 `;
 
-export default function InlineProfileInfo({
-  accountname,
-  img,
-  name,
-  desc,
-  state,
-}) {
+export default function InlineProfileInfo({ accountname, img, name, desc, state }) {
   const check = state.toUpperCase();
   let size, gap, line;
   switch (check) {

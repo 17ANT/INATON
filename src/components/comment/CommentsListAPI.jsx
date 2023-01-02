@@ -1,7 +1,6 @@
 import { BASE_URL } from '../../common/BASE_URL';
 
 async function CommentsList(post_id) {
-  console.log('get comment')
   const token = localStorage.getItem('token');
   try {
     const data = await fetch(BASE_URL + `/post/${post_id}/comments`, {

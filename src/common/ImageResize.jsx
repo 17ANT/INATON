@@ -10,7 +10,6 @@ async function ImageResize(file) {
 
   try {
     const blobFile = await imageCompression(file, options);
-    console.log(blobFile);
     const newFile = new File([blobFile], `${blobFile.name}`, {
       type: blobFile.type,
     });

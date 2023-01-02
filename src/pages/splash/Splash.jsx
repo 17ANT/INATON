@@ -36,7 +36,7 @@ export default function Splash() {
     } else {
       navigate('/login');
     }
-  }, 3000);
+  }, 1500);
 
   return (
     <Logo>
