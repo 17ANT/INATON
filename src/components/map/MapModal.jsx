@@ -19,7 +19,7 @@ const MapContainer = styled.div`
   position: absolute;
   width: 358px;
   height: fit-content;
-  top: 2%;
+  top: 7%;
   left: 50%;
   transform: translateX(-50%);
   margin: 10px auto;

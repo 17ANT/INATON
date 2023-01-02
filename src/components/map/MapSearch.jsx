@@ -14,7 +14,9 @@ const SearchContainer = styled.div`
 
 const MapResultList = styled.ul`
   width: 358px;
-  height: 100%;
+  /* height: fit-content; */
+  max-height: 80%;
+  height: min(fit-content, 80%);
   display: flex;
   flex-direction: column;
   position: fixed;
