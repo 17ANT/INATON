@@ -190,7 +190,7 @@ export default function PostUpload() {
                 ))}
             </ImageList>
           </ImageSlider>
-          {select && <MapInline place={select}></MapInline>}
+          {!!Object.keys(select).length && <MapInline place={select}></MapInline>}
         </PostPreview>
       </PostUploadMain>
       {/* 여기에 모달 컴포넌트 불러오기 */}
