@@ -5,6 +5,15 @@ import styled, { css } from 'styled-components';
 import MapSearch from './MapSearch';
 import ImageButton from '../imageButton/ImageButton';
 
+const ModalBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+`;
+
 const MapContainer = styled.div`
   position: absolute;
   width: 358px;
@@ -63,7 +72,13 @@ export default function MapModal({ open, setOpen, select, setSelect }) {
   return (
     <>
       <MapContainer open={open}>
-        <ImageButton size="24px" src="./assets/x-button.png" alt="닫기 버튼" onClick={handleClose}></ImageButton>
+        <ImageButton
+          size="24px"
+          src="./assets/x-button.png"
+          alt="닫기 버튼"
+          onClick={handleClose}
+          float="right"
+        ></ImageButton>
         <form className="search_form" onSubmit={submitKeyword}>
           <label htmlFor="place">
             <input

@@ -143,7 +143,7 @@ function dateChange(createdAt) {
 function hasMap(content) {
   try {
     const res = JSON.parse(content);
-    return res === 'object';
+    return !!res.map;
   } catch (e) {
     return false;
   }
@@ -160,28 +160,20 @@ export default function HomePost({ data, page }) {
   };
 
   useEffect(() => {
-    console.log('컨텐츠', data.content);
-    if (hasMap(data.content)) {
-      console.log('있지롱', data.content);
-      // 지도 정보가 있음
-      const strData = JSON.parse(data.content);
-      console.log(strData.map);
-      // setMapInfo(strData.map);
-      setTextContent(strData.content);
+    const contents = data.content;
+    console.log('---');
+
+    if (hasMap(contents)) {
+      // 지도 정보가 있을 때
+      const objContents = JSON.parse(contents);
+      console.log('>', objContents.content);
+      setMapInfo(objContents.map);
+      setTextContent(objContents.content);
     } else {
-      console.log(data.content);
-
-      // 지도 정보가 없음
-      setMapInfo(testPlace);
-
-      setTextContent(data.content);
+      // 지도 정보가 없을 때
+      setTextContent(contents);
     }
   }, []);
-
-  useEffect(() => {
-    console.log('map>', mapInfo);
-    console.log('text>', textContent);
-  }, [mapInfo]);
 
   const [likeState, setLikeState] = useState(data.hearted);
   const likeCnt = changeUnit(data.heartCount);
@@ -279,15 +271,14 @@ export default function HomePost({ data, page }) {
           state="post"
         />
         <PostContents>
-          <p>{data.content}</p>
+          <p>{textContent}</p>
           {imgList && (
             <>
               <ImgSlider images={imgList} />
             </>
           )}
-          {/* <MapPost place={testPlace} /> */}
-          {/* {!!Object.keys(mapInfo).length && */}
-          {page === 'detail' ? <MapPost place={mapInfo} /> : <MapInline place={mapInfo}></MapInline>}
+          {!!Object.keys(mapInfo).length &&
+            (page === 'detail' ? <MapPost place={mapInfo} /> : <MapInline place={mapInfo}></MapInline>)}
         </PostContents>
         <PostReaction>
           <button>

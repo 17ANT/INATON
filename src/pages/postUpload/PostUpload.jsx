@@ -100,6 +100,7 @@ export default function PostUpload() {
   useEffect(() => {
     console.log(select);
   }, [select]);
+
   useEffect(() => {
     // console.log(txtRef.current.value);
     if (content) {
@@ -142,12 +143,23 @@ export default function PostUpload() {
   }
 
   async function handleSubmit() {
-    const post = {
-      post: {
-        content: content,
-        image: image.join(','),
-      },
-    };
+    let post = {};
+    if (Object.keys(select).length) {
+      const newContent = JSON.stringify({ content: content, map: select });
+      post = {
+        post: {
+          content: newContent,
+          image: image.join(','),
+        },
+      };
+    } else {
+      post = {
+        post: {
+          content: content,
+          image: image.join(','),
+        },
+      };
+    }
     uploadPost(post);
     navigate('/profile');
   }
@@ -156,11 +168,16 @@ export default function PostUpload() {
     // console.log(e.target.previousSibling.src);
     setImage(image.filter((el) => el !== e.target.previousSibling.src));
   };
+
   const handleMap = (e) => {
-    // navigate('/map');
-    // 모달창 열어주기
     setOpen(true);
   };
+
+  useEffect(() => {
+    const newContent = JSON.stringify({ content: content, map: select });
+    console.log(newContent);
+  }, [content, select]);
+
   return (
     <>
       <UploadHeader
