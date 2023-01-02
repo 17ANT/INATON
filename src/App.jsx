@@ -42,7 +42,9 @@ const GlobalStyle = createGlobalStyle`
         font-size:14px;
         line-height:18px;
     }
-
+body{
+  overflow-x: hidden;
+}
     a {
         display: block;
         text-decoration: none;

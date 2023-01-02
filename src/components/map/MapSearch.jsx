@@ -19,10 +19,11 @@ const MapResultList = styled.ul`
   flex-direction: column;
   position: fixed;
   gap: 12px;
-  margin: 20px auto;
+  margin: 0px auto;
   overflow-y: scroll;
   padding-bottom: 16px;
   overflow-x: hidden;
+  border-radius: 0 0 8px 8px;
   /* z-index: 100; */
   background-color: #fff;
   ::-webkit-scrollbar {
