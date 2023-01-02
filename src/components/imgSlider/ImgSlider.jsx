@@ -61,6 +61,8 @@ const Prev = styled.button`
   width: 24px;
   position: absolute;
   top: 50%;
+  transform: translateY(-50%);
+
   left: 10px;
   cursor: pointer;
   display: flex;
@@ -80,6 +82,7 @@ const Next = styled.button`
   width: 24px;
   position: absolute;
   top: 50%;
+  transform: translateY(-50%);
   right: 10px;
   cursor: pointer;
   display: flex;
