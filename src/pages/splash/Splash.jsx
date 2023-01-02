@@ -11,32 +11,38 @@ const Logo = styled.main`
   align-items: center;
 `;
 
-export default function Splash() {
+export default function Splash({ auth }) {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  const [auth, setAuth] = useState(!!token);
-
-  const authTest = async () => {
-    if (token) {
-      const res = await authCheck();
-      console.log('res', res.isValid);
-      setAuth(res.isValid);
-    } else {
-      setAuth(false);
-    }
-  };
+  // const [auth, setAuth] = useState(!!token);
 
   useEffect(() => {
-    authTest();
-  }, [token]);
+    setTimeout(() => {
+      if (auth) {
+        navigate('/home');
+      } else {
+        navigate('/login');
+      }
+    }, 1500);
+  }, [auth]);
+  console.log(auth);
+  // const authTest = async () => {
+  //   if (token) {
+  //     const res = await authCheck();
+  //     console.log('res', res.isValid);
+  //     // setAuth(res.isValid);
+  //   } else {
+  //     // setAuth(false);
+  //   }
+  // };
 
-  setTimeout(() => {
-    if (auth) {
-      navigate('/home');
-    } else {
-      navigate('/login');
-    }
-  }, 1500);
+  // setTimeout(() => {
+  //   if (auth) {
+  //     navigate('/home');
+  //   } else {
+  //     navigate('/login');
+  //   }
+  // }, 1500);
 
   return (
     <Logo>

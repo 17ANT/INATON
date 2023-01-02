@@ -35,7 +35,7 @@ const SignupLink = styled.a`
   text-decoration: none;
 `;
 
-export default function LoginEmail() {
+export default function LoginEmail({ setAuth }) {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const emailRef = useRef(null);
@@ -55,9 +55,10 @@ export default function LoginEmail() {
     // 데이터를 넘겨주면서 페이지 이동
     const result = await postLogin(user);
     if (result) {
+      setAuth(true);
       navigate('/');
     } else {
-      setMsg('*이메일 또는 비밀번호가 일치하지 않습니다.');
+      setMsg('* 이메일 또는 비밀번호가 일치하지 않습니다.');
     }
   }
 

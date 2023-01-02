@@ -19,7 +19,7 @@ const NotFoundMain = styled.main`
   }
 `;
 
-export default function NotFound() {
+export default function NotFound({ auth }) {
   const navigate = useNavigate();
 
   return (
@@ -27,14 +27,31 @@ export default function NotFound() {
       <NotFoundMain>
         <img src={'/assets/icon/icon-404.png'} alt="" />
         <p>페이지를 찾을 수 없습니다!</p>
-        <CustomButton
-          size="m"
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          이전페이지
-        </CustomButton>
+        {auth ? (
+          <>
+            {/* auth가 있을 때 */}
+            <CustomButton
+              size="m"
+              onClick={() => {
+                navigate('/');
+              }}
+            >
+              Home으로 이동
+            </CustomButton>
+          </>
+        ) : (
+          <>
+            {/* auth가 없을 때 */}
+            <CustomButton
+              size="m"
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
+              로그인으로
+            </CustomButton>
+          </>
+        )}
       </NotFoundMain>
     </>
   );
