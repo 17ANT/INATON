@@ -1,7 +1,6 @@
 import { BASE_URL } from './BASE_URL';
 
 async function getPost(post_id) {
-  // console.log(BASE_URL);
   try {
     const token = localStorage.getItem('token');
     const data = await fetch(BASE_URL + `/post/${post_id}`, {
@@ -12,7 +11,6 @@ async function getPost(post_id) {
       },
     });
     const result = await data.json();
-    console.log(result);
     return result;
   } catch (error) {
     console.log(error.message);

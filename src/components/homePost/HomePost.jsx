@@ -165,7 +165,6 @@ export default function HomePost({ data, page }) {
     if (hasMap(contents)) {
       // 지도 정보가 있을 때
       const objContents = JSON.parse(contents);
-      console.log('>', objContents.content);
       setMapInfo(objContents.map);
       setTextContent(objContents.content);
     } else {
@@ -199,7 +198,6 @@ export default function HomePost({ data, page }) {
             {
               label: '수정',
               onClick: () => {
-                console.log('수정');
                 navigate(`/post/${data.id}/modify`, {
                   state: data,
                 });
@@ -214,9 +212,7 @@ export default function HomePost({ data, page }) {
                   {
                     label: '삭제',
                     onClick: async () => {
-                      console.log('삭제');
                       const res = await PostDelete(data.id);
-                      console.log(res.status);
                       if (res.status === '200') {
                         window.location.replace(`/profile`);
                       }
@@ -277,7 +273,13 @@ export default function HomePost({ data, page }) {
             </>
           )}
           {!!Object.keys(mapInfo).length &&
-            (page === 'detail' ? <MapPost place={mapInfo} /> : <MapInline place={mapInfo}></MapInline>)}
+            (page === 'detail' ? (
+              <MapPost place={mapInfo} />
+            ) : (
+              <Link to={`/post/${data.id}`}>
+                <MapInline place={mapInfo}></MapInline>
+              </Link>
+            ))}
         </PostContents>
         <PostReaction>
           <button>
