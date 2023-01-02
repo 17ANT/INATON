@@ -127,16 +127,14 @@ export default function ChatRoom() {
           <MyMsg>
             <h3 className="sr-only">메시지</h3>
             <div>
-              <p>
-                안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-              </p>
+              <p>안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</p>
               <strong>13:49</strong>
             </div>
           </MyMsg>
           <YourMsg>
             <h3 className="sr-only">메시지</h3>
             <a href="#">
-              <img src={`assets/Ellipse 6.png`} alt="" />
+              <img src={`${process.env.PUBLIC_URL}/assets/Ellipse 6.png`} alt="" />
             </a>
             <div>
               <p>네 안녕하세요</p>
@@ -146,13 +144,10 @@ export default function ChatRoom() {
           <YourMsg>
             <h3 className="sr-only">메시지</h3>
             <Link to="#">
-              <img src={`assets/Ellipse 6.png`} alt="" />
+              <img src={`${process.env.PUBLIC_URL}/assets/Ellipse 6.png`} alt="" />
             </Link>
             <div>
-              <p>
-                네 안녕하세요 대답하시라구요 아 진짜 아놔 왜 답을 안하세요
-                제발요
-              </p>
+              <p>네 안녕하세요 대답하시라구요 아 진짜 아놔 왜 답을 안하세요 제발요</p>
               <strong> 14:00</strong>
             </div>
           </YourMsg>
@@ -166,7 +161,7 @@ export default function ChatRoom() {
           <MyMsg>
             <h3 className="sr-only">메시지</h3>
             <div>
-              <img src={`assets/chat-exapmle.png`} alt="" />
+              <img src={`${process.env.PUBLIC_URL}/assets/chat-exapmle.png`} alt="" />
               <strong>13:49</strong>
             </div>
           </MyMsg>
@@ -176,17 +171,13 @@ export default function ChatRoom() {
         <h2 className="sr-only">채팅입력창</h2>
         <form>
           <label htmlFor="imgUpload" className="img-upload">
-            <img src={'assets/img-button.png'} alt="" />
+            <img src={process.env.PUBLIC_URL + '/assets/img-button.png'} alt="" />
           </label>
           <input type="file" id="imgUpload" className="sr-only" />
           <label htmlFor="msgInput" className="sr-only">
             메시지창
           </label>
-          <input
-            className="msg-input"
-            type="text"
-            placeholder="메시지를 입력하세요"
-          />
+          <input className="msg-input" type="text" placeholder="메시지를 입력하세요" />
           <button>전송</button>
         </form>
       </MsgInput>

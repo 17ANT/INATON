@@ -36,11 +36,10 @@ export default function Splash({ auth }) {
       }
     }, 1500);
   }, [auth]);
-  console.log(auth);
 
   return (
     <Logo>
-      <img src={'/assets/inaton-logo.svg'} alt="IN AT ON" />
+      <img src={process.env.PUBLIC_URL + '/assets/inaton-logo.svg'} alt="IN AT ON" />
     </Logo>
   );
 }

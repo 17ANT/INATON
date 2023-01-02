@@ -74,16 +74,12 @@ export default function NavBar() {
       <Nav>
         <NavList>
           <li className="home">
-            <NavLink
-              to="/home"
-              className={({ isActive }) => (isActive ? 'active' : '')}>
+            <NavLink to="/home" className={({ isActive }) => (isActive ? 'active' : '')}>
               홈
             </NavLink>
           </li>
           <li className="chat">
-            <NavLink
-              to="/chatlist"
-              className={({ isActive }) => (isActive ? 'active' : '')}>
+            <NavLink to="/chatlist" className={({ isActive }) => (isActive ? 'active' : '')}>
               채팅
             </NavLink>
           </li>
@@ -91,9 +87,7 @@ export default function NavBar() {
             <NavLink to="/postupload">게시물작성</NavLink>
           </li>
           <li className="user">
-            <NavLink
-              end to="/profile"
-              className={({ isActive }) => (isActive ? 'active' : '')}>
+            <NavLink end to="/profile" className={({ isActive }) => (isActive ? 'active' : '')}>
               프로필
             </NavLink>
           </li>

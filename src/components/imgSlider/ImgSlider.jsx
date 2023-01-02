@@ -145,10 +145,10 @@ export default function ImgSlider({ images }) {
                 ))}
               </DotsContainer>
               <Prev onClick={movePrev} disabled={showIndex === 0}>
-                <img src="/assets/icon/icon-prev.png" alt="이전" />
+                <img src={process.env.PUBLIC_URL + '/assets/icon/icon-prev.png'} alt="이전" />
               </Prev>
               <Next onClick={moveNext} disabled={showIndex === images.length - 1}>
-                <img src="/assets/icon/icon-next.png" alt="이후 버튼" />
+                <img src={process.env.PUBLIC_URL + '/assets/icon/icon-next.png'} alt="이후 버튼" />
               </Next>
             </>
           )}
