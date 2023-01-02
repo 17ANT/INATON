@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/INATON/static/css/main.b560a772.css",
-    "main.js": "/INATON/static/js/main.530fa24a.js",
+    "main.js": "/INATON/static/js/main.f1e4f4d7.js",
     "index.html": "/INATON/index.html",
     "main.b560a772.css.map": "/INATON/static/css/main.b560a772.css.map",
-    "main.530fa24a.js.map": "/INATON/static/js/main.530fa24a.js.map"
+    "main.f1e4f4d7.js.map": "/INATON/static/js/main.f1e4f4d7.js.map"
   },
   "entrypoints": [
     "static/css/main.b560a772.css",
-    "static/js/main.530fa24a.js"
+    "static/js/main.f1e4f4d7.js"
   ]
 }
