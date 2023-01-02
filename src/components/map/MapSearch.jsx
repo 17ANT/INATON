@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import './map.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { useNavigate } from 'react-router-dom';
 const { kakao } = window;
 
 const SearchContainer = styled.div`
@@ -13,7 +14,7 @@ const SearchContainer = styled.div`
 
 const MapResultList = styled.ul`
   width: 358px;
-  height: 50%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -21,14 +22,24 @@ const MapResultList = styled.ul`
   margin: 20px auto;
   overflow-y: scroll;
   padding-bottom: 16px;
-  /* ::-webkit-scrollbar {
-    width: 4px;
-  } */
+  overflow-x: hidden;
+  /* z-index: 100; */
+  background-color: #fff;
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
   li {
     position: relative;
     padding: 16px 7px 0;
     border-top: 1px solid #777;
     min-height: fit-content;
+
     .info {
       display: flex;
       align-items: center;
@@ -53,7 +64,7 @@ const MapResultList = styled.ul`
     button {
       cursor: pointer;
       position: relative;
-      left: 30px;
+      left: 25px;
       width: 65px;
       height: 30px;
       font-size: 1em;
@@ -65,10 +76,9 @@ const MapResultList = styled.ul`
   }
 `;
 
-export default function MapSearch({ searchKeyword, value, setValue }) {
+export default function MapSearch({ searchKeyword, select, setSelect, setOpen }) {
   // 결과 저장
   const [places, setPlaces] = useState([]);
-  const [selected, setSelected] = useState({});
 
   useEffect(() => {
     const mapContainer = document.getElementById('map');
@@ -168,20 +178,21 @@ export default function MapSearch({ searchKeyword, value, setValue }) {
                     label: '확인',
                     onClick: () => {
                       if (places.road_address_name) {
-                        setValue({
+                        setSelect({
                           place_name: places[i].place_name,
                           x: places[i].x,
                           y: places[i].y,
                           address: places[i].road_address_name,
                         });
                       } else {
-                        setValue({
+                        setSelect({
                           place_name: places[i].place_name,
                           x: places[i].x,
                           y: places[i].y,
                           address: places[i].address_name,
                         });
                       }
+                      setOpen(false);
                     },
                   },
                   {
