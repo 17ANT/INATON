@@ -20,13 +20,13 @@ const PostUploadMain = styled.main`
 `;
 
 const PostPreview = styled.div`
-  width: 200px;
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
 
 const TextForm = styled.textarea`
-  width: 100%;
+  width: max(300px, 80vw);
   padding: 0 16px;
   margin-bottom: 16px;
   border: none;
