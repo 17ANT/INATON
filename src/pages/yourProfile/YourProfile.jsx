@@ -107,7 +107,7 @@ export default function YourProfile() {
         <YourProfileWrap>
           <ProfileHeader>
             <FollowCount count={userProfile.followerCount} kind="followers" onClick={goFollower}></FollowCount>
-            <ProfileImg size="110px" src={userProfile.image} alt="profile image"></ProfileImg>
+            <ProfileImg size="110px" src={userProfile.image} alt="프로필 이미지"></ProfileImg>
             <FollowCount count={userProfile.followingCount} kind="followings" onClick={goFollowing}></FollowCount>
           </ProfileHeader>
 
@@ -119,14 +119,12 @@ export default function YourProfile() {
             ></UserInfoText>
           </ProfileMain>
 
-          {/* 여기서부터 수정시작  */}
-
           <ProfileButton>
-            <Link to="/chatroom">
+            <Link to="/chatroom" state={{ user: userProfile.username }}>
               <ImageButton
                 size="34px"
                 src={`${process.env.PUBLIC_URL}/assets/icon/icon-message-circle.png`}
-                alt="message"
+                alt="메시지 전송"
               ></ImageButton>
             </Link>
             {/* 버튼이 클릭되었을 때 ~.isFollow가 true면 언팔로우 API, false면 팔로우API 실행 */}
@@ -144,7 +142,7 @@ export default function YourProfile() {
               <ImageButton
                 size="34px"
                 src={`${process.env.PUBLIC_URL}/assets/icon/icon-share.png`}
-                alt="message"
+                alt="공유하기"
               ></ImageButton>
             </Link>
           </ProfileButton>

@@ -171,7 +171,7 @@ export default function ChatRoom() {
         <h2 className="sr-only">채팅입력창</h2>
         <form>
           <label htmlFor="imgUpload" className="img-upload">
-            <img src={process.env.PUBLIC_URL + '/assets/img-button.png'} alt="" />
+            <img src={process.env.PUBLIC_URL + '/assets/img-button.png'} alt="이미지 업로드" />
           </label>
           <input type="file" id="imgUpload" className="sr-only" />
           <label htmlFor="msgInput" className="sr-only">

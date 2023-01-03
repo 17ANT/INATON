@@ -38,9 +38,11 @@ const ChatItem = styled.li`
 
 export default function ChatList() {
   const navigate = useNavigate();
-  function movetoChatroom() {
-    navigate(`/chatroom`);
+
+  function movetoChatroom(user) {
+    navigate(`/chatroom`, { state: { user: user } });
   }
+
   return (
     <>
       <BasicHeader />
@@ -56,7 +58,12 @@ export default function ChatList() {
           <span>2023-01-01</span>
         </ChatItem>
         <ChatItem onClick={movetoChatroom}>
-          <InlineProfileInfo img="https://mandarin.api.weniv.co.kr/Ellipse.png" name="멋진사자" desc="아 집에 가고싶다" state="chat" />
+          <InlineProfileInfo
+            img="https://mandarin.api.weniv.co.kr/Ellipse.png"
+            name="멋진사자"
+            desc="아 집에 가고싶다"
+            state="chat"
+          />
           <span>2022-12-18</span>
         </ChatItem>
         <ChatItem onClick={movetoChatroom}>

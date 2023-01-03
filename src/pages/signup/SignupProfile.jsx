@@ -163,13 +163,13 @@ export default function SignupProfile() {
 
       <ProfileModificationWrap>
         <ProfileHeader>
-          <ProfileImg size="110px" src={imageFile} alt="message"></ProfileImg>
+          <ProfileImg size="110px" src={imageFile} alt="프로필 이미지"></ProfileImg>
           <DeleteButtonWrap>
             {show && (
               <ImageButton
                 size="20px"
                 src={process.env.PUBLIC_URL + '/assets/x-button.png'}
-                alt="delete image"
+                alt="이미지 삭제"
                 onClick={deleteImageFile}
               ></ImageButton>
             )}

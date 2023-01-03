@@ -186,13 +186,13 @@ export default function ProfileModification() {
 
       <ProfileModificationWrap>
         <ProfileHeader>
-          <ProfileImg size="110px" src={imageFile} alt="message"></ProfileImg>
+          <ProfileImg size="110px" src={imageFile} alt="프로필 이미지"></ProfileImg>
           <DeleteButtonWrap>
             {show && (
               <ImageButton
                 size="31px"
                 src="../assets/x-button.png"
-                alt="delete image"
+                alt="이미지 삭제"
                 onClick={deleteImageFile}
               ></ImageButton>
             )}

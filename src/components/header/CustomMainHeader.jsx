@@ -154,10 +154,10 @@ export default function CustomMainHeader({ searchActive, setSearchActive }) {
         <div className="search">
           <span className="icon">
             <i name="search-outline" onClick={HandleSearchBtn} className={searchBtn}>
-              <img src={process.env.PUBLIC_URL + '/assets/icon/search.png'} alt="" />
+              <img src={process.env.PUBLIC_URL + '/assets/icon/search.png'} alt="검색창 열기" />
             </i>
             <i name="close-outline" onClick={HandleCloseBtn} className={closeBtn}>
-              <img src={process.env.PUBLIC_URL + '/assets/icon/icon-delete-black.png'} alt="" />
+              <img src={process.env.PUBLIC_URL + '/assets/icon/icon-delete-black.png'} alt="검색창 닫기" />
             </i>
           </span>
         </div>

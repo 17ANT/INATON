@@ -37,10 +37,10 @@ export default function BasicHeader({ onClick }) {
               navigate(-1);
             }}
           >
-            <img src={`${process.env.PUBLIC_URL}/assets/icon/icon-arrow-left.png`} alt="" />
+            <img src={`${process.env.PUBLIC_URL}/assets/icon/icon-arrow-left.png`} alt="뒤로가기" />
           </button>
           <button onClick={onClick}>
-            <img src={`${process.env.PUBLIC_URL}/assets/icon/icon-more-vertical.png`} alt="" />
+            <img src={`${process.env.PUBLIC_URL}/assets/icon/icon-more-vertical.png`} alt="더보기" />
           </button>
         </Section>
       </HeaderWrap>

@@ -295,7 +295,7 @@ export default function HomePost({ data, page }) {
           </button>
           <Link to={`/post/${data.id}`}>
             <button>
-              <img src={process.env.PUBLIC_URL + '/assets/icon/icon-message-circle.png'} alt="댓글 입력창으로 이동" />
+              <img src={process.env.PUBLIC_URL + '/assets/icon/icon-message-circle.png'} "게시글 상세로 이동하기" />
               {commentCnt}
             </button>
           </Link>

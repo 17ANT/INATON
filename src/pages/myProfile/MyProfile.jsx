@@ -49,7 +49,7 @@ const PostContainer = styled.div`
   margin-bottom: 40px;
 `;
 
-export default function MyProfile() {
+export default function MyProfile({ setAuth }) {
   const [myProfile, setMyProfile] = useState();
   const [myFeed, setMyFeed] = useState([]);
   const navigate = useNavigate();
@@ -86,6 +86,7 @@ export default function MyProfile() {
           onClick: () => {
             localStorage.removeItem('accountname');
             localStorage.removeItem('token');
+            setAuth(false);
             navigate('/');
           },
         },
@@ -102,7 +103,7 @@ export default function MyProfile() {
         <MyProfileWrap>
           <ProfileHeader>
             <FollowCount count={myProfile.followerCount} kind="followers" onClick={goFollower}></FollowCount>
-            <ProfileImg size="110px" src={myProfile.image} alt="profile image"></ProfileImg>
+            <ProfileImg size="110px" src={myProfile.image} alt="프로필 이미지"></ProfileImg>
             <FollowCount count={myProfile.followingCount} kind="followings" onClick={goFollowing}></FollowCount>
           </ProfileHeader>
 

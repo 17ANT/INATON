@@ -132,7 +132,7 @@ export default function ImgSlider({ images }) {
           <ImgContainer position={showIndex}>
             {images.map((el, idx) => (
               <ImgItem key={idx}>
-                <img src={el} alt="" />
+                <img src={el} alt="게시글 이미지" />
               </ImgItem>
             ))}
           </ImgContainer>
@@ -148,7 +148,7 @@ export default function ImgSlider({ images }) {
                 <img src={process.env.PUBLIC_URL + '/assets/icon/icon-prev.png'} alt="이전" />
               </Prev>
               <Next onClick={moveNext} disabled={showIndex === images.length - 1}>
-                <img src={process.env.PUBLIC_URL + '/assets/icon/icon-next.png'} alt="이후 버튼" />
+                <img src={process.env.PUBLIC_URL + '/assets/icon/icon-next.png'} alt="이후" />
               </Next>
             </>
           )}

@@ -51,12 +51,12 @@ export default function ChatHeader({ text, isMore, onClick }) {
             navigate(-1);
           }}
         >
-          <img src={`${process.env.PUBLIC_URL}/assets/icon/icon-arrow-left.png`} alt="" />
+          <img src={`${process.env.PUBLIC_URL}/assets/icon/icon-arrow-left.png`} alt="뒤로가기" />
         </button>
         <h2>{text}</h2>
         {isMore ? (
           <button className="more" onClick={onClick}>
-            <img src={`${process.env.PUBLIC_URL}/assets/icon/icon-more-vertical.png`} alt="" />
+            <img src={`${process.env.PUBLIC_URL}/assets/icon/icon-more-vertical.png`} alt="더보기" />
           </button>
         ) : (
           <></>

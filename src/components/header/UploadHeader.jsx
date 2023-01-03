@@ -39,7 +39,7 @@ export default function UploadHeader({ onClick, state, text }) {
               navigate(-1);
             }}
           >
-            <img src={`${process.env.PUBLIC_URL}/assets/icon/icon-arrow-left.png`} alt="" />
+            <img src={`${process.env.PUBLIC_URL}/assets/icon/icon-arrow-left.png`} alt="뒤로가기" />
           </button>
           <CustomButton state={state} size="ms" onClick={onClick}>
             {text}

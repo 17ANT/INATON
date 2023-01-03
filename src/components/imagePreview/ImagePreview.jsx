@@ -37,7 +37,7 @@ const ImageItem = styled.li`
 export default function ImagePreview({ size, src, onClick }) {
   return (
     <ImageItem size={size}>
-      <img src={src} alt="" />
+      <img src={src} alt="업로드 이미지" />
       <button type="button" onClick={onClick}></button>
     </ImageItem>
   );
