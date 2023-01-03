@@ -1,8 +1,8 @@
 # <span id="top">🏠 INATON</span>
 
 [🔗 배포 링크](https://17ant.github.io/INATON/)
+![mock](https://user-images.githubusercontent.com/96777064/210398400-ad2d8a31-114c-409a-89d7-47fc9f91cee8.jpg)
 
-![image](https://user-images.githubusercontent.com/101968934/206655080-7c39e569-bbff-4211-9ab8-0b44ecf2fdd0.png)
 
 
 <details>
@@ -226,7 +226,7 @@
 
 - 게시글 상세/ 업로드 페이지 및 관련 컴포넌트 구현
 - 지도 API 활용을 위한 데이터 처리 및 구현
-- 이미지 압축, API 호출 개선을 통 성능 최적화
+- 이미지 압축, API 호출 개선을 통한 성능 최적화
 
 ### 장수민
 
