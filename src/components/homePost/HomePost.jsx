@@ -213,7 +213,7 @@ export default function HomePost({ data, page }) {
                     onClick: async () => {
                       const res = await PostDelete(data.id);
                       if (res.status === '200') {
-                        window.location.replace(`/profile`);
+                        window.location.replace(`/INATON/profile`);
                       }
                     },
                   },
