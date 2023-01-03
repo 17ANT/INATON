@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { BASE_URL } from '../../common/BASE_URL';
@@ -30,7 +31,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
 `;
-const SignupLink = styled.a`
+const SignupLink = styled(Link)`
   color: var(--sub-font);
   text-decoration: none;
 `;
