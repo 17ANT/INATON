@@ -6,7 +6,6 @@ import UploadHeader from '../../components/header/UploadHeader';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UserInfoInput from '../../components/userInfoInput/UserInfoInput';
 import ImageButton from '../../components/imageButton/ImageButton';
-// import postSignup from './SignupAPI';
 import { SignupContext } from '../../Contexts/SignupContext';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';
 import accountValid from './AccountValidAPI';
@@ -81,7 +80,6 @@ export default function ProfileModification() {
   /* 이미지를 업로드 하는 이벤트 함수 */
   const viewImageFile = async (e) => {
     const imgSrc = await imageUpload(e.target.files[0]);
-    console.log(imgSrc);
     if (imgSrc.message) {
       alert(imgSrc.message);
     } else {

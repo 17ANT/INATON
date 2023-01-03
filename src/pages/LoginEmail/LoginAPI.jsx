@@ -1,8 +1,6 @@
 import { BASE_URL } from '../../common/BASE_URL';
 
 async function postLogin(reqData) {
-  console.log('postlogin');
-  console.log(BASE_URL);
   try {
     const data = await fetch(BASE_URL + '/user/login', {
       method: 'POST',
@@ -11,7 +9,6 @@ async function postLogin(reqData) {
       },
       body: JSON.stringify(reqData),
     });
-    console.log(data);
     const result = await data.json();
     localStorage.setItem('token', result.user.token);
     localStorage.setItem('accountname', result.user.accountname);

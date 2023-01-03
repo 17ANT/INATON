@@ -66,7 +66,6 @@ export default function SignupProfile() {
   /* 이미지를 업로드 하는 이벤트 함수 */
   const viewImageFile = async (e) => {
     const imgSrc = await imageUpload(e.target.files[0]);
-    console.log(imgSrc);
     if (imgSrc.message) {
       alert(imgSrc.message);
     } else {
@@ -139,8 +138,7 @@ export default function SignupProfile() {
       ...signupData,
     };
 
-    // // 데이터를 넘겨주면서 페이지 이동
-    console.log(signupInfo);
+    // 데이터를 넘겨주면서 페이지 이동
     postSignup(signupInfo);
     navigate('/login');
   };

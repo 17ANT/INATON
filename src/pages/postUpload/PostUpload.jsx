@@ -63,7 +63,8 @@ const MapButton = styled.button`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-map.png?raw=true') no-repeat center/ 24px 24px;
+  background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-map.png?raw=true') no-repeat
+    center/ 24px 24px;
   background-color: var(--main-color);
   border: none;
 
@@ -126,7 +127,6 @@ export default function PostUpload() {
       alert('이미지는 3개까지 업로드 가능합니다.');
     } else if (e.target.files[0]) {
       // 이미지 데이터를 API를 이용하여 서버에 업로드
-      // const res = await postImage(url);
       const res = await postImage(e.target.files[0]);
       if (res.message) {
         alert(res.message);

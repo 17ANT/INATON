@@ -11,7 +11,6 @@ async function PostDelete(post_id) {
       },
     });
     const result = await data.json();
-    console.log(result);
     return result;
   } catch (error) {
     console.log(error.message);

@@ -12,7 +12,6 @@ import MyProfile from '../pages/myProfile/MyProfile';
 import YourProfile from '../pages/yourProfile/YourProfile';
 import ProfileModification from '../pages/profileModification/ProfileModification';
 import Home from './../pages/home/Home';
-import Search from './../pages/search/Search';
 import NotFound from './../pages/NotFound/NotFound';
 
 import Follower from '../pages/follow/Follower';
@@ -31,7 +30,6 @@ export default function Router() {
   const authTest = async () => {
     if (token) {
       const res = await authCheck();
-      console.log('rs', res.isValid);
       setAuth(res.isValid);
     } else {
       setAuth(false);
@@ -46,19 +44,11 @@ export default function Router() {
     <SignupContextProvider>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-          {/* 토큰이 없거나 유효하지 않을 때 */}
-          {/* <Route path="/" element={<Splash auth={auth} />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/login/email" element={<LoginEmail setAuth={setAuth} />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signup/profile" element={<SignupProfile />} /> */}
-          {/* /////////////////////////////////// */}
-          {/* 토큰이 있고 토큰이 유효할 때 */}
           <Route path="/" element={<Splash auth={auth} />} />
           {auth ? (
             <>
+              {/* 토큰이 있고 토큰이 유효할 때 */}
               <Route path="/home" element={<Home />} />
-              <Route path="/search" element={<Search />} />
               <Route path="/chatlist" element={<ChatList />} />
               <Route path="/chatroom" element={<ChatRoom />} />
               <Route path="/postupload" element={<PostUpload />} />
@@ -73,6 +63,7 @@ export default function Router() {
             </>
           ) : (
             <>
+              {/* 토큰이 없거나 유효하지 않을 때 */}
               <Route path="/login" element={<Login />} />
               <Route path="/login/email" element={<LoginEmail setAuth={setAuth} />} />
               <Route path="/signup" element={<SignUp />} />
@@ -81,7 +72,6 @@ export default function Router() {
           )}
           {/* 404 */}
           <Route path="/*" element={<NotFound auth={auth} />} />
-          {/* /////////////////////////////////// */}
         </Routes>
       </BrowserRouter>
     </SignupContextProvider>

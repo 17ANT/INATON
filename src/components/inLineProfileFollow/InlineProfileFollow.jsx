@@ -7,7 +7,6 @@ import UnFollow from '../../pages/follow/UnFollowAPI';
 
 export default function InlineProfileFollow({ item }) {
   const navigate = useNavigate();
-  //   const [isFollow, setIsFollow] = useState(true);
   const [userProfile, setUserProfile] = useState();
 
   async function handleFollow() {

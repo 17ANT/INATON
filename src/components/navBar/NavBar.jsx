@@ -48,8 +48,7 @@ const NavList = styled.ul`
     background: url('https://17ant.github.io/INATON/assets/icon/icon-message-circle.png?raw=true') no-repeat;
   }
   .chat a.active::before {
-    background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-message-circle-fill.png?raw=true')
-      no-repeat;
+    background: url('https://17ant.github.io/INATON/assets//icon/icon-message-circle-fill.png?raw=true') no-repeat;
     background-size: contain;
   }
   .user a::before {

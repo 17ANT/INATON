@@ -11,18 +11,6 @@ const ResultContainer = styled.div`
 `;
 
 export default function MapPost({ place }) {
-  // const testPlace = {
-  //   place_name: '테일러커피 서교점',
-  //   x: '126.927602272249',
-  //   y: '37.5538674238312',
-  //   address: '서울 마포구 서교동 338-1',
-  // // };
-  // const place = {
-  //   place_name: '톤앤매너',
-  //   x: '126.928688328087',
-  //   y: '37.5542717317149',
-  //   address: '서울 마포구 서교동 337-10',
-  // };
   const [lat, lng] = [place.y, place.x];
 
   useEffect(() => {
@@ -46,7 +34,7 @@ export default function MapPost({ place }) {
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
 
-    // 길찾기?
+    // 길찾기
     var iwContent = `<div style="padding:5px;">${place.place_name} <a href="https://map.kakao.com/link/to/${place.place_name},${lat},${lng}" style="color:blue" target="_blank">길찾기</a></div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
       iwPosition = new kakao.maps.LatLng(lat, lng); //인포윈도우 표시 위치입니다
 

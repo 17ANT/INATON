@@ -1,10 +1,7 @@
 import { BASE_URL } from '../../common/BASE_URL';
-import { useContext, useState } from 'react';
-import Following from './Following';
 
 async function Follow(accountname) {
   const token = localStorage.getItem('token');
-  // const accountname = localStorage.getItem('accountname');
 
   try {
     const data = await fetch(BASE_URL + `/profile/${accountname}/follow`, {

@@ -179,7 +179,6 @@ export default function CustomMainHeader({ searchActive, setSearchActive }) {
         <SearchResultList>
           {searchResult &&
             searchResult.map((item) => (
-              // <li key={item._id}>{item.username}</li>
               <li key={item._id}>
                 <InlineProfileInfo
                   accountname={item.accountname}

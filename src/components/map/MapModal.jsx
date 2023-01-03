@@ -24,9 +24,7 @@ const MapContainer = styled.div`
   transform: translateX(-50%);
   margin: 10px auto;
 
-  /* z-index: 100; */
   form {
-    /* width: 358px; */
     padding: 12px;
     width: 100%;
     background-color: var(--sub-color);

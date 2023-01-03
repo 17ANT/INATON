@@ -35,7 +35,6 @@ export default function Following() {
   const navigate = useNavigate();
 
   const [followings, setFollowings] = useState(null);
-  // const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
     async function setFollowingList() {
@@ -49,7 +48,6 @@ export default function Following() {
   return (
     <>
       <ChatHeader text={'Following'} isMore={false} />
-      {/* <Btn>팔로우목록</Btn> */}
       <StyledInlineProfileInfo>
         {followings &&
           followings.map((item, index) => (

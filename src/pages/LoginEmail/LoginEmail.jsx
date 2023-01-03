@@ -9,7 +9,6 @@ import InputDiv from '../../components/Input/Input';
 import postLogin from './LoginAPI';
 
 const LoginForm = styled.div`
-  /* font-family: var(--font-family); */
   padding: 0 34px;
   width: fit-content;
   min-height: 100vh;

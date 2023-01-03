@@ -70,8 +70,6 @@ const ImgContainer = styled.ul`
   display: flex;
   width: 304px;
   height: 228px;
-  /* overflow-x: scroll; */
-  /* overflow-y: hidden; */
   outline: 3px solid yellow;
 `;
 
@@ -121,7 +119,8 @@ const MoreBtn = styled.button`
   right: 0px;
   width: 18px;
   height: 18px;
-  background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-more-vertical.png?raw=true') no-repeat center/18px 18px;
+  background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-more-vertical.png?raw=true')
+    no-repeat center/18px 18px;
   border: none;
   cursor: pointer;
 `;

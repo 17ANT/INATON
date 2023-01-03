@@ -96,15 +96,10 @@ export default function Signup() {
       ...signupInfo.user,
       ...signupData.user,
     };
-    console.log(signupInfo);
-    // newUser = { ...newUser, ...signupData };
-    // console.log(newUser);
-    // 데이터를 넘겨주면서 페이지 이동
     navigate('/signup/profile');
   }
 
   return (
-    // 여기에 조건식 ? <SignupForm/>:<SignupProfile/>
     <SignupForm>
       <h2>이메일로 회원가입</h2>
       <Form action="">
