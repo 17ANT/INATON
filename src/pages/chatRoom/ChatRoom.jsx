@@ -122,7 +122,6 @@ const MsgInput = styled.footer`
 export default function ChatRoom() {
   const location = useLocation();
   const username = location.state.user;
-  console.log(username);
   return (
     <>
       <ChatHeader text={username} isMore={true} />
