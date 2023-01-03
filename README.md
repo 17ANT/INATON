@@ -1,70 +1,159 @@
-# Getting Started with Create React App
+# INATON
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![image](https://user-images.githubusercontent.com/101968934/206655080-7c39e569-bbff-4211-9ab8-0b44ecf2fdd0.png)
 
-## Available Scripts
+오늘 점심 뭐 드시나요 -jasmin-
 
-In the project directory, you can run:
+내일 두시 달콤한 거짓말에서
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+딸기마켓
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 배포 링크
+- 개요
+- 팀원 구성
 
-### `npm test`
+> 목차
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. 프로젝트 목표
+2. 개발 환경 및 배포 url
+3. 프로젝트 구조
+4. 역할분담
+5. 개발 기간 및 작업 관리
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+├── README.md
+├── README.old.md
+├── assets
+├── package-lock.json
+├── package.json
+├── public
+│   ├── assets
+│   └── index.html
+└── src
+    ├── App.jsx
+    ├── Contexts
+    │   └── SignupContext.jsx
+    ├── common
+    │   ├── AuthenticationCheck.jsx
+    │   ├── BASE_URL.jsx
+    │   ├── GetMyInfo.jsx
+    │   ├── GetPostDetail.jsx
+    │   ├── GetUserPost.jsx
+    │   ├── ImageResize.jsx
+    │   ├── ImageUploadAPI.jsx
+    │   └── PostComment.jsx
+    ├── components
+    │   ├── Input
+    │   │   └── Input.jsx
+    │   ├── comment
+    │   │   ├── Comment.jsx
+    │   │   ├── CommentReportAPI.jsx
+    │   │   ├── CommentsDeleteAPI.jsx
+    │   │   ├── CommentsListAPI.jsx
+    │   │   └── CommentsWriteAPI.jsx
+    │   ├── customButton
+    │   │   └── CustomButton.jsx
+    │   ├── errorMessage
+    │   │   └── ErrorMessage.jsx
+    │   ├── feedList
+    │   │   └── FeedList.jsx
+    │   ├── followCount
+    │   │   └── FollowCount.jsx
+    │   ├── header
+    │   │   ├── BasicHeader.jsx
+    │   │   ├── ChatHeader.jsx
+    │   │   ├── CustomMainHeader.jsx
+    │   │   └── UploadHeader.jsx
+    │   ├── homePost
+    │   │   ├── DeleteLikeAPI.jsx
+    │   │   ├── HomePost.jsx
+    │   │   ├── LikeAPI.jsx
+    │   │   └── PostReportAPI.jsx
+    │   ├── imageButton
+    │   │   └── ImageButton.jsx
+    │   ├── imagePreview
+    │   │   └── ImagePreview.jsx
+    │   ├── imgSlider
+    │   │   └── ImgSlider.jsx
+    │   ├── inLineProfileFollow
+    │   │   └── InlineProfileFollow.jsx
+    │   ├── inlineProfileInfo
+    │   │   └── InlineProfileInfo.jsx
+    │   ├── map
+    │   │   ├── MapInline.jsx
+    │   │   ├── MapModal.jsx
+    │   │   ├── MapPost.jsx
+    │   │   ├── MapSearch.jsx
+    │   │   ├── map.css
+    │   │   └── page.css
+    │   ├── navBar
+    │   │   └── NavBar.jsx
+    │   ├── profileImg
+    │   │   └── ProfileImg.jsx
+    │   ├── uploadButton
+    │   │   └── UploadButton.jsx
+    │   ├── userInfoInput
+    │   │   └── UserInfoInput.jsx
+    │   └── userInfoText
+    │       └── UserInfoText.jsx
+    ├── index.js
+    ├── pages
+    │   ├── LoginEmail
+    │   │   ├── LoginAPI.jsx
+    │   │   └── LoginEmail.jsx
+    │   ├── NotFound
+    │   │   └── NotFound.jsx
+    │   ├── chatList
+    │   │   └── ChatList.jsx
+    │   ├── chatRoom
+    │   │   └── ChatRoom.jsx
+    │   ├── follow
+    │   │   ├── FollowAPI.jsx
+    │   │   ├── Follower.jsx
+    │   │   ├── FollowerAPI.jsx
+    │   │   ├── Following.jsx
+    │   │   ├── FollowingAPI.jsx
+    │   │   └── UnFollowAPI.jsx
+    │   ├── home
+    │   │   ├── FeedAPI.jsx
+    │   │   ├── Home.jsx
+    │   │   └── SearchAPI.jsx
+    │   ├── login
+    │   │   └── Login.jsx
+    │   ├── myProfile
+    │   │   ├── GetProfileAPI.jsx
+    │   │   ├── MyProfile.jsx
+    │   │   └── MyProfileFeedAPI.jsx
+    │   ├── postDetail
+    │   │   ├── PostDeleteAPI.jsx
+    │   │   └── PostDetail.jsx
+    │   ├── postModify
+    │   │   ├── PostModify.jsx
+    │   │   └── PostModifyAPI.jsx
+    │   ├── postUpload
+    │   │   ├── PostUpload.jsx
+    │   │   └── PostUploadAPI.jsx
+    │   ├── profileModification
+    │   │   ├── AccountValidAPI.jsx
+    │   │   ├── ImageAPI.jsx
+    │   │   ├── ProfileModification.jsx
+    │   │   └── ProfileModificationAPI.jsx
+    │   ├── signup
+    │   │   ├── AccountValidAPI.jsx
+    │   │   ├── EmailValidAPI.jsx
+    │   │   ├── ImageAPI.jsx
+    │   │   ├── Signup.jsx
+    │   │   ├── SignupAPI.jsx
+    │   │   └── SignupProfile.jsx
+    │   ├── splash
+    │   │   └── Splash.jsx
+    │   └── yourProfile
+    │       ├── ProfileAPI.jsx
+    │       └── YourProfile.jsx
+    └── routes
+        └── Router.jsx
+```
