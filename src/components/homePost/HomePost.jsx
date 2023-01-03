@@ -121,7 +121,7 @@ const MoreBtn = styled.button`
   right: 0px;
   width: 18px;
   height: 18px;
-  background: url('/assets/icon/icon-more-vertical.png') no-repeat center/18px 18px;
+  background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-more-vertical.png?raw=true') no-repeat center/18px 18px;
   border: none;
   cursor: pointer;
 `;

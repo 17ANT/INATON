@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import styled from 'styled-components';
-import './map.css';
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useEffect } from "react";
+import styled from "styled-components";
+import "./map.css";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import { useNavigate } from "react-router-dom";
 const { kakao } = window;
 
 const SearchContainer = styled.div`
@@ -23,7 +23,6 @@ const MapResultList = styled.ul`
   gap: 12px;
   margin: 0px auto;
   overflow-y: scroll;
-  padding-bottom: 16px;
   overflow-x: hidden;
   border-radius: 0 0 8px 8px;
   /* z-index: 100; */
@@ -42,7 +41,9 @@ const MapResultList = styled.ul`
     padding: 16px 7px 0;
     border-top: 1px solid #777;
     min-height: fit-content;
-
+    :last-child {
+      padding-bottom: 16px;
+    }
     .info {
       display: flex;
       align-items: center;
@@ -79,12 +80,17 @@ const MapResultList = styled.ul`
   }
 `;
 
-export default function MapSearch({ searchKeyword, select, setSelect, setOpen }) {
+export default function MapSearch({
+  searchKeyword,
+  select,
+  setSelect,
+  setOpen,
+}) {
   // 결과 저장
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
-    const mapContainer = document.getElementById('map');
+    const mapContainer = document.getElementById("map");
     const mapOption = {
       center: new kakao.maps.LatLng(37.566826, 126.9786567), // 중심좌표(서울시청)
       level: 3, // 확대 레벨
@@ -104,7 +110,7 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
     function searchPlaces() {
       const keyword = searchKeyword;
 
-      if (!keyword.replace(/^\s+|\s+$/g, '')) {
+      if (!keyword.replace(/^\s+|\s+$/g, "")) {
         return false;
       }
       ps.keywordSearch(keyword, placesSearchCB);
@@ -117,10 +123,10 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
         setPlaces(places);
         displayPlaces(data);
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-        alert('검색 결과가 존재하지 않습니다.');
+        alert("검색 결과가 존재하지 않습니다.");
         return;
       } else if (status === kakao.maps.services.Status.ERROR) {
-        alert('검색 결과 중 오류가 발생했습니다.');
+        alert("검색 결과 중 오류가 발생했습니다.");
         return;
       }
     }
@@ -128,8 +134,8 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
 
     // displayPlaces() 검색 결과 목록, 마커 출력
     function displayPlaces(places) {
-      const listEl = document.getElementById('places-list'),
-        resultEl = document.getElementById('search-result'),
+      const listEl = document.getElementById("places-list"),
+        resultEl = document.getElementById("search-result"),
         fragment = document.createDocumentFragment(),
         bounds = new kakao.maps.LatLngBounds();
 
@@ -145,14 +151,14 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
 
         // event
         (function (marker, title) {
-          kakao.maps.event.addListener(marker, 'mouseover', function () {
+          kakao.maps.event.addListener(marker, "mouseover", function () {
             var moveLatLon = new kakao.maps.LatLng(places[i].y, places[i].x);
             map.setLevel(3);
             map.setCenter(moveLatLon);
             displayInfowindow(marker, title);
           });
 
-          kakao.maps.event.addListener(marker, 'mouseout', function () {
+          kakao.maps.event.addListener(marker, "mouseout", function () {
             infowindow.close();
           });
 
@@ -166,18 +172,18 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
           };
 
           itemEl.onclick = function (e) {
-            if (e.target.tagName !== 'BUTTON') {
+            if (e.target.tagName !== "BUTTON") {
               // 이동할 위도 경도 위치를 생성합니다
               var moveLatLon = new kakao.maps.LatLng(places[i].y, places[i].x);
               map.setLevel(3);
               map.setCenter(moveLatLon);
             }
-            if (e.target.tagName === 'BUTTON') {
+            if (e.target.tagName === "BUTTON") {
               confirmAlert({
-                message: '해당 장소를 선택하시겠습니까?',
+                message: "해당 장소를 선택하시겠습니까?",
                 buttons: [
                   {
-                    label: '확인',
+                    label: "확인",
                     onClick: () => {
                       if (places.road_address_name) {
                         setSelect({
@@ -198,7 +204,7 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
                     },
                   },
                   {
-                    label: '취소',
+                    label: "취소",
                   },
                 ],
               });
@@ -234,7 +240,7 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
 
     // getListItem() 검색결과 리스트 출력
     function getListItem(index, places) {
-      const el = document.createElement('li');
+      const el = document.createElement("li");
       let itemStr = `
         <div class='info'>
           <div>
@@ -250,7 +256,7 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
       `;
 
       el.innerHTML = itemStr;
-      el.className = 'place-item';
+      el.className = "place-item";
 
       return el;
     }
@@ -258,10 +264,15 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
 
     // displayMarker()
     function displayMarker(position, index, title) {
-      let imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png',
+      let imageSrc =
+          "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
         imageSize = new kakao.maps.Size(24, 35),
         imgOptions = {},
-        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+        markerImage = new kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imgOptions
+        ),
         marker = new kakao.maps.Marker({
           position: position, // 마커의 위치
           image: markerImage,
@@ -276,7 +287,7 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
 
     // displayInfowindow()
     function displayInfowindow(marker, title) {
-      let content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+      let content = '<div style="padding:5px;z-index:1;">' + title + "</div>";
 
       infowindow.setContent(content);
       infowindow.open(map, marker);
