@@ -47,7 +47,7 @@ export default function ChatList() {
     <>
       <BasicHeader />
       <ChatMain>
-        <ChatItem onClick={movetoChatroom}>
+        <ChatItem onClick={() => movetoChatroom('피카피카')}>
           {/* 넹 여기는 그냥 두겠습니다! */}
           <InlineProfileInfo
             img=" https://mandarin.api.weniv.co.kr/Ellipse.png"
@@ -57,7 +57,7 @@ export default function ChatList() {
           />
           <span>2023-01-01</span>
         </ChatItem>
-        <ChatItem onClick={movetoChatroom}>
+        <ChatItem onClick={() => movetoChatroom('멋진사자')}>
           <InlineProfileInfo
             img="https://mandarin.api.weniv.co.kr/Ellipse.png"
             name="멋진사자"
@@ -66,7 +66,7 @@ export default function ChatList() {
           />
           <span>2022-12-18</span>
         </ChatItem>
-        <ChatItem onClick={movetoChatroom}>
+        <ChatItem onClick={() => movetoChatroom('자스민')}>
           <InlineProfileInfo
             img="https://mandarin.api.weniv.co.kr/Ellipse.png"
             name="자스민"
@@ -75,7 +75,7 @@ export default function ChatList() {
           />
           <span>2022-12-18</span>
         </ChatItem>
-        <ChatItem onClick={movetoChatroom}>
+        <ChatItem onClick={() => movetoChatroom('먹고자')}>
           <InlineProfileInfo
             img="https://mandarin.api.weniv.co.kr/Ellipse.png"
             name="먹고자"

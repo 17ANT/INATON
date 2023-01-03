@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ChatHeader from './../../components/header/ChatHeader';
@@ -119,9 +120,12 @@ const MsgInput = styled.footer`
 `;
 
 export default function ChatRoom() {
+  const location = useLocation();
+  const username = location.state.user;
+  console.log(username);
   return (
     <>
-      <ChatHeader text={'회원이름'} isMore={true} />
+      <ChatHeader text={username} isMore={true} />
       <Main>
         <ChatRoomWrap>
           <MyMsg>
