@@ -39,7 +39,9 @@ export default function ImagePreview({ size, src, onClick }) {
   return (
     <ImageItem size={size}>
       <img src={src} alt="업로드 이미지" />
-      <button type="button" onClick={onClick}></button>
+      <button type="button" onClick={onClick}>
+        X<span className="sr-only">이미지 삭제</span>
+      </button>
     </ImageItem>
   );
 }
