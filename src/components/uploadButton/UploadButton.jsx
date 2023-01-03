@@ -7,7 +7,8 @@ export const UploadButtonBox = styled.label`
   display: block;
   border-radius: 50%;
 
-  background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-image.png?raw=true') no-repeat center/ ${(props) => props.radius};
+  background: url('https://17ant.github.io/INATON/assets/icon/icon-image.png?raw=true') no-repeat center/
+    ${(props) => props.radius};
   background-color: ${(props) => props.bg};
   box-shadow: 0px 0px 4px #646464;
 

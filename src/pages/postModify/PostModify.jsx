@@ -59,7 +59,7 @@ const MapButton = styled.button`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: url('/assets/icon/icon-map.png') no-repeat center/ 24px 24px;
+  background: url('https://17ant.github.io/INATON/assets/icon/icon-map.png') no-repeat center/ 24px 24px;
   background-color: var(--main-color);
   border: none;
 
