@@ -4,19 +4,11 @@
 
 ![image](https://user-images.githubusercontent.com/101968934/206655080-7c39e569-bbff-4211-9ab8-0b44ecf2fdd0.png)
 
----
-
-## 개요
-
-- INATON(인에톤)서비스는 "공간"이라는 키워드를 중심으로 각자만이 알고있는 장소를 공유하는 SNS입니다.
-- 서로의 아지트를 공유하며 '좋아요'
-  , '댓글'기능을 통해 서로 소통할 수 있습니다.
-- 🦁 멋쟁이사자처럼 프론트엔드스쿨 3기 팀 프로젝트로 진행한 INATON입니다.
 
 <details>
 <summary>목차</summary>
 
-1. [프로젝트 목표](#goal)
+1. [프로젝트 소개](#goal)
 2. [개발 환경 및 배포 URL](#dev)
 3. [프로젝트 구조](#tree)
 4. [팀원 소개](#member)
@@ -26,11 +18,16 @@
 8. [개발하며 겪은 이슈](#issues)
 </details>
 
----
 
-## <span id="goal">1. 프로젝트 목표</span>
+## <span id="goal">1. 프로젝트 소개</span>
+
+- INATON(인에톤)서비스는 "공간"이라는 키워드를 중심으로 각자만이 알고있는 장소를 공유하는 SNS입니다.
+- 서로의 아지트를 공유하며 '좋아요'
+  , '댓글'기능을 통해 서로 소통할 수 있습니다.
+- 🦁 멋쟁이사자처럼 프론트엔드스쿨 3기 팀 프로젝트로 진행한 INATON입니다.
 
 <p align="right"><a href="#top">(Top)</a></p>
+
 
 ## <span id="dev">2. 개발 환경 및 배포 URL</span>
 
@@ -47,6 +44,7 @@
   > pw: `admin1234`
 
 <p align="right"><a href="#top">(Top)</a></p>
+
 
 ## <span id="tree">3. 프로젝트 구조</span>
 
@@ -188,9 +186,9 @@
         └── Router.jsx
 ```
 
----
-
 <p align="right"><a href="#top">(Top)</a></p>
+
+
 
 ## <span id="member">4. 팀원 소개</span>
 
@@ -198,9 +196,9 @@
 | :-----------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
 | [<img src="https://avatars.githubusercontent.com/u/101968934?v=4" height=150 width=150> <br/> @gajua](https://github.com/gajua) | [<img src="https://avatars.githubusercontent.com/u/105181266?v=4" height=150 width=150> <br/> @jhyun-k](https://github.com/jhyun-k) | [<img src="https://avatars.githubusercontent.com/u/96777064?v=4" height=150 width=150> <br/> @baekg6](https://github.com/baekg6) | [<img src="https://avatars.githubusercontent.com/u/29765842?v=4" height=150 width=150> <br/> @jangsumin](https://github.com/jangsumin) |
 
----
 
 <p align="right"><a href="#top">(Top)</a></p>
+
 
 ## <span id="role">5. 역할 분담</span>
 
@@ -235,35 +233,32 @@
 - 내 프로필, 상대 프로필, 프로필 수정 페이지 마크업 및 관련 컴포넌트 구현
 - react-confirm-alert 라이브러리를 활용한 confirm 기능 획일화
 
----
-
 <p align="right"><a href="#top">(Top)</a></p>
+
 
 ## <span id="task">6. 개발 기간 및 작업 관리</span>
 
 - 전체 개발 기간 : 2022-12-09 ~ 2023-01-04
 
----
-
 <p align="right"><a href="#top">(Top)</a></p>
+
 
 ## <span id="pages">7. 페이지 기능</span>
 
 ## 1) 홈
 
-|                           Splash                            |                                                                         로그인                                                                         |                                                             회원가입                                                             |
-| :---------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: |
+|    Splash  |  로그인       |              회원가입                |
+| :----------: | :----------: | :----------: |
 | <img height="540px"  src="https://i.imgur.com/8esgAUW.gif"> | <img height="540px" src="https://media.discordapp.net/attachments/1045252441756684368/1059717287608864849/chrome_X3D40XQiPD.gif?width=310&height=670"> | <img height="540px"  src="https://cdn.discordapp.com/attachments/1045252441756684368/1059711139602255902/chrome_92BGrLs6PS.gif"> |
 
-|                                                                         홈 피드                                                                         |                                                                          검색                                                                           |                                                           채팅 페이지                                                            |
-| :-----------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------- |
-| <img height="540px"  src="https://media.discordapp.net/attachments/1045252441756684368/1059720760886837358/chrome_gJqSjq7JiX.gif?width=310&height=670"> | <img height="540px"  src="https://media.discordapp.net/attachments/1045252441756684368/1059718125450428466/chrome_1CRB95jC9P.gif?width=310&height=670"> | <img height="540px"  src="https://cdn.discordapp.com/attachments/1045252441756684368/1059721433120514118/chrome_pHDAHyMzlC.gif"> | 🔗[댓글 작성](https://cdn.discordapp.com/attachments/1045252441756684368/1059728743859494983/chrome_XoiGNsezQH.gif) |
+|      홈 피드        |              검색         |       채팅 페이지         |
+| :----------: | :----------: | :----------: |
+| <img height="540px"  src="https://media.discordapp.net/attachments/1045252441756684368/1059720760886837358/chrome_gJqSjq7JiX.gif?width=310&height=670"> | <img height="540px"  src="https://media.discordapp.net/attachments/1045252441756684368/1059718125450428466/chrome_1CRB95jC9P.gif?width=310&height=670"> | <img height="540px"  src="https://cdn.discordapp.com/attachments/1045252441756684368/1059721433120514118/chrome_pHDAHyMzlC.gif"> |
 
 ## 2) 게시글
-
 |                                                           게시글 작성                                                            |                                                           게시글 수정                                                            |                        게시글 삭제                         |
 | :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------: |
-| <img height="540px"  src="https://cdn.discordapp.com/attachments/1045252441756684368/1059726264396685332/chrome_uds4ntAfvX.gif"> | <img height="540px"  src="https://cdn.discordapp.com/attachments/1045252441756684368/1059727083137409064/chrome_oEBXFJfsN8.gif"> | <img height="540px" src="https://i.imgur.com/4d0qoLx.gif"> |
+| <img height="540px" src="https://user-images.githubusercontent.com/96777064/210320769-3c956487-1c3b-4f7a-8443-390f5d10e933.gif"> | <img height="540px"  src="https://cdn.discordapp.com/attachments/1045252441756684368/1059727083137409064/chrome_oEBXFJfsN8.gif"> | <img height="540px" src="https://i.imgur.com/4d0qoLx.gif"> |
 
 |                         게시글 신고                         |                          댓글 작성                          |                     댓글 신고 및 삭제                      |
 | :---------------------------------------------------------: | :---------------------------------------------------------: | :--------------------------------------------------------: |
