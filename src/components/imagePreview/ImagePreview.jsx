@@ -28,7 +28,8 @@ const ImageItem = styled.li`
     width: 22px;
     height: 22px;
     border: none;
-    background: url('https://17ant.github.io/INATON/assets/icon/icon-delete.png') no-repeat center/22px 22px transparent;
+    background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-delete.png') no-repeat
+      center/22px 22px transparent;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     cursor: pointer;
   }
