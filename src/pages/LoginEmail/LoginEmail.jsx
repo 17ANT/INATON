@@ -78,7 +78,7 @@ export default function LoginEmail({ setAuth }) {
           로그인
         </CustomButton>
       </Form>
-      <SignupLink href="/signup">이메일로 회원가입</SignupLink>
+      <SignupLink to="/signup">이메일로 회원가입</SignupLink>
     </LoginForm>
   );
 }

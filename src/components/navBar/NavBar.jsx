@@ -41,22 +41,25 @@ const NavList = styled.ul`
     background-size: contain;
   }
   .home a.active::before {
-    background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-home-fill.png?raw=true') no-repeat;
+    background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-home-fill.png?raw=true')
+      no-repeat;
     background-size: contain;
   }
   .chat a::before {
-    background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-message-circle.png?raw=true') no-repeat;
+    background: url('https://17ant.github.io/INATON/assets/icon/icon-message-circle.png?raw=true') no-repeat;
   }
   .chat a.active::before {
-    background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-message-circle-fill.png?raw=true') no-repeat;
+    background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-message-circle-fill.png?raw=true')
+      no-repeat;
     background-size: contain;
   }
   .user a::before {
-    background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-user.png?raw=true') no-repeat;
+    background: url(process.env.PUBLIC_URL + '/assets/icon/icon-user.png?raw=true') no-repeat;
     background-size: contain;
   }
   .user a.active::before {
-    background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-user-fill.png?raw=true') no-repeat;
+    background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-user-fill.png?raw=true')
+      no-repeat;
     background-size: contain;
   }
   .post a::before {
