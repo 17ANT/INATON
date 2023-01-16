@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
 import CommentsDelete from './CommentsDeleteAPI';
-import CommentReport from './CommentReportAPI';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import postAPI from '../../common/PostAPI';
 
 const CommentContainer = styled.li`
   position: relative;
@@ -97,7 +97,7 @@ export default function Comment({ data, setFlag }) {
           {
             label: '신고',
             onClick: () => {
-              CommentReport(params.post_id, data.id);
+              postAPI(`/post/${params.post_id}/comments/${data.id}/report`);
             },
           },
           {

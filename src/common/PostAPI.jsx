@@ -11,11 +11,9 @@ async function postAPI(url, reqData = null) {
     headers['Authorization'] = `Bearer ${token}`;
   }
   options['headers'] = headers;
-
   if (reqData) {
     options['body'] = JSON.stringify(reqData);
   }
-
   try {
     // const data = await fetch(BASE_URL + '/user/login', {
     const data = await fetch(BASE_URL + url, options);

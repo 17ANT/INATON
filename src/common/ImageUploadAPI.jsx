@@ -8,11 +8,10 @@ import ImageResize from './ImageResize';
 async function postImage(file) {
   try {
     let newFile = file;
-    console.log('upload:', file);
-    // 1. jpeg,png인 경우에는 압축을 진행
+
+    // jpeg, png인 경우에만 압축을 진행
     if (newFile.type === 'image/jpeg' || newFile.type === 'image/png') {
       newFile = await ImageResize(file);
-      console.log('resize:', newFile);
     } else if (file.size >= 10 * 1024 * 1024) {
       alert('10MB 이하의 이미지를 올려주세요');
       new Error('용량 초과');
