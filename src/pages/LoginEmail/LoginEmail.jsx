@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { BASE_URL } from '../../common/BASE_URL';
+import postAPI from '../../common/PostAPI';
 import CustomButton from '../../components/customButton/CustomButton';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';
 import InputDiv from '../../components/Input/Input';
@@ -53,8 +54,14 @@ export default function LoginEmail({ setAuth }) {
 
   async function handleSubmit() {
     // 데이터를 넘겨주면서 페이지 이동
-    const result = await postLogin(user);
-    if (result) {
+    // const result = await postLogin(user);
+    const result = await postAPI('/user/login', user);
+    console.log('postAPI로 로그인');
+
+    if (result.user) {
+      localStorage.setItem('token', result.user.token);
+      localStorage.setItem('accountname', result.user.accountname);
+
       setAuth(true);
       navigate('/');
     } else {

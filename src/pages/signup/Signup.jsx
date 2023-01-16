@@ -6,6 +6,7 @@ import ErrorMessage from '../../components/errorMessage/ErrorMessage';
 import InputDiv from '../../components/Input/Input';
 import { SignupContext } from '../../Contexts/SignupContext';
 import emailValid from './EmailValidAPI';
+import postAPI from '../../common/PostAPI';
 
 const SignupForm = styled.div`
   padding: 0 34px;
@@ -71,7 +72,8 @@ export default function Signup() {
 
   async function handleEmailValid() {
     // 이메일 validation check
-    const message = await emailValid({
+
+    const message = await postAPI('/user/emailvalid', {
       user: {
         email: emailRef.current.value,
       },

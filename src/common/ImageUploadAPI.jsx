@@ -1,6 +1,11 @@
 import { BASE_URL } from './BASE_URL';
 import ImageResize from './ImageResize';
 const SIZE_LIMIT = 8 * 1024 * 1024;
+
+// postImage라는 API를 부를때 file을 넘기는데
+// 이때 file이 null일 수 있다.
+// file.size null이면 어쩔꺼냐.
+
 async function postImage(file) {
   try {
     let newFile = file;
