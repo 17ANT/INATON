@@ -1,9 +1,7 @@
 import React from 'react';
 import ChatHeader from '../../components/header/ChatHeader';
 import NavBar from '../../components/navBar/NavBar';
-import InlineProfileInfo from '../../components/inlineProfileInfo/InlineProfileInfo';
 import styled from 'styled-components';
-import CustomButton from '../../components/customButton/CustomButton';
 import getFollowing from './FollowingAPI';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -32,7 +30,6 @@ const StyledInlineProfileInfo = styled.div`
 
 export default function Following() {
   const params = useParams();
-  const navigate = useNavigate();
 
   const [followings, setFollowings] = useState(null);
 

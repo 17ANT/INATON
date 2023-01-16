@@ -1,21 +1,24 @@
 import { BASE_URL } from './BASE_URL';
 
-async function postAPI(url, reqData) {
+async function postAPI(url, reqData = null) {
+  const options = {
+    method: 'POST',
+  };
   // token이 있으면 headers에 authorization 추가
   const token = localStorage.getItem('token');
   const headers = { 'Content-type': 'application/json' };
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
-  console.log(headers);
+  options['headers'] = headers;
+
+  if (reqData) {
+    options['body'] = JSON.stringify(reqData);
+  }
 
   try {
     // const data = await fetch(BASE_URL + '/user/login', {
-    const data = await fetch(BASE_URL + url, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(reqData),
-    });
+    const data = await fetch(BASE_URL + url, options);
     const result = await data.json();
     return result;
   } catch (error) {
@@ -24,22 +27,3 @@ async function postAPI(url, reqData) {
 }
 
 export default postAPI;
-
-///////////
-// import { BASE_URL } from '../../common/BASE_URL';
-
-async function accountValid(reqData) {
-  try {
-    const data = await fetch(BASE_URL + '/user/accountnamevalid', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(reqData),
-    });
-    const result = await data.json();
-    return result;
-  } catch (error) {
-    console.log(error.message);
-  }
-}

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { BASE_URL } from '../../common/BASE_URL';
 import postImage from '../../common/ImageUploadAPI';
+import postAPI from '../../common/PostAPI';
 import UploadHeader from '../../components/header/UploadHeader';
 import ImagePreview from '../../components/imagePreview/ImagePreview';
 import MapInline from '../../components/map/MapInline';
@@ -10,7 +11,6 @@ import MapModal from '../../components/map/MapModal';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UploadButton from '../../components/uploadButton/UploadButton';
 import getUser from '../myProfile/GetProfileAPI';
-import uploadPost from './PostUploadAPI';
 
 const PostUploadMain = styled.main`
   width: 100%;
@@ -153,7 +153,7 @@ export default function PostUpload() {
         },
       };
     }
-    uploadPost(post);
+    postAPI('/post', post);
     navigate('/profile');
   }
 
