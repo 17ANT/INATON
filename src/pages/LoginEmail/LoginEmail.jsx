@@ -1,13 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { BASE_URL } from '../../common/BASE_URL';
 import postAPI from '../../common/PostAPI';
 import CustomButton from '../../components/customButton/CustomButton';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';
 import InputDiv from '../../components/Input/Input';
-import postLogin from './LoginAPI';
 
 const LoginForm = styled.div`
   padding: 0 34px;

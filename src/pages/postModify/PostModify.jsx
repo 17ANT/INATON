@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { BASE_URL } from '../../common/BASE_URL';
 import postImage from '../../common/ImageUploadAPI';

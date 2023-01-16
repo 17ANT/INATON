@@ -8,13 +8,13 @@ import UserInfoInput from '../../components/userInfoInput/UserInfoInput';
 import ImageButton from '../../components/imageButton/ImageButton';
 import { SignupContext } from '../../Contexts/SignupContext';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';
-import accountValid from './AccountValidAPI';
 import { useNavigate } from 'react-router-dom';
 import UploadButton from '../../components/uploadButton/UploadButton';
 import imageUpload from './ImageAPI';
 import { BASE_URL } from '../../common/BASE_URL';
 import getMyProfile from '../../common/GetMyInfo';
 import putProfile from './ProfileModificationAPI';
+import postAPI from '../../common/PostAPI';
 
 const ProfileModificationWrap = styled.div`
   margin: 0 auto;
@@ -123,7 +123,7 @@ export default function ProfileModification() {
     // 정규식 체크
     if (reg.test(accountRef.current.value)) {
       // valid 체크
-      const message = await accountValid({
+      const message = await postAPI('/user/accountnamevalid', {
         user: {
           accountname: accountRef.current.value,
         },

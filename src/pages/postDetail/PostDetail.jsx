@@ -9,6 +9,7 @@ import ProfileImg from '../../components/profileImg/ProfileImg';
 import getUser from '../myProfile/GetProfileAPI';
 import CommentsList from '../../components/comment/CommentsListAPI';
 import CommentsWrite from '../../components/comment/CommentsWriteAPI';
+import postAPI from '../../common/PostAPI';
 
 const PostDetailMain = styled.main`
   position: relative;
@@ -120,7 +121,8 @@ export default function PostDetail() {
         content: commentRef.current.value,
       },
     };
-    await CommentsWrite(params.post_id, reqData);
+    // await CommentsWrite(params.post_id, reqData);
+    await postAPI(`/post/${params.post_id}/comments`, reqData);
     commentRef.current.value = '';
     setFlag((prev) => !prev);
   }

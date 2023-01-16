@@ -1,23 +1,25 @@
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
 import CustomButton from '../customButton/CustomButton';
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Follow from '../../pages/follow/FollowAPI';
 import UnFollow from '../../pages/follow/UnFollowAPI';
+import postAPI from '../../common/PostAPI';
 
 export default function InlineProfileFollow({ item }) {
-  const navigate = useNavigate();
   const [userProfile, setUserProfile] = useState();
 
   async function handleFollow() {
     if (item.isfollow) {
       // 언팔로우 API
+      console.log('unfollow');
       const res = await UnFollow(item.accountname);
       item.isfollow = !item.isfollow;
       setUserProfile(res.profile);
     } else {
       // 팔로우 API
-      const res = await Follow(item.accountname);
+      // const res = await Follow(item.accountname);
+      const res = await postAPI(`profile/${item.accountname}/follow`);
+      console.log('follow', res);
       item.isfollow = !item.isfollow;
       setUserProfile(res.profile);
     }

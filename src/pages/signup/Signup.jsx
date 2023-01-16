@@ -5,7 +5,6 @@ import CustomButton from '../../components/customButton/CustomButton';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';
 import InputDiv from '../../components/Input/Input';
 import { SignupContext } from '../../Contexts/SignupContext';
-import emailValid from './EmailValidAPI';
 import postAPI from '../../common/PostAPI';
 
 const SignupForm = styled.div`
