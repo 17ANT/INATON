@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import getPost from '../../common/GetPostDetail';
 import Comment from '../../components/comment/Comment';
 import BasicHeader from '../../components/header/BasicHeader';
@@ -8,7 +8,6 @@ import HomePost from '../../components/homePost/HomePost';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import getUser from '../myProfile/GetProfileAPI';
 import CommentsList from '../../components/comment/CommentsListAPI';
-import CommentsWrite from '../../components/comment/CommentsWriteAPI';
 import postAPI from '../../common/PostAPI';
 
 const PostDetailMain = styled.main`
@@ -121,7 +120,6 @@ export default function PostDetail() {
         content: commentRef.current.value,
       },
     };
-    // await CommentsWrite(params.post_id, reqData);
     await postAPI(`/post/${params.post_id}/comments`, reqData);
     commentRef.current.value = '';
     setFlag((prev) => !prev);

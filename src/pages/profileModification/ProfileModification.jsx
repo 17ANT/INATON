@@ -10,8 +10,8 @@ import { SignupContext } from '../../Contexts/SignupContext';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';
 import { useNavigate } from 'react-router-dom';
 import UploadButton from '../../components/uploadButton/UploadButton';
-import imageUpload from './ImageAPI';
 import { BASE_URL } from '../../common/BASE_URL';
+import postImage from '../../common/ImageUploadAPI';
 import getMyProfile from '../../common/GetMyInfo';
 import putProfile from './ProfileModificationAPI';
 import postAPI from '../../common/PostAPI';
@@ -79,7 +79,7 @@ export default function ProfileModification() {
 
   /* 이미지를 업로드 하는 이벤트 함수 */
   const viewImageFile = async (e) => {
-    const imgSrc = await imageUpload(e.target.files[0]);
+    const imgSrc = await postImage(e.target.files[0]);
     if (imgSrc.message) {
       alert(imgSrc.message);
     } else {
