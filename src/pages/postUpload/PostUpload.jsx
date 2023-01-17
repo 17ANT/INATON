@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { BASE_URL } from '../../common/BASE_URL';
+import getAPI from '../../common/GetAPI';
 import postImage from '../../common/ImageUploadAPI';
 import postAPI from '../../common/PostAPI';
 import UploadHeader from '../../components/header/UploadHeader';
@@ -10,7 +11,6 @@ import MapInline from '../../components/map/MapInline';
 import MapModal from '../../components/map/MapModal';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UploadButton from '../../components/uploadButton/UploadButton';
-import getUser from '../myProfile/GetProfileAPI';
 
 const PostUploadMain = styled.main`
   width: 100%;
@@ -110,7 +110,7 @@ export default function PostUpload() {
   }, []);
 
   async function getData() {
-    const userInfo = await getUser(token, accountname);
+    const userInfo = await await getAPI(`/profile/${accountname}`);
     setUser(userInfo.profile);
   }
 

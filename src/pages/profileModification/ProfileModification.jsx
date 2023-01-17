@@ -12,9 +12,9 @@ import { useNavigate } from 'react-router-dom';
 import UploadButton from '../../components/uploadButton/UploadButton';
 import { BASE_URL } from '../../common/BASE_URL';
 import postImage from '../../common/ImageUploadAPI';
-import getMyProfile from '../../common/GetMyInfo';
-import putProfile from './ProfileModificationAPI';
 import postAPI from '../../common/PostAPI';
+import putAPI from '../../common/PutAPI';
+import getAPI from '../../common/GetAPI';
 
 const ProfileModificationWrap = styled.div`
   margin: 0 auto;
@@ -67,7 +67,7 @@ export default function ProfileModification() {
 
   useEffect(() => {
     async function handleProfile() {
-      const myProfileData = await getMyProfile();
+      const myProfileData = await getAPI(`/user/myinfo`);
       const userInfo = myProfileData.user;
 
       setMyProfile(userInfo);
@@ -149,7 +149,7 @@ export default function ProfileModification() {
         image: imageFile,
       },
     };
-    const res = await putProfile(reqData);
+    const res = await putAPI('/user', reqData);
 
     // error가 없을 때 context값 변경하고 링크 이동
     signupData = {

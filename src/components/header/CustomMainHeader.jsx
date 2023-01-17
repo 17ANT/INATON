@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import searchUser from '../../pages/home/SearchAPI';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
-import getProfile from './../../pages/yourProfile/ProfileAPI';
+import getAPI from '../../common/GetAPI';
 
 const Header = styled.header`
   width: 100%;
@@ -122,7 +121,7 @@ export default function CustomMainHeader({ searchActive, setSearchActive }) {
   async function HandleSearchValue() {
     setSearchValue(searchRef.current.value);
     if (searchRef.current.value) {
-      const searchList = await searchUser(searchRef.current.value);
+      const searchList = await getAPI(`/user/searchuser/?keyword=${searchRef.current.value}`);
       setSearchResult(searchList);
     }
   }

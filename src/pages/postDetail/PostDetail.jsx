@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import getPost from '../../common/GetPostDetail';
 import Comment from '../../components/comment/Comment';
 import BasicHeader from '../../components/header/BasicHeader';
 import HomePost from '../../components/homePost/HomePost';
 import ProfileImg from '../../components/profileImg/ProfileImg';
-import getUser from '../myProfile/GetProfileAPI';
-import CommentsList from '../../components/comment/CommentsListAPI';
 import postAPI from '../../common/PostAPI';
+import getAPI from '../../common/GetAPI';
 
 const PostDetailMain = styled.main`
   position: relative;
@@ -83,7 +81,6 @@ const CommentButton = styled.button`
 
 export default function PostDetail() {
   const params = useParams();
-  const token = localStorage.getItem('token');
   const accountname = localStorage.getItem('accountname');
 
   const [userInfo, setUserInfo] = useState(null);
@@ -94,13 +91,13 @@ export default function PostDetail() {
   const [btnState, setBtnState] = useState(false);
 
   async function getData() {
-    const userData = await getUser(token, accountname);
+    const userData = await getAPI(`/profile/${accountname}`);
     setUserInfo(userData.user);
   }
   async function getComments() {
-    const postData = await getPost(params.post_id);
+    const postData = await getAPI(`/post/${params.post_id}`);
     setPostInfo(postData.post);
-    const commentData = await CommentsList(params.post_id);
+    const commentData = await getAPI(`/post/${params.post_id}/comments`);
     setCommentsList(commentData.comments);
   }
 

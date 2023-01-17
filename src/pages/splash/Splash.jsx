@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import authCheck from '../../common/AuthenticationCheck';
-import Login from '../login/Login';
 const keyframeItemMove = keyframes`
   0% {
     transform: translateY(0);

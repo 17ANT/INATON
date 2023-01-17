@@ -7,12 +7,11 @@ import UploadHeader from '../../components/header/UploadHeader';
 import ImagePreview from '../../components/imagePreview/ImagePreview';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UploadButton from '../../components/uploadButton/UploadButton';
-import putPost from './PostModifyAPI';
-import getUser from '../myProfile/GetProfileAPI';
-import getPost from '../../common/GetPostDetail';
 import MapInline from '../../components/map/MapInline';
 import MapModal from '../../components/map/MapModal';
 import { hasMap } from '../../components/homePost/HomePost';
+import getAPI from '../../common/GetAPI';
+import putAPI from '../../common/PutAPI';
 
 const PostUploadMain = styled.main`
   width: 100%;
@@ -138,9 +137,9 @@ export default function PostModify() {
   };
 
   async function getData() {
-    const userInfo = await getUser(token, accountname);
+    const userInfo = await getAPI(`/profile/${accountname}`);
     setUser(userInfo.profile);
-    const postInfo = await getPost(params.post_id);
+    const postInfo = await getAPI(`/post/${params.post_id}`);
 
     if (accountname !== postInfo.post.author.accountname) {
       navigate('/home');
@@ -196,7 +195,7 @@ export default function PostModify() {
         },
       };
     }
-    putPost(post, params.post_id);
+    putAPI(`/post/${params.post_id}`, post);
     navigate(`/profile`);
   }
 

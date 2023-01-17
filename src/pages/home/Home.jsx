@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import HomePost from '../../components/homePost/HomePost';
 import NavBar from '../../components/navBar/NavBar';
 import CustomButton from '../../components/customButton/CustomButton';
 import CustomMainHeader from '../../components/header/CustomMainHeader';
-import Feed from './FeedAPI';
-import getMyProfile from '../../common/GetMyInfo';
 import FeedList from '../../components/feedList/FeedList';
+import getAPI from '../../common/GetAPI';
 
 const Container = styled.div`
   display: flex;
@@ -41,12 +39,12 @@ export default function Home() {
   const [searchActive, setSearchActive] = useState(false);
 
   async function getUser() {
-    const userInfo = await getMyProfile();
+    const userInfo = await getAPI(`/user/myinfo`);
     setUserData(userInfo.user);
   }
 
   async function showPostList() {
-    const feedList = await Feed();
+    const feedList = await getAPI('/post/feed');
     setPostList(feedList.posts);
   }
   useEffect(() => {
@@ -60,10 +58,7 @@ export default function Home() {
 
   return (
     <Container>
-      <CustomMainHeader
-        searchActive={searchActive}
-        setSearchActive={setSearchActive}
-      />
+      <CustomMainHeader searchActive={searchActive} setSearchActive={setSearchActive} />
       {userData &&
         (userData.followingCount > 0 ? (
           // 팔로우가 있는경우
