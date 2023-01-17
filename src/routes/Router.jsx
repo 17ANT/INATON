@@ -19,8 +19,8 @@ import Following from './../pages/follow/Following';
 import SignupProfile from '../pages/signup/SignupProfile';
 import { SignupContextProvider } from '../Contexts/SignupContext';
 import PostModify from '../pages/postModify/PostModify';
-import authCheck from '../common/AuthenticationCheck';
 import MapModal from '../components/map/MapModal';
+import getAPI from '../common/GetAPI';
 
 export default function Router() {
   const token = localStorage.getItem('token');
@@ -29,7 +29,7 @@ export default function Router() {
 
   const authTest = async () => {
     if (token) {
-      const res = await authCheck();
+      const res = await getAPI('/user/checktoken');
       setAuth(res.isValid);
     } else {
       setAuth(false);

@@ -2,10 +2,10 @@ import React from 'react';
 import ChatHeader from '../../components/header/ChatHeader';
 import NavBar from '../../components/navBar/NavBar';
 import styled from 'styled-components';
-import getFollowing from './FollowingAPI';
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import InlineProfileFollow from '../../components/inLineProfileFollow/InlineProfileFollow';
+import getAPI from '../../common/GetAPI';
 
 const StyledInlineProfileInfo = styled.div`
   margin: 48px auto;
@@ -35,7 +35,7 @@ export default function Following() {
 
   useEffect(() => {
     async function setFollowingList() {
-      const followingList = await getFollowing(params.accountname);
+      const followingList = await getAPI(`/profile/${params.accountname}/following?limit=100&skip=0`);
       setFollowings(followingList);
     }
 

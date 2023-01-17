@@ -8,11 +8,10 @@ import UserInfoText from '../../components/userInfoText/UserInfoText';
 import CustomButton from '../../components/customButton/CustomButton';
 import { ImgButton } from '../../components/imageButton/ImageButton';
 import NavBar from './../../components/navBar/NavBar';
-import getProfile from './ProfileAPI';
 import UnFollow from '../follow/UnFollowAPI';
-import ProfileFeed from '../myProfile/MyProfileFeedAPI';
 import FeedList from '../../components/feedList/FeedList';
 import postAPI from '../../common/PostAPI';
+import getAPI from '../../common/GetAPI';
 
 const YourProfileWrap = styled.div`
   margin: 0 auto 16px;
@@ -68,7 +67,7 @@ export default function YourProfile() {
 
   useEffect(() => {
     async function handleProfile() {
-      const userProfileData = await getProfile(params.accountname);
+      const userProfileData = await getAPI(`/profile/${params.accountname}`);
       setUserProfile(userProfileData.profile);
     }
     handleProfile();
@@ -76,7 +75,7 @@ export default function YourProfile() {
   }, []);
 
   async function getFeed() {
-    const res = await ProfileFeed(params.accountname);
+    const res = await getAPI(`/post/${params.accountname}/userpost`);
     setMyFeed(res.post);
   }
 
