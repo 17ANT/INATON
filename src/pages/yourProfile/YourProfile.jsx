@@ -8,10 +8,10 @@ import UserInfoText from '../../components/userInfoText/UserInfoText';
 import CustomButton from '../../components/customButton/CustomButton';
 import { ImgButton } from '../../components/imageButton/ImageButton';
 import NavBar from './../../components/navBar/NavBar';
-import UnFollow from '../follow/UnFollowAPI';
 import FeedList from '../../components/feedList/FeedList';
 import postAPI from '../../common/PostAPI';
 import getAPI from '../../common/GetAPI';
+import deleteAPI from '../../common/DeleteAPI';
 
 const YourProfileWrap = styled.div`
   margin: 0 auto 16px;
@@ -90,7 +90,7 @@ export default function YourProfile() {
     setIsFollow((prev) => !prev);
     if (userProfile.isfollow) {
       // 언팔로우 API
-      const res = await UnFollow(params.accountname);
+      const res = await deleteAPI(`/profile/${params.accountname}/unfollow`);
       setUserProfile(res.profile);
     } else {
       // 팔로우 API

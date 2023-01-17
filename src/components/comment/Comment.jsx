@@ -2,10 +2,10 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
-import CommentsDelete from './CommentsDeleteAPI';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import postAPI from '../../common/PostAPI';
+import deleteAPI from '../../common/DeleteAPI';
 
 const CommentContainer = styled.li`
   position: relative;
@@ -81,7 +81,7 @@ export default function Comment({ data, setFlag }) {
           {
             label: '삭제',
             onClick: async () => {
-              await CommentsDelete(params.post_id, data.id);
+              await deleteAPI(`/post/${params.post_id}/comments/${data.id}`);
               setFlag((prev) => !prev);
             },
           },

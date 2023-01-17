@@ -5,11 +5,10 @@ import ImgSlider from '../imgSlider/ImgSlider';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import deleteLike from './DeleteLikeAPI';
-import PostDelete from '../../pages/postDetail/PostDeleteAPI';
 import MapInline from '../map/MapInline';
 import MapPost from '../map/MapPost';
 import postAPI from '../../common/PostAPI';
+import deleteAPI from '../../common/DeleteAPI';
 
 const PostContainer = styled.div`
   position: relative;
@@ -164,7 +163,8 @@ export default function HomePost({ data, page }) {
                   {
                     label: '삭제',
                     onClick: async () => {
-                      const res = await PostDelete(data.id);
+                      const res = await deleteAPI(`/post/${data.id}`);
+
                       if (res.status === '200') {
                         window.location.replace(`/INATON/profile`);
                       }
@@ -201,7 +201,7 @@ export default function HomePost({ data, page }) {
       setLikeCont((prev) => prev + 1);
     }
     if (likeState) {
-      await deleteLike(data.id);
+      await deleteAPI(`/post/${data.id}/unheart`);
       setLikeState((prev) => !prev);
       setLikeCont((prev) => prev - 1);
     }

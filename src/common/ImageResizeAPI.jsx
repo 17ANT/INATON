@@ -1,9 +1,8 @@
-import React from 'react';
 import imageCompression from 'browser-image-compression';
 
-async function ImageResize(file) {
+async function imageResizeAPI(file) {
   const options = {
-    // maxSizeMB: 8,
+    maxSizeMB: 8,
     maxWidhOrHeight: 1920,
     useWebWorker: true,
   };
@@ -19,4 +18,4 @@ async function ImageResize(file) {
   }
 }
 
-export default ImageResize;
+export default imageResizeAPI;
