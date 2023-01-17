@@ -60,129 +60,101 @@
 ├── package-lock.json
 ├── package.json
 ├── public
-│   ├── assets
-│   └── index.html
+│   ├── assets
+│   └── index.html
 └── src
     ├── App.jsx
     ├── Contexts
-    │   └── SignupContext.jsx
+    │   └── SignupContext.jsx
     ├── common
-    │   ├── AuthenticationCheck.jsx
-    │   ├── BASE_URL.jsx
-    │   ├── GetMyInfo.jsx
-    │   ├── GetPostDetail.jsx
-    │   ├── GetUserPost.jsx
-    │   ├── ImageResize.jsx
-    │   ├── ImageUploadAPI.jsx
-    │   └── PostComment.jsx
+    │   ├── BASE_URL.jsx
+    │   ├── DeleteAPI.jsx
+    │   ├── GetAPI.jsx
+    │   ├── ImageResizeAPI.jsx
+    │   ├── ImageUploadAPI.jsx
+    │   ├── PostAPI.jsx
+    │   └── PutAPI.jsx
     ├── components
-    │   ├── Input
-    │   │   └── Input.jsx
-    │   ├── comment
-    │   │   ├── Comment.jsx
-    │   │   ├── CommentReportAPI.jsx
-    │   │   ├── CommentsDeleteAPI.jsx
-    │   │   ├── CommentsListAPI.jsx
-    │   │   └── CommentsWriteAPI.jsx
-    │   ├── customButton
-    │   │   └── CustomButton.jsx
-    │   ├── errorMessage
-    │   │   └── ErrorMessage.jsx
-    │   ├── feedList
-    │   │   └── FeedList.jsx
-    │   ├── followCount
-    │   │   └── FollowCount.jsx
-    │   ├── header
-    │   │   ├── BasicHeader.jsx
-    │   │   ├── ChatHeader.jsx
-    │   │   ├── CustomMainHeader.jsx
-    │   │   └── UploadHeader.jsx
-    │   ├── homePost
-    │   │   ├── DeleteLikeAPI.jsx
-    │   │   ├── HomePost.jsx
-    │   │   ├── LikeAPI.jsx
-    │   │   └── PostReportAPI.jsx
-    │   ├── imageButton
-    │   │   └── ImageButton.jsx
-    │   ├── imagePreview
-    │   │   └── ImagePreview.jsx
-    │   ├── imgSlider
-    │   │   └── ImgSlider.jsx
-    │   ├── inLineProfileFollow
-    │   │   └── InlineProfileFollow.jsx
-    │   ├── inlineProfileInfo
-    │   │   └── InlineProfileInfo.jsx
-    │   ├── map
-    │   │   ├── MapInline.jsx
-    │   │   ├── MapModal.jsx
-    │   │   ├── MapPost.jsx
-    │   │   ├── MapSearch.jsx
-    │   │   ├── map.css
-    │   │   └── page.css
-    │   ├── navBar
-    │   │   └── NavBar.jsx
-    │   ├── profileImg
-    │   │   └── ProfileImg.jsx
-    │   ├── uploadButton
-    │   │   └── UploadButton.jsx
-    │   ├── userInfoInput
-    │   │   └── UserInfoInput.jsx
-    │   └── userInfoText
-    │       └── UserInfoText.jsx
+    │   ├── Input
+    │   │   └── Input.jsx
+    │   ├── comment
+    │   │   └── Comment.jsx
+    │   ├── customButton
+    │   │   └── CustomButton.jsx
+    │   ├── errorMessage
+    │   │   └── ErrorMessage.jsx
+    │   ├── feedList
+    │   │   └── FeedList.jsx
+    │   ├── followCount
+    │   │   └── FollowCount.jsx
+    │   ├── header
+    │   │   ├── BasicHeader.jsx
+    │   │   ├── ChatHeader.jsx
+    │   │   ├── CustomMainHeader.jsx
+    │   │   └── UploadHeader.jsx
+    │   ├── homePost
+    │   │   └── HomePost.jsx
+    │   ├── imageButton
+    │   │   └── ImageButton.jsx
+    │   ├── imagePreview
+    │   │   └── ImagePreview.jsx
+    │   ├── imgSlider
+    │   │   └── ImgSlider.jsx
+    │   ├── inLineProfileFollow
+    │   │   └── InlineProfileFollow.jsx
+    │   ├── inlineProfileInfo
+    │   │   └── InlineProfileInfo.jsx
+    │   ├── map
+    │   │   ├── MapInline.jsx
+    │   │   ├── MapModal.jsx
+    │   │   ├── MapPost.jsx
+    │   │   ├── MapSearch.jsx
+    │   │   ├── map.css
+    │   │   └── page.css
+    │   ├── navBar
+    │   │   └── NavBar.jsx
+    │   ├── profileImg
+    │   │   └── ProfileImg.jsx
+    │   ├── uploadButton
+    │   │   └── UploadButton.jsx
+    │   ├── userInfoInput
+    │   │   └── UserInfoInput.jsx
+    │   └── userInfoText
+    │       └── UserInfoText.jsx
     ├── index.js
     ├── pages
-    │   ├── LoginEmail
-    │   │   ├── LoginAPI.jsx
-    │   │   └── LoginEmail.jsx
-    │   ├── NotFound
-    │   │   └── NotFound.jsx
-    │   ├── chatList
-    │   │   └── ChatList.jsx
-    │   ├── chatRoom
-    │   │   └── ChatRoom.jsx
-    │   ├── follow
-    │   │   ├── FollowAPI.jsx
-    │   │   ├── Follower.jsx
-    │   │   ├── FollowerAPI.jsx
-    │   │   ├── Following.jsx
-    │   │   ├── FollowingAPI.jsx
-    │   │   └── UnFollowAPI.jsx
-    │   ├── home
-    │   │   ├── FeedAPI.jsx
-    │   │   ├── Home.jsx
-    │   │   └── SearchAPI.jsx
-    │   ├── login
-    │   │   └── Login.jsx
-    │   ├── myProfile
-    │   │   ├── GetProfileAPI.jsx
-    │   │   ├── MyProfile.jsx
-    │   │   └── MyProfileFeedAPI.jsx
-    │   ├── postDetail
-    │   │   ├── PostDeleteAPI.jsx
-    │   │   └── PostDetail.jsx
-    │   ├── postModify
-    │   │   ├── PostModify.jsx
-    │   │   └── PostModifyAPI.jsx
-    │   ├── postUpload
-    │   │   ├── PostUpload.jsx
-    │   │   └── PostUploadAPI.jsx
-    │   ├── profileModification
-    │   │   ├── AccountValidAPI.jsx
-    │   │   ├── ImageAPI.jsx
-    │   │   ├── ProfileModification.jsx
-    │   │   └── ProfileModificationAPI.jsx
-    │   ├── signup
-    │   │   ├── AccountValidAPI.jsx
-    │   │   ├── EmailValidAPI.jsx
-    │   │   ├── ImageAPI.jsx
-    │   │   ├── Signup.jsx
-    │   │   ├── SignupAPI.jsx
-    │   │   └── SignupProfile.jsx
-    │   ├── splash
-    │   │   └── Splash.jsx
-    │   └── yourProfile
-    │       ├── ProfileAPI.jsx
-    │       └── YourProfile.jsx
+    │   ├── LoginEmail
+    │   │   └── LoginEmail.jsx
+    │   ├── NotFound
+    │   │   └── NotFound.jsx
+    │   ├── chatList
+    │   │   └── ChatList.jsx
+    │   ├── chatRoom
+    │   │   └── ChatRoom.jsx
+    │   ├── follow
+    │   │   ├── Follower.jsx
+    │   │   └── Following.jsx
+    │   ├── home
+    │   │   └── Home.jsx
+    │   ├── login
+    │   │   └── Login.jsx
+    │   ├── myProfile
+    │   │   └── MyProfile.jsx
+    │   ├── postDetail
+    │   │   └── PostDetail.jsx
+    │   ├── postModify
+    │   │   └── PostModify.jsx
+    │   ├── postUpload
+    │   │   └── PostUpload.jsx
+    │   ├── profileModification
+    │   │   └── ProfileModification.jsx
+    │   ├── signup
+    │   │   ├── Signup.jsx
+    │   │   └── SignupProfile.jsx
+    │   ├── splash
+    │   │   └── Splash.jsx
+    │   └── yourProfile
+    │       └── YourProfile.jsx
     └── routes
         └── Router.jsx
 ```
