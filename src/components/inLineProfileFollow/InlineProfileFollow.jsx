@@ -1,8 +1,8 @@
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
 import CustomButton from '../customButton/CustomButton';
 import { useState } from 'react';
-import UnFollow from '../../pages/follow/UnFollowAPI';
 import postAPI from '../../common/PostAPI';
+import deleteAPI from '../../common/DeleteAPI';
 
 export default function InlineProfileFollow({ item }) {
   const [userProfile, setUserProfile] = useState();
@@ -10,7 +10,7 @@ export default function InlineProfileFollow({ item }) {
   async function handleFollow() {
     if (item.isfollow) {
       // 언팔로우 API
-      const res = await UnFollow(item.accountname);
+      const res = await deleteAPI(`/profile/${item.accountname}/unfollow`);
       item.isfollow = !item.isfollow;
       setUserProfile(res.profile);
     } else {
