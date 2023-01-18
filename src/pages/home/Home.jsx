@@ -39,7 +39,7 @@ export default function Home() {
   const [postLists, setPostLists] = useState([]);
   const [userData, setUserData] = useState(null);
   const [searchActive, setSearchActive] = useState(false);
-  const [step, setStep] = useState(0);
+  const steps = useRef(10);
 
   async function getUser() {
     const userInfo = await getAPI(`/user/myinfo`);
@@ -47,41 +47,25 @@ export default function Home() {
   }
 
   async function showPostList() {
-    console.log('showPostList');
-
-    // 초기가 아닐때 setTimeout 넣으면?
-    // await new Promise((resolve) => setTimeout(resolve, 1500));
     const feedList = await getAPI(`/post/feed/?limit=10&skip=0`);
     setPostLists(postLists.concat(feedList.posts));
   }
 
   // 추가 아이템 가져오기
-  // const getMoreItem = async () => {
-  //   console.log('getMoreItem');
-  //   await new Promise((resolve) => setTimeout(resolve, 1500));
-
-  //   // 데이터 불러오기
-  //   // let newData = await getAPI(`/post/feed/?limit=10$skip=${10 * (step + 1)}`);
-
-  //   let newData = await getAPI(`/post/feed/?limit=10&skip=${step}`);
-  //   console.log('newdata', newData.posts);
-  //   // setItemLists((itemLists) => itemLists.concat(Items));
-  //   setPostLists((postLists) => postLists.concat(newData.posts));
-  //   // setStep((prev) => prev + 1);
-  //   setStep(step + 10);
-  // };
-  // //
+  const getMoreItem = async () => {
+    // await new Promise((resolve) => setTimeout(resolve, 1500));
+    let newData = await getAPI(`/post/feed/?limit=10&skip=${steps.current}`);
+    setPostLists((prev) => prev.concat(newData.posts));
+    steps.current += 10;
+  };
 
   // Intersect
   const onIntersect = async ([entry], observer) => {
     if (entry.isIntersecting) {
-      observer.unobserve(entry.target);
-      // await getMoreItem();
-      // await showPostList();
+      await getMoreItem();
       observer.observe(entry.target);
     }
   };
-  // //Intersect
 
   // useEffect
   useEffect(() => {
@@ -94,8 +78,6 @@ export default function Home() {
     }
     return () => observer && observer.disconnect();
   }, [target]);
-
-  // //useEffect
 
   useEffect(() => {
     showPostList();
@@ -112,10 +94,12 @@ export default function Home() {
       {userData &&
         (userData.followingCount > 0 ? (
           // 팔로우가 있는경우
-          <>
-            <FeedList posts={postLists} />
-            {postLists && <div ref={setTarget} className="Target-Element"></div>}
-          </>
+          postLists && (
+            <>
+              <FeedList posts={postLists} />
+              <div ref={setTarget}></div>
+            </>
+          )
         ) : (
           // 팔로우가 없는 경우
           <>
