@@ -14,7 +14,6 @@ const SearchContainer = styled.div`
 
 const MapResultList = styled.ul`
   width: 358px;
-  /* height: fit-content; */
   max-height: 80%;
   height: min(fit-content, 80%);
   display: flex;
@@ -23,10 +22,8 @@ const MapResultList = styled.ul`
   gap: 12px;
   margin: 0px auto;
   overflow-y: scroll;
-  padding-bottom: 16px;
   overflow-x: hidden;
   border-radius: 0 0 8px 8px;
-  /* z-index: 100; */
   background-color: #fff;
   ::-webkit-scrollbar {
     width: 8px;
@@ -42,7 +39,9 @@ const MapResultList = styled.ul`
     padding: 16px 7px 0;
     border-top: 1px solid #777;
     min-height: fit-content;
-
+    :last-child {
+      padding-bottom: 16px;
+    }
     .info {
       display: flex;
       align-items: center;
@@ -91,7 +90,6 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
     };
     const map = new kakao.maps.Map(mapContainer, mapOption);
 
-    // 줌 컨트롤러
     const zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
@@ -100,7 +98,6 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
     const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
     searchPlaces();
-    // searchPlaces() 검색 요청
     function searchPlaces() {
       const keyword = searchKeyword;
 
@@ -109,9 +106,7 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
       }
       ps.keywordSearch(keyword, placesSearchCB);
     }
-    // //searchPlaces()
 
-    // placesSearchCB() 키워드 검색 콜백
     function placesSearchCB(data, status) {
       if (status === kakao.maps.services.Status.OK) {
         setPlaces(places);
@@ -124,9 +119,7 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
         return;
       }
     }
-    // //placesSearchCB()
 
-    // displayPlaces() 검색 결과 목록, 마커 출력
     function displayPlaces(places) {
       const listEl = document.getElementById('places-list'),
         resultEl = document.getElementById('search-result'),
@@ -143,7 +136,6 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
 
         bounds.extend(placePosition);
 
-        // event
         (function (marker, title) {
           kakao.maps.event.addListener(marker, 'mouseover', function () {
             var moveLatLon = new kakao.maps.LatLng(places[i].y, places[i].x);
@@ -213,26 +205,20 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
       }
       map.setBounds(bounds);
     }
-    // //dispalyPlaces()
 
-    // removeMarker()
     function removeMarker() {
       for (let i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
       }
       markers = [];
     }
-    // //removeMarker()
 
-    // removeAllChildNods()
     function removeAllChildNods(el) {
       while (el.hasChildNodes()) {
         el.removeChild(el.lastChild);
       }
     }
-    // //removeAllCihldNods
 
-    // getListItem() 검색결과 리스트 출력
     function getListItem(index, places) {
       const el = document.createElement('li');
       let itemStr = `
@@ -254,9 +240,7 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
 
       return el;
     }
-    // //getLsitItem()
 
-    // displayMarker()
     function displayMarker(position, index, title) {
       let imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png',
         imageSize = new kakao.maps.Size(24, 35),
@@ -272,18 +256,14 @@ export default function MapSearch({ searchKeyword, select, setSelect, setOpen })
 
       return marker;
     }
-    // //displayMarker()
 
-    // displayInfowindow()
     function displayInfowindow(marker, title) {
       let content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
 
       infowindow.setContent(content);
       infowindow.open(map, marker);
     }
-    // //displayInfowindow()
   }, [searchKeyword]);
-  // //useEfffect
 
   return (
     <SearchContainer>

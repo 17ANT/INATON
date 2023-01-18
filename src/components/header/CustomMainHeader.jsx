@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import searchUser from '../../pages/home/SearchAPI';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
-import getProfile from './../../pages/yourProfile/ProfileAPI';
+import getAPI from '../../common/GetAPI';
 
 const Header = styled.header`
   width: 100%;
@@ -30,8 +29,7 @@ const Section = styled.div`
     border: none;
     cursor: pointer;
     a {
-      background: url('assets/icon/icon-search.png') no-repeat center / 24px
-        24px;
+      background: url('https://17ant.github.io/INATON/assets/icon/icon-search.png') no-repeat center / 24px 24px;
       display: block;
       width: 24px;
       height: 24px;
@@ -123,7 +121,7 @@ export default function CustomMainHeader({ searchActive, setSearchActive }) {
   async function HandleSearchValue() {
     setSearchValue(searchRef.current.value);
     if (searchRef.current.value) {
-      const searchList = await searchUser(searchRef.current.value);
+      const searchList = await getAPI(`/user/searchuser/?keyword=${searchRef.current.value}`);
       setSearchResult(searchList);
     }
   }
@@ -154,17 +152,11 @@ export default function CustomMainHeader({ searchActive, setSearchActive }) {
         <h2>INATON 피드</h2>
         <div className="search">
           <span className="icon">
-            <i
-              name="search-outline"
-              onClick={HandleSearchBtn}
-              className={searchBtn}>
-              <img src="assets/icon/search.png" alt="" />
+            <i name="search-outline" onClick={HandleSearchBtn} className={searchBtn}>
+              <img src={process.env.PUBLIC_URL + '/assets/icon/search.png'} alt="검색창 열기" />
             </i>
-            <i
-              name="close-outline"
-              onClick={HandleCloseBtn}
-              className={closeBtn}>
-              <img src="assets/icon/icon-delete-black.png" alt="" />
+            <i name="close-outline" onClick={HandleCloseBtn} className={closeBtn}>
+              <img src={process.env.PUBLIC_URL + '/assets/icon/icon-delete-black.png'} alt="검색창 닫기" />
             </i>
           </span>
         </div>
@@ -186,7 +178,6 @@ export default function CustomMainHeader({ searchActive, setSearchActive }) {
         <SearchResultList>
           {searchResult &&
             searchResult.map((item) => (
-              // <li key={item._id}>{item.username}</li>
               <li key={item._id}>
                 <InlineProfileInfo
                   accountname={item.accountname}

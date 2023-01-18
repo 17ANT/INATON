@@ -1,10 +1,10 @@
 import { BASE_URL } from './BASE_URL';
 
-async function getPost(post_id) {
+async function deleteAPI(url) {
+  const token = localStorage.getItem('token');
   try {
-    const token = localStorage.getItem('token');
-    const data = await fetch(BASE_URL + `/post/${post_id}`, {
-      method: 'GET',
+    const data = await fetch(BASE_URL + url, {
+      method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-type': 'application/json',
@@ -17,4 +17,4 @@ async function getPost(post_id) {
   }
 }
 
-export default getPost;
+export default deleteAPI;

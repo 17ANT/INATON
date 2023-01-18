@@ -1,6 +1,7 @@
 {
   "name": "17ant",
   "version": "0.1.0",
+  "homepage": "https://17ant.github.io/INATON",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -21,7 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "cp build/index.html build/404.html && gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "serve": "serve -s build",

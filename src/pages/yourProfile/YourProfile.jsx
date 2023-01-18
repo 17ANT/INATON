@@ -8,11 +8,10 @@ import UserInfoText from '../../components/userInfoText/UserInfoText';
 import CustomButton from '../../components/customButton/CustomButton';
 import { ImgButton } from '../../components/imageButton/ImageButton';
 import NavBar from './../../components/navBar/NavBar';
-import getProfile from './ProfileAPI';
-import Follow from '../follow/FollowAPI';
-import UnFollow from '../follow/UnFollowAPI';
-import ProfileFeed from '../myProfile/MyProfileFeedAPI';
 import FeedList from '../../components/feedList/FeedList';
+import postAPI from '../../common/PostAPI';
+import getAPI from '../../common/GetAPI';
+import deleteAPI from '../../common/DeleteAPI';
 
 const YourProfileWrap = styled.div`
   margin: 0 auto 16px;
@@ -68,7 +67,7 @@ export default function YourProfile() {
 
   useEffect(() => {
     async function handleProfile() {
-      const userProfileData = await getProfile(params.accountname);
+      const userProfileData = await getAPI(`/profile/${params.accountname}`);
       setUserProfile(userProfileData.profile);
     }
     handleProfile();
@@ -76,7 +75,7 @@ export default function YourProfile() {
   }, []);
 
   async function getFeed() {
-    const res = await ProfileFeed(params.accountname);
+    const res = await getAPI(`/post/${params.accountname}/userpost`);
     setMyFeed(res.post);
   }
 
@@ -91,11 +90,12 @@ export default function YourProfile() {
     setIsFollow((prev) => !prev);
     if (userProfile.isfollow) {
       // 언팔로우 API
-      const res = await UnFollow(params.accountname);
+      const res = await deleteAPI(`/profile/${params.accountname}/unfollow`);
       setUserProfile(res.profile);
     } else {
       // 팔로우 API
-      const res = await Follow(params.accountname);
+      const res = await postAPI(`/profile/${params.accountname}/follow`);
+
       setUserProfile(res.profile);
     }
   }
@@ -106,35 +106,26 @@ export default function YourProfile() {
       {userProfile && (
         <YourProfileWrap>
           <ProfileHeader>
-            <FollowCount
-              count={userProfile.followerCount}
-              kind="followers"
-              onClick={goFollower}></FollowCount>
-            <ProfileImg
-              size="110px"
-              src={userProfile.image}
-              alt="profile image"></ProfileImg>
-            <FollowCount
-              count={userProfile.followingCount}
-              kind="followings"
-              onClick={goFollowing}></FollowCount>
+            <FollowCount count={userProfile.followerCount} kind="followers" onClick={goFollower}></FollowCount>
+            <ProfileImg size="110px" src={userProfile.image} alt="프로필 이미지"></ProfileImg>
+            <FollowCount count={userProfile.followingCount} kind="followings" onClick={goFollowing}></FollowCount>
           </ProfileHeader>
 
           <ProfileMain>
             <UserInfoText
               userName={userProfile.username}
               userId={`@ ${params.accountname}`}
-              userDesc={userProfile.intro}></UserInfoText>
+              userDesc={userProfile.intro}
+            ></UserInfoText>
           </ProfileMain>
 
-          {/* 여기서부터 수정시작  */}
-
           <ProfileButton>
-            <Link to="/chatroom">
+            <Link to="/chatroom" state={{ user: userProfile.username }}>
               <ImageButton
                 size="34px"
-                src="/assets/icon/icon-message-circle.png"
-                alt="message"></ImageButton>
+                src={`${process.env.PUBLIC_URL}/assets/icon/icon-message-circle.png`}
+                alt="메시지 전송"
+              ></ImageButton>
             </Link>
             {/* 버튼이 클릭되었을 때 ~.isFollow가 true면 언팔로우 API, false면 팔로우API 실행 */}
             {userProfile.isfollow ? (
@@ -150,8 +141,9 @@ export default function YourProfile() {
             <Link to="/">
               <ImageButton
                 size="34px"
-                src="/assets/icon/icon-share.png"
-                alt="message"></ImageButton>
+                src={`${process.env.PUBLIC_URL}/assets/icon/icon-share.png`}
+                alt="공유하기"
+              ></ImageButton>
             </Link>
           </ProfileButton>
 

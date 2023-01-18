@@ -5,7 +5,7 @@ import CustomButton from '../../components/customButton/CustomButton';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';
 import InputDiv from '../../components/Input/Input';
 import { SignupContext } from '../../Contexts/SignupContext';
-import emailValid from './EmailValidAPI';
+import postAPI from '../../common/PostAPI';
 
 const SignupForm = styled.div`
   padding: 0 34px;
@@ -71,7 +71,8 @@ export default function Signup() {
 
   async function handleEmailValid() {
     // 이메일 validation check
-    const message = await emailValid({
+
+    const message = await postAPI('/user/emailvalid', {
       user: {
         email: emailRef.current.value,
       },
@@ -96,15 +97,10 @@ export default function Signup() {
       ...signupInfo.user,
       ...signupData.user,
     };
-    console.log(signupInfo);
-    // newUser = { ...newUser, ...signupData };
-    // console.log(newUser);
-    // 데이터를 넘겨주면서 페이지 이동
     navigate('/signup/profile');
   }
 
   return (
-    // 여기에 조건식 ? <SignupForm/>:<SignupProfile/>
     <SignupForm>
       <h2>이메일로 회원가입</h2>
       <Form action="">

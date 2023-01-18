@@ -1,13 +1,11 @@
 import React from 'react';
 import ChatHeader from '../../components/header/ChatHeader';
 import NavBar from '../../components/navBar/NavBar';
-import InlineProfileInfo from '../../components/inlineProfileInfo/InlineProfileInfo';
 import styled from 'styled-components';
-import CustomButton from '../../components/customButton/CustomButton';
-import getFollowing from './FollowingAPI';
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import InlineProfileFollow from '../../components/inLineProfileFollow/InlineProfileFollow';
+import getAPI from '../../common/GetAPI';
 
 const StyledInlineProfileInfo = styled.div`
   margin: 48px auto;
@@ -32,14 +30,12 @@ const StyledInlineProfileInfo = styled.div`
 
 export default function Following() {
   const params = useParams();
-  const navigate = useNavigate();
 
   const [followings, setFollowings] = useState(null);
-  // const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
     async function setFollowingList() {
-      const followingList = await getFollowing(params.accountname);
+      const followingList = await getAPI(`/profile/${params.accountname}/following?limit=100&skip=0`);
       setFollowings(followingList);
     }
 
@@ -49,7 +45,6 @@ export default function Following() {
   return (
     <>
       <ChatHeader text={'Following'} isMore={false} />
-      {/* <Btn>팔로우목록</Btn> */}
       <StyledInlineProfileInfo>
         {followings &&
           followings.map((item, index) => (

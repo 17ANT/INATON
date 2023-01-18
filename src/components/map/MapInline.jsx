@@ -32,7 +32,7 @@ const MapItemContainer = styled.div`
 export default function MapInline({ place }) {
   return (
     <MapItemContainer>
-      <img src="/assets/icon/icon-marker.png" alt="지도 정보" />
+      <img src={process.env.PUBLIC_URL + `/assets/icon/icon-marker.png`} alt="지도 정보" />
       <div>
         <strong>{place.place_name}</strong>
         <p>{place.address}</p>

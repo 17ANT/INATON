@@ -1,14 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { BASE_URL } from '../../common/BASE_URL';
+import postAPI from '../../common/PostAPI';
 import CustomButton from '../../components/customButton/CustomButton';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';
 import InputDiv from '../../components/Input/Input';
-import postLogin from './LoginAPI';
 
 const LoginForm = styled.div`
-  /* font-family: var(--font-family); */
   padding: 0 34px;
   width: fit-content;
   min-height: 100vh;
@@ -30,7 +29,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
 `;
-const SignupLink = styled.a`
+const SignupLink = styled(Link)`
   color: var(--sub-font);
   text-decoration: none;
 `;
@@ -53,8 +52,14 @@ export default function LoginEmail({ setAuth }) {
 
   async function handleSubmit() {
     // 데이터를 넘겨주면서 페이지 이동
-    const result = await postLogin(user);
-    if (result) {
+    // const result = await postLogin(user);
+    const result = await postAPI('/user/login', user);
+    console.log('postAPI로 로그인');
+
+    if (result.user) {
+      localStorage.setItem('token', result.user.token);
+      localStorage.setItem('accountname', result.user.accountname);
+
       setAuth(true);
       navigate('/');
     } else {
@@ -78,7 +83,7 @@ export default function LoginEmail({ setAuth }) {
           로그인
         </CustomButton>
       </Form>
-      <SignupLink href="/signup">이메일로 회원가입</SignupLink>
+      <SignupLink to="/signup">이메일로 회원가입</SignupLink>
     </LoginForm>
   );
 }

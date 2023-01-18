@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import ImgSlider from '../imgSlider/ImgSlider';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import doLike from './LikeAPI';
-import deleteLike from './DeleteLikeAPI';
-import PostDelete from '../../pages/postDetail/PostDeleteAPI';
-import postReport from './PostReportAPI';
 import MapInline from '../map/MapInline';
 import MapPost from '../map/MapPost';
+import postAPI from '../../common/PostAPI';
+import deleteAPI from '../../common/DeleteAPI';
 
 const PostContainer = styled.div`
   position: relative;
@@ -66,47 +64,6 @@ const PostReaction = styled.div`
   }
 `;
 
-const ImgContainer = styled.ul`
-  display: flex;
-  width: 304px;
-  height: 228px;
-  /* overflow-x: scroll; */
-  /* overflow-y: hidden; */
-  outline: 3px solid yellow;
-`;
-
-const ImgItem = styled.li`
-  width: 100%;
-  img {
-    width: 304px;
-    height: 228px;
-    border-radius: 10px;
-    object-fit: cover;
-  }
-`;
-
-const SwipeContainer = styled.ul`
-  position: absolute;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding-left: 54px;
-  display: flex;
-  gap: 6px;
-`;
-
-const SwipeItem = styled.li`
-  background-color: #fff;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  ${(props) =>
-    props.on &&
-    css`
-      background-color: var(--error-color);
-    `}
-`;
-
 const PostDate = styled.p`
   padding-left: 54px;
   font-weight: 400;
@@ -121,7 +78,8 @@ const MoreBtn = styled.button`
   right: 0px;
   width: 18px;
   height: 18px;
-  background: url('/assets/icon/icon-more-vertical.png') no-repeat center/18px 18px;
+  background: url('https://github.com/17ANT/INATON/blob/main/public/assets/icon/icon-more-vertical.png?raw=true')
+    no-repeat center/18px 18px;
   border: none;
   cursor: pointer;
 `;
@@ -151,13 +109,6 @@ export function hasMap(content) {
 export default function HomePost({ data, page }) {
   const [mapInfo, setMapInfo] = useState({});
   const [textContent, setTextContent] = useState('');
-
-  const testPlace = {
-    place_name: '테일러커피 서교점',
-    x: '126.927602272249',
-    y: '37.5538674238312',
-    address: '서울 마포구 서교동 338-1',
-  };
 
   useEffect(() => {
     const contents = data.content;
@@ -212,9 +163,10 @@ export default function HomePost({ data, page }) {
                   {
                     label: '삭제',
                     onClick: async () => {
-                      const res = await PostDelete(data.id);
+                      const res = await deleteAPI(`/post/${data.id}`);
+
                       if (res.status === '200') {
-                        window.location.replace(`/profile`);
+                        window.location.replace(`/INATON/profile`);
                       }
                     },
                   },
@@ -232,7 +184,7 @@ export default function HomePost({ data, page }) {
             {
               label: '신고',
               onClick: async () => {
-                await postReport(data.id);
+                await postAPI(`/post/${data.id}/report`);
               },
             },
             {
@@ -244,12 +196,12 @@ export default function HomePost({ data, page }) {
 
   const handleLike = async () => {
     if (!likeState) {
-      await doLike(data.id);
+      await postAPI(`/post/${data.id}/heart`);
       setLikeState((prev) => !prev);
       setLikeCont((prev) => prev + 1);
     }
     if (likeState) {
-      await deleteLike(data.id);
+      await deleteAPI(`/post/${data.id}/unheart`);
       setLikeState((prev) => !prev);
       setLikeCont((prev) => prev - 1);
     }
@@ -284,15 +236,19 @@ export default function HomePost({ data, page }) {
         <PostReaction>
           <button>
             {likeState ? (
-              <img src={'/assets/icon/icon-heart-active.png'} alt="좋아요 취소" onClick={handleLike} />
+              <img
+                src={process.env.PUBLIC_URL + '/assets/icon/icon-heart-active.png'}
+                alt="좋아요 취소"
+                onClick={handleLike}
+              />
             ) : (
-              <img src={'/assets/icon/icon-heart.png'} alt="좋아요" onClick={handleLike} />
+              <img src={process.env.PUBLIC_URL + '/assets/icon/icon-heart.png'} alt="좋아요" onClick={handleLike} />
             )}
             {likeCont}
           </button>
           <Link to={`/post/${data.id}`}>
             <button>
-              <img src={'/assets/icon/icon-message-circle.png'} alt="댓글 입력창으로 이동" />
+              <img src={process.env.PUBLIC_URL + '/assets/icon/icon-message-circle.png'} alt="게시글 상세로 이동하기" />
               {commentCnt}
             </button>
           </Link>

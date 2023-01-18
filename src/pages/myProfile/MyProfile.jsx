@@ -8,10 +8,9 @@ import FollowCount from '../../components/followCount/FollowCount';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UserInfoText from '../../components/userInfoText/UserInfoText';
 import CustomButton from '../../components/customButton/CustomButton';
-import getMyProfile from '../../common/GetMyInfo';
 import NavBar from '../../components/navBar/NavBar';
-import ProfileFeed from './MyProfileFeedAPI';
 import FeedList from '../../components/feedList/FeedList';
+import getAPI from '../../common/GetAPI';
 
 const MyProfileWrap = styled.div`
   margin: 0 auto 16px;
@@ -49,7 +48,7 @@ const PostContainer = styled.div`
   margin-bottom: 40px;
 `;
 
-export default function MyProfile() {
+export default function MyProfile({ setAuth }) {
   const [myProfile, setMyProfile] = useState();
   const [myFeed, setMyFeed] = useState([]);
   const navigate = useNavigate();
@@ -58,7 +57,7 @@ export default function MyProfile() {
 
   useEffect(() => {
     async function handleProfile() {
-      const myProfileData = await getMyProfile();
+      const myProfileData = await getAPI(`/user/myinfo`);
       setMyProfile(myProfileData.user);
     }
     handleProfile();
@@ -66,7 +65,7 @@ export default function MyProfile() {
   }, []);
 
   async function getFeed() {
-    const res = await ProfileFeed(accountname);
+    const res = await getAPI(`/post/${accountname}/userpost`);
     setMyFeed(res.post);
   }
 
@@ -86,7 +85,8 @@ export default function MyProfile() {
           onClick: () => {
             localStorage.removeItem('accountname');
             localStorage.removeItem('token');
-            navigate('/login');
+            setAuth(false);
+            navigate('/');
           },
         },
         {
@@ -101,25 +101,17 @@ export default function MyProfile() {
       {myProfile && (
         <MyProfileWrap>
           <ProfileHeader>
-            <FollowCount
-              count={myProfile.followerCount}
-              kind="followers"
-              onClick={goFollower}></FollowCount>
-            <ProfileImg
-              size="110px"
-              src={myProfile.image}
-              alt="profile image"></ProfileImg>
-            <FollowCount
-              count={myProfile.followingCount}
-              kind="followings"
-              onClick={goFollowing}></FollowCount>
+            <FollowCount count={myProfile.followerCount} kind="followers" onClick={goFollower}></FollowCount>
+            <ProfileImg size="110px" src={myProfile.image} alt="프로필 이미지"></ProfileImg>
+            <FollowCount count={myProfile.followingCount} kind="followings" onClick={goFollowing}></FollowCount>
           </ProfileHeader>
 
           <ProfileMain>
             <UserInfoText
               userName={myProfile.username}
               userId={`@ ${myProfile.accountname}`}
-              userDesc={myProfile.intro}></UserInfoText>
+              userDesc={myProfile.intro}
+            ></UserInfoText>
           </ProfileMain>
 
           <ProfileButton>

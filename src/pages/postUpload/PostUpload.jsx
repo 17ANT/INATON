@@ -2,15 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { BASE_URL } from '../../common/BASE_URL';
+import getAPI from '../../common/GetAPI';
 import postImage from '../../common/ImageUploadAPI';
+import postAPI from '../../common/PostAPI';
 import UploadHeader from '../../components/header/UploadHeader';
 import ImagePreview from '../../components/imagePreview/ImagePreview';
 import MapInline from '../../components/map/MapInline';
 import MapModal from '../../components/map/MapModal';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UploadButton from '../../components/uploadButton/UploadButton';
-import getUser from '../myProfile/GetProfileAPI';
-import uploadPost from './PostUploadAPI';
 
 const PostUploadMain = styled.main`
   width: 100%;
@@ -26,7 +26,7 @@ const PostPreview = styled.div`
 `;
 
 const TextForm = styled.textarea`
-  width: 100%;
+  width: max(300px, 80vw);
   padding: 0 16px;
   margin-bottom: 16px;
   border: none;
@@ -63,7 +63,7 @@ const MapButton = styled.button`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: url('/assets/icon/icon-map.png') no-repeat center/ 24px 24px;
+  background: url('https://17ant.github.io/INATON/assets/icon/icon-map.png?raw=true') no-repeat center/ 24px 24px;
   background-color: var(--main-color);
   border: none;
 
@@ -86,7 +86,6 @@ const ButtonDiv = styled.div`
 export default function PostUpload() {
   const txtRef = useRef();
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
   const accountname = localStorage.getItem('accountname');
 
   const [image, setImage] = useState([]);
@@ -110,7 +109,7 @@ export default function PostUpload() {
   }, []);
 
   async function getData() {
-    const userInfo = await getUser(token, accountname);
+    const userInfo = await await getAPI(`/profile/${accountname}`);
     setUser(userInfo.profile);
   }
 
@@ -126,7 +125,6 @@ export default function PostUpload() {
       alert('이미지는 3개까지 업로드 가능합니다.');
     } else if (e.target.files[0]) {
       // 이미지 데이터를 API를 이용하여 서버에 업로드
-      // const res = await postImage(url);
       const res = await postImage(e.target.files[0]);
       if (res.message) {
         alert(res.message);
@@ -154,7 +152,7 @@ export default function PostUpload() {
         },
       };
     }
-    uploadPost(post);
+    postAPI('/post', post);
     navigate('/profile');
   }
 

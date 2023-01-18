@@ -1,15 +1,11 @@
 import React from 'react';
 import ChatHeader from '../../components/header/ChatHeader';
 import NavBar from '../../components/navBar/NavBar';
-import InlineProfileInfo from '../../components/inlineProfileInfo/InlineProfileInfo';
 import styled from 'styled-components';
-import CustomButton from '../../components/customButton/CustomButton';
 import { useState, useEffect } from 'react';
-import getFollower from './FollowerAPI';
-import { useParams, useNavigate } from 'react-router-dom';
-import Follow from './FollowAPI';
-import UnFollow from './UnFollowAPI';
+import { useParams } from 'react-router-dom';
 import InlineProfileFollow from '../../components/inLineProfileFollow/InlineProfileFollow';
+import getAPI from '../../common/GetAPI';
 
 const StyledInlineProfileInfo = styled.div`
   margin: 48px auto;
@@ -34,31 +30,16 @@ const StyledInlineProfileInfo = styled.div`
 
 export default function Follower() {
   const params = useParams();
-  const navigate = useNavigate();
-  const [userProfile, setUserProfile] = useState();
   const [followers, setFollowers] = useState(null);
 
   useEffect(() => {
     async function setFollowingList() {
-      const followingList = await getFollower(params.accountname);
+      const followingList = await getAPI(`/profile/${params.accountname}/follower?limit=100&skip=0`);
       setFollowers(followingList);
     }
 
     setFollowingList();
   }, []);
-  async function changeFollow() {
-    // 팔로우 버튼 기능 (팔로우 토글)
-    // setIsFollow((prev) => !prev);
-    if (userProfile.isfollow) {
-      // 언팔로우 API
-      const res = await UnFollow(params.accountname);
-      setUserProfile(res.profile);
-    } else {
-      // 팔로우 API
-      const res = await Follow(params.accountname);
-      setUserProfile(res.profile);
-    }
-  }
 
   return (
     <>

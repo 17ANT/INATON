@@ -24,9 +24,7 @@ const MapContainer = styled.div`
   transform: translateX(-50%);
   margin: 10px auto;
 
-  /* z-index: 100; */
   form {
-    /* width: 358px; */
     padding: 12px;
     width: 100%;
     background-color: var(--sub-color);
@@ -111,7 +109,7 @@ export default function MapModal({ open, setOpen, select, setSelect }) {
             <CloseDiv>
               <h3>장소검색</h3>
               <button onClick={handleClose}>
-                <img src="/assets/icon/icon-delete-black.png" alt="닫기" />
+                <img src={process.env.PUBLIC_URL + `/assets/icon/icon-delete-black.png`} alt="닫기" />
               </button>
             </CloseDiv>
 

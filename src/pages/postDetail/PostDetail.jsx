@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styled, { css } from 'styled-components';
-import getPost from '../../common/GetPostDetail';
+import styled from 'styled-components';
 import Comment from '../../components/comment/Comment';
 import BasicHeader from '../../components/header/BasicHeader';
 import HomePost from '../../components/homePost/HomePost';
 import ProfileImg from '../../components/profileImg/ProfileImg';
-import getUser from '../myProfile/GetProfileAPI';
-import CommentsList from '../../components/comment/CommentsListAPI';
-import CommentsWrite from '../../components/comment/CommentsWriteAPI';
+import postAPI from '../../common/PostAPI';
+import getAPI from '../../common/GetAPI';
 
 const PostDetailMain = styled.main`
   position: relative;
@@ -75,17 +73,14 @@ const CommentButton = styled.button`
   border: none;
   font-weight: 500;
   font-size: 14px;
-  /* color: ${(props) =>
-    props.btnactiv ? 'var(--error-color)' : 'var( --sub-border)'}; //경고 */
-  color: ${(props) =>
-    props.btnactiv ? 'var(--font-color)' : 'var( --sub-border)'}; //진한 녹색
+  //경고
+  color: ${(props) => (props.btnactiv ? 'var(--font-color)' : 'var( --sub-border)')}; //진한 녹색
   line-height: 18px;
   cursor: ${(props) => props.btnactiv && 'pointer'};
 `;
 
 export default function PostDetail() {
   const params = useParams();
-  const token = localStorage.getItem('token');
   const accountname = localStorage.getItem('accountname');
 
   const [userInfo, setUserInfo] = useState(null);
@@ -96,13 +91,13 @@ export default function PostDetail() {
   const [btnState, setBtnState] = useState(false);
 
   async function getData() {
-    const userData = await getUser(token, accountname);
+    const userData = await getAPI(`/profile/${accountname}`);
     setUserInfo(userData.user);
   }
   async function getComments() {
-    const postData = await getPost(params.post_id);
+    const postData = await getAPI(`/post/${params.post_id}`);
     setPostInfo(postData.post);
-    const commentData = await CommentsList(params.post_id);
+    const commentData = await getAPI(`/post/${params.post_id}/comments`);
     setCommentsList(commentData.comments);
   }
 
@@ -122,7 +117,7 @@ export default function PostDetail() {
         content: commentRef.current.value,
       },
     };
-    await CommentsWrite(params.post_id, reqData);
+    await postAPI(`/post/${params.post_id}/comments`, reqData);
     commentRef.current.value = '';
     setFlag((prev) => !prev);
   }
@@ -142,19 +137,10 @@ export default function PostDetail() {
         <PostDetailMain>
           <HomePost data={postInfo} page="detail" />
           <CommentList>
-            {commentsList &&
-              commentsList.map((el) => (
-                <Comment key={el.id} data={el} setFlag={setFlag} />
-              ))}
+            {commentsList && commentsList.map((el) => <Comment key={el.id} data={el} setFlag={setFlag} />)}
           </CommentList>
           <CommentWrite>
-            {userInfo && (
-              <ProfileImg
-                size="36px"
-                alt="프로필 이미지"
-                src={userInfo.image}
-              />
-            )}
+            {userInfo && <ProfileImg size="36px" alt="프로필 이미지" src={userInfo.image} />}
             <CommentForm onSubmit={writeComments}>
               <label htmlFor="inputComment" className="ir"></label>
               <input

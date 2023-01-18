@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import HomePost from '../../components/homePost/HomePost';
 import NavBar from '../../components/navBar/NavBar';
 import CustomButton from '../../components/customButton/CustomButton';
 import CustomMainHeader from '../../components/header/CustomMainHeader';
-import Feed from './FeedAPI';
-import getMyProfile from '../../common/GetMyInfo';
 import FeedList from '../../components/feedList/FeedList';
+import getAPI from '../../common/GetAPI';
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 68px 0 90px;
@@ -36,19 +35,68 @@ const NoneFollowSection = styled.div`
 `;
 
 export default function Home() {
-  const [postLists, setPostList] = useState(null);
+  const [target, setTarget] = useState(null);
+  const [postLists, setPostLists] = useState([]);
   const [userData, setUserData] = useState(null);
   const [searchActive, setSearchActive] = useState(false);
+  const [step, setStep] = useState(0);
 
   async function getUser() {
-    const userInfo = await getMyProfile();
+    const userInfo = await getAPI(`/user/myinfo`);
     setUserData(userInfo.user);
   }
 
   async function showPostList() {
-    const feedList = await Feed();
-    setPostList(feedList.posts);
+    console.log('showPostList');
+
+    // 초기가 아닐때 setTimeout 넣으면?
+    // await new Promise((resolve) => setTimeout(resolve, 1500));
+    const feedList = await getAPI(`/post/feed/?limit=10&skip=0`);
+    setPostLists(postLists.concat(feedList.posts));
   }
+
+  // 추가 아이템 가져오기
+  // const getMoreItem = async () => {
+  //   console.log('getMoreItem');
+  //   await new Promise((resolve) => setTimeout(resolve, 1500));
+
+  //   // 데이터 불러오기
+  //   // let newData = await getAPI(`/post/feed/?limit=10$skip=${10 * (step + 1)}`);
+
+  //   let newData = await getAPI(`/post/feed/?limit=10&skip=${step}`);
+  //   console.log('newdata', newData.posts);
+  //   // setItemLists((itemLists) => itemLists.concat(Items));
+  //   setPostLists((postLists) => postLists.concat(newData.posts));
+  //   // setStep((prev) => prev + 1);
+  //   setStep(step + 10);
+  // };
+  // //
+
+  // Intersect
+  const onIntersect = async ([entry], observer) => {
+    if (entry.isIntersecting) {
+      observer.unobserve(entry.target);
+      // await getMoreItem();
+      // await showPostList();
+      observer.observe(entry.target);
+    }
+  };
+  // //Intersect
+
+  // useEffect
+  useEffect(() => {
+    let observer;
+    if (target) {
+      observer = new IntersectionObserver(onIntersect, {
+        threshold: 0.4,
+      });
+      observer.observe(target);
+    }
+    return () => observer && observer.disconnect();
+  }, [target]);
+
+  // //useEffect
+
   useEffect(() => {
     showPostList();
     getUser();
@@ -60,14 +108,14 @@ export default function Home() {
 
   return (
     <Container>
-      <CustomMainHeader
-        searchActive={searchActive}
-        setSearchActive={setSearchActive}
-      />
+      <CustomMainHeader searchActive={searchActive} setSearchActive={setSearchActive} />
       {userData &&
         (userData.followingCount > 0 ? (
           // 팔로우가 있는경우
-          <FeedList posts={postLists} />
+          <>
+            <FeedList posts={postLists} />
+            {postLists && <div ref={setTarget} className="Target-Element"></div>}
+          </>
         ) : (
           // 팔로우가 없는 경우
           <>

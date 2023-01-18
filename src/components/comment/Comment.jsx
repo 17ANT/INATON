@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import InlineProfileInfo from '../inlineProfileInfo/InlineProfileInfo';
-import CommentsDelete from './CommentsDeleteAPI';
-import CommentReport from './CommentReportAPI';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import postAPI from '../../common/PostAPI';
+import deleteAPI from '../../common/DeleteAPI';
 
 const CommentContainer = styled.li`
   position: relative;
@@ -13,8 +13,8 @@ const CommentContainer = styled.li`
 `;
 
 const CommentContent = styled.p`
-  width: 300px; 
-  word-break: break-all; 
+  width: 300px;
+  word-break: break-all;
   margin-left: 48px;
   margin-right: 18px;
   font-weight: 400;
@@ -29,9 +29,9 @@ const MoreBtn = styled.button`
   right: 0px;
   width: 20px;
   height: 20px;
-  background: url('/assets/icon/icon-more-vertical.png') no-repeat center/20px;
+  background: url('https://17ant.github.io/INATON/assets/icon/icon-more-vertical.png') no-repeat center/20px;
   border: none;
-  cursor: pointer;
+  cursor: pointer; ;
 `;
 
 const timeCheck = (val) => {
@@ -62,9 +62,7 @@ const timeCheck = (val) => {
   } else if (diff < month * 3) {
     result = Math.floor(diff / month) + '달 전';
   } else {
-    result = `${time.getFullYear()}년 ${
-      time.getMonth() + 1
-    }월 ${time.getDate()}일`;
+    result = `${time.getFullYear()}년 ${time.getMonth() + 1}월 ${time.getDate()}일`;
   }
 
   return result;
@@ -83,7 +81,7 @@ export default function Comment({ data, setFlag }) {
           {
             label: '삭제',
             onClick: async () => {
-              await CommentsDelete(params.post_id, data.id);
+              await deleteAPI(`/post/${params.post_id}/comments/${data.id}`);
               setFlag((prev) => !prev);
             },
           },
@@ -99,7 +97,7 @@ export default function Comment({ data, setFlag }) {
           {
             label: '신고',
             onClick: () => {
-              CommentReport(params.post_id, data.id);
+              postAPI(`/post/${params.post_id}/comments/${data.id}/report`);
             },
           },
           {

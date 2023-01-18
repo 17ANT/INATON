@@ -37,30 +37,30 @@ const NavList = styled.ul`
     margin-bottom: 4px;
   }
   .home a::before {
-    background: url('/assets/icon/icon-home.png') no-repeat;
+    background: url('https://17ant.github.io/INATON/assets/icon/icon-home.png?raw=true') no-repeat;
     background-size: contain;
   }
   .home a.active::before {
-    background: url('/assets/icon/icon-home-fill.png') no-repeat;
+    background: url('https://17ant.github.io/INATON/assets/icon/icon-home-fill.png?raw=true') no-repeat;
     background-size: contain;
   }
   .chat a::before {
-    background: url('/assets/icon/icon-message-circle.png') no-repeat;
+    background: url('https://17ant.github.io/INATON/assets/icon/icon-message-circle.png?raw=true') no-repeat;
   }
   .chat a.active::before {
-    background: url('/assets/icon/icon-message-circle-fill.png') no-repeat;
+    background: url('https://17ant.github.io/INATON/assets//icon/icon-message-circle-fill.png?raw=true') no-repeat;
     background-size: contain;
   }
   .user a::before {
-    background: url('/assets/icon/icon-user.png') no-repeat;
+    background: url('https://17ant.github.io/INATON/assets/icon/icon-user.png?raw=true') no-repeat;
     background-size: contain;
   }
   .user a.active::before {
-    background: url('/assets/icon/icon-user-fill.png') no-repeat;
+    background: url('https://17ant.github.io/INATON/assets/icon/icon-user-fill.png?raw=true') no-repeat;
     background-size: contain;
   }
   .post a::before {
-    background: url('/assets/icon/icon-edit.png') no-repeat;
+    background: url('https://17ant.github.io/INATON/assets/icon/icon-edit.png?raw=true') no-repeat;
     background-size: contain;
   }
   .active {
@@ -74,16 +74,12 @@ export default function NavBar() {
       <Nav>
         <NavList>
           <li className="home">
-            <NavLink
-              to="/home"
-              className={({ isActive }) => (isActive ? 'active' : '')}>
+            <NavLink to="/home" className={({ isActive }) => (isActive ? 'active' : '')}>
               홈
             </NavLink>
           </li>
           <li className="chat">
-            <NavLink
-              to="/chatlist"
-              className={({ isActive }) => (isActive ? 'active' : '')}>
+            <NavLink to="/chatlist" className={({ isActive }) => (isActive ? 'active' : '')}>
               채팅
             </NavLink>
           </li>
@@ -91,9 +87,7 @@ export default function NavBar() {
             <NavLink to="/postupload">게시물작성</NavLink>
           </li>
           <li className="user">
-            <NavLink
-              end to="/profile"
-              className={({ isActive }) => (isActive ? 'active' : '')}>
+            <NavLink end to="/profile" className={({ isActive }) => (isActive ? 'active' : '')}>
               프로필
             </NavLink>
           </li>

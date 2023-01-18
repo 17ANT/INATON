@@ -6,16 +6,15 @@ import UploadHeader from '../../components/header/UploadHeader';
 import ProfileImg from '../../components/profileImg/ProfileImg';
 import UserInfoInput from '../../components/userInfoInput/UserInfoInput';
 import ImageButton from '../../components/imageButton/ImageButton';
-// import postSignup from './SignupAPI';
 import { SignupContext } from '../../Contexts/SignupContext';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';
-import accountValid from './AccountValidAPI';
 import { useNavigate } from 'react-router-dom';
 import UploadButton from '../../components/uploadButton/UploadButton';
-import imageUpload from './ImageAPI';
 import { BASE_URL } from '../../common/BASE_URL';
-import getMyProfile from '../../common/GetMyInfo';
-import putProfile from './ProfileModificationAPI';
+import postImage from '../../common/ImageUploadAPI';
+import postAPI from '../../common/PostAPI';
+import putAPI from '../../common/PutAPI';
+import getAPI from '../../common/GetAPI';
 
 const ProfileModificationWrap = styled.div`
   margin: 0 auto;
@@ -53,9 +52,7 @@ const UploadButtonWrap = styled.div`
 `;
 
 export default function ProfileModification() {
-  const [imageFile, setImageFile] = useState(
-    'https://mandarin.api.weniv.co.kr/Ellipse.png'
-  );
+  const [imageFile, setImageFile] = useState('https://mandarin.api.weniv.co.kr/Ellipse.png');
   const [show, setShow] = useState(false);
   const [msg, setMsg] = useState('*사용 가능한 계정ID 입니다.');
   let { signupInfo } = useContext(SignupContext);
@@ -70,7 +67,7 @@ export default function ProfileModification() {
 
   useEffect(() => {
     async function handleProfile() {
-      const myProfileData = await getMyProfile();
+      const myProfileData = await getAPI(`/user/myinfo`);
       const userInfo = myProfileData.user;
 
       setMyProfile(userInfo);
@@ -82,15 +79,13 @@ export default function ProfileModification() {
 
   /* 이미지를 업로드 하는 이벤트 함수 */
   const viewImageFile = async (e) => {
-    const imgSrc = await imageUpload(e.target.files[0]);
-    console.log(imgSrc);
+    const imgSrc = await postImage(e.target.files[0]);
     if (imgSrc.message) {
       alert(imgSrc.message);
     } else {
       setImageFile(BASE_URL + '/' + imgSrc.filename);
       setShow(true);
     }
-    // setImageFile(URL.createObjectURL(e.target.files[0]));
   };
 
   /* 업로드 한 이미지를 기본 이미지로 변경하는 이벤트 함수 */
@@ -102,7 +97,6 @@ export default function ProfileModification() {
           {
             label: '변경',
             onClick: () => {
-              // URL.revokeObjectURL(imageFile);
               setImageFile(BASE_URL + '/' + 'Ellipse.png');
               setShow(false);
             },
@@ -129,7 +123,7 @@ export default function ProfileModification() {
     // 정규식 체크
     if (reg.test(accountRef.current.value)) {
       // valid 체크
-      const message = await accountValid({
+      const message = await postAPI('/user/accountnamevalid', {
         user: {
           accountname: accountRef.current.value,
         },
@@ -155,7 +149,7 @@ export default function ProfileModification() {
         image: imageFile,
       },
     };
-    const res = await putProfile(reqData);
+    const res = await putAPI('/user', reqData);
 
     // error가 없을 때 context값 변경하고 링크 이동
     signupData = {
@@ -192,23 +186,19 @@ export default function ProfileModification() {
 
       <ProfileModificationWrap>
         <ProfileHeader>
-          <ProfileImg size="110px" src={imageFile} alt="message"></ProfileImg>
+          <ProfileImg size="110px" src={imageFile} alt="프로필 이미지"></ProfileImg>
           <DeleteButtonWrap>
             {show && (
               <ImageButton
                 size="31px"
                 src="../assets/x-button.png"
-                alt="delete image"
-                onClick={deleteImageFile}></ImageButton>
+                alt="이미지 삭제"
+                onClick={deleteImageFile}
+              ></ImageButton>
             )}
           </DeleteButtonWrap>
           <UploadButtonWrap>
-            <UploadButton
-              bg="#f26e22"
-              id="imgUpload"
-              radius="22px"
-              size="36px"
-              onChange={viewImageFile}></UploadButton>
+            <UploadButton bg="#f26e22" id="imgUpload" radius="22px" size="36px" onChange={viewImageFile}></UploadButton>
           </UploadButtonWrap>
         </ProfileHeader>
 
@@ -219,14 +209,16 @@ export default function ProfileModification() {
             maxLength="10"
             ref={nameRef}
             onChange={handleName}
-            defaultValue={myProfile.username}></UserInfoInput>
+            defaultValue={myProfile.username}
+          ></UserInfoInput>
 
           <UserInfoInput
             labelText="계정 ID"
             placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
             onChange={handleValid}
             ref={accountRef}
-            defaultValue={myProfile.accountname}></UserInfoInput>
+            defaultValue={myProfile.accountname}
+          ></UserInfoInput>
           <ErrorMessage text={msg} />
 
           <UserInfoInput
@@ -234,7 +226,8 @@ export default function ProfileModification() {
             placeholder="50자 이내로 자신을 소개해 주세요."
             maxLength="50"
             ref={introRef}
-            defaultValue={myProfile.intro}></UserInfoInput>
+            defaultValue={myProfile.intro}
+          ></UserInfoInput>
         </ProfileMain>
       </ProfileModificationWrap>
     </>

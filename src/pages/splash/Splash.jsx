@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import authCheck from '../../common/AuthenticationCheck';
-import Login from '../login/Login';
 const keyframeItemMove = keyframes`
   0% {
     transform: translateY(0);
@@ -36,11 +34,10 @@ export default function Splash({ auth }) {
       }
     }, 1500);
   }, [auth]);
-  console.log(auth);
 
   return (
     <Logo>
-      <img src={'/assets/inaton-logo.svg'} alt="IN AT ON" />
+      <img src={process.env.PUBLIC_URL + '/assets/inaton-logo.svg'} alt="IN AT ON" />
     </Logo>
   );
 }

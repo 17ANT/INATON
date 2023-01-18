@@ -1,15 +1,14 @@
-import { BASE_URL } from '../../common/BASE_URL';
+import { BASE_URL } from './BASE_URL';
 
-async function CommentsWrite(post_id, reqData) {
+async function getAPI(url) {
   const token = localStorage.getItem('token');
   try {
-    const data = await fetch(BASE_URL + `/post/${post_id}/comments`, {
-      method: 'POST',
+    const data = await fetch(BASE_URL + url, {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-type': 'application/json',
       },
-      body: JSON.stringify(reqData),
     });
     const result = await data.json();
     return result;
@@ -18,4 +17,4 @@ async function CommentsWrite(post_id, reqData) {
   }
 }
 
-export default CommentsWrite;
+export default getAPI;
