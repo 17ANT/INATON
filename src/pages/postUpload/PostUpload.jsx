@@ -86,7 +86,6 @@ const ButtonDiv = styled.div`
 export default function PostUpload() {
   const txtRef = useRef();
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
   const accountname = localStorage.getItem('accountname');
 
   const [image, setImage] = useState([]);
