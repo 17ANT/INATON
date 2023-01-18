@@ -22,6 +22,7 @@ const CommentList = styled.ul`
   width: 100%;
   display: flex;
   flex-direction: column-reverse;
+  /* flex-direction: column; */
   align-items: center;
   gap: 16px;
   border-top: 1px solid var(--border-color);
@@ -82,6 +83,8 @@ const CommentButton = styled.button`
 export default function PostDetail() {
   const params = useParams();
   const accountname = localStorage.getItem('accountname');
+  const [target, setTarget] = useState(null);
+  const steps = useRef(0);
 
   const [userInfo, setUserInfo] = useState(null);
   const [postInfo, setPostInfo] = useState(null);
@@ -89,7 +92,6 @@ export default function PostDetail() {
   const [commentsList, setCommentsList] = useState([]);
   const [flag, setFlag] = useState();
   const [btnState, setBtnState] = useState(false);
-
   async function getData() {
     const userData = await getAPI(`/profile/${accountname}`);
     setUserInfo(userData.user);
@@ -97,9 +99,39 @@ export default function PostDetail() {
   async function getComments() {
     const postData = await getAPI(`/post/${params.post_id}`);
     setPostInfo(postData.post);
-    const commentData = await getAPI(`/post/${params.post_id}/comments`);
+    const commentData = await getAPI(`/post/${params.post_id}/comments?limit=${postData.post.commentCount}`);
     setCommentsList(commentData.comments);
   }
+
+  ////////
+
+  // 추가 아이템 가져오기
+  const getMoreItem = async () => {
+    // await new Promise((resolve) => setTimeout(resolve, 1500));
+    let newData = await getAPI(`/post/${params.post_id}/comments/?limit=10&skip=${steps.current}`);
+    setCommentsList((prev) => prev.concat(newData.comments));
+    steps.current += 10;
+  };
+
+  // Intersect
+  const onIntersect = async ([entry], observer) => {
+    if (entry.isIntersecting) {
+      await getMoreItem();
+      observer.observe(entry.target);
+    }
+  };
+
+  // 무한스크롤
+  // useEffect(() => {
+  //   let observer;
+  //   if (target) {
+  //     observer = new IntersectionObserver(onIntersect, {
+  //       threshold: 0.4,
+  //     });
+  //     observer.observe(target);
+  //   }
+  //   return () => observer && observer.disconnect();
+  // }, [target]);
 
   useEffect(() => {
     getData();
@@ -139,6 +171,7 @@ export default function PostDetail() {
           <CommentList>
             {commentsList && commentsList.map((el) => <Comment key={el.id} data={el} setFlag={setFlag} />)}
           </CommentList>
+          {commentsList && <div ref={setTarget}></div>}
           <CommentWrite>
             {userInfo && <ProfileImg size="36px" alt="프로필 이미지" src={userInfo.image} />}
             <CommentForm onSubmit={writeComments}>
