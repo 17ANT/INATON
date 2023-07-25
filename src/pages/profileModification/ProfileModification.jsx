@@ -52,9 +52,7 @@ const UploadButtonWrap = styled.div`
 `;
 
 export default function ProfileModification() {
-  const [imageFile, setImageFile] = useState(
-    'https://api.mandarin.weniv.co.kr/Ellipse.png'
-  );
+  const [imageFile, setImageFile] = useState('https://mandarin.api.weniv.co.kr/Ellipse.png');
   const [show, setShow] = useState(false);
   const [msg, setMsg] = useState('*사용 가능한 계정ID 입니다.');
   let { signupInfo } = useContext(SignupContext);
@@ -188,11 +186,7 @@ export default function ProfileModification() {
 
       <ProfileModificationWrap>
         <ProfileHeader>
-          <ProfileImg
-            size="110px"
-            src={imageFile}
-            alt="프로필 이미지"
-          ></ProfileImg>
+          <ProfileImg size="110px" src={imageFile} alt="프로필 이미지"></ProfileImg>
           <DeleteButtonWrap>
             {show && (
               <ImageButton
@@ -204,13 +198,7 @@ export default function ProfileModification() {
             )}
           </DeleteButtonWrap>
           <UploadButtonWrap>
-            <UploadButton
-              bg="#f26e22"
-              id="imgUpload"
-              radius="22px"
-              size="36px"
-              onChange={viewImageFile}
-            ></UploadButton>
+            <UploadButton bg="#f26e22" id="imgUpload" radius="22px" size="36px" onChange={viewImageFile}></UploadButton>
           </UploadButtonWrap>
         </ProfileHeader>
 

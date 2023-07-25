@@ -65,13 +65,7 @@ const ProfileText = styled.div`
   }
 `;
 
-export default function InlineProfileInfo({
-  accountname,
-  img,
-  name,
-  desc,
-  state,
-}) {
+export default function InlineProfileInfo({ accountname, img, name, desc, state }) {
   const check = state.toUpperCase();
   let size, gap, line;
   switch (check) {
@@ -128,6 +122,6 @@ export default function InlineProfileInfo({
 }
 
 InlineProfileInfo.defaultProps = {
-  img: 'https://api.mandarin.weniv.co.kr/Ellipse.png',
+  img: 'https://mandarin.api.weniv.co.kr/Ellipse.png',
   desc: '  ',
 };

@@ -50,7 +50,7 @@ export default function ChatList() {
         <ChatItem onClick={() => movetoChatroom('피카피카')}>
           {/* 넹 여기는 그냥 두겠습니다! */}
           <InlineProfileInfo
-            img=" https://api.mandarin.weniv.co.kr/Ellipse.png"
+            img=" https://mandarin.api.weniv.co.kr/Ellipse.png"
             name="피카피카"
             desc="새해 복 많이 받으세요"
             state="chat"
@@ -59,7 +59,7 @@ export default function ChatList() {
         </ChatItem>
         <ChatItem onClick={() => movetoChatroom('멋진사자')}>
           <InlineProfileInfo
-            img="https://api.mandarin.weniv.co.kr/Ellipse.png"
+            img="https://mandarin.api.weniv.co.kr/Ellipse.png"
             name="멋진사자"
             desc="아 집에 가고싶다"
             state="chat"
@@ -68,7 +68,7 @@ export default function ChatList() {
         </ChatItem>
         <ChatItem onClick={() => movetoChatroom('자스민')}>
           <InlineProfileInfo
-            img="https://api.mandarin.weniv.co.kr/Ellipse.png"
+            img="https://mandarin.api.weniv.co.kr/Ellipse.png"
             name="자스민"
             desc="와 좋아보이네요? 어디인가요?"
             state="chat"
@@ -77,7 +77,7 @@ export default function ChatList() {
         </ChatItem>
         <ChatItem onClick={() => movetoChatroom('먹고자')}>
           <InlineProfileInfo
-            img="https://api.mandarin.weniv.co.kr/Ellipse.png"
+            img="https://mandarin.api.weniv.co.kr/Ellipse.png"
             name="먹고자"
             desc="위치 자세히 알려주세요 ㅠ"
             state="chat"
