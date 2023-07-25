@@ -12,5 +12,5 @@ export default function ProfileImg({ size, src, alt }) {
 }
 
 ProfileImg.defaultProps = {
-  src: 'https://mandarin.api.weniv.co.kr/Ellipse.png',
+  src: 'https://api.mandarin.weniv.co.kr/Ellipse.png',
 };
